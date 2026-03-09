@@ -53,7 +53,7 @@ async function startServer() {
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
       "font-src 'self' https://fonts.gstatic.com; " +
       "img-src 'self' data: blob: https:; " +
-      "connect-src 'self' https://api.manus.im https://forge.manus.im wss: https:; " +
+      "connect-src 'self' https://api.openai.com wss: https:; " +
       "frame-ancestors 'self';"
     );
     next();
@@ -62,6 +62,17 @@ async function startServer() {
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
+
+  // Health check endpoint for Railway
+  app.get("/api/health", (_req, res) => {
+    res.json({
+      status: "healthy",
+      timestamp: new Date().toISOString(),
+      service: "ruzn-backend",
+      version: "1.0.0",
+    });
+  });
+
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
   // Streaming chat endpoint (SSE)

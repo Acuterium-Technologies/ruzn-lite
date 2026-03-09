@@ -109,3 +109,5 @@ temp/
 # QA Audit Reports
 QA_AUDIT_REPORT.json
 QA_AUDIT_REPORT.md
+.manus/
+node_modules/
