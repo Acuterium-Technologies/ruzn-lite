@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://ruzn-backend.railway.app/api/:path*"
+            "destination": "https://heroic-celebration-production-eab9.up.railway.app/api/:path*"
     }
   ],
   "headers": [
