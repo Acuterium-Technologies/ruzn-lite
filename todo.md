@@ -208,7 +208,7 @@ The uploaded HTML file is a **comprehensive offline complaints management POC** 
 - [x] Add structured data (JSON-LD)
 
 ### Domain Setup Guidance
-- [x] Domain already purchased and configured via Manus
+- [x] Domain already purchased and configured
 - [x] ruzn.ai is live and publicly accessible
 - [x] SEO files ready for search engine indexing
 
@@ -585,9 +585,9 @@ The uploaded HTML file is a **comprehensive offline complaints management POC** 
 - [ ] Create code validation form
 - [ ] Show pending approval message after request submission
 
-### Remove Manus Branding
-- [ ] Identify all Manus references in UI
-- [ ] Replace or remove Manus branding from authentication flow
+### Remove Legacy Vendor Branding
+- [ ] Identify all legacy vendor references in UI
+- [ ] Replace or remove legacy vendor branding from authentication flow
 - [ ] Ensure clean Ruzn-only branding throughout
 
 

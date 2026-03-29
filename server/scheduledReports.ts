@@ -349,7 +349,7 @@ export async function sendWeeklyReportToRecipients(): Promise<{
     // Format report for notification
     const reportText = formatReportAsText(report);
     
-    // Send notification to owner (this will appear in Manus notifications)
+    // Send notification to owner
     const notificationSent = await notifyOwner({
       title: `📊 التقرير الأسبوعي لرُزن - ${new Date().toLocaleDateString('ar-OM')}`,
       content: reportText

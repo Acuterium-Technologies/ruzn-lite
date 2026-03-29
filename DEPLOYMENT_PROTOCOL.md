@@ -3,7 +3,7 @@
 
 **Document Version:** 1.0  
 **Effective Date:** December 29, 2025  
-**Author:** Manus AI (on behalf of MAJD-AI78)  
+**Author:** Acuterium Technologies (MAJD-AI78)  
 **Classification:** MANDATORY - All deployments must comply
 
 ---
@@ -198,7 +198,7 @@ Step 6: DOCUMENT - Full incident report
 ### 7.3 Rollback Command Reference
 
 ```bash
-# Using Manus webdev tools
+# Deployment commands
 webdev_rollback_checkpoint --version_id [VERSION_ID]
 
 # Manual git rollback (if webdev tools unavailable)
@@ -289,7 +289,7 @@ Failure to follow this protocol will result in:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
-| 1.0 | Dec 29, 2025 | Manus AI | Initial version |
+| 1.0 | Dec 29, 2025 | Acuterium Technologies | Initial version |
 
 **This document is effective immediately and supersedes all previous informal procedures.**
 
