@@ -63,20 +63,21 @@ const EXISTING_STATUTE_REGISTRY = [
 
 export function calculateEREBUSFORMULA653(input: LegislativeResolutionInput): LegislativeImpactResult {
   const consciousness = new ConsciousnessWeight();
+  const safeText = input.text || '';
   const phi = consciousness.calculatePhi({
-    dataQuality: input.text.length > 500 ? 0.95 : 0.75,
+    dataQuality: safeText.length > 500 ? 0.95 : 0.75,
     sourceReliability: 0.95,
     temporalRelevance: 0.95,
     contextAlignment: 0.90,
     modelConfidence: 0.95,
   });
 
-  const textLower = input.text.toLowerCase();
+  const textLower = safeText.toLowerCase();
   const detectedConflicts: DownstreamConflict[] = [];
 
   // Cross-check for statute interactions and potential conflicts
   for (const statute of EXISTING_STATUTE_REGISTRY) {
-    const hits = statute.keywords.filter(k => textLower.includes(k) || input.text.includes(k));
+    const hits = statute.keywords.filter(k => textLower.includes(k) || safeText.includes(k));
     if (hits.length > 0) {
       const hasConflictKeywords = /خلافاً|مع عدم الإخلال|يلغى كل ما يخالف|استثناء|contradict|repeal|supersede/.test(input.text);
       if (hasConflictKeywords) {

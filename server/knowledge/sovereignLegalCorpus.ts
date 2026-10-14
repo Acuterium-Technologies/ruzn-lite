@@ -65,11 +65,20 @@ const ARABIC_DIGITS: Record<string, string> = {
   '٥': '5', '٦': '6', '٧': '7', '٨': '8', '٩': '9'
 };
 
+const WESTERN_TO_ARABIC: Record<string, string> = {
+  '0': '٠', '1': '١', '2': '٢', '3': '٣', '4': '٤',
+  '5': '٥', '6': '٦', '7': '٧', '8': '٨', '9': '٩'
+};
+
 function normalizeArabicDigits(str: string): string {
   return str.replace(/[٠-٩]/g, d => ARABIC_DIGITS[d] || d);
 }
 
-const CITATION_REGEX = /\[(?:Article|المادة)\s*(\d+|[٠-٩]+)\s*,\s*(?:RD|مرسوم\s*سلطاني\s*رقم)?\s*(\d+|[٠-٩]+)\s*[\/\-]\s*(\d+|[٠-٩]+)\]/gi;
+function toArabicDigits(str: string): string {
+  return str.replace(/[0-9]/g, d => WESTERN_TO_ARABIC[d] || d);
+}
+
+const CITATION_REGEX = /\[(?:Article|المادة)\s*(\d+|[٠-٩]+)[\s,\u060C]+(?:RD|مرسوم\s*سلطاني\s*(?:رقم)?)?\s*(\d+|[٠-٩]+)\s*[\/\-]\s*(\d+|[٠-٩]+)\]/gi;
 
 /**
  * Perform high-speed FTS5 full-text search across 6,033 legal articles
@@ -152,8 +161,9 @@ export function verifyStatutoryCitation(text: string): CitationVerificationResul
     const rawDecreeNum = normalizeArabicDigits(match[2]);
     const rawDecreeYear = normalizeArabicDigits(match[3]);
     const canonicalTag = `[Article ${rawArticle}, RD ${rawDecreeNum}/${rawDecreeYear}]`;
+    const canonicalTagArabic = `[Article ${rawArticle}, RD ${toArabicDigits(rawDecreeNum)}/${toArabicDigits(rawDecreeYear)}]`;
 
-    if (citationMap && citationMap.articles && citationMap.articles[canonicalTag]) {
+    if (citationMap && citationMap.articles && (citationMap.articles[canonicalTag] || citationMap.articles[canonicalTagArabic])) {
       resolved.push({
         tag: canonicalTag,
         status: 'VERIFIED_CORPUS_GROUNDED',
@@ -231,6 +241,7 @@ export function getCorpusStats() {
   return {
     totalDocuments: documentCount,
     totalArticles: articleCount,
+    corpusPath: CORPUS_DIR,
     engine: 'BAAI/bge-m3 + SQLite FTS5 + BGE-Reranker-v2',
     standards: 'Ruling R-17 Canonical Statutory Index',
     lastSync: '2026-10-15T00:00:00Z'
