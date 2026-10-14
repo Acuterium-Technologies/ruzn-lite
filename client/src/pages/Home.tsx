@@ -900,6 +900,18 @@ export default function Home() {
           {/* Navigation Links - Horizontally scrollable on mobile */}
           <div className="mt-3 -mx-4 px-4 overflow-x-auto scrollbar-hide">
             <div className="flex gap-2 pb-2 min-w-max">
+              <Link href="/ria-dashboard">
+                <button className="ruzn-btn-gold text-xs flex items-center gap-1 px-3 py-2 rounded-xl whitespace-nowrap font-bold">
+                  <Scale className="w-3 h-3 text-[#d6b36a]" />
+                  {language === "arabic" ? "تقييم الأثر (RIA)" : "RIA Dashboard"}
+                </button>
+              </Link>
+              <Link href="/landing">
+                <button className="ruzn-btn text-xs flex items-center gap-1 px-3 py-2 rounded-xl whitespace-nowrap border-[#d6b36a]/40 text-[#d6b36a]">
+                  <Globe className="w-3 h-3" />
+                  {language === "arabic" ? "الموقع التعريفي" : "Landing Page"}
+                </button>
+              </Link>
               <Link href="/operations">
                 <button className="ruzn-btn-gold text-xs flex items-center gap-1 px-3 py-2 rounded-xl whitespace-nowrap">
                   <ClipboardList className="w-3 h-3" />

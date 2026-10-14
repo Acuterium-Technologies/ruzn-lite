@@ -1221,174 +1221,208 @@ export async function searchCaseLaw(params: {
   limit?: number;
   offset?: number;
 }) {
-  const db = await getDb();
-  if (!db) {
-    console.warn("[Database] Cannot search case law: database not available");
-    return { cases: [], total: 0 };
-  }
-  
   try {
-    const conditions = [];
-    
-    if (params.year) {
-      conditions.push(eq(caseLaw.year, params.year));
+    const db = await getDb();
+    if (db) {
+      const conditions = [];
+      
+      if (params.year) {
+        conditions.push(eq(caseLaw.year, params.year));
+      }
+      
+      if (params.violationType) {
+        conditions.push(eq(caseLaw.violationType, params.violationType as any));
+      }
+      
+      if (params.entityType) {
+        conditions.push(eq(caseLaw.entityType, params.entityType as any));
+      }
+      
+      if (params.outcome) {
+        conditions.push(eq(caseLaw.outcome, params.outcome as any));
+      }
+      
+      // For text search, we'll use LIKE on multiple fields
+      if (params.query) {
+        const searchPattern = `%${params.query}%`;
+        conditions.push(
+          sql`(${caseLaw.entityNameEnglish} LIKE ${searchPattern} 
+            OR ${caseLaw.entityNameArabic} LIKE ${searchPattern}
+            OR ${caseLaw.summaryEnglish} LIKE ${searchPattern}
+            OR ${caseLaw.summaryArabic} LIKE ${searchPattern}
+            OR ${caseLaw.accusedPosition} LIKE ${searchPattern}
+            OR ${caseLaw.violationTypeEnglish} LIKE ${searchPattern}
+            OR ${caseLaw.violationTypeArabic} LIKE ${searchPattern})`
+        );
+      }
+      
+      const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
+      
+      // Get total count
+      const countResult = await db
+        .select({ count: sql<number>`count(*)` })
+        .from(caseLaw)
+        .where(whereClause);
+      
+      const total = Number(countResult[0]?.count || 0);
+      
+      if (total > 0) {
+        // Get paginated results
+        const limit = params.limit || 20;
+        const offset = params.offset || 0;
+        
+        const cases = await db
+          .select()
+          .from(caseLaw)
+          .where(whereClause)
+          .orderBy(desc(caseLaw.year), desc(caseLaw.amountInvolved))
+          .limit(limit)
+          .offset(offset);
+        
+        return { cases, total };
+      }
     }
-    
-    if (params.violationType) {
-      conditions.push(eq(caseLaw.violationType, params.violationType as any));
-    }
-    
-    if (params.entityType) {
-      conditions.push(eq(caseLaw.entityType, params.entityType as any));
-    }
-    
-    if (params.outcome) {
-      conditions.push(eq(caseLaw.outcome, params.outcome as any));
-    }
-    
-    // For text search, we'll use LIKE on multiple fields
-    if (params.query) {
-      const searchPattern = `%${params.query}%`;
-      conditions.push(
-        sql`(${caseLaw.entityNameEnglish} LIKE ${searchPattern} 
-          OR ${caseLaw.entityNameArabic} LIKE ${searchPattern}
-          OR ${caseLaw.summaryEnglish} LIKE ${searchPattern}
-          OR ${caseLaw.summaryArabic} LIKE ${searchPattern}
-          OR ${caseLaw.accusedPosition} LIKE ${searchPattern}
-          OR ${caseLaw.violationTypeEnglish} LIKE ${searchPattern}
-          OR ${caseLaw.violationTypeArabic} LIKE ${searchPattern})`
-      );
-    }
-    
-    const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
-    
-    // Get total count
-    const countResult = await db
-      .select({ count: sql<number>`count(*)` })
-      .from(caseLaw)
-      .where(whereClause);
-    
-    const total = Number(countResult[0]?.count || 0);
-    
-    // Get paginated results
-    const limit = params.limit || 20;
-    const offset = params.offset || 0;
-    
-    let query = db
-      .select()
-      .from(caseLaw)
-      .where(whereClause)
-      .orderBy(desc(caseLaw.year), desc(caseLaw.amountInvolved))
-      .limit(limit)
-      .offset(offset);
-    
-    const cases = await query;
-    
-    return { cases, total };
   } catch (error) {
-    console.error("[Database] Error searching case law:", error);
-    return { cases: [], total: 0 };
+    console.warn("[Database] Error searching case law in DB, falling back to sovereign archive:", error);
   }
+
+  // Fallback to SOVEREIGN_CASE_LAW_DATA
+  let filtered = [...SOVEREIGN_CASE_LAW_DATA];
+  if (params.year) filtered = filtered.filter(c => c.year === params.year);
+  if (params.violationType) filtered = filtered.filter(c => c.violationType === params.violationType);
+  if (params.entityType) filtered = filtered.filter(c => c.entityType === params.entityType);
+  if (params.outcome) filtered = filtered.filter(c => c.outcome === params.outcome);
+  if (params.query) {
+    const q = params.query.toLowerCase();
+    filtered = filtered.filter(c => 
+      c.entityNameEnglish?.toLowerCase().includes(q) ||
+      c.entityNameArabic?.includes(q) ||
+      c.summaryEnglish?.toLowerCase().includes(q) ||
+      c.summaryArabic?.includes(q) ||
+      c.accusedPosition?.toLowerCase().includes(q) ||
+      c.accusedPositionArabic?.includes(q) ||
+      c.violationTypeEnglish?.toLowerCase().includes(q) ||
+      c.violationTypeArabic?.includes(q)
+    );
+  }
+
+  filtered.sort((a, b) => b.year - a.year || (b.amountInvolved || 0) - (a.amountInvolved || 0));
+  const limit = params.limit || 20;
+  const offset = params.offset || 0;
+  return {
+    cases: filtered.slice(offset, offset + limit),
+    total: filtered.length
+  };
 }
 
 // Get case law by ID
 export async function getCaseLawById(id: number) {
-  const db = await getDb();
-  if (!db) return null;
-  
   try {
-    const result = await db.select().from(caseLaw).where(eq(caseLaw.id, id)).limit(1);
-    return result[0] || null;
+    const db = await getDb();
+    if (db) {
+      const result = await db.select().from(caseLaw).where(eq(caseLaw.id, id)).limit(1);
+      if (result && result.length > 0) return result[0];
+    }
   } catch (error) {
-    console.error("[Database] Error getting case law by ID:", error);
-    return null;
+    console.warn("[Database] Error getting case law by ID from DB:", error);
   }
+  return SOVEREIGN_CASE_LAW_DATA.find(c => c.id === id) || null;
 }
 
-// Get case law statistics
+// Get case law statistics with Sovereign fallback
 export async function getCaseLawStats() {
-  const db = await getDb();
-  if (!db) {
-    return {
-      totalCases: 0,
-      totalAmountInvolved: 0,
-      totalAmountRecovered: 0,
-      totalFines: 0,
-      avgSentenceYears: 0,
-      byViolationType: [],
-      byYear: [],
-      byOutcome: []
-    };
-  }
-  
   try {
-    // Total cases
-    const totalResult = await db
-      .select({ count: sql<number>`count(*)` })
-      .from(caseLaw);
-    const totalCases = Number(totalResult[0]?.count || 0);
-    
-    // Aggregate amounts
-    const amountsResult = await db
-      .select({
-        totalInvolved: sql<number>`COALESCE(SUM(amountInvolved), 0)`,
-        totalRecovered: sql<number>`COALESCE(SUM(amountRecovered), 0)`,
-        totalFines: sql<number>`COALESCE(SUM(fineOMR), 0)`,
-        avgSentence: sql<number>`COALESCE(AVG(sentenceYears + sentenceMonths/12), 0)`
-      })
-      .from(caseLaw);
-    
-    // By violation type
-    const byViolationType = await db
-      .select({
-        type: caseLaw.violationType,
-        count: sql<number>`count(*)`
-      })
-      .from(caseLaw)
-      .groupBy(caseLaw.violationType);
-    
-    // By year
-    const byYear = await db
-      .select({
-        year: caseLaw.year,
-        count: sql<number>`count(*)`
-      })
-      .from(caseLaw)
-      .groupBy(caseLaw.year)
-      .orderBy(caseLaw.year);
-    
-    // By outcome
-    const byOutcome = await db
-      .select({
-        outcome: caseLaw.outcome,
-        count: sql<number>`count(*)`
-      })
-      .from(caseLaw)
-      .groupBy(caseLaw.outcome);
-    
-    return {
-      totalCases,
-      totalAmountInvolved: Number(amountsResult[0]?.totalInvolved || 0),
-      totalAmountRecovered: Number(amountsResult[0]?.totalRecovered || 0),
-      totalFines: Number(amountsResult[0]?.totalFines || 0),
-      avgSentenceYears: Number(amountsResult[0]?.avgSentence || 0),
-      byViolationType: byViolationType.map(v => ({ type: v.type, count: Number(v.count) })),
-      byYear: byYear.map(y => ({ year: y.year, count: Number(y.count) })),
-      byOutcome: byOutcome.map(o => ({ outcome: o.outcome, count: Number(o.count) }))
-    };
+    const db = await getDb();
+    if (db) {
+      // Total cases
+      const totalResult = await db
+        .select({ count: sql<number>`count(*)` })
+        .from(caseLaw);
+      const totalCases = Number(totalResult[0]?.count || 0);
+      
+      if (totalCases > 0) {
+        // Aggregate amounts
+        const amountsResult = await db
+          .select({
+            totalInvolved: sql<number>`COALESCE(SUM(amountInvolved), 0)`,
+            totalRecovered: sql<number>`COALESCE(SUM(amountRecovered), 0)`,
+            totalFines: sql<number>`COALESCE(SUM(fineOMR), 0)`,
+            avgSentence: sql<number>`COALESCE(AVG(sentenceYears + sentenceMonths/12), 0)`
+          })
+          .from(caseLaw);
+        
+        // By violation type
+        const byViolationType = await db
+          .select({
+            type: caseLaw.violationType,
+            count: sql<number>`count(*)`
+          })
+          .from(caseLaw)
+          .groupBy(caseLaw.violationType);
+        
+        // By year
+        const byYear = await db
+          .select({
+            year: caseLaw.year,
+            count: sql<number>`count(*)`
+          })
+          .from(caseLaw)
+          .groupBy(caseLaw.year)
+          .orderBy(caseLaw.year);
+        
+        // By outcome
+        const byOutcome = await db
+          .select({
+            outcome: caseLaw.outcome,
+            count: sql<number>`count(*)`
+          })
+          .from(caseLaw)
+          .groupBy(caseLaw.outcome);
+        
+        return {
+          totalCases,
+          totalAmountInvolved: Number(amountsResult[0]?.totalInvolved || 0),
+          totalAmountRecovered: Number(amountsResult[0]?.totalRecovered || 0),
+          totalFines: Number(amountsResult[0]?.totalFines || 0),
+          avgSentenceYears: Math.round(Number(amountsResult[0]?.avgSentence || 0) * 10) / 10,
+          byViolationType: byViolationType.map(v => ({ type: v.type, count: Number(v.count) })),
+          byYear: byYear.map(y => ({ year: y.year, count: Number(y.count) })),
+          byOutcome: byOutcome.map(o => ({ outcome: o.outcome, count: Number(o.count) }))
+        };
+      }
+    }
   } catch (error) {
-    console.error("[Database] Error getting case law stats:", error);
-    return {
-      totalCases: 0,
-      totalAmountInvolved: 0,
-      totalAmountRecovered: 0,
-      totalFines: 0,
-      avgSentenceYears: 0,
-      byViolationType: [],
-      byYear: [],
-      byOutcome: []
-    };
+    console.warn("[Database] Error getting case law stats from DB, falling back to sovereign archive:", error);
   }
+
+  // Fallback calculations directly from SOVEREIGN_CASE_LAW_DATA
+  const cases = SOVEREIGN_CASE_LAW_DATA;
+  const totalCases = cases.length;
+  const totalAmountInvolved = cases.reduce((acc, c) => acc + (c.amountInvolved || 0), 0);
+  const totalAmountRecovered = cases.reduce((acc, c) => acc + (c.amountRecovered || 0), 0);
+  const totalFines = cases.reduce((acc, c) => acc + (c.fineOMR || 0), 0);
+  const avgSentenceYears = cases.reduce((acc, c) => acc + (c.sentenceYears || 0), 0) / (totalCases || 1);
+
+  const typeMap: Record<string, number> = {};
+  const yearMap: Record<number, number> = {};
+  const outcomeMap: Record<string, number> = {};
+
+  cases.forEach(c => {
+    typeMap[c.violationType] = (typeMap[c.violationType] || 0) + 1;
+    yearMap[c.year] = (yearMap[c.year] || 0) + 1;
+    outcomeMap[c.outcome] = (outcomeMap[c.outcome] || 0) + 1;
+  });
+
+  return {
+    totalCases,
+    totalAmountInvolved,
+    totalAmountRecovered,
+    totalFines,
+    avgSentenceYears: Math.round(avgSentenceYears * 10) / 10,
+    byViolationType: Object.entries(typeMap).map(([type, count]) => ({ type, count })),
+    byYear: Object.entries(yearMap).map(([year, count]) => ({ year: Number(year), count })),
+    byOutcome: Object.entries(outcomeMap).map(([outcome, count]) => ({ outcome, count }))
+  };
 }
 
 // Add new case law entry
@@ -1408,18 +1442,12 @@ export async function addCaseLaw(data: InsertCaseLaw) {
   }
 }
 
-// Seed case law database with historical data
-export async function seedCaseLawDatabase() {
-  const db = await getDb();
-  if (!db) {
-    console.warn("[Database] Cannot seed case law: database not available");
-    return { success: false, count: 0 };
-  }
-  
-  const caseLawData: InsertCaseLaw[] = [
-    // 2021 Cases
-    {
-      year: 2021,
+// Sovereign Historical Case Law Archive
+export const SOVEREIGN_CASE_LAW_DATA: any[] = [
+  // 2021 Cases
+  {
+    id: 1,
+    year: 2021,
       entityNameEnglish: "Oman Telecommunications Company",
       entityNameArabic: "شركة عمان للاتصالات",
       entityType: "government_company",
@@ -1640,19 +1668,27 @@ export async function seedCaseLawDatabase() {
       summaryArabic: "إدانة مسؤول عقود بالتلاعب في مناقصة بقيمة 450,000 ريال",
       outcome: "convicted",
       sourceReport: "Annual Report 2024"
-    }
   ];
+
+// Seed case law database with historical data
+export async function seedCaseLawDatabase() {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot seed case law: database not available");
+    return { success: false, count: 0 };
+  }
   
   try {
     // Clear existing data first
     await db.delete(caseLaw);
     
     // Insert all case law entries
-    for (const entry of caseLawData) {
-      await db.insert(caseLaw).values(entry);
+    for (const entry of SOVEREIGN_CASE_LAW_DATA) {
+      const { id, ...dataToInsert } = entry;
+      await db.insert(caseLaw).values(dataToInsert);
     }
     
-    return { success: true, count: caseLawData.length };
+    return { success: true, count: SOVEREIGN_CASE_LAW_DATA.length };
   } catch (error) {
     console.error("[Database] Error seeding case law:", error);
     return { success: false, count: 0 };

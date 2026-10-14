@@ -21,15 +21,41 @@ import {
 } from "@/components/ui/sidebar";
 import { getLoginUrl } from "@/const";
 import { useIsMobile } from "@/hooks/useMobile";
-import { LayoutDashboard, LogOut, PanelLeft, Users } from "lucide-react";
+import { 
+  LayoutDashboard, 
+  LogOut, 
+  PanelLeft, 
+  Users, 
+  Scale, 
+  FileText, 
+  BookOpen, 
+  History, 
+  Map, 
+  TrendingUp, 
+  ClipboardList, 
+  BarChart3, 
+  Shield, 
+  Settings, 
+  Globe 
+} from "lucide-react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
 import { Button } from "./ui/button";
 
 const menuItems = [
-  { icon: LayoutDashboard, label: "Page 1", path: "/" },
-  { icon: Users, label: "Page 2", path: "/some-path" },
+  { icon: LayoutDashboard, label: "الرئيسية (المساعد)", path: "/" },
+  { icon: Scale, label: "تقييم الأثر التنظيمي (RIA)", path: "/ria-dashboard" },
+  { icon: FileText, label: "سجل البلاغات", path: "/complaint-registry" },
+  { icon: BookOpen, label: "قاعدة المعرفة السيادية", path: "/knowledge-base" },
+  { icon: History, label: "السوابق القضائية", path: "/case-law" },
+  { icon: Map, label: "خريطة الكيانات", path: "/entity-map" },
+  { icon: TrendingUp, label: "التحليل المقارن", path: "/comparative-analysis" },
+  { icon: ClipboardList, label: "العمليات التنفيذية", path: "/operations" },
+  { icon: BarChart3, label: "لوحة التحليلات", path: "/analytics" },
+  { icon: Shield, label: "إدارة الوصول", path: "/access-management" },
+  { icon: Settings, label: "لوحة التحكم", path: "/admin" },
+  { icon: Globe, label: "الموقع التعريفي (Landing)", path: "/landing" },
 ];
 
 const SIDEBAR_WIDTH_KEY = "sidebar-width";

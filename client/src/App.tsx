@@ -17,20 +17,29 @@ import ComplaintRegistry from "./pages/ComplaintRegistry";
 import KnowledgeBase from "./pages/KnowledgeBase";
 import AccessManagement from "./pages/AccessManagement";
 
+import RIADashboard from "./pages/RIADashboard";
+import AssessmentDetail from "./pages/AssessmentDetail";
+
 function ProtectedRouter() {
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/analytics"} component={Analytics} />
-      <Route path={"/admin"} component={Admin} />
-      <Route path={"/operations"} component={Operations} />
-      <Route path={"/entity-map"} component={EntityMap} />
+      <Route path="/" component={Home} />
+      <Route path="/home" component={Home} />
+      <Route path="/landing" component={() => <Landing onAccessGranted={() => { window.location.href = "/"; }} />} />
+      <Route path="/ria-dashboard" component={RIADashboard} />
+      <Route path="/ria-dashboard/assessment/:id" component={AssessmentDetail} />
+      <Route path="/ria" component={RIADashboard} />
+      <Route path="/analytics" component={Analytics} />
+      <Route path="/admin" component={Admin} />
+      <Route path="/operations" component={Operations} />
+      <Route path="/entity-map" component={EntityMap} />
       <Route path="/comparative-analysis" component={ComparativeAnalysis} />
-            <Route path="/case-law" component={CaseLaw} />
+      <Route path="/case-law" component={CaseLaw} />
       <Route path="/complaint-registry" component={ComplaintRegistry} />
       <Route path="/knowledge-base" component={KnowledgeBase} />
+      <Route path="/knowledge" component={KnowledgeBase} />
       <Route path="/access-management" component={AccessManagement} />
-      <Route path={"/404"} component={NotFound} />
+      <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
@@ -47,6 +56,7 @@ function AccessGate() {
   }, []);
   
   const handleAccessGranted = () => {
+    sessionStorage.setItem("ruzn_access", "granted");
     setHasAccess(true);
   };
   
@@ -59,6 +69,11 @@ function AccessGate() {
     );
   }
   
+  // If user explicitly visits /landing, always display the Landing page showcase
+  if (typeof window !== "undefined" && window.location.pathname === "/landing") {
+    return <Landing onAccessGranted={handleAccessGranted} />;
+  }
+
   // Show landing page if no access
   if (!hasAccess) {
     return <Landing onAccessGranted={handleAccessGranted} />;
