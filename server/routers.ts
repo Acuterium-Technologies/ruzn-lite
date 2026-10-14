@@ -1799,9 +1799,34 @@ Ruzn - Sovereign AI for Governance, Integrity, and Compliance
     // Public endpoint - Validate access code
     validateCode: publicProcedure
       .input(z.object({
-        code: z.string().min(6).max(20)
+        code: z.string().min(4).max(50)
       }))
       .mutation(async ({ input }) => {
+        const normalizedCode = input.code.trim().toUpperCase();
+        
+        // Sovereign Chairman Master Codes (always valid, reusable, zero-db dependency)
+        const MASTER_CODES = [
+          'RUZN2024',
+          'RUZN-2024',
+          'RUZN',
+          'RZN-MASTER-DRJAY',
+          'RZN-CHAIRMAN',
+          'ACUTERIUM2026',
+          'SOVEREIGN2026',
+          'ACUTERIUM',
+          'ALMAJD',
+          'ASATEER'
+        ];
+        
+        if (MASTER_CODES.includes(normalizedCode) || normalizedCode.startsWith('RZN-MASTER')) {
+          console.log(`[Access] Master Sovereign access granted for code: ${normalizedCode}`);
+          return {
+            valid: true,
+            message: 'Access granted. Welcome Chairman Dr. Jay.',
+            email: 'chairman@acuterium.ai'
+          };
+        }
+
         const db = await getDb();
         if (!db) {
           throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: 'Database not available' });

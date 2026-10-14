@@ -319,9 +319,31 @@ export default function Landing({ onAccessGranted }: LandingProps) {
 
   const handleAccessSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!accessCode.trim()) return;
+    const cleanCode = accessCode.trim().toUpperCase();
+    if (!cleanCode) return;
+    
+    // Sovereign Chairman Master Codes (instant client-side bypass)
+    const MASTER_CODES = [
+      'RUZN2024',
+      'RUZN-2024',
+      'RUZN',
+      'RZN-MASTER-DRJAY',
+      'RZN-CHAIRMAN',
+      'ACUTERIUM2026',
+      'SOVEREIGN2026',
+      'ACUTERIUM',
+      'ALMAJD',
+      'ASATEER'
+    ];
+    if (MASTER_CODES.includes(cleanCode) || cleanCode.startsWith('RZN-MASTER')) {
+      toast.success(text.accessSection.success);
+      sessionStorage.setItem("ruzn_access", "granted");
+      onAccessGranted();
+      return;
+    }
+
     setIsVerifying(true);
-    validateCodeMutation.mutate({ code: accessCode.trim().toUpperCase() });
+    validateCodeMutation.mutate({ code: cleanCode });
   };
 
   const handleRequestAccess = (e: React.FormEvent) => {
