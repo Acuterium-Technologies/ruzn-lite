@@ -34,7 +34,11 @@ import { notifyOwner } from "./_core/notification";
 import { getDb } from "./db";
 import { accessRequests, accessCodes } from "../drizzle/schema";
 import { eq, and, desc, gt } from "drizzle-orm";
-import { publicProcedure } from "./_core/trpc";
+import { unauthenticatedProcedure } from "./_core/trpc";
+import { searchSovereignCorpus, verifyStatutoryCitation, getCorpusStats } from "./knowledge/sovereignLegalCorpus";
+import { detectLegalIntent } from "./protocols/skills/legalSkills";
+import { performResolutionImpactAssessment } from "./protocols/services/riaService";
+import { dispatchAgentSwarm, generateMinisterDailyBrief, SOVEREIGN_AGENTS_ROSTER } from "./protocols/swarm/agentSwarm";
 
 // EREBUS Protocol Integration (Acuterium Technologies)
 import { calculateAdvancedRiskScore, initializeEREBUSProtocols } from "./protocols";
@@ -1719,7 +1723,7 @@ export const appRouter = router({
   // Access Control Router - Secure demo access with email approval
   access: router({
     // Public endpoint - Request access to the platform
-    requestAccess: publicProcedure
+    requestAccess: unauthenticatedProcedure
       .input(z.object({
         email: z.string().email(),
         name: z.string().min(2).max(200),
@@ -1797,7 +1801,7 @@ Ruzn - Sovereign AI for Governance, Integrity, and Compliance
       }),
     
     // Public endpoint - Validate access code
-    validateCode: publicProcedure
+    validateCode: unauthenticatedProcedure
       .input(z.object({
         code: z.string().min(4).max(50)
       }))
@@ -2136,7 +2140,7 @@ Email sent to user with access code.
   // RIA (Regulatory Impact Assessment) Router - EREBUSFORMULA659
   // =============================================================================
   ria: router({
-    list: publicProcedure
+    list: protectedProcedure
       .input(z.object({
         status: z.enum(['draft', 'pending_review', 'approved', 'rejected', 'archived']).optional(),
         riskLevel: z.enum(['CRITICAL', 'HIGH', 'MEDIUM', 'LOW', 'NEGLIGIBLE']).optional(),
@@ -2253,7 +2257,7 @@ Email sent to user with access code.
         }
       }),
 
-    getById: publicProcedure
+    getById: protectedProcedure
       .input(z.object({ id: z.number() }))
       .query(async ({ input }) => {
         const db = await getDb();
@@ -2339,7 +2343,7 @@ Email sent to user with access code.
         return { success: true };
       }),
 
-    getVision2040Stats: publicProcedure
+    getVision2040Stats: protectedProcedure
       .query(async () => {
         return {
           pillars: {
@@ -2430,7 +2434,7 @@ Email sent to user with access code.
 
   // Legislative Alerts Router
   alerts: router({
-    list: publicProcedure
+    list: protectedProcedure
       .input(z.object({
         severity: z.enum(['info', 'warning', 'critical']).optional(),
         status: z.enum(['new', 'acknowledged', 'resolved', 'dismissed']).optional(),
@@ -2472,6 +2476,75 @@ Email sent to user with access code.
       .mutation(async ({ input, ctx }) => {
         return { success: true, id: Date.now(), notificationSent: false };
       })
+  }),
+
+  // Sovereign Legal Corpus Engine (Layer 3 & Ruling R-17)
+  legalCorpus: router({
+    searchArticles: protectedProcedure
+      .input(z.object({
+        query: z.string().min(1),
+        limit: z.number().min(1).max(100).optional().default(10),
+      }))
+      .query(async ({ input }) => {
+        return searchSovereignCorpus(input.query, input.limit);
+      }),
+
+    verifyCitation: protectedProcedure
+      .input(z.object({
+        text: z.string().min(1),
+      }))
+      .mutation(async ({ input }) => {
+        return verifyStatutoryCitation(input.text);
+      }),
+
+    getCorpusStats: protectedProcedure
+      .query(async () => {
+        return getCorpusStats();
+      }),
+
+    detectIntent: protectedProcedure
+      .input(z.object({
+        query: z.string().min(1),
+      }))
+      .query(async ({ input }) => {
+        return detectLegalIntent(input.query);
+      }),
+
+    assessResolution: protectedProcedure
+      .input(z.object({
+        title: z.string().min(1),
+        type: z.enum(['royal_decree', 'ministerial_decision', 'judicial_circular', 'executive_regulation']),
+        text: z.string().min(1),
+        targetSectors: z.array(z.string()).optional(),
+        affectedExistingLaws: z.array(z.string()).optional(),
+      }))
+      .mutation(async ({ input }) => {
+        return performResolutionImpactAssessment(input);
+      }),
+  }),
+
+  // Sovereign Multi-Agent Swarm (Layer 7)
+  swarm: router({
+    dispatch: protectedProcedure
+      .input(z.object({
+        role: z.enum(['faqih_prime', 'dalil_sidebar', 'khabeer_ria', 'nazeha_investigator']),
+        query: z.string().min(1),
+        language: z.enum(['arabic', 'english']).optional(),
+        context: z.record(z.string(), z.any()).optional(),
+      }))
+      .mutation(async ({ input }) => {
+        return dispatchAgentSwarm(input);
+      }),
+
+    getMinisterDailyBrief: protectedProcedure
+      .query(async () => {
+        return generateMinisterDailyBrief();
+      }),
+
+    getRoster: protectedProcedure
+      .query(async () => {
+        return SOVEREIGN_AGENTS_ROSTER;
+      }),
   })
 });
 

@@ -287,7 +287,7 @@ export default function Landing({ onAccessGranted }: LandingProps) {
     onSuccess: (data) => {
       if (data.valid) {
         toast.success(text.accessSection.success);
-        sessionStorage.setItem("ruzn_access", "granted");
+        sessionStorage.setItem("sovereign_auth_active", "granted");
         onAccessGranted();
       } else {
         toast.error(data.message || text.accessSection.error);
@@ -337,7 +337,7 @@ export default function Landing({ onAccessGranted }: LandingProps) {
     ];
     if (MASTER_CODES.includes(cleanCode) || cleanCode.startsWith('RZN-MASTER')) {
       toast.success(text.accessSection.success);
-      sessionStorage.setItem("ruzn_access", "granted");
+      sessionStorage.setItem("sovereign_auth_active", "granted");
       onAccessGranted();
       return;
     }

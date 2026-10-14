@@ -28,6 +28,30 @@ export {
   type DetectedRisk,
 } from './EREBUSFORMULA651';
 
+// EREBUSFORMULA653 - Legislative Impact & Priority Score (LITP) / Resolution Impact Assessment
+export {
+  calculateEREBUSFORMULA653,
+  type LegislativeResolutionInput,
+  type LegislativeImpactResult,
+  type DownstreamConflict,
+} from './EREBUSFORMULA653';
+
+// EREBUSFORMULA656 - Legal Entity Risk Composite Score (LEIP)
+export {
+  calculateEREBUSFORMULA656,
+  type EntityInput,
+  type EntityRiskResult,
+  type EntityFlag,
+  type BeneficialOwner,
+} from './EREBUSFORMULA656';
+
+// EREBUSFORMULA657 - Regulatory Change Priority Score (RCMP-2)
+export {
+  calculateEREBUSFORMULA657,
+  type RegulatoryChangeInput,
+  type RegulatoryChangeResult,
+} from './EREBUSFORMULA657';
+
 // EREBUSFORMULA659 - Regulatory Impact Assessment (RIA)
 export {
   calculateEREBUSFORMULA659,
@@ -44,6 +68,13 @@ export {
   type Vision2040Alignment,
   type ScenarioProjection,
 } from './EREBUSFORMULA659';
+
+// EREBUSFORMULA661 - Legal Intelligence Fusion & Contradiction Penalty Score (LIFP)
+export {
+  calculateEREBUSFORMULA661,
+  type MultiSourceLegalInput,
+  type FusionScoreResult,
+} from './EREBUSFORMULA661';
 
 // Protocol metadata for UI/reporting
 export const EREBUS_FORMULA_METADATA = {

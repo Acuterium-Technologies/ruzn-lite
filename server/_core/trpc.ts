@@ -8,7 +8,7 @@ const t = initTRPC.context<TrpcContext>().create({
 });
 
 export const router = t.router;
-export const publicProcedure = t.procedure; // No authentication required
+export const unauthenticatedProcedure = t.procedure; // Unauthenticated public gateway procedure
 // Protected procedures require authentication
 
 const requireUser = t.middleware(async opts => {

@@ -1,0 +1,3757 @@
+{
+ "lineage": [
+  {
+   "host_document_id": "RUZN-LW-1999-92",
+   "host_decree_number": "1999/92",
+   "article_number": "7",
+   "attributed": false,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «بمرسوم سلطاني بترشيح» → «بقرار»",
+    "insert: «» → «المفتش العام للشرطة والجمارك بعد موافقة»",
+    "replace: «القضائية» → «القضائية، وذلك فيما عدا وظيفة المدعي العام، ووظيفة نائب المدعي العام، فيكون التعيين فيهما »"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-1999-92",
+   "host_decree_number": "1999/92",
+   "article_number": "25",
+   "attributed": false,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "insert: «» → «1 عدلت بموجب المرسوم السلطاني رقم 98 2006»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-1999-97",
+   "host_decree_number": "1999/97",
+   "article_number": "4",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/59",
+    "apparatus_text": "[1] عدلت بموجب المرسوم السلطاني رقم 59 / 2011.",
+    "marker": 1,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/59",
+     "apparatus_text": "[1] عدلت بموجب المرسوم السلطاني رقم 59 / 2011.",
+     "marker": 1,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    },
+    {
+     "event": "added",
+     "decree_number": "2005/75",
+     "apparatus_text": "[2] اضيفت بموجب المرسوم السلطاني رقم 75 / 2005 وعدلت بموجب المرسوم السلطاني رقم 69 / 2022.",
+     "marker": 2,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": false
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "insert: «» → «ولجهات الامن العام بالتنسيق مع الادعاء العام التحقيق في الجرائم الواقعة علي امن الدولة وال»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-1999-97",
+   "host_decree_number": "1999/97",
+   "article_number": "31",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/59",
+    "apparatus_text": "[3] عدلت بموجب المرسوم السلطاني رقم 59 / 2011.",
+    "marker": 3,
+    "marker_position": "body",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/59",
+     "apparatus_text": "[3] عدلت بموجب المرسوم السلطاني رقم 59 / 2011.",
+     "marker": 3,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «موظفو» → «ضباط»",
+    "replace: «الذين يصدر بتحديدهم قرار» → «والرتب النظامية الاخري بدءا»",
+    "replace: «رئيس الجهة» → «رتبة جندي 3»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-1999-97",
+   "host_decree_number": "1999/97",
+   "article_number": "42",
+   "attributed": true,
+   "attributed_footnote": false,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/96",
+    "apparatus_text": "[4] عدلت بموجب المرسوم السلطاني رقم 96 / 2011.",
+    "marker": 4,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/96",
+     "apparatus_text": "[4] عدلت بموجب المرسوم السلطاني رقم 96 / 2011.",
+     "marker": 4,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": true,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": true,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "delete: «مدة تزيد علي ثلاثة اشهر» → «»"
+   ],
+   "amended_by": [
+    {
+     "instrument_id": "RUZN-RD-2011-96",
+     "decree_number": "2011/96",
+     "date_gregorian": "11 October 2011",
+     "gazette_number": 947,
+     "event": "replaced",
+     "replacement_text_ar": "لمأمور الضبط القضائي في حالات التلبس بالجنايات والجنح المعاقب عليها بالسجن أن يأمر بالقبض على المتهم الحاضر إذا قامت أدلة قوية على ارتكابه الجريمة، فإذا لم يكن حاضرا جاز لمأمور الضبط القضائي أن يصدر أمرا بضبطه وإحضاره ويثبت ذلك في المحضر.",
+     "replacement_scope": null,
+     "instruction_text_ar": null,
+     "amends_instrument": "1999/97"
+    }
+   ]
+  },
+  {
+   "host_document_id": "RUZN-LW-1999-97",
+   "host_decree_number": "1999/97",
+   "article_number": "48",
+   "attributed": true,
+   "attributed_footnote": false,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/96",
+    "apparatus_text": "[5] عدلت بموجب المرسوم السلطاني رقم 96 / 2011.",
+    "marker": 5,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/96",
+     "apparatus_text": "[5] عدلت بموجب المرسوم السلطاني رقم 96 / 2011.",
+     "marker": 5,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": true,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": true,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "delete: «مدة تزيد علي ثلاثة اشهر،» → «»"
+   ],
+   "amended_by": [
+    {
+     "instrument_id": "RUZN-RD-2011-96",
+     "decree_number": "2011/96",
+     "date_gregorian": "11 October 2011",
+     "gazette_number": 947,
+     "event": "replaced",
+     "replacement_text_ar": "في غير الحالات المنصوص عليها في المادة (٤٢) من هذا القانون، إذا وجدت دلائل كافية على اتهام شخص بارتكاب جناية أو جنحة معاقب عليها بالسجن لمأمور الضبط القضائي اتخاذ الإجراءات التحفظية المناسبة وأن يطلب فورا من الادعاء العام أن يصدر أمرا بالقبض على المتهم.",
+     "replacement_scope": null,
+     "instruction_text_ar": null,
+     "amends_instrument": "1999/97"
+    }
+   ]
+  },
+  {
+   "host_document_id": "RUZN-LW-1999-97",
+   "host_decree_number": "1999/97",
+   "article_number": "50",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/59",
+    "apparatus_text": "[6] عدلت بموجب المرسوم السلطاني رقم 59 / 2011.",
+    "marker": 6,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/59",
+     "apparatus_text": "[6] عدلت بموجب المرسوم السلطاني رقم 59 / 2011.",
+     "marker": 6,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "insert: «» → «الي جهة التحقيق المختصة، وذلك»",
+    "replace: «ثمانية» → «خمسة عشر يوما بالنسبة للجرائم الواقعة علي امن الدولة والجرائم المنصوص عليها في قانون مكافح»",
+    "replace: «الي» → «بالنسبة لغيرها من الجرائم، ولا يجوز تجديد هذه المدة الا لمرة واحدة ولمدة مماثلة بموافقة»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-1999-97",
+   "host_decree_number": "1999/97",
+   "article_number": "52",
+   "attributed": false,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "delete: «ثانيا الحبس الاحتياطي» → «»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-1999-97",
+   "host_decree_number": "1999/97",
+   "article_number": "53",
+   "attributed": true,
+   "attributed_footnote": false,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/96",
+    "apparatus_text": "[8] عدلت بموجب المرسوم السلطاني رقم 96 / 2011.",
+    "marker": 8,
+    "marker_position": "body",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/96",
+     "apparatus_text": "[8] عدلت بموجب المرسوم السلطاني رقم 96 / 2011.",
+     "marker": 8,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": true,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": true,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "delete: «مدة تزيد علي ثلاثة اشهر،» → «»",
+    "delete: «حبس المتهم احتياطيا اذا لم يكن له محل اقامة معروف في السلطنة اذا كانت الجريمة معاقبا عليها» → «»",
+    "insert: «» → «8»"
+   ],
+   "amended_by": [
+    {
+     "instrument_id": "RUZN-RD-2011-96",
+     "decree_number": "2011/96",
+     "date_gregorian": "11 October 2011",
+     "gazette_number": 947,
+     "event": "replaced",
+     "replacement_text_ar": "إذا اقتضت مصلحة التحقيق الابتدائي بعد استجواب المتهم منعه من الفرار أو من التأثير في سير التحقيق، جاز لعضو الادعاء العام أن يصدر أمرا بحبسه احتياطيا.\nولا يجوز الأمر بالحبس الاحتياطي إلا إذا كانت الواقعة جناية أو جنحة معاقبا عليها بالسجن.\nويجوز أن يشتمل أمر الحبس إضافة إلى البيانات الواردة في المادة (٤٩) من هذا القانون على تكليف القائم على إدارة المكان المخصص للحبس قبول المتهم ووضعه فيه مع بيان ماد",
+     "replacement_scope": null,
+     "instruction_text_ar": null,
+     "amends_instrument": "1999/97"
+    }
+   ]
+  },
+  {
+   "host_document_id": "RUZN-LW-1999-97",
+   "host_decree_number": "1999/97",
+   "article_number": "63",
+   "attributed": true,
+   "attributed_footnote": false,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/96",
+    "apparatus_text": "[9] عدلت بموجب المرسوم السلطاني رقم 96 / 2011.",
+    "marker": 9,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/96",
+     "apparatus_text": "[9] عدلت بموجب المرسوم السلطاني رقم 96 / 2011.",
+     "marker": 9,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": true,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": true,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «بعد تقديم تعهد بالحضور كلما طلب منه ذلك وبعدم الفرار من تنفيذ الحكم الذي قد يصدر ضده، ويكو» → «عن المتهم»",
+    "insert: «» → «او بحجز وثائقه الرسمية»",
+    "insert: «» → «ويكون تقديم الضمان المالي وجوبيا»"
+   ],
+   "amended_by": [
+    {
+     "instrument_id": "RUZN-RD-2011-96",
+     "decree_number": "2011/96",
+     "date_gregorian": "11 October 2011",
+     "gazette_number": 947,
+     "event": "replaced",
+     "replacement_text_ar": "لعضو الادعاء العام في أي وقت أن يصدر أمرا بالإفراج عن المتهم متى وجد أن حبسه لم يعد له مبرر، أو أنه لا ضرر على التحقيق من إخلاء سبيله ولا يخشى فراره.\nوإذا كان المتهم قد أحيل إلى المحكمة المختصة فيكون الإفراج عنه من اختصاصها، وفي جميع الأحوال يكون الإفراج عن المتهم بضمان شخصي أو بحجز وثائقه الرسمية أو بتقديم ضمان مالي.\nويكون تقديم الضمان المالي وجوبيا في الجرائم الواقعة على الأموال.\n\nثانيا: تضاف ما",
+     "replacement_scope": null,
+     "instruction_text_ar": null,
+     "amends_instrument": "1999/97"
+    }
+   ]
+  },
+  {
+   "host_document_id": "RUZN-LW-1999-97",
+   "host_decree_number": "1999/97",
+   "article_number": "141",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/59",
+    "apparatus_text": "[10] عدلت بموجب المرسوم السلطاني رقم 59 / 2011.",
+    "marker": 10,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/59",
+     "apparatus_text": "[10] عدلت بموجب المرسوم السلطاني رقم 59 / 2011.",
+     "marker": 10,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "insert: «» → «ويجوز بقرار من وزير العدل لاسباب يقدرها وبناء علي طلب رئيس المحكمة المختصة او المدعي العام»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-1999-97",
+   "host_decree_number": "1999/97",
+   "article_number": "164",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2022/69",
+    "apparatus_text": "[11] عدلت بموجب المرسوم السلطاني رقم 69 / 2022.",
+    "marker": 11,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2022/69",
+     "apparatus_text": "[11] عدلت بموجب المرسوم السلطاني رقم 69 / 2022.",
+     "marker": 11,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "insert: «» → «رؤساء وحدات الجهاز الاداري للدولة وغيرها من الاشخاص الاعتبارية العامة عن طريق التقسيم الاد»",
+    "replace: «بالاستلام،» → «بالتسلم،»",
+    "replace: «عشرين ريالا،» → «50 خمسين ريالا عمانيا،»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-1999-97",
+   "host_decree_number": "1999/97",
+   "article_number": "221",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2020/120",
+    "apparatus_text": "[12] عدلت بموجب المرسوم السلطاني رقم 120 / 2020.",
+    "marker": 12,
+    "marker_position": "body",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2020/120",
+     "apparatus_text": "[12] عدلت بموجب المرسوم السلطاني رقم 120 / 2020.",
+     "marker": 12,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «الاراء» → «الاراء،»",
+    "delete: «هذا» → «»",
+    "replace: «ان تاخذ راي» → «ارسال الاوراق الي لجنة تشكل بامر من جلالة السلطان برئاسة»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-1999-97",
+   "host_decree_number": "1999/97",
+   "article_number": "334",
+   "attributed": true,
+   "attributed_footnote": false,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2003/42",
+    "apparatus_text": "[13] عدلت بموجب المرسوم السلطاني رقم 42 / 2003.",
+    "marker": 13,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2003/42",
+     "apparatus_text": "[13] عدلت بموجب المرسوم السلطاني رقم 42 / 2003.",
+     "marker": 13,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": true,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": true,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "insert: «» → «بمضي المدة»",
+    "replace: «ست» → «خمس»"
+   ],
+   "amended_by": [
+    {
+     "instrument_id": "RUZN-RD-2003-42",
+     "decree_number": "2003/42",
+     "date_gregorian": "13 May 2003",
+     "gazette_number": 743,
+     "event": "replaced",
+     "replacement_text_ar": "يرد الاعتبار بحكم القانون بعد تمام تنفيذ العقوبة الأصلية والتكميلية أو صدور عفو عنها أو سقوطها بمضي المدة متى مضت خمس سنوات إذا كانت العقوبة في جناية وثلاث سنوات إذا كانت في جنحة.",
+     "replacement_scope": null,
+     "instruction_text_ar": null,
+     "amends_instrument": "1999/97"
+    }
+   ]
+  },
+  {
+   "host_document_id": "RUZN-LW-1999-97",
+   "host_decree_number": "1999/97",
+   "article_number": "335",
+   "attributed": true,
+   "attributed_footnote": false,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2003/42",
+    "apparatus_text": "[14] عدلت بموجب المرسوم السلطاني رقم 42 / 2003.",
+    "marker": 14,
+    "marker_position": "body",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2003/42",
+     "apparatus_text": "[14] عدلت بموجب المرسوم السلطاني رقم 42 / 2003.",
+     "marker": 14,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": true,
+   "replacement_partial": true,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": true,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «ثلاث سنوات» → «سنتان»",
+    "replace: «وثمانية عشر شهرا» → «وسنة»",
+    "replace: «جنحة،» → «جنحة»"
+   ],
+   "amended_by": [
+    {
+     "instrument_id": "RUZN-RD-2003-42",
+     "decree_number": "2003/42",
+     "date_gregorian": "13 May 2003",
+     "gazette_number": 743,
+     "event": "replaced",
+     "replacement_text_ar": "٢ – أن يكون قد مضى من تاريخ تمام التنفيذ أو صدور العفو سنتان إذا كانت العقوبة في جناية وسنة إذا كانت في جنحة وتضاعف المدد في حالتي الحكم للعود وسقوط العقوبة بمضي المدة.",
+     "replacement_scope": "البند (٢) فقط",
+     "instruction_text_ar": null,
+     "amends_instrument": "1999/97"
+    }
+   ]
+  },
+  {
+   "host_document_id": "RUZN-LW-1999-97",
+   "host_decree_number": "1999/97",
+   "article_number": "356",
+   "attributed": false,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "insert: «» → «1 عدلت بموجب المرسوم السلطاني رقم 59 2011 2 اضيفت بموجب المرسوم السلطاني رقم 75 2005 وعدلت»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-1999-97",
+   "host_decree_number": "1999/97",
+   "article_number": "52 مكررا",
+   "attributed": true,
+   "attributed_footnote": false,
+   "footnote": {
+    "event": "added",
+    "decree_number": "2011/96",
+    "apparatus_text": "[7] اضيفت بموجب المرسوم السلطاني رقم 96 / 2011.",
+    "marker": 7,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "added",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "added",
+     "decree_number": "2011/96",
+     "apparatus_text": "[7] اضيفت بموجب المرسوم السلطاني رقم 96 / 2011.",
+     "marker": 7,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": true,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": true,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": [
+    {
+     "instrument_id": "RUZN-RD-2011-96",
+     "decree_number": "2011/96",
+     "date_gregorian": "11 October 2011",
+     "gazette_number": 947,
+     "event": "inserted",
+     "replacement_text_ar": "للمدعي العام أو من يقوم مقامه أن يصدر أمرا بالمنع من السفر إذا وجدت دلائل كافية على اتهام شخص بارتكاب جناية أو جنحة معاقب عليها بالسجن.\nويكون الأمر بالمنع من السفر مكتوبا ومؤرخا وموقعا ممن أصدره مع بيان صفته ويبين فيه اسم الشخص الممنوع من السفر وكل ما يلزم لتعيينه، وسبب الأمر بالمنع من السفر، ومدته.\nولصاحب الشأن أو من ينوب عنه التظلم من أمر المنع من السفر أمام محكمة الجنح المستأنفة منعقدة في غرفة ",
+     "replacement_scope": null,
+     "instruction_text_ar": null,
+     "amends_instrument": "1999/97"
+    }
+   ]
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "1",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/113",
+    "apparatus_text": "[1] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+    "marker": 1,
+    "marker_position": "body",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/113",
+     "apparatus_text": "[1] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+     "marker": 1,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    },
+    {
+     "event": "modified",
+     "decree_number": "2011/113",
+     "apparatus_text": "[2] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+     "marker": 2,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "delete: «او عينا» → «»",
+    "replace: «ان وجدت» → «1»",
+    "replace: «سائر الاستحقاقات» → «جميع العلاوات»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "10",
+   "attributed": false,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": true,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": "recorded change consists only of structural heading text; flagged_amended_in_source is false",
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "delete: «الباب الثاني تشغيل المواطنين وتنظيم عمل الاجانب الفصل الاول تشغيل المواطنين» → «»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "19",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "added",
+    "decree_number": "2011/113",
+    "apparatus_text": "[7] اضيفت بموجب المرسوم السلطاني رقم 113 / 2011.",
+    "marker": 7,
+    "marker_position": "body",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": false
+   },
+   "footnotes_all": [
+    {
+     "event": "added",
+     "decree_number": "2011/113",
+     "apparatus_text": "[7] اضيفت بموجب المرسوم السلطاني رقم 113 / 2011.",
+     "marker": 7,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": false
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "insert: «» → «4 المهن والاعمال التي يتم ايقاف التصريح باستقدام القوي العاملة غير العمانية بصفة مؤقتة 7»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "28",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/113",
+    "apparatus_text": "[8] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+    "marker": 8,
+    "marker_position": "body",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/113",
+     "apparatus_text": "[8] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+     "marker": 8,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "delete: «اذا كانت طبيعة العمل تستدعي ذلك» → «»",
+    "insert: «» → «8»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "48",
+   "attributed": false,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": true,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": "recorded change consists only of structural heading text; flagged_amended_in_source is false",
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "delete: «الباب الرابع الاجور والاجازات وساعات العمل الفصل الاول الاجور» → «»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "51",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/113",
+    "apparatus_text": "[11] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+    "marker": 11,
+    "marker_position": "body",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/113",
+     "apparatus_text": "[11] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+     "marker": 11,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "insert: «» → «7»",
+    "replace: «عنها» → «عنها، ويجوز بقرار من الوزير تحديد موعد صرف اجور العاملين بالمنشات الخاضعة لاحكام هذا القان»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "53",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/113",
+    "apparatus_text": "[12] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+    "marker": 12,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/113",
+     "apparatus_text": "[12] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+     "marker": 12,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «وقع» → «قام صاحب العمل بتحويل اجر»",
+    "delete: «بما يفيد استلام الاجر في السجل المعد لذلك، او في كشوف الاجور او ايصال خاص معد لهذا الغرض ا» → «»",
+    "replace: «البنوك» → «المصارف»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "61",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/113",
+    "apparatus_text": "[13] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+    "marker": 13,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/113",
+     "apparatus_text": "[13] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+     "marker": 13,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «اساسي لمدة خمسة عشر» → «شامل لا تقل عن ثلاثين»",
+    "replace: «بعد اتمام سنة» → «ويتمتع العامل بالاجازة حسب مقتضيات مصلحة العمل، ولا يجوز له القيام بالاجازة الاعتيادية قبل»",
+    "replace: «الخدمة المستمرة مع» → «تاريخ التحاقه بالعمل لدي»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "68",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/113",
+    "apparatus_text": "[14] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+    "marker": 14,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/113",
+     "apparatus_text": "[14] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+     "marker": 14,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "delete: «تشغيلا فعليا» → «»",
+    "replace: «48» → «45»",
+    "insert: «» → «عمل»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "70",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/113",
+    "apparatus_text": "[15] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+    "marker": 15,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/113",
+     "apparatus_text": "[15] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+     "marker": 15,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «اذا كلف» → «يجوز تشغيل»",
+    "replace: «بالعمل» → «ساعات اضافية»",
+    "replace: «فعلي» → «اذا اقتضت مصلحة العمل ذلك علي ان لا يزيد مجموع ساعات العمل الاصلية والاضافية علي 12 اثنتي »"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "71",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/113",
+    "apparatus_text": "[16] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+    "marker": 16,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/113",
+     "apparatus_text": "[16] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+     "marker": 16,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «اربع وعشرين ساعة متتالية» → «يومين متتاليين»",
+    "replace: «ستة» → «خمسة»",
+    "replace: «متصلة علي الاكثر،» → «متصلة،»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "72",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/113",
+    "apparatus_text": "[17] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+    "marker": 17,
+    "marker_position": "body",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/113",
+     "apparatus_text": "[17] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+     "marker": 17,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «الاعياد والمواسم والمناسبات الاخري والاعمال» → «الاعمال»",
+    "insert: «» → «17»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "73",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/113",
+    "apparatus_text": "[18] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+    "marker": 18,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/113",
+     "apparatus_text": "[18] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+     "marker": 18,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «السابقة» → «72»",
+    "replace: «الذي كان يستحقه عن الفترة» → «الاساسي محسوبا وفقا لساعات العمل»",
+    "replace: «خلال الاسبوع التالي» → «بالاتفاق مع العامل»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "81",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/113",
+    "apparatus_text": "[19] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+    "marker": 19,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/113",
+     "apparatus_text": "[19] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+     "marker": 19,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «السابعة» → «التاسعة»",
+    "replace: «والسابعة» → «والسادسة»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "83",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/113",
+    "apparatus_text": "[20] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+    "marker": 20,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/113",
+     "apparatus_text": "[20] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+     "marker": 20,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «للمراة التي امضت سنة في خدمة» → «تمنح المراة العاملة اجازة خاصة لتغطية فترة ما قبل وبعد الولادة وذلك لمدة خمسين يوما براتب »",
+    "delete: «الحق في اجازة وضع لمدة لا تزيد في مجموعها علي ستة اسابيع تشمل المدة التي تسبق الوضع والتي » → «»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "106",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2009/63",
+    "apparatus_text": "[21] عدلت بموجب المرسوم السلطاني رقم 63 / 2009 والمرسوم السلطاني رقم 113 / 2011.",
+    "marker": 21,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2009/63",
+     "apparatus_text": "[21] عدلت بموجب المرسوم السلطاني رقم 63 / 2009 والمرسوم السلطاني رقم 113 / 2011.",
+     "marker": 21,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «يجوز لها» → «يجب عليها»",
+    "replace: «عادلا» → «لا يقل عن ثلاثة اشهر يحسب علي اساس اخر اجر شامل كان يتقاضاه، مع مراعاة ظروف العامل ومدة خد»",
+    "delete: «ان وجدت» → «»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "107",
+   "attributed": false,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": true,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": "recorded change consists only of structural heading text; flagged_amended_in_source is false",
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "delete: «الباب التاسع اللجان التمثيلية» → «»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "108",
+   "attributed": false,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «للعاملين في اية منشاة» → «للعمال»",
+    "replace: «لجنة تمثيلية،» → «نقابات عمالية»",
+    "replace: «المقررة قانونا» → «وتحسين حالتهم المادية والاجتماعية»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "109",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2006/112",
+    "apparatus_text": "[24] عدلت بموجب المرسوم السلطاني رقم 112 / 2006.",
+    "marker": 24,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2006/112",
+     "apparatus_text": "[24] عدلت بموجب المرسوم السلطاني رقم 112 / 2006.",
+     "marker": 24,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «تختار اللجان التمثيلية في المنشات لجنة تمثيلية رئيسية تمثلهم» → «تشكل النقابات العمالية اتحادا عاما لعمال سلطنة عمان يمثلهم»",
+    "insert: «» → «ويجوز للنقابات العمالية تشكيل اتحادات عمالية فيما بينها»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "110",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2006/112",
+    "apparatus_text": "[25] عدلت بموجب المرسوم السلطاني رقم 112 / 2006.",
+    "marker": 25,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2006/112",
+     "apparatus_text": "[25] عدلت بموجب المرسوم السلطاني رقم 112 / 2006.",
+     "marker": 25,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «يصدر» → «تتمتع النقابات العمالية والاتحادات العمالية والاتحاد العام لعمال سلطنة عمان بالشخصية الاعت»",
+    "replace: «قرارا بقواعد تشكيل» → «القرارات المنظمة لتشكيل»",
+    "replace: «اللجان التمثيلية واللجنة الرئيسية الباب العاشر في العقوبات» → «وتسجيل النقابات العمالية والاتحادات العمالية والاتحاد العام لعمال سلطنة عمان»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "112",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2006/74",
+    "apparatus_text": "[27] عدلت بموجب المرسوم السلطاني رقم 74 / 2006.",
+    "marker": 27,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2006/74",
+     "apparatus_text": "[27] عدلت بموجب المرسوم السلطاني رقم 74 / 2006.",
+     "marker": 27,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «اللازمة،» → «اللازمة»",
+    "delete: «عن تقديم» → «»",
+    "insert: «» → «او يقوم باي فعل من شانه حرمان العامل من حقه في ممارسة نشاطه النقابي او عرقلة تشكيل النقابا»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "114",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2009/63",
+    "apparatus_text": "[29] عدلت بموجب المرسوم السلطاني رقم 63 / 2009.",
+    "marker": 29,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2009/63",
+     "apparatus_text": "[29] عدلت بموجب المرسوم السلطاني رقم 63 / 2009.",
+     "marker": 29,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    },
+    {
+     "event": "removed",
+     "decree_number": "2011/113",
+     "apparatus_text": "[30] الغيت الفقرات الرابعة والخامسة من المادة (114) بموجب المرسوم السلطاني رقم 113 / 2011.",
+     "marker": 30,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": false
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «يستخدم» → «يشغل»",
+    "replace: «باستخدامهم لديه» → «بتشغيلهم وفقا للترخيص الصادر له»",
+    "replace: «عشرة ريالات» → «1000 الف ريال عماني»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "118",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2006/74",
+    "apparatus_text": "[32] عدلت بموجب المرسوم السلطاني رقم 74 / 2006.",
+    "marker": 32,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2006/74",
+     "apparatus_text": "[32] عدلت بموجب المرسوم السلطاني رقم 74 / 2006.",
+     "marker": 32,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «مائة ريال،» → «خمسمائة ريال»",
+    "replace: «الاحكام» → «الاحكام،»",
+    "replace: «مدة» → «لمدة»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "123",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "added",
+    "decree_number": "2006/74",
+    "apparatus_text": "[34] اضيفت بموجب المرسوم السلطاني رقم 74 / 2006.",
+    "marker": 34,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "added",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "added",
+     "decree_number": "2006/74",
+     "apparatus_text": "[34] اضيفت بموجب المرسوم السلطاني رقم 74 / 2006.",
+     "marker": 34,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "124",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "added",
+    "decree_number": "2009/63",
+    "apparatus_text": "[35] اضيفت بموجب المرسوم السلطاني رقم 63 / 2009.",
+    "marker": 35,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "added",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "added",
+     "decree_number": "2009/63",
+     "apparatus_text": "[35] اضيفت بموجب المرسوم السلطاني رقم 63 / 2009.",
+     "marker": 35,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "125",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "added",
+    "decree_number": "2009/63",
+    "apparatus_text": "[36] اضيفت بموجب المرسوم السلطاني رقم 63 / 2009.",
+    "marker": 36,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "added",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "added",
+     "decree_number": "2009/63",
+     "apparatus_text": "[36] اضيفت بموجب المرسوم السلطاني رقم 63 / 2009.",
+     "marker": 36,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "3 مكررا",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "added",
+    "decree_number": "2006/74",
+    "apparatus_text": "[3] اضيفت بموجب المرسوم السلطاني رقم 74 / 2006.",
+    "marker": 3,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "added",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "added",
+     "decree_number": "2006/74",
+     "apparatus_text": "[3] اضيفت بموجب المرسوم السلطاني رقم 74 / 2006.",
+     "marker": 3,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "10 مكررا",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/113",
+    "apparatus_text": "[4] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+    "marker": 4,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "added",
+    "event_class_matches": false
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/113",
+     "apparatus_text": "[4] عدلت بموجب المرسوم السلطاني رقم 113 / 2011.",
+     "marker": 4,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": false
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "18 مكررا",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "added",
+    "decree_number": "2009/63",
+    "apparatus_text": "[5] اضيفت بموجب المرسوم السلطاني رقم 63 / 2009.",
+    "marker": 5,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "added",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "added",
+     "decree_number": "2009/63",
+     "apparatus_text": "[5] اضيفت بموجب المرسوم السلطاني رقم 63 / 2009.",
+     "marker": 5,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": true
+    },
+    {
+     "event": "added",
+     "decree_number": "2011/113",
+     "apparatus_text": "[6] اضيفت بموجب المرسوم السلطاني رقم 113 / 2011.",
+     "marker": 6,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "48 مكررا",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "added",
+    "decree_number": "2011/113",
+    "apparatus_text": "[9] اضيفت بموجب المرسوم السلطاني رقم 113 / 2011.",
+    "marker": 9,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "added",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "added",
+     "decree_number": "2011/113",
+     "apparatus_text": "[9] اضيفت بموجب المرسوم السلطاني رقم 113 / 2011.",
+     "marker": 9,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "50 مكررا",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "added",
+    "decree_number": "2011/113",
+    "apparatus_text": "[10] اضيفت بموجب المرسوم السلطاني رقم 113 / 2011.",
+    "marker": 10,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "added",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "added",
+     "decree_number": "2011/113",
+     "apparatus_text": "[10] اضيفت بموجب المرسوم السلطاني رقم 113 / 2011.",
+     "marker": 10,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "107 مكررا",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "added",
+    "decree_number": "2006/74",
+    "apparatus_text": "[22] اضيفت بموجب المرسوم السلطاني رقم 74 / 2006.",
+    "marker": 22,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "added",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "added",
+     "decree_number": "2006/74",
+     "apparatus_text": "[22] اضيفت بموجب المرسوم السلطاني رقم 74 / 2006.",
+     "marker": 22,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": true
+    },
+    {
+     "event": "modified",
+     "decree_number": "2006/74",
+     "apparatus_text": "[23] عدل بموجب المرسوم السلطاني رقم 74 / 2006.",
+     "marker": 23,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": false
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "110 مكررا",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2006/112",
+    "apparatus_text": "[26] عدلت بموجب المرسوم السلطاني رقم 112 / 2006.",
+    "marker": 26,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "added",
+    "event_class_matches": false
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2006/112",
+     "apparatus_text": "[26] عدلت بموجب المرسوم السلطاني رقم 112 / 2006.",
+     "marker": 26,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": false
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "113 مكررا",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "added",
+    "decree_number": "2009/63",
+    "apparatus_text": "[28] اضيفت بموجب المرسوم السلطاني رقم 63 / 2009.",
+    "marker": 28,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "added",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "added",
+     "decree_number": "2009/63",
+     "apparatus_text": "[28] اضيفت بموجب المرسوم السلطاني رقم 63 / 2009.",
+     "marker": 28,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "114 مكررا",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "added",
+    "decree_number": "2011/113",
+    "apparatus_text": "[31] اضيفت بموجب المرسوم السلطاني رقم 113 / 2011.",
+    "marker": 31,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "added",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "added",
+     "decree_number": "2011/113",
+     "apparatus_text": "[31] اضيفت بموجب المرسوم السلطاني رقم 113 / 2011.",
+     "marker": 31,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2003-35",
+   "host_decree_number": "2003/35",
+   "article_number": "118 مكررا",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2009/63",
+    "apparatus_text": "[33] عدلت بموجب المرسوم السلطاني رقم 63 / 2009.",
+    "marker": 33,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "added",
+    "event_class_matches": false
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2009/63",
+     "apparatus_text": "[33] عدلت بموجب المرسوم السلطاني رقم 63 / 2009.",
+     "marker": 33,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": false
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2008-36",
+   "host_decree_number": "2008/36",
+   "article_number": "1",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "added",
+    "decree_number": "2011/19",
+    "apparatus_text": "[1] اضيفت بموجب المرسوم السلطاني رقم 19 / 2011.",
+    "marker": 1,
+    "marker_position": "body",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": false
+   },
+   "footnotes_all": [
+    {
+     "event": "added",
+     "decree_number": "2011/19",
+     "apparatus_text": "[1] اضيفت بموجب المرسوم السلطاني رقم 19 / 2011.",
+     "marker": 1,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": false
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "insert: «» → «الامين العام الامين العام لمجلس المناقصات 1»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2008-36",
+   "host_decree_number": "2008/36",
+   "article_number": "2",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/19",
+    "apparatus_text": "[2] عدلت بموجب المرسوم السلطاني رقم 19 / 2011 والمرسوم السلطاني رقم 60 / 2013.",
+    "marker": 2,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/19",
+     "apparatus_text": "[2] عدلت بموجب المرسوم السلطاني رقم 19 / 2011 والمرسوم السلطاني رقم 60 / 2013.",
+     "marker": 2,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "delete: «جميع» → «»",
+    "delete: «والشركات ذات الشخصية الاعتبارية المستقلة المملوكة بالكامل للحكومة» → «»",
+    "insert: «» → «والوحدات التي تطبق القانون الخاص بالنظام المالي لديوان البلاط السلطاني»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2008-36",
+   "host_decree_number": "2008/36",
+   "article_number": "6",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/120",
+    "apparatus_text": "[3] عدلت بموجب المرسوم السلطاني رقم 120 / 2011.",
+    "marker": 3,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/120",
+     "apparatus_text": "[3] عدلت بموجب المرسوم السلطاني رقم 120 / 2011.",
+     "marker": 3,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "insert: «» → «وازواجهم واقاربهم حتي الدرجة الثانية»",
+    "insert: «» → «بقانون حماية المال العام وتجنب تضارب المصالح الصادر»",
+    "replace: «39 28 وتفسيره،» → «112 2011،»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2008-36",
+   "host_decree_number": "2008/36",
+   "article_number": "8",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/19",
+    "apparatus_text": "[5] عدلت بموجب المرسوم السلطاني رقم 19 / 2011.",
+    "marker": 5,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/19",
+     "apparatus_text": "[5] عدلت بموجب المرسوم السلطاني رقم 19 / 2011.",
+     "marker": 5,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    },
+    {
+     "event": "modified",
+     "decree_number": "2020/83",
+     "apparatus_text": "[6] عدلت بموجب المرسوم السلطاني رقم 83 / 2020.",
+     "marker": 6,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "delete: «جميع» → «»",
+    "replace: «مرسوم سلطاني» → «قرار من مجلس الوزراء،»",
+    "insert: «» → «6»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2008-36",
+   "host_decree_number": "2008/36",
+   "article_number": "10",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/19",
+    "apparatus_text": "[7] عدلت بموجب المرسوم السلطاني رقم 19 / 2011.",
+    "marker": 7,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/19",
+     "apparatus_text": "[7] عدلت بموجب المرسوم السلطاني رقم 19 / 2011.",
+     "marker": 7,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    },
+    {
+     "event": "removed",
+     "decree_number": "2020/83",
+     "apparatus_text": "[8] الغيت بموجب المرسوم السلطاني رقم 83 / 2020.",
+     "marker": 8,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": false
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «تكون للمجلس امانة عامة يصدر بهيكلها التنظيمي واختصاصاتها مرسوم سلطاني» → «ملغي 8»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2008-36",
+   "host_decree_number": "2008/36",
+   "article_number": "12",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/19",
+    "apparatus_text": "[13] عدلت بموجب المرسوم السلطاني رقم 19 / 2011.",
+    "marker": 13,
+    "marker_position": "body",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/19",
+     "apparatus_text": "[13] عدلت بموجب المرسوم السلطاني رقم 19 / 2011.",
+     "marker": 13,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «وفي الحالات التي يري فيها» → «ويحل نائب رئيس»",
+    "replace: «مخالفة توصية الجهات المعنية يشترط لصحة قرارات» → «محل الرئيس في رئاسة اجتماعات»",
+    "replace: «ان تصدر باغلبية ثلثي اعضائه الحاضرين» → «في حالة غيابه او وجود مانع يحول دون رئاسته للاجتماع 13»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2008-36",
+   "host_decree_number": "2008/36",
+   "article_number": "14",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/19",
+    "apparatus_text": "[14] عدلت بموجب المرسوم السلطاني رقم 19 / 2011.",
+    "marker": 14,
+    "marker_position": "body",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": false,
+    "ledger_event": null,
+    "event_class_matches": false
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/19",
+     "apparatus_text": "[14] عدلت بموجب المرسوم السلطاني رقم 19 / 2011.",
+     "marker": 14,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": false,
+     "ledger_event": null,
+     "event_class_matches": false
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": null,
+   "ledger_changes": [],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2008-36",
+   "host_decree_number": "2008/36",
+   "article_number": "15",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/19",
+    "apparatus_text": "[15] عدلت بموجب المرسوم السلطاني رقم 19 / 2011 والمرسوم السلطاني رقم 60 / 2013.",
+    "marker": 15,
+    "marker_position": "body",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/19",
+     "apparatus_text": "[15] عدلت بموجب المرسوم السلطاني رقم 19 / 2011 والمرسوم السلطاني رقم 60 / 2013.",
+     "marker": 15,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «برئاسة رئيس تلك الجهة او من يفوضه صلاحية» → «اختصاصات»",
+    "replace: «مائتين وخمسين الف» → «ثلاثة ملايين»",
+    "insert: «» → «15»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2008-36",
+   "host_decree_number": "2008/36",
+   "article_number": "31",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/120",
+    "apparatus_text": "[16] عدلت بموجب المرسوم السلطاني رقم 120 / 2011.",
+    "marker": 16,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/120",
+     "apparatus_text": "[16] عدلت بموجب المرسوم السلطاني رقم 120 / 2011.",
+     "marker": 16,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "insert: «» → «الفنية والمالية»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2008-36",
+   "host_decree_number": "2008/36",
+   "article_number": "33",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/19",
+    "apparatus_text": "[17] عدلت بموجب المرسوم السلطاني رقم 19 / 2011.",
+    "marker": 17,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/19",
+     "apparatus_text": "[17] عدلت بموجب المرسوم السلطاني رقم 19 / 2011.",
+     "marker": 17,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "delete: «وكان اقل عطاء غير مقترن بشيء من ذلك تزيد قيمته علي العطاء المقترن بتحفظات» → «»",
+    "replace: «الامكان،» → «الامكان»",
+    "insert: «» → «من مقدمي العطاءات المقترنة بتحفظات»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2008-36",
+   "host_decree_number": "2008/36",
+   "article_number": "39",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/19",
+    "apparatus_text": "[1188] عدلت بموجب المرسوم السلطاني رقم 19 / 2011.",
+    "marker": 18,
+    "marker_position": "heading",
+    "pairing": "forced_by_elimination",
+    "pairing_note": "apparatus label reads [1188], corrupt in the source itself (identical in sourcing/txt and in the corpus, so the parser is not implicated). Marker [18] and this entry are the only unpaired one of each, so the pairing is forced by elimination, not inferred from order.",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/19",
+     "apparatus_text": "[1188] عدلت بموجب المرسوم السلطاني رقم 19 / 2011.",
+     "marker": 18,
+     "marker_position": "heading",
+     "pairing": "forced_by_elimination",
+     "pairing_note": "apparatus label reads [1188], corrupt in the source itself (identical in sourcing/txt and in the corpus, so the parser is not implicated). Marker [18] and this entry are the only unpaired one of each, so the pairing is forced by elimination, not inferred from order.",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "insert: «» → «1»",
+    "replace: «المناقصة» → «المناقصات»",
+    "insert: «» → «2 يجوز الغاء المناقصات بعد صدور قرار الاسناد وقبل التوقيع علي العقد بقرار مسبب من المجلس ا»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2008-36",
+   "host_decree_number": "2008/36",
+   "article_number": "50",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/19",
+    "apparatus_text": "[19] عدلت بموجب المرسوم السلطاني رقم 19 / 2011.",
+    "marker": 19,
+    "marker_position": "body",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/19",
+     "apparatus_text": "[19] عدلت بموجب المرسوم السلطاني رقم 19 / 2011.",
+     "marker": 19,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "insert: «» → «او النقل او تقديم الخدمات والدراسات الاستشارية والاعمال الفنية»",
+    "insert: «» → «19»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2008-36",
+   "host_decree_number": "2008/36",
+   "article_number": "51",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "modified",
+    "decree_number": "2011/19",
+    "apparatus_text": "[20] عدلت بموجب المرسوم السلطاني رقم 19 / 2011. 2008/36 36/2008 2008/36 36/2008",
+    "marker": 20,
+    "marker_position": "body",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "modified",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "modified",
+     "decree_number": "2011/19",
+     "apparatus_text": "[20] عدلت بموجب المرسوم السلطاني رقم 19 / 2011. 2008/36 36/2008 2008/36 36/2008",
+     "marker": 20,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "modified",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "insert: «» → «وتختص هذه اللجنة بالبت في نتيجة التفاوض واتخاذ قرار الاسناد 20»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2008-36",
+   "host_decree_number": "2008/36",
+   "article_number": "62",
+   "attributed": false,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "insert: «» → «1 اضيفت بموجب المرسوم السلطاني رقم 19 2011 2 عدلت بموجب المرسوم السلطاني رقم 19 2011 والمر»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2008-36",
+   "host_decree_number": "2008/36",
+   "article_number": "6 مكررا",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "added",
+    "decree_number": "2011/120",
+    "apparatus_text": "[4] اضيفت بموجب المرسوم السلطاني رقم 120 / 2011.",
+    "marker": 4,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "added",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "added",
+     "decree_number": "2011/120",
+     "apparatus_text": "[4] اضيفت بموجب المرسوم السلطاني رقم 120 / 2011.",
+     "marker": 4,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": true
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2008-36",
+   "host_decree_number": "2008/36",
+   "article_number": "10 مكررا",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "added",
+    "decree_number": "2011/19",
+    "apparatus_text": "[9] اضيفت بموجب المرسوم السلطاني رقم 19 / 2011.",
+    "marker": 9,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "added",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "added",
+     "decree_number": "2011/19",
+     "apparatus_text": "[9] اضيفت بموجب المرسوم السلطاني رقم 19 / 2011.",
+     "marker": 9,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": true
+    },
+    {
+     "event": "removed",
+     "decree_number": "2020/83",
+     "apparatus_text": "[10] الغيت بموجب المرسوم السلطاني رقم 83 / 2020.",
+     "marker": 10,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": false
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2008-36",
+   "host_decree_number": "2008/36",
+   "article_number": "10 مكررا 1",
+   "attributed": false,
+   "attributed_footnote": true,
+   "footnote": {
+    "event": "added",
+    "decree_number": "2011/19",
+    "apparatus_text": "[11] اضيفت بموجب المرسوم السلطاني رقم 19 / 2011.",
+    "marker": 11,
+    "marker_position": "heading",
+    "pairing": "direct",
+    "evidence_class": "footnote_apparatus",
+    "replacement_text_available": false,
+    "ledger_corroborates": true,
+    "ledger_event": "added",
+    "event_class_matches": true
+   },
+   "footnotes_all": [
+    {
+     "event": "added",
+     "decree_number": "2011/19",
+     "apparatus_text": "[11] اضيفت بموجب المرسوم السلطاني رقم 19 / 2011.",
+     "marker": 11,
+     "marker_position": "heading",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": true
+    },
+    {
+     "event": "removed",
+     "decree_number": "2020/83",
+     "apparatus_text": "[12] الغيت بموجب المرسوم السلطاني رقم 83 / 2020.",
+     "marker": 12,
+     "marker_position": "body",
+     "pairing": "direct",
+     "evidence_class": "footnote_apparatus",
+     "replacement_text_available": false,
+     "ledger_corroborates": true,
+     "ledger_event": "added",
+     "event_class_matches": false
+    }
+   ],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2018-7",
+   "host_decree_number": "2018/7",
+   "article_number": "71",
+   "attributed": true,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": true,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": true,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "insert: «» → «فيما عدا العقوبات الصادرة في جرائم امن الدولة، والجرائم الماسة بهيبة الدولة، وجرائم الارها»"
+   ],
+   "amended_by": [
+    {
+     "instrument_id": "RUZN-RD-2025-11",
+     "decree_number": "2025/11",
+     "date_gregorian": "7 January 2025",
+     "gazette_number": 1579,
+     "event": "replaced",
+     "replacement_text_ar": "فيما عدا العقوبات الصادرة في جرائم أمن الدولة، والجرائم الماسة بهيبة الدولة، وجرائم الإرهاب وتمويلها، للمحكمة عند الحكم بعقوبة الغرامة أو السجن مدة تقل عن (٣) ثلاث سنوات، أن تأمر في الحكم بوقف التنفيذ إذا رأت من أخلاق المحكوم عليه، أو ماضيه أو سنه، أو الظروف التي ارتكبت فيها الجريمة ما يبعث على الاعتقاد بأنه لن يعود إلى ارتكاب جريمة، متى كان له محل إقامة معلوم.\n\nوللمحكمة أن تجعل وقف التنفيذ شاملا ",
+     "replacement_scope": null,
+     "instruction_text_ar": null,
+     "amends_instrument": "2018/7"
+    }
+   ]
+  },
+  {
+   "host_document_id": "RUZN-LW-2018-7",
+   "host_decree_number": "2018/7",
+   "article_number": "97",
+   "attributed": true,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": true,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": true,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «سنوات» → «سنوات،»",
+    "insert: «» → «كما يعاقب بالعقوبة ذاتها كل من ارتكب علانية او بالنشر طعنا في زوجة السلطان وولي عهده واولا»"
+   ],
+   "amended_by": [
+    {
+     "instrument_id": "RUZN-RD-2022-68",
+     "decree_number": "2022/68",
+     "date_gregorian": "20 October 2022",
+     "gazette_number": 1464,
+     "event": "replaced",
+     "replacement_text_ar": "يعاقب بالسجن مدة لا تقل عن (٣) ثلاث سنوات، ولا تزيد على (٧) سبع سنوات، كل من ارتكب علانية أو بالنشر طعنا في حقوق السلطان، وسلطته، أو عابه في ذاته.\n\nكما يعاقب بالعقوبة ذاتها كل من ارتكب علانية أو بالنشر طعنا في زوجة السلطان وولي عهده وأولاده، أو عابهم في ذاتهم.",
+     "replacement_scope": null,
+     "instruction_text_ar": null,
+     "amends_instrument": "2018/7"
+    }
+   ]
+  },
+  {
+   "host_document_id": "RUZN-LW-2018-7",
+   "host_decree_number": "2018/7",
+   "article_number": "159",
+   "attributed": false,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": true,
+   "structural_source": "RUZN-RD-2022-68 instruction article 1, substituting عنوان الفصل الثاني من الباب الثالث من الكتاب الثاني",
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "insert: «» → «والمخالفات البلدية 4»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2018-7",
+   "host_decree_number": "2018/7",
+   "article_number": "168",
+   "attributed": false,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": true,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": "recorded change consists only of structural heading text; flagged_amended_in_source is false",
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "delete: «الباب الرابع الجرائم المخلة بالثقة العامة الفصل الاول تزوير وتقليد الاختام والعلامات والطو» → «»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2018-7",
+   "host_decree_number": "2018/7",
+   "article_number": "222",
+   "attributed": false,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": true,
+   "structural_source": "RUZN-RD-2026-66 annex instruction article 1, inserting بابا جديدا — الباب الخامس مكررا، جريمة الرشوة في القطاع الخاص — into الكتاب الثاني",
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «السادس الجرائم المخلة بسير العدالة الفصل الاول البلاغ الكاذب والامتناع عن الابلاغ وعن تقدي» → «الخامس مكررا 6 جريمة الرشوة في القطاع الخاص»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2018-7",
+   "host_decree_number": "2018/7",
+   "article_number": "321",
+   "attributed": false,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": true,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": "recorded change consists only of structural heading text; flagged_amended_in_source is false",
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "delete: «الباب العاشر الجرائم الماسة بحرية الانسان وكرامته الفصل الاول القبض علي الاشخاص وخطفهم وحب» → «»"
+   ],
+   "amended_by": []
+  },
+  {
+   "host_document_id": "RUZN-LW-2018-7",
+   "host_decree_number": "2018/7",
+   "article_number": "103 مكررا",
+   "attributed": true,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": true,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": true,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": [
+    {
+     "instrument_id": "RUZN-RD-2022-68",
+     "decree_number": "2022/68",
+     "date_gregorian": "20 October 2022",
+     "gazette_number": 1464,
+     "event": "inserted",
+     "replacement_text_ar": "يعاقب بالسجن مدة لا تقل عن (٣) ثلاثة أشهر، ولا تزيد على (٣) ثلاث سنوات، وبغرامة لا تقل عن (١٠٠٠) ألف ريال عماني، ولا تزيد على (٥٠٠٠) خمسة آلاف ريال عماني، أو بإحدى هاتين العقوبتين، كل من أنشأ خريطة الدولة، أو وضعها على أي منتجات أو مصوغات أو أدوات تنتج أو تصنع محليا، أو استورد أيا منها، دون ترخيص من الجهة المختصة، أو استخدمها كعلامة تجارية أو بقصد الإعلان أو الدعاية التجارية.",
+     "replacement_scope": null,
+     "instruction_text_ar": null,
+     "amends_instrument": "2018/7"
+    }
+   ]
+  },
+  {
+   "host_document_id": "RUZN-LW-2018-7",
+   "host_decree_number": "2018/7",
+   "article_number": "168 مكررا",
+   "attributed": true,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": true,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": true,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": [
+    {
+     "instrument_id": "RUZN-RD-2022-68",
+     "decree_number": "2022/68",
+     "date_gregorian": "20 October 2022",
+     "gazette_number": 1464,
+     "event": "inserted",
+     "replacement_text_ar": "يعاقب بالسجن مدة لا تقل عن (٢٤) أربع وعشرين ساعة، ولا تزيد على (٦) ستة أشهر، وبغرامة لا تقل عن (١٠٠٠) ألف ريال عماني، ولا تزيد على (٥٠٠٠) خمسة آلاف ريال عماني، أو بإحدى هاتين العقوبتين كل من خالف أحكام اللوائح والقرارات المنظمة للأنشطة البلدية.",
+     "replacement_scope": null,
+     "instruction_text_ar": null,
+     "amends_instrument": "2018/7"
+    }
+   ]
+  },
+  {
+   "host_document_id": "RUZN-LW-2018-7",
+   "host_decree_number": "2018/7",
+   "article_number": "222 مكررا",
+   "attributed": true,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": true,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": true,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": [
+    {
+     "instrument_id": "RUZN-RD-2026-66",
+     "decree_number": "2026/66",
+     "date_gregorian": "23 June 2026",
+     "gazette_number": 1654,
+     "event": "inserted",
+     "replacement_text_ar": "تسري أحكام هذا الباب على شركات ومؤسسات القطاع الخاص، والمؤسسات الدولية العمومية التي يقع مقرها في سلطنة عمان.\n\nولا تسري على من ينطبق عليهم صفة الموظف العام وفقا لحكم البند (د) من المادة (١٠) من هذا القانون.",
+     "replacement_scope": null,
+     "instruction_text_ar": null,
+     "amends_instrument": "2018/7"
+    }
+   ]
+  },
+  {
+   "host_document_id": "RUZN-LW-2018-7",
+   "host_decree_number": "2018/7",
+   "article_number": "321 مكررا",
+   "attributed": true,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": true,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": true,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": [
+    {
+     "instrument_id": "RUZN-RD-2022-68",
+     "decree_number": "2022/68",
+     "date_gregorian": "20 October 2022",
+     "gazette_number": 1464,
+     "event": "inserted",
+     "replacement_text_ar": "يعاقب بالسجن مدة لا تقل عن (٣) ثلاث سنوات، ولا تزيد على (٧) سبع سنوات، كل من تعامل في أي عضو من أعضاء جسم الإنسان أو جزء منه أو أحد أنسجته أو خلاياه على سبيل البيع أو الشراء أو بمقابل أيا كانت طبيعته، أو قام بالدعوة أو الإعلان عن ذلك أو الترويج له أو التوسط فيه.\n\nوتكون العقوبة السجن مدة لا تقل عن (٥) خمس سنوات، ولا تزيد على (١٠) عشر سنوات إذا كان الجاني أحد مزاولي المهن الطبية.",
+     "replacement_scope": null,
+     "instruction_text_ar": null,
+     "amends_instrument": "2018/7"
+    }
+   ]
+  },
+  {
+   "host_document_id": "RUZN-LW-2018-7",
+   "host_decree_number": "2018/7",
+   "article_number": "222 مكررا 1",
+   "attributed": true,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": true,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": true,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": [
+    {
+     "instrument_id": "RUZN-RD-2026-66",
+     "decree_number": "2026/66",
+     "date_gregorian": "23 June 2026",
+     "gazette_number": 1654,
+     "event": "inserted",
+     "replacement_text_ar": "يعاقب بالسجن مدة لا تقل عن سنة، ولا تزيد على (٣) ثلاث سنوات، وبغرامة تساوي على الأقل ما أعطي له أو وعد به، كل صاحب عمل أو عضو مجلس إدارة أو عامل طلب أو قبل لنفسه أو لغيره أي مقابل كان، أو أخذ وعدا بذلك من أجل القيام بعمل من الأعمال المكلف بها، أو الامتناع عن القيام بعمل واجب عليه الامتناع عنه.\n\nويسري حكم هذه المادة، ولو كان العمل المنصوص عليه في الفقرة السابقة لا يدخل ضمن أعمال الجاني.",
+     "replacement_scope": null,
+     "instruction_text_ar": null,
+     "amends_instrument": "2018/7"
+    }
+   ]
+  },
+  {
+   "host_document_id": "RUZN-LW-2018-7",
+   "host_decree_number": "2018/7",
+   "article_number": "222 مكررا 2",
+   "attributed": true,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": true,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": true,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": [
+    {
+     "instrument_id": "RUZN-RD-2026-66",
+     "decree_number": "2026/66",
+     "date_gregorian": "23 June 2026",
+     "gazette_number": 1654,
+     "event": "inserted",
+     "replacement_text_ar": "يعاقب بالسجن مدة لا تقل عن (٣) ثلاث سنوات، ولا تزيد على (٥) خمس سنوات، وبغرامة تساوي على الأقل ما أعطي له أو وعد به، كل صاحب عمل أو عضو مجلس إدارة أو عامل طلب أو قبل لنفسه أو لغيره أي مقابل كان أو أخذ وعدا بذلك ليقوم بعمل مناف لواجبات عمله أو للامتناع عن عمل كان واجبا عليه القيام به.",
+     "replacement_scope": null,
+     "instruction_text_ar": null,
+     "amends_instrument": "2018/7"
+    }
+   ]
+  },
+  {
+   "host_document_id": "RUZN-LW-2018-7",
+   "host_decree_number": "2018/7",
+   "article_number": "222 مكررا 3",
+   "attributed": true,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": true,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": true,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": [
+    {
+     "instrument_id": "RUZN-RD-2026-66",
+     "decree_number": "2026/66",
+     "date_gregorian": "23 June 2026",
+     "gazette_number": 1654,
+     "event": "inserted",
+     "replacement_text_ar": "يعاقب بالسجن مدة لا تقل عن (٣) ثلاثة أشهر، ولا تزيد على سنة، كل من عرض رشوة على صاحب عمل أو عضو مجلس إدارة أو عامل ولم تقبل منه.",
+     "replacement_scope": null,
+     "instruction_text_ar": null,
+     "amends_instrument": "2018/7"
+    }
+   ]
+  },
+  {
+   "host_document_id": "RUZN-LW-2018-7",
+   "host_decree_number": "2018/7",
+   "article_number": "222 مكررا 4",
+   "attributed": true,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": true,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": true,
+   "ledger_event": "added",
+   "ledger_changes": [],
+   "amended_by": [
+    {
+     "instrument_id": "RUZN-RD-2026-66",
+     "decree_number": "2026/66",
+     "date_gregorian": "23 June 2026",
+     "gazette_number": 1654,
+     "event": "inserted",
+     "replacement_text_ar": "يعاقب الراشي والوسيط بالعقوبة المقررة للمرتشي، ومع ذلك يعفى الراشي أو الوسيط من العقوبة إذا بادر بإبلاغ السلطات المختصة بالجريمة أو اعترف بها قبل اكتشافها، ولو بعد تمامها، وإذا حصل الاعتراف بعد اكتشاف الجرم جاز اعتبار الاعتراف عذرا مخففا.",
+     "replacement_scope": null,
+     "instruction_text_ar": null,
+     "amends_instrument": "2018/7"
+    }
+   ]
+  },
+  {
+   "host_document_id": "RUZN-LW-2023-53",
+   "host_decree_number": "2023/53",
+   "article_number": "146",
+   "attributed": true,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": true,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "replace: «يعاقب بالسجن مدة لا تقل عن 3 ثلاثة اشهر، ولا تزيد علي 3 ثلاث سنوات، وبغرامة لا تقل عن 1000» → «ملغي»"
+   ],
+   "amended_by": [
+    {
+     "instrument_id": "RUZN-RD-2026-66",
+     "decree_number": "2026/66",
+     "date_gregorian": "23 June 2026",
+     "gazette_number": 1654,
+     "event": "repealed",
+     "replacement_text_ar": "",
+     "replacement_scope": null,
+     "instruction_text_ar": "إليه، كما يلغى كل ما يخالف التعديالت المرفقة، شارû) من قانون العمل الم146( تلغى المادة\nأحكامها. ض معأو يتعار",
+     "amends_instrument": "2023/53"
+    }
+   ]
+  },
+  {
+   "host_document_id": "RUZN-LW-2023-53",
+   "host_decree_number": "2023/53",
+   "article_number": "150",
+   "attributed": false,
+   "attributed_footnote": false,
+   "footnote": null,
+   "footnotes_all": [],
+   "replacement_text_available": false,
+   "replacement_partial": false,
+   "likely_artefact": false,
+   "structural": false,
+   "structural_source": null,
+   "artefact_reason": null,
+   "sequence_confident": false,
+   "ledger_event": "modified",
+   "ledger_changes": [
+    "insert: «» → «1 الغيت بموجب المرسوم السلطاني رقم 66 2026»"
+   ],
+   "amended_by": []
+  }
+ ],
+ "counts": {
+  "articles": 86,
+  "attributed": 18,
+  "attributed_footnote": 54,
+  "unattributed": 7,
+  "likely_artefact": 5,
+  "structural": 2,
+  "multi_amender": 0,
+  "footnote_multi_marker": 9,
+  "no_ledger": 0
+ },
+ "amending_instruments": 6,
+ "hosts_with_lineage": 6
+}

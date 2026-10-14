@@ -65,8 +65,10 @@ const MAX_WIDTH = 480;
 
 export default function DashboardLayout({
   children,
+  defaultCollapsed = false,
 }: {
   children: React.ReactNode;
+  defaultCollapsed?: boolean;
 }) {
   const [sidebarWidth, setSidebarWidth] = useState(() => {
     const saved = localStorage.getItem(SIDEBAR_WIDTH_KEY);
@@ -110,6 +112,7 @@ export default function DashboardLayout({
 
   return (
     <SidebarProvider
+      defaultOpen={!defaultCollapsed}
       style={
         {
           "--sidebar-width": `${sidebarWidth}px`,

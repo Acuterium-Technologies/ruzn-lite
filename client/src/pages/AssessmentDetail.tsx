@@ -405,4 +405,6 @@ export default function AssessmentDetail() {
           </div>
         </div>
       </div>
-(Content truncated due to size limit. Use page ranges or line ranges to read remaining content)
+    </DashboardLayout>
+  );
+}

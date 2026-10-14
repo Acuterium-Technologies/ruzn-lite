@@ -13,6 +13,8 @@ import {
   getVision2040Pillars,
   getKeyOmaniLaws,
 } from '../formulas/EREBUSFORMULA659';
+import { calculateEREBUSFORMULA653, LegislativeImpactResult, LegislativeResolutionInput } from '../formulas/EREBUSFORMULA653';
+import { calculateEREBUSFORMULA661, FusionScoreResult } from '../formulas/EREBUSFORMULA661';
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // RIA SERVICE INTERFACE
@@ -333,6 +335,31 @@ export function simulateLegislativeMonitor(): LegislativeMonitorAlert[] {
       timestamp: new Date(),
     },
   ];
+}
+
+/**
+ * Perform Resolution Impact Assessment & Legislative Cross-Check (EREBUSFORMULA653 + EREBUSFORMULA661)
+ * Analyzes downstream impact, implied repeals, and contradiction penalty
+ */
+export async function performResolutionImpactAssessment(
+  input: LegislativeResolutionInput
+): Promise<LegislativeImpactResult & { fusionContradictionAssessment: FusionScoreResult }> {
+  const litpResult = calculateEREBUSFORMULA653(input);
+  
+  // Calculate contradiction penalty based on detected conflicts
+  const contradictionDegree = Math.min(1.0, litpResult.detectedConflicts.length * 0.25);
+  const fusionContradictionAssessment = calculateEREBUSFORMULA661({
+    statuteScore: litpResult.metrics.scopeScore,
+    caseLawScore: 75,
+    regulationsScore: litpResult.metrics.conflictPotential,
+    jurisprudenceScore: 80,
+    contradictionDegree,
+  });
+
+  return {
+    ...litpResult,
+    fusionContradictionAssessment,
+  };
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════

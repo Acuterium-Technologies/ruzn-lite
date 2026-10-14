@@ -1,0 +1,440 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ruzn.ai/schemas/legal-document/v1",
+  "title": "RUZN.AI Legal Document Schema",
+  "version": "1.0.0",
+  "description": "Sovereign AI legal document schema for Oman/GCC jurisdiction. Designed for PostgreSQL storage and RAG/vector search integration. Covers Royal Decrees, Laws, Regulations, Ministerial Decisions, Circulars, Official Gazette entries, and Legal Commentary.",
+  "platform": "RUZN-ASI",
+  "ecosystem": "Acuterium Neural Shard – RUZN-ASI",
+  "jurisdiction": ["Oman", "GCC"],
+  "languages": ["ar", "en"],
+
+  "postgres_design_notes": {
+    "primary_table": "ruzn_legal_documents",
+    "articles_table": "ruzn_legal_articles",
+    "cross_references_table": "ruzn_legal_cross_references",
+    "keywords_table": "ruzn_legal_keywords",
+    "embeddings_table": "ruzn_legal_embeddings",
+    "notes": [
+      "Use UUID primary keys for all tables",
+      "articles array maps to ruzn_legal_articles with FK document_id",
+      "cross_references array maps to ruzn_legal_cross_references with FK document_id",
+      "keywords arrays map to ruzn_legal_keywords with lang column ('ar'|'en')",
+      "embedding_vector stored in ruzn_legal_embeddings as pgvector type vector(1536)",
+      "full_text_ar stored as TEXT with GIN trigram index for full-text Arabic search",
+      "Use tsvector + GIN index on summary_en for English FTS",
+      "document_id uses format RUZN-{type_code}-{year}-{number} as UNIQUE TEXT NOT NULL"
+    ],
+    "sql_schema": {
+      "ruzn_legal_documents": "CREATE TABLE ruzn_legal_documents (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), document_id TEXT UNIQUE NOT NULL, document_type TEXT NOT NULL, title_ar TEXT, title_en TEXT, decree_number TEXT, year_hijri INTEGER, year_gregorian INTEGER, date_hijri TEXT, date_gregorian DATE, issuing_authority TEXT, gazette_number INTEGER, gazette_date DATE, subject_ar TEXT, subject_en TEXT, legal_domain TEXT, parent_law TEXT, parent_decree TEXT, status TEXT NOT NULL DEFAULT 'active', full_text_ar TEXT, summary_en TEXT, embedding_ready BOOLEAN DEFAULT FALSE, parsed_at TIMESTAMPTZ, parsed_by TEXT, source_file TEXT, source_url TEXT, confidence_score NUMERIC(5,2), created_at TIMESTAMPTZ DEFAULT NOW(), updated_at TIMESTAMPTZ DEFAULT NOW());",
+      "ruzn_legal_articles": "CREATE TABLE ruzn_legal_articles (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), document_id TEXT NOT NULL REFERENCES ruzn_legal_documents(document_id) ON DELETE CASCADE, article_number TEXT NOT NULL, article_text_ar TEXT, article_text_en TEXT, amends_article TEXT, is_new BOOLEAN DEFAULT FALSE, sort_order INTEGER, created_at TIMESTAMPTZ DEFAULT NOW());",
+      "ruzn_legal_cross_references": "CREATE TABLE ruzn_legal_cross_references (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), document_id TEXT NOT NULL REFERENCES ruzn_legal_documents(document_id) ON DELETE CASCADE, reference_type TEXT, reference_decree TEXT, reference_law TEXT, reference_article TEXT, reference_description TEXT, created_at TIMESTAMPTZ DEFAULT NOW());",
+      "ruzn_legal_keywords": "CREATE TABLE ruzn_legal_keywords (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), document_id TEXT NOT NULL REFERENCES ruzn_legal_documents(document_id) ON DELETE CASCADE, keyword TEXT NOT NULL, lang TEXT NOT NULL CHECK (lang IN ('ar','en')), created_at TIMESTAMPTZ DEFAULT NOW());",
+      "ruzn_legal_embeddings": "CREATE TABLE ruzn_legal_embeddings (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), document_id TEXT NOT NULL REFERENCES ruzn_legal_documents(document_id) ON DELETE CASCADE, chunk_index INTEGER NOT NULL DEFAULT 0, chunk_text TEXT, embedding vector(1536), model_used TEXT DEFAULT 'text-embedding-3-small', created_at TIMESTAMPTZ DEFAULT NOW());"
+    }
+  },
+
+  "type": "object",
+  "required": ["document_id", "document_type", "status", "extraction_metadata"],
+
+  "properties": {
+
+    "document_id": {
+      "type": "string",
+      "pattern": "^RUZN-[A-Z]+-[0-9]{4}-[A-Z0-9]+$",
+      "description": "Unique RUZN document ID. Format: RUZN-{type_code}-{year}-{number}. Type codes: RD=Royal Decree, LW=Law, RG=Regulation, MD=Ministerial Decision, CR=Circular, GZ=Gazette, LC=Legal Commentary, RL=Reference Link.",
+      "postgres_column": "document_id TEXT UNIQUE NOT NULL",
+      "examples": ["RUZN-RD-2020-120", "RUZN-LW-1999-97", "RUZN-LC-2024-001"]
+    },
+
+    "document_type": {
+      "type": "string",
+      "enum": [
+        "royal_decree",
+        "law",
+        "regulation",
+        "ministerial_decision",
+        "circular",
+        "gazette_entry",
+        "legal_commentary",
+        "reference_link"
+      ],
+      "description": "Document classification type (النوع القانوني للوثيقة).",
+      "postgres_column": "document_type TEXT NOT NULL",
+      "arabic_labels": {
+        "royal_decree": "مرسوم سلطاني",
+        "law": "قانون",
+        "regulation": "لائحة",
+        "ministerial_decision": "قرار وزاري",
+        "circular": "تعميم",
+        "gazette_entry": "نشرة في الجريدة الرسمية",
+        "legal_commentary": "تعليق قانوني",
+        "reference_link": "رابط مرجعي"
+      }
+    },
+
+    "title_ar": {
+      "type": ["string", "null"],
+      "description": "Official Arabic title of the document.",
+      "postgres_column": "title_ar TEXT"
+    },
+
+    "title_en": {
+      "type": ["string", "null"],
+      "description": "English title or translation.",
+      "postgres_column": "title_en TEXT"
+    },
+
+    "decree_number": {
+      "type": ["string", "null"],
+      "description": "Official decree or law number (e.g., '2020/120', '1999/97'). Format: {year}/{number} for Omani decrees -- year first, always 4 digits. Stricter than reference_decree by design: decree_number states what this document IS and must be canonical, while reference_decree records what a source SAID and stays permissive so an unresolvable citation can be stored as written.",
+      "postgres_column": "decree_number TEXT",
+      "pattern": "^[0-9]{4}/[0-9]{1,4}$"
+    },
+
+    "year_hijri": {
+      "type": ["integer", "null"],
+      "description": "Hijri year of issuance (سنة الإصدار هجرية).",
+      "postgres_column": "year_hijri INTEGER",
+      "minimum": 1300,
+      "maximum": 1600
+    },
+
+    "year_gregorian": {
+      "type": ["integer", "null"],
+      "description": "Gregorian year of issuance.",
+      "postgres_column": "year_gregorian INTEGER",
+      "minimum": 1900,
+      "maximum": 2100
+    },
+
+    "date_hijri": {
+      "type": ["string", "null"],
+      "description": "Full Hijri date string (e.g., '24 صفر 1442 هـ').",
+      "postgres_column": "date_hijri TEXT"
+    },
+
+    "date_gregorian": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Full Gregorian date in ISO 8601 format (YYYY-MM-DD).",
+      "postgres_column": "date_gregorian DATE"
+    },
+
+    "issuing_authority": {
+      "type": ["string", "null"],
+      "description": "Authority that issued the document (جهة الإصدار).",
+      "postgres_column": "issuing_authority TEXT",
+      "examples": [
+        "سلطان عمان - هيثم بن طارق",
+        "سلطان عمان - قابوس بن سعيد",
+        "وزارة العدل والشؤون القانونية",
+        "الادعاء العام"
+      ]
+    },
+
+    "gazette_number": {
+      "type": ["integer", "null"],
+      "description": "Official Gazette issue number (رقم الجريدة الرسمية).",
+      "postgres_column": "gazette_number INTEGER"
+    },
+
+    "gazette_date": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Date of Official Gazette publication (ISO 8601).",
+      "postgres_column": "gazette_date DATE"
+    },
+
+    "subject_ar": {
+      "type": ["string", "null"],
+      "description": "Subject or topic in Arabic (الموضوع بالعربية).",
+      "postgres_column": "subject_ar TEXT"
+    },
+
+    "subject_en": {
+      "type": ["string", "null"],
+      "description": "Subject or topic in English.",
+      "postgres_column": "subject_en TEXT"
+    },
+
+    "legal_domain": {
+      "type": ["string", "null"],
+      "enum": [
+        "criminal_law",
+        "civil_law",
+        "commercial_law",
+        "family_law",
+        "labor_law",
+        "administrative_law",
+        "constitutional_law",
+        "public_prosecution",
+        "judicial_procedures",
+        "penal_code",
+        "real_estate_law",
+        "banking_law",
+        "international_law",
+        "sharia_law",
+        "mixed",
+        "unclassified"
+      ],
+      "description": "Primary legal domain classification (مجال القانون).",
+      "postgres_column": "legal_domain TEXT",
+      "arabic_labels": {
+        "criminal_law": "القانون الجنائي",
+        "civil_law": "القانون المدني",
+        "commercial_law": "القانون التجاري",
+        "family_law": "قانون الأسرة",
+        "labor_law": "قانون العمل",
+        "administrative_law": "القانون الإداري",
+        "constitutional_law": "القانون الدستوري",
+        "public_prosecution": "الادعاء العام",
+        "judicial_procedures": "الإجراءات القضائية",
+        "penal_code": "قانون الجزاء"
+      }
+    },
+
+    "parent_law": {
+      "type": ["string", "null"],
+      "description": "The law being amended by this decree (if amendment). References the law by its common name.",
+      "postgres_column": "parent_law TEXT",
+      "examples": ["قانون الإجراءات الجزائية", "قانون الجزاء", "قانون الادعاء العام"]
+    },
+
+    "parent_decree": {
+      "type": ["string", "null"],
+      "description": "The parent decree number that issued the law being amended (e.g., '1999/97' for Criminal Procedures Law). Format: {year}/{number}, same as decree_number.",
+      "postgres_column": "parent_decree TEXT",
+      "examples": ["1999/97", "2018/7", "1999/92"]
+    },
+
+    "status": {
+      "type": "string",
+      "enum": ["active", "amended", "repealed", "superseded", "placeholder", "draft"],
+      "default": "active",
+      "description": "Current legal status of the document.",
+      "postgres_column": "status TEXT NOT NULL DEFAULT 'active'"
+    },
+
+    "articles": {
+      "type": "array",
+      "description": "Array of articles/provisions in this document. Maps to ruzn_legal_articles table.",
+      "items": {
+        "type": "object",
+        "required": ["article_number"],
+        "properties": {
+          "article_number": {
+            "type": "string",
+            "description": "Article number or identifier (e.g., '1', '4مكررا', '221-para2').",
+            "postgres_column": "article_number TEXT NOT NULL"
+          },
+          "article_text_ar": {
+            "type": ["string", "null"],
+            "description": "Full Arabic text of the article.",
+            "postgres_column": "article_text_ar TEXT"
+          },
+          "article_text_en": {
+            "type": ["string", "null"],
+            "description": "English translation or summary of the article.",
+            "postgres_column": "article_text_en TEXT"
+          },
+          "amends_article": {
+            "type": ["string", "null"],
+            "description": "Which article of the parent law this provision amends (e.g., '221-para2', '4مكررا', '164', '31').",
+            "postgres_column": "amends_article TEXT"
+          },
+          "is_new": {
+            "type": "boolean",
+            "default": false,
+            "description": "True if this is a newly added article/paragraph, false if it replaces existing text.",
+            "postgres_column": "is_new BOOLEAN DEFAULT FALSE"
+          },
+          "sort_order": {
+            "type": ["integer", "null"],
+            "description": "Ordering index within the document.",
+            "postgres_column": "sort_order INTEGER"
+          }
+        }
+      }
+    },
+
+    "cross_references": {
+      "type": "array",
+      "description": "Related decrees, laws, and articles referenced by this document. Maps to ruzn_legal_cross_references table.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "reference_type": {
+            "type": "string",
+            "enum": ["amends", "cites", "supersedes", "repeals", "related", "implements"],
+            "description": "Nature of the cross-reference relationship."
+          },
+          "reference_decree": {
+            "type": ["string", "null"],
+            "description": "Referenced decree number (e.g., '1999/97'). Format: {year}/{number} where it can be resolved. Deliberately permissive (^[0-9]{2,4}/[0-9]{1,4}$): a citation to an instrument the corpus does not hold is recorded exactly as the source wrote it rather than reordered on a guess."
+          },
+          "reference_law": {
+            "type": ["string", "null"],
+            "description": "Referenced law name."
+          },
+          "reference_article": {
+            "type": ["string", "null"],
+            "description": "Specific article referenced."
+          },
+          "reference_description": {
+            "type": ["string", "null"],
+            "description": "Description of the reference relationship."
+          }
+        }
+      }
+    },
+
+    "keywords_ar": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Arabic keywords for search and classification. Maps to ruzn_legal_keywords (lang='ar').",
+      "examples": ["الإعدام", "مفتى عام", "الادعاء العام", "الإجراءات الجزائية"]
+    },
+
+    "keywords_en": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "English keywords for search and classification. Maps to ruzn_legal_keywords (lang='en').",
+      "examples": ["death penalty", "Grand Mufti", "public prosecution", "criminal procedures"]
+    },
+
+    "full_text_ar": {
+      "type": ["string", "null"],
+      "description": "Complete Arabic text of the document. Stored as TEXT with GIN trigram index for full-text search.",
+      "postgres_column": "full_text_ar TEXT"
+    },
+
+    "summary_en": {
+      "type": ["string", "null"],
+      "description": "English summary of the document's content and significance.",
+      "postgres_column": "summary_en TEXT"
+    },
+
+    "extraction_metadata": {
+      "type": "object",
+      "description": "Metadata about how and when this document was parsed into the schema.",
+      "required": ["parsed_at", "parsed_by", "schema_version"],
+      "properties": {
+        "parsed_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp when document was parsed.",
+          "postgres_column": "parsed_at TIMESTAMPTZ"
+        },
+        "parsed_by": {
+          "type": "string",
+          "enum": ["Claude", "ChatGPT", "Gemini", "DeepSeek", "Qwen", "Kimi-k2", "Manual", "Other"],
+          "description": "LLM or method used for parsing.",
+          "postgres_column": "parsed_by TEXT"
+        },
+        "schema_version": {
+          "type": "string",
+          "default": "1.0.0",
+          "description": "RUZN schema version used for this parse."
+        },
+        "source_file": {
+          "type": ["string", "null"],
+          "description": "Original source file name (e.g., 'royal-decree-2020-120.pdf').",
+          "postgres_column": "source_file TEXT"
+        },
+        "source_url": {
+          "type": ["string", "null"],
+          "format": "uri",
+          "description": "Source URL if document was fetched from web.",
+          "postgres_column": "source_url TEXT"
+        },
+        "confidence_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Extraction confidence percentage (0-100).",
+          "postgres_column": "confidence_score NUMERIC(5,2)"
+        },
+        "parse_notes": {
+          "type": ["string", "null"],
+          "description": "Any notes about the parsing process, quality issues, or missing data."
+        }
+      }
+    },
+
+    "embedding_ready": {
+      "type": "boolean",
+      "default": false,
+      "description": "Indicates whether this document has been processed for vector embedding and is ready for RAG search. When true, embeddings exist in ruzn_legal_embeddings table.",
+      "postgres_column": "embedding_ready BOOLEAN DEFAULT FALSE"
+    },
+
+    "embedding_chunks": {
+      "type": ["array", "null"],
+      "description": "Text chunks prepared for embedding. Each chunk maps to a row in ruzn_legal_embeddings table. Chunk size: ~500 tokens. Overlap: 50 tokens.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "chunk_index": {
+            "type": "integer",
+            "description": "Zero-based chunk sequence number."
+          },
+          "chunk_text": {
+            "type": "string",
+            "description": "Text content of this chunk (Arabic + English mixed for bilingual search)."
+          },
+          "embedding_model": {
+            "type": "string",
+            "default": "text-embedding-3-small",
+            "description": "OpenAI or other embedding model used."
+          },
+          "vector_dimensions": {
+            "type": "integer",
+            "default": 1536,
+            "description": "Dimensions of the embedding vector."
+          }
+        }
+      }
+    }
+  },
+
+  "type_codes": {
+    "RD": "royal_decree",
+    "LW": "law",
+    "RG": "regulation",
+    "MD": "ministerial_decision",
+    "CR": "circular",
+    "GZ": "gazette_entry",
+    "LC": "legal_commentary",
+    "RL": "reference_link"
+  },
+
+  "legal_domain_taxonomy": {
+    "tier_1_criminal": ["criminal_law", "penal_code", "judicial_procedures", "public_prosecution"],
+    "tier_2_civil": ["civil_law", "family_law", "real_estate_law"],
+    "tier_3_commercial": ["commercial_law", "banking_law", "labor_law"],
+    "tier_4_public": ["administrative_law", "constitutional_law", "international_law", "sharia_law"]
+  },
+
+  "rag_configuration": {
+    "embedding_model": "text-embedding-3-small",
+    "vector_dimensions": 1536,
+    "chunk_size_tokens": 500,
+    "chunk_overlap_tokens": 50,
+    "retrieval_top_k": 5,
+    "similarity_threshold": 0.75,
+    "language_strategy": "bilingual_concat",
+    "notes": "For Arabic legal text, prepend English summary to each chunk for better bilingual retrieval. Use pgvector extension with ivfflat index for production scale."
+  },
+
+  "acuterium_integration": {
+    "neural_shard": "RUZN-ASI",
+    "ecosystem_level": "Application",
+    "hierarchy_path": "Acuterium_Prime > RUZN-ASI > Legal_Document_Parser",
+    "related_schemas": [
+      "EXTRACTION_OUTPUT_SCHEMA (Acuterium)",
+      "Schema_Mapping_Output (DB Fields)",
+      "schema_templates (Query Templates)"
+    ]
+  }
+}

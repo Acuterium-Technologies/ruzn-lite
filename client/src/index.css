@@ -122,16 +122,16 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: "Inter", "Noto Naskh Arabic", "Noto Sans Arabic", system-ui, sans-serif;
-    /* POC Demo gradient background */
+    font-family: "Inter", "Cinzel", "IBM Plex Sans Arabic", "Cairo", system-ui, sans-serif;
+    /* Sovereign Theme: Desert Obsidian & Imperial Gold with Bronze Glow */
     background: 
-      radial-gradient(1200px 600px at 60% 18%, rgba(214,179,106,.12), transparent 55%),
-      radial-gradient(900px 500px at 20% 80%, rgba(96,165,250,.08), transparent 60%),
-      linear-gradient(180deg, #050506, #0a0a0c);
+      radial-gradient(1200px 600px at 50% 10%, rgba(212, 175, 55, 0.15), transparent 60%),
+      radial-gradient(900px 500px at 15% 75%, rgba(184, 146, 77, 0.10), transparent 65%),
+      linear-gradient(180deg, #0A0A0F, #050508);
     min-height: 100vh;
   }
   html[dir="rtl"] body {
-    font-family: "Noto Naskh Arabic", "Noto Kufi Arabic", "Geeza Pro", "Tahoma", "Arial", sans-serif;
+    font-family: "IBM Plex Sans Arabic", "Cairo", "Tajawal", system-ui, sans-serif;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),

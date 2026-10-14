@@ -1,4 +1,5 @@
 import { ENV } from "./env";
+import { scrubSovereignOutput } from "../utils/sanitize";
 
 export type Role = "system" | "user" | "assistant" | "tool" | "function";
 
@@ -438,5 +439,13 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
     );
   }
 
-  return (await response.json()) as InvokeResult;
+  const result = (await response.json()) as InvokeResult;
+  if (result?.choices) {
+    for (const choice of result.choices) {
+      if (typeof choice.message?.content === "string") {
+        choice.message.content = scrubSovereignOutput(choice.message.content);
+      }
+    }
+  }
+  return result;
 }

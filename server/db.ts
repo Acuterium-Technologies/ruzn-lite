@@ -1668,6 +1668,7 @@ export const SOVEREIGN_CASE_LAW_DATA: any[] = [
       summaryArabic: "إدانة مسؤول عقود بالتلاعب في مناقصة بقيمة 450,000 ريال",
       outcome: "convicted",
       sourceReport: "Annual Report 2024"
+    }
   ];
 
 // Seed case law database with historical data

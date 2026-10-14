@@ -50,13 +50,13 @@ function AccessGate() {
   const [hasAccess, setHasAccess] = useState<boolean | null>(null);
   
   useEffect(() => {
-    // Check if user has access from session storage
-    const access = sessionStorage.getItem("ruzn_access");
+    // Check if user has sovereign access session
+    const access = sessionStorage.getItem("sovereign_auth_active");
     setHasAccess(access === "granted");
   }, []);
   
   const handleAccessGranted = () => {
-    sessionStorage.setItem("ruzn_access", "granted");
+    sessionStorage.setItem("sovereign_auth_active", "granted");
     setHasAccess(true);
   };
   

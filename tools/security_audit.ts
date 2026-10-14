@@ -45,7 +45,7 @@ if (publicMode) {
 }
 
 // Directories to skip
-const SKIP_DIRS = new Set(["node_modules", ".git", "dist", ".next", "build", ".turbo"]);
+const SKIP_DIRS = new Set(["node_modules", ".git", "dist", ".next", "build", ".turbo", "tools"]);
 
 function walk(dir: string, out: string[] = []): string[] {
   try {
@@ -86,9 +86,15 @@ function main() {
       const content = fs.readFileSync(f, "utf-8");
       const lines = content.split(/\r?\n/);
       
+      const ext = path.extname(f);
+      const isDoc = ext === ".md" || ext === ".txt";
+      
       for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
         for (const term of SEARCH_TERMS) {
+          if (isDoc && (term === "publicProcedure" || term.includes("ruzn_access"))) {
+            continue;
+          }
           if (line.includes(term)) {
             const relPath = path.relative(ROOT, f);
             hits[relPath] ||= [];

@@ -1,0 +1,124 @@
+{
+  "document": {
+    "id": "unique-id",                          // e.g., "rd53-2023-exp-v1"
+    "work_id": "work-oman-labor-law",          // abstract Work identifier
+    "title_ar": "قانون العمل العماني",
+    "title_en": "Omani Labor Law",
+    "source_type": "legislation",              // legislation | regulation | case_law | contract | legal_opinion
+    "jurisdiction": "oman",                   // oman | gcc | international
+    "language": "ar",
+    "issuing_authority": "ديوان البلاط السلطاني",
+    "effective_date": "2023-07-26",
+    "publication_date": "2023-07-26",
+    "gazette": {
+      "number": "1356",
+      "issue_date": "2023-07-26",
+      "url": "https://.../gazette/1356"
+    },
+    "status": "active",                       // active | repealed | superseded
+    "version": "1.0",
+    "amendment_history": [                    // lineage of the Expression
+      {
+        "amending_work_id": "rd68-2022",
+        "amending_expression_id": "rd68-2022-exp",
+        "amendment_date": "2022-12-15",
+        "description_ar": "تعديل المادة 15",
+        "description_en": "Amendment to Article 15"
+      }
+    ],
+    "replaced_by": null,                      // if superseded, link to new Expression
+    "replaces": null,                         // if this replaces another Expression
+    "hierarchy": [                            // structural breakdown
+      {
+        "level": "chapter",
+        "number": "1",
+        "title_ar": "أحكام عامة",
+        "title_en": "General Provisions",
+        "children": [
+          {
+            "level": "section",
+            "number": "1",
+            "title_ar": "التعاريف",
+            "title_en": "Definitions",
+            "children": [
+              {
+                "level": "article",
+                "number": "1",
+                "title_ar": null,
+                "title_en": null,
+                "text_ar": "يقصد بعبارة 'الوزارة' في تطبيق أحكام هذا القانون وزارة القوى العاملة...",
+                "text_en": "For the purposes of this law, 'Ministry' means the Ministry of Labour...",
+                "effective_date": "2023-07-26",
+                "repealed_date": null,
+                "status": "active",
+                "amended_by": [                // references to amendments affecting this article
+                  {
+                    "amending_work_id": "rd68-2022",
+                    "new_text_ar": "النص الجديد...",
+                    "old_text_ar": "النص القديم...",
+                    "effective_date": "2022-12-15"
+                  }
+                ],
+                "citations": [                // citations made by this article to other articles/laws
+                  {
+                    "target_document_id": "rd53-2022",
+                    "target_article_number": "12",
+                    "type": "internal_reference", // internal_reference | external_reference | precedent
+                    "authority_score": 1.0,
+                    "verification_status": "verified" // verified | unverified | miscited
+                  }
+                ],
+                "extracted_entities": {       // role-specific semantic extractions
+                  "definitions": [
+                    {
+                      "term_ar": "الوزارة",
+                      "term_en": "Ministry",
+                      "definition_ar": "وزارة القوى العاملة",
+                      "definition_en": "Ministry of Labour"
+                    }
+                  ],
+                  "obligations": [],
+                  "penalties": [],
+                  "dates": [],
+                  "monetary_amounts": [
+                    {
+                      "amount": 500,
+                      "currency": "OMR",
+                      "context_ar": "غرامة لا تتجاوز 500 ريال عماني"
+                    }
+                  ],
+                  "entities": [
+                    {
+                      "name_ar": "وزارة القوى العاملة",
+                      "name_en": "Ministry of Labour",
+                      "type": "government_body"
+                    }
+                  ],
+                  "omanisation_targets": []  // e.g., "نسبة التعمين 35%"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [                          // any additional files (e.g., evidence matrices, summaries)
+      {
+        "name": "evidence_matrix.xlsx",
+        "url": "s3://...",
+        "type": "excel"
+      }
+    ],
+    "metadata": {                             // flexible field for any other extracted info
+      "total_articles": 128,
+      "total_chapters": 5,
+      "key_subjects": ["employment", "termination", "wages"]
+    },
+    "verification_summary": {                 // overall trustworthiness of the parsed document
+      "overall_authority_score": 1.0,
+      "verified_articles_count": 120,
+      "unverified_articles_count": 8,
+      "last_verified_date": "2025-07-10"
+    }
+  }
+}

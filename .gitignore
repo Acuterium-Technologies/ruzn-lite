@@ -105,6 +105,7 @@ temp/
 *.db
 *.sqlite
 *.sqlite3
+!knowledge/corpus/*.sqlite
 
 # QA Audit Reports
 QA_AUDIT_REPORT.json
