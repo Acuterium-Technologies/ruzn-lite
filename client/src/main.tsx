@@ -18,7 +18,8 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
 
   if (!isUnauthorized) return;
 
-  window.location.href = getLoginUrl();
+  // Never redirect to external OAuth portal; stay on ruzn.legal
+  console.warn("[Auth Notice] Unauthorized tRPC call handled gracefully:", error.message);
 };
 
 queryClient.getQueryCache().subscribe(event => {
