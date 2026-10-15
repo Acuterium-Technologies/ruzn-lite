@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
@@ -87,7 +87,10 @@ const UI_TEXT = {
 };
 
 export default function CaseLaw() {
-  const [language, setLanguage] = useState<Language>("arabic");
+  const [language, setLanguage] = useState<Language>(() => {
+    const saved = typeof window !== "undefined" ? localStorage.getItem("ruzn_lang") : null;
+    return saved === "en" || saved === "english" ? "english" : "arabic";
+  });
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedYear, setSelectedYear] = useState<number | undefined>();
   const [selectedViolationType, setSelectedViolationType] = useState<string | undefined>();
@@ -96,6 +99,12 @@ export default function CaseLaw() {
   
   const isRTL = language === "arabic";
   const text = UI_TEXT[language];
+
+  useEffect(() => {
+    localStorage.setItem("ruzn_lang", language === "english" ? "en" : "ar");
+    document.documentElement.dir = isRTL ? "rtl" : "ltr";
+    document.documentElement.lang = isRTL ? "ar" : "en";
+  }, [language, isRTL]);
   
   // Queries
   const { data: searchResults, isLoading } = trpc.caseLaw.search.useQuery({

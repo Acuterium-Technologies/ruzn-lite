@@ -152,7 +152,7 @@ export default function SovereignHeader({
             <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-white/70">
               <span className="flex items-center gap-1.5 text-[rgba(214,179,106,0.95)] font-semibold">
                 <Shield className="w-3.5 h-3.5" />
-                {language === "arabic" ? "عرض محلي سيادي" : "Sovereign Mode"}
+                {language === "arabic" ? "الوضع: سجل سيادي نشط" : "Mode: Sovereign Active Registry"}
               </span>
               <span className="text-white/30">•</span>
               <span className="text-emerald-400 font-mono text-[11px]">Q-ARC: Active</span>

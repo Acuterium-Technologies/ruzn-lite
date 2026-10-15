@@ -1,9 +1,9 @@
 /**
  * ACUTERIUM TECHNOLOGIES - SOVEREIGN MULTI-AGENT SWARM (LAYER 7)
  * Orchestration across 4 national-grade agent personas:
- * 1. Faqih Prime: Chief Sovereign Jurist (Complex case analysis & jurisprudence)
- * 2. Dalil Legal Sidebar: Tactical sub-second search & statutory indexer (Ruling R-17)
- * 3. Khabeer RIA: Regulatory Impact Assessment & Oman Vision 2040 4-pillar algorithmic scorer
+ * 1. Faqih Prime: Chief Sovereign Jurist (Complex case analysis, IRAC/CRAC judicial reasoning & jurisprudence)
+ * 2. Dalil Legal Sidebar: Tactical sub-second search & statutory indexer
+ * 3. Khabeer RIA: Regulatory Impact Assessment, legislative drafting, future side-effect simulation & Oman Vision 2040 4-pillar algorithmic scorer
  * 4. Nazeha Investigator: Whistleblowing triage (0-100 risk score), case pack compiler, and Daily Minister Brief
  * 
  * Authority: Dr. Jalal Saleh AlHadhrami ("Dr. Jay") | Acuterium Technologies Inc.
@@ -52,7 +52,7 @@ export const SOVEREIGN_AGENTS_ROSTER = {
     name: 'Faqih Prime',
     title: 'المستشار القانوني السيادي (فقيه برايم) - Chief Sovereign Jurist',
     protocolId: 'ASIP-v2 / EREBUS-CSE-3A12d-001',
-    description: 'كبير المستشارين القانونيين السياديين لبحث القضايا المعقدة، التكييف الفقهي والتشريعي، والتحليل القضائي المقارن.',
+    description: 'كبير المستشارين القانونيين السياديين لبحث القضايا المعقدة، التكييف الفقهي والتشريعي (IRAC/CRAC)، والتحليل القضائي المقارن.',
   },
   dalil_sidebar: {
     role: 'dalil_sidebar' as SovereignAgentRole,
@@ -66,13 +66,13 @@ export const SOVEREIGN_AGENTS_ROSTER = {
     name: 'Khabeer RIA',
     title: 'خبير تقييم الأثر التشريعي والتنظيمي - Regulatory Impact Assessment Specialist',
     protocolId: 'EREBUS-CSE-3A12d-010 / EREBUSFORMULA659',
-    description: 'المحاكي الخوارزمي للأثر التشريعي والتنظيمي وتوافق مشاريع القوانين والقرارات مع المحاور الأربعة لرؤية عُمان 2040.',
+    description: 'المحاكي الخوارزمي للصياغة التشريعية وتقييم الأثر التنظيمي ومحاكاة الآثار الجانبية المستقبلية وتوافق مشاريع القوانين مع المحاور الأربعة لرؤية عُمان 2040.',
   },
   nazeha_investigator: {
     role: 'nazeha_investigator' as SovereignAgentRole,
     name: 'Nazeha Investigator',
     title: 'محقق النزاهة وحماية المال العام - Whistleblowing & Integrity Investigator',
-    protocolId: 'EREBUS-CSE-3A12d-002 / EREBUSFORMULA651',
+    protocolId: 'EREBUS-CSE-3A12d-002 / EREBUSFORMULA653 / EREBUSFORMULA651',
     description: 'فرز البلاغات وتصنيف الجرائم المالية والإدارية (0-100)، توليد ملفات الإحالة الجنائية، وإعداد الإيجاز اليومي لمعالي الوزير.',
   },
 };
@@ -123,7 +123,10 @@ export async function dispatchAgentSwarm(request: AgentTaskRequest): Promise<Age
       vision2040Alignment: riaResult.vision2040Alignment.overallAlignment,
       citations: riaResult.legalImpact.conflictsDetected.map(c => `[مرسوم سلطاني ${c.conflictingLaw}]`),
       recommendations: riaResult.recommendations,
-      metadata: { riaResult }
+      metadata: {
+        riaResult,
+        methodology: 'EREBUSFORMULA659-LEGISLATIVE-DRAFTING-SIMULATION'
+      }
     };
   }
 
@@ -132,6 +135,11 @@ export async function dispatchAgentSwarm(request: AgentTaskRequest): Promise<Age
       text: request.query,
       entityType: request.context?.entityType || 'government',
       maturityLevel: 'managed',
+    });
+    const resolutionImpact = calculateEREBUSFORMULA653({
+      title: request.context?.title || 'بلاغ نزاهة ورقابة مالية وإدارية',
+      type: 'ministerial_decision',
+      text: request.query,
     });
 
     return {
@@ -144,7 +152,11 @@ export async function dispatchAgentSwarm(request: AgentTaskRequest): Promise<Age
         '[المادة 8، مرسوم سلطاني رقم 111/2011]'
       ],
       recommendations: riskResult.recommendations,
-      metadata: { riskResult }
+      metadata: {
+        riskResult,
+        resolutionImpact,
+        methodology: 'EREBUSFORMULA653-EREBUSFORMULA651-TRIAGE'
+      }
     };
   }
 
@@ -163,19 +175,18 @@ export async function dispatchAgentSwarm(request: AgentTaskRequest): Promise<Age
   try {
     const systemPrompt = lang === 'arabic'
       ? `أنت المستشار القانوني السيادي (فقيه برايم) - كبير المستشارين القانونيين بمنظومة رُزن التابعة لمؤسسة أكوتيريوم للتكنولوجيا بسلطنة عُمان.
-مهمتك: تقديم استشارة وتكييف فقهي وتشريعي وقضائي دقيق وفق أسلوب (IRAC) المؤسسي استناداً إلى التشريعات العُمانية والمراسيم السلطانية النافذة.
+مهمتك: تقديم استشارة وتكييف فقهي وتشريعي وقضائي دقيق وفق منهجية (IRAC / CRAC) المؤسسية استناداً إلى التشريعات العُمانية والمراسيم السلطانية النافذة، مع دعم الصياغة التشريعية ومحاكاة الآثار القانونية المستقبلية عند الطلب.
 
-هيكل الاستشارة الإلزامي:
-1. [التكييف القانوني]: توصيف الواقعة وتحديد الإطار النظامي الحاكم.
-2. [السند التشريعي والقضائي]: الاستشهاد بالمواد القانونية والمراسيم السلطانية ذات الصلة بدقة.
-3. [التحليل الموضوعي]: بسط الالتزامات النظامية، شروط المسؤولية، ومطابقة الوقائع بالنصوص.
-4. [تقييم المخاطر]: قياس درجة المخاطر الإدارية والمالية والقضائية.
-5. [الرأي والتوجيه الإجرائي]: توصيات محددة وإجراءات تنفيذية وقائية.
+هيكل الاستشارة الإلزامي (IRAC / CRAC):
+1. [التكييف القانوني والقاعدة الحاكمة (Issue / Conclusion & Rule)]: توصيف الواقعة وتحديد الإطار النظامي الحاكم والمراسيم السلطانية ذات الصلة بدقة.
+2. [التطبيق والتحليل الموضوعي (Application / Analysis)]: بسط الالتزامات النظامية، شروط المسؤولية، ومطابقة الوقائع بالنصوص.
+3. [تقييم المخاطر والآثار المستقبلية (Risk & Side-Effect Simulation)]: قياس درجة المخاطر الإدارية والمالية والقضائية والآثار الجانبية المحتملة.
+4. [الخلاصة والتوجيه الإجرائي (Conclusion & Counsel Directive)]: توصيات محددة وإجراءات تنفيذية وقائية.
 
 النصوص القانونية المسترجعة من الفهرس السيادي للاسترشاد:
 ${articles.map(a => `- المادة ${a.articleNumber} من المرسوم السلطاني رقم ${a.decreeNo}: ${a.titleAr || ''} - ${(a.textAr || '').substring(0, 300)}`).join('\n')}`
       : `You are Faqih Prime (Chief Sovereign Jurist), senior legal counsel in the Ruzn Sovereign Legal System built by Acuterium Technologies in Oman.
-Provide thorough, professional IRAC-structured legal counsel grounded in Omani statutory doctrine and Royal Decrees.
+Provide thorough, professional IRAC/CRAC-structured legal counsel grounded in Omani statutory doctrine and Royal Decrees, including legislative drafting and future side-effect analysis when applicable.
 
 Retrieved Statutory Corpus Context:
 ${articles.map(a => `- Article ${a.articleNumber}, Royal Decree ${a.decreeNo}: ${(a.textAr || '').substring(0, 300)}`).join('\n')}`;
@@ -198,16 +209,16 @@ ${articles.map(a => `- Article ${a.articleNumber}, Royal Decree ${a.decreeNo}: $
 
   // Fallback to grounded structured synthesis if AI is unreachable
   if (!dynamicSummary) {
-    const iracSummaryAr = `[التكييف القانوني]: دراسة الواقعة وتحديد الإطار النظامي الحاكم بموجب التشريعات العُمانية النافذة.
+    const iracSummaryAr = `[التكييف القانوني والقاعدة الحاكمة (IRAC/CRAC)]: دراسة الواقعة وتحديد الإطار النظامي الحاكم بموجب التشريعات العُمانية النافذة.
 [السند التشريعي]: استناداً إلى ${finalCitations.slice(0, 2).join(' و ')} واللوائح التنفيذية المرتبطة.
 [التحليل الموضوعي]: تقييم الالتزامات النظامية، وتحديد نطاق المسؤولية الإدارية والتعاقدية، وفحص مدى توافر شروط المشروعية.
-[تقييم المخاطر]: فحص مخاطر عدم الامتثال أو التنازع الإجرائي ودرجة التعرض للمساءلة الرقابية أو القضائية.
+[تقييم المخاطر والآثار المستقبلية]: فحص مخاطر عدم الامتثال أو التنازع الإجرائي ودرجة التعرض للمساءلة الرقابية أو القضائية.
 [الرأي والتوجيه]: وجوب الالتزام بالأطر القانونية المعتمدة واستيفاء الموافقات والتوثيق اللازم.`;
 
-    const iracSummaryEn = `[Characterization]: Evaluated factual scenario under applicable Omani legislative doctrine.
-[Governing Rule]: Grounded in ${finalCitations.slice(0, 2).join(' and ')} and governing executive regulations.
+    const iracSummaryEn = `[Characterization & Governing Rule (IRAC/CRAC)]: Evaluated factual scenario under applicable Omani legislative doctrine.
+[Statutory Authority]: Grounded in ${finalCitations.slice(0, 2).join(' and ')} and governing executive regulations.
 [Substantive Analysis]: Assessment of contractual and regulatory duties, administrative liability, and compliance bounds.
-[Risk Assessment]: Appraisal of non-compliance exposure, supervisory audit scrutiny, and procedural vulnerabilities.
+[Risk & Side-Effect Assessment]: Appraisal of non-compliance exposure, supervisory audit scrutiny, and procedural vulnerabilities.
 [Counsel Guidance]: Enforce statutory compliance measures and maintain institutional documentation.`;
 
     dynamicSummary = lang === 'arabic' ? iracSummaryAr : iracSummaryEn;
@@ -219,7 +230,7 @@ ${articles.map(a => `- Article ${a.articleNumber}, Royal Decree ${a.decreeNo}: $
     verdict: 'LEGAL_OPINION_DELIVERED',
     citations: finalCitations,
     recommendations,
-    metadata: { articles, methodology: 'IRAC-SOVEREIGN-v2' }
+    metadata: { articles, methodology: 'IRAC-CRAC-SOVEREIGN-v2' }
   };
 }
 

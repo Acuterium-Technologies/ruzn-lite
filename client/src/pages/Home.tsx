@@ -327,7 +327,10 @@ function generatePDF(data: {
 }
 
 export default function Home() {
-  const [language, setLanguage] = useState<Language>("arabic");
+  const [language, setLanguage] = useState<Language>(() => {
+    const saved = typeof window !== "undefined" ? localStorage.getItem("ruzn_lang") : null;
+    return saved === "en" || saved === "english" ? "english" : "arabic";
+  });
   const [feature, setFeature] = useState<Feature>("complaints");
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -375,6 +378,12 @@ export default function Home() {
   const isRTL = language === "arabic";
   const text = UI_TEXT[language];
   const presets = PRESET_QUERIES[feature][language];
+
+  useEffect(() => {
+    localStorage.setItem("ruzn_lang", language === "english" ? "en" : "ar");
+    document.documentElement.dir = isRTL ? "rtl" : "ltr";
+    document.documentElement.lang = isRTL ? "ar" : "en";
+  }, [language, isRTL]);
   
   const chatMutation = trpc.chat.send.useMutation({
     onSuccess: (data) => {
@@ -758,28 +767,42 @@ export default function Home() {
     setIsStreaming(false);
   };
   
-  // Voice input handling
-  const transcribeMutation = trpc.chat.transcribe.useMutation({
-    onSuccess: (data) => {
-      if (data.status === 'success' && data.text) {
-        setInput(prev => prev + (prev ? ' ' : '') + data.text);
-        toast.success(language === 'arabic' ? 'تم التعرف على الصوت' : 'Voice recognized');
-      } else {
-        toast.error(language === 'arabic' ? 'فشل التعرف على الصوت' : 'Voice recognition failed');
-      }
-    },
-    onError: () => {
-      toast.error(language === 'arabic' ? 'فشل التعرف على الصوت' : 'Voice recognition failed');
-    }
-  });
+  // Voice input handling (Server Whisper Transcription + Live Web Speech API Capture)
+  const speechRecognitionRef = useRef<any>(null);
+  const liveTranscriptCapturedRef = useRef<boolean>(false);
+  const transcribeMutation = trpc.chat.transcribe.useMutation();
   
   const startRecording = async () => {
-    if (!isAuthenticated) {
-      toast.error(text.loginRequired);
-      return;
-    }
-    
     try {
+      liveTranscriptCapturedRef.current = false;
+
+      // Start Web Speech API live speech recognition (Arabic / English) if supported
+      const SpeechRecognitionAPI = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      if (SpeechRecognitionAPI) {
+        try {
+          const recognition = new SpeechRecognitionAPI();
+          recognition.lang = language === 'arabic' ? 'ar-OM' : 'en-US';
+          recognition.continuous = true;
+          recognition.interimResults = false;
+          recognition.onresult = (event: any) => {
+            let finalSegment = '';
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+              if (event.results[i].isFinal) {
+                finalSegment += event.results[i][0].transcript;
+              }
+            }
+            if (finalSegment.trim()) {
+              liveTranscriptCapturedRef.current = true;
+              setInput(prev => prev + (prev ? ' ' : '') + finalSegment.trim());
+            }
+          };
+          recognition.start();
+          speechRecognitionRef.current = recognition;
+        } catch {
+          speechRecognitionRef.current = null;
+        }
+      }
+
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       const recorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
       const chunks: Blob[] = [];
@@ -791,16 +814,42 @@ export default function Home() {
       };
       
       recorder.onstop = async () => {
+        if (speechRecognitionRef.current) {
+          try {
+            speechRecognitionRef.current.stop();
+          } catch {}
+          speechRecognitionRef.current = null;
+        }
+
         const audioBlob = new Blob(chunks, { type: 'audio/webm' });
         stream.getTracks().forEach(track => track.stop());
         
-        // Convert to base64 and create a data URL
         const reader = new FileReader();
-        reader.onloadend = () => {
+        reader.onloadend = async () => {
           const base64Audio = reader.result as string;
-          // For now, show a message that voice input is being processed
           toast.info(language === 'arabic' ? 'جاري معالجة الصوت...' : 'Processing voice...');
-          setInput(prev => prev + (prev ? ' ' : '') + (language === 'arabic' ? 'استفسار صوتي موجه إلى رُزن' : 'Voice legal inquiry directed to Ruzn'));
+          try {
+            const data = await transcribeMutation.mutateAsync({
+              audioUrl: base64Audio,
+              language
+            });
+            if (data.status === 'success' && data.text) {
+              if (!liveTranscriptCapturedRef.current) {
+                setInput(prev => prev + (prev ? ' ' : '') + data.text);
+              }
+              toast.success(language === 'arabic' ? 'تم التعرف على الصوت' : 'Voice recognized');
+            } else if (liveTranscriptCapturedRef.current) {
+              toast.success(language === 'arabic' ? 'تم التعرف على الصوت' : 'Voice recognized');
+            } else {
+              toast.error(language === 'arabic' ? 'فشل التعرف على الصوت' : 'Voice recognition failed');
+            }
+          } catch {
+            if (liveTranscriptCapturedRef.current) {
+              toast.success(language === 'arabic' ? 'تم التعرف على الصوت' : 'Voice recognized');
+            } else {
+              toast.error(language === 'arabic' ? 'فشل التعرف على الصوت' : 'Voice recognition failed');
+            }
+          }
         };
         reader.readAsDataURL(audioBlob);
       };
@@ -815,6 +864,12 @@ export default function Home() {
   };
   
   const stopRecording = () => {
+    if (speechRecognitionRef.current) {
+      try {
+        speechRecognitionRef.current.stop();
+      } catch {}
+      speechRecognitionRef.current = null;
+    }
     if (mediaRecorder && mediaRecorder.state !== 'inactive') {
       mediaRecorder.stop();
       setIsRecording(false);

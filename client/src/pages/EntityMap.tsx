@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Link } from "wouter";
@@ -310,7 +310,10 @@ function TrendIcon({ trend, percent }: { trend: "up" | "down" | "stable"; percen
 }
 
 export default function EntityMap() {
-  const [language, setLanguage] = useState<Language>("arabic");
+  const [language, setLanguage] = useState<Language>(() => {
+    const saved = typeof window !== "undefined" ? localStorage.getItem("ruzn_lang") : null;
+    return saved === "en" || saved === "english" ? "english" : "arabic";
+  });
   const [sortBy, setSortBy] = useState<SortBy>("risk");
   const [timeRange, setTimeRange] = useState<TimeRange>("month");
   const [expandedEntity, setExpandedEntity] = useState<number | null>(null);
@@ -320,6 +323,12 @@ export default function EntityMap() {
   
   const isRTL = language === "arabic";
   const text = UI_TEXT[language];
+
+  useEffect(() => {
+    localStorage.setItem("ruzn_lang", language === "english" ? "en" : "ar");
+    document.documentElement.dir = isRTL ? "rtl" : "ltr";
+    document.documentElement.lang = isRTL ? "ar" : "en";
+  }, [language, isRTL]);
   
   // Sort entities
   const sortedEntities = useMemo(() => {

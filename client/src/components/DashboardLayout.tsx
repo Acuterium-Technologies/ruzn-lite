@@ -86,7 +86,7 @@ export default function DashboardLayout({
 
   const effectiveUser = user || {
     id: 1,
-    name: "مقيم سيادي (عرض معتمد)",
+    name: "مقيم سيادي (صلاحية معتمدة)",
     email: "chairman@ruzn.legal",
     role: "admin"
   };
@@ -119,7 +119,7 @@ function DashboardLayoutContent({
   const { user, logout } = useAuth();
   const effectiveUser = user || {
     id: 1,
-    name: "مقيم سيادي (عرض معتمد)",
+    name: "مقيم سيادي (صلاحية معتمدة)",
     email: "chairman@ruzn.legal",
     role: "admin"
   };

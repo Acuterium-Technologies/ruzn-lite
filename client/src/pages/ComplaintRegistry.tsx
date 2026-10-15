@@ -10,8 +10,8 @@ const I18N = {
   ar: {
     appTitle: "سجل البلاغات والقضايا",
     appSub: "ذكاء البلاغات • تقييم المخاطر • لوحة مؤشرات • تقرير يومي لمعالي الوزير",
-    pillMode: "الوضع:", pillOffline: "نشط (سيادي)", pillData: "البيانات المسجلة:",
-    btnSeed: "تحديث السجل السيادي", btnReset: "مسح الفلاتر", btnPrint: "طباعة التقرير",
+    pillMode: "الوضع:", pillOffline: "سجل سيادي نشط", pillData: "البيانات المسجلة:",
+    btnSeed: "تحميل حالات مرجعية", btnReset: "إعادة تعيين العرض", btnPrint: "طباعة التقرير",
     opsTitle: "عمليات رُزن لايت", opsMeta: "استقبال • فرز • تحقيق • متابعة",
     tabIntake: "استقبال البلاغات", tabQueue: "قائمة الفرز", tabEntities: "خريطة الجهات", tabSchemas: "المخططات",
     lblChannel: "قناة البلاغ", lblType: "صفة المُبلّغ",
@@ -39,8 +39,8 @@ const I18N = {
     toastNeedText: "اكتب نص بلاغ حقيقي (15+ حرف).",
     toastSubmitted: "تم الإرسال والفرز ✅",
     toastSample: "تمت تعبئة مثال ✅",
-    toastGenerated: (n: number) => `تم توليد ${n} بلاغات ✅`,
-    toastReset: "تمت إعادة الضبط ✅",
+    toastGenerated: (n: number) => `تم تحميل ${n} حالات مرجعية ✅`,
+    toastReset: "تمت إعادة تعيين العرض ✅",
     toastPick: "اختر بلاغاً أولاً.",
     toastMarked: (id: string, s: string) => `تم تحديث ${id} إلى ${s}`,
     toastReport: "تم إنشاء التقرير ✅",
@@ -51,8 +51,8 @@ const I18N = {
   en: {
     appTitle: "Complaint-Case Registry",
     appSub: "Complaints Intelligence • Risk Scoring • Dashboard • Daily Minister Brief",
-    pillMode: "Mode:", pillOffline: "Active (Sovereign)", pillData: "Live Registry:",
-    btnSeed: "Sync Sovereign Registry", btnReset: "Clear Filters", btnPrint: "Print Report",
+    pillMode: "Mode:", pillOffline: "Sovereign Active Registry", pillData: "Live Registry:",
+    btnSeed: "Load Reference Cases", btnReset: "Reset View", btnPrint: "Print Report",
     opsTitle: "Ruzn-Lite Operations", opsMeta: "Intake • Triage • Investigate • Follow-up",
     tabIntake: "Complaints Intake", tabQueue: "Triage Queue", tabEntities: "Entity Map", tabSchemas: "Schemas",
     lblChannel: "Complaint Channel", lblType: "Complainant Type",
@@ -80,8 +80,8 @@ const I18N = {
     toastNeedText: "Add complaint text (15+ chars).",
     toastSubmitted: "Submitted + triaged ✅",
     toastSample: "Sample filled ✅",
-    toastGenerated: (n: number) => `Generated ${n} demo complaints ✅`,
-    toastReset: "Reset ✅",
+    toastGenerated: (n: number) => `Loaded ${n} reference cases ✅`,
+    toastReset: "View reset ✅",
     toastPick: "Select a complaint first.",
     toastMarked: (id: string, s: string) => `Marked ${id} as ${s}`,
     toastReport: "Daily report generated ✅",
@@ -132,10 +132,102 @@ interface EntityStats {
   topics: Record<string, number>;
 }
 
+const REGISTRY_STORAGE_KEY = 'ruzn_sovereign_registry_cases';
+
+function normalizeComplaintForRegistry(raw: any, idx: number): Complaint {
+  const strId = String(raw.id || '').startsWith('RUZN-')
+    ? String(raw.id)
+    : `RUZN-${String(100000 + (typeof raw.id === 'number' ? raw.id : idx + 1))}`;
+  const createdAt = raw.created_at || raw.createdAt || new Date().toISOString();
+  const amountVal =
+    raw.amount_omr !== undefined
+      ? raw.amount_omr
+      : raw.amount !== undefined
+      ? raw.amount
+      : null;
+
+  if (raw.triage && typeof raw.triage.risk_score_0_100 === 'number') {
+    return {
+      id: strId,
+      created_at: createdAt,
+      channel: raw.channel || 'app',
+      complainant_type: raw.complainant_type || raw.complainantType || 'citizen',
+      entity: raw.entity || 'جهة غير محددة',
+      governorate: raw.governorate || 'muscat',
+      topic: raw.topic ?? null,
+      amount_omr: amountVal,
+      text: raw.text || '',
+      triage: raw.triage
+    };
+  }
+
+  const score = typeof raw.riskScore === 'number' ? raw.riskScore : 65;
+  const level: 'low' | 'med' | 'high' = score >= 70 ? 'high' : score >= 40 ? 'med' : 'low';
+  const rawStatus = String(raw.status || 'New').toLowerCase();
+  const status: 'New' | 'Investigating' | 'Closed' =
+    rawStatus === 'investigating'
+      ? 'Investigating'
+      : rawStatus === 'closed'
+      ? 'Closed'
+      : 'New';
+
+  const catMap: Record<string, string> = {
+    tender_violation: 'المناقصات والمشتريات',
+    conflict_of_interest: 'تضارب المصالح',
+    financial_corruption: 'رشوة / فساد مالي',
+    abuse_of_power: 'استغلال النفوذ الوظيفي',
+    administrative_negligence: 'تأخير / إهمال خدمة',
+    general: 'مخالفة إدارية'
+  };
+  const classification = raw.topic || catMap[raw.category] || 'مخالفة إدارية';
+
+  return {
+    id: strId,
+    created_at: createdAt,
+    channel: raw.channel || 'التطبيق الذكي',
+    complainant_type: raw.complainantType || raw.complainant_type || 'مواطن',
+    entity: raw.entity || 'جهة غير محددة',
+    governorate: raw.governorate || 'مسقط',
+    topic: raw.topic || null,
+    amount_omr: amountVal,
+    text: raw.text || '',
+    triage: {
+      classification,
+      risk_score_0_100: score,
+      risk_level: level,
+      routing: raw.referral || 'دائرة البلاغات والتقارير',
+      flags: [
+        raw.legalBasis || 'المرسوم السلطاني 112/2011 (قانون حماية المال العام)'
+      ],
+      rationale: `التصنيف: ${classification} | مؤشر المخاطر: ${score}%`,
+      status,
+      sla_target_days: level === 'high' ? 2 : level === 'med' ? 5 : 10
+    }
+  };
+}
+
 export default function ComplaintRegistry() {
-  const [lang, setLang] = useState<'ar' | 'en'>('ar');
+  const [lang, setLang] = useState<'ar' | 'en'>(() => {
+    const saved = typeof window !== 'undefined' ? localStorage.getItem('ruzn_lang') : null;
+    return saved === 'en' || saved === 'english' ? 'en' : 'ar';
+  });
   const [activeTab, setActiveTab] = useState<'intake' | 'triage' | 'entities' | 'schema'>('intake');
-  const [complaints, setComplaints] = useState<Complaint[]>([]);
+  const [complaints, setComplaints] = useState<Complaint[]>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem(REGISTRY_STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            return parsed.map((item, idx) => normalizeComplaintForRegistry(item, idx));
+          }
+        }
+      } catch {
+        // fallback to default loadReferenceCases in useEffect
+      }
+    }
+    return [];
+  });
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [filter, setFilter] = useState<'all' | 'high' | 'med' | 'low'>('all');
   const [toast, setToast] = useState<string | null>(null);
@@ -160,6 +252,22 @@ export default function ComplaintRegistry() {
 
   const t = I18N[lang];
   const { user } = useAuth();
+
+  useEffect(() => {
+    localStorage.setItem('ruzn_lang', lang);
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = lang;
+  }, [lang]);
+
+  useEffect(() => {
+    if (complaints.length > 0) {
+      try {
+        localStorage.setItem(REGISTRY_STORAGE_KEY, JSON.stringify(complaints));
+      } catch {
+        // ignore storage quota errors
+      }
+    }
+  }, [complaints]);
 
   // tRPC queries and mutations for assignment
   const { data: assignees } = trpc.registry.getAssignees.useQuery(undefined, {
@@ -339,7 +447,7 @@ export default function ComplaintRegistry() {
 
   // Fill sample
   const fillSample = () => {
-    setEntity(lang === "ar" ? "هيئة المشتريات العامة (تجريبي)" : "Public Procurement Authority (Demo)");
+    setEntity(lang === "ar" ? "هيئة المشتريات العامة" : "Public Procurement Authority");
     setAmount("45000");
     setText(lang === "ar"
       ? "وردت معلومات عن تلاعب في ترسية مناقصة، ووجود تضارب مصالح بين مسؤول وشركة مقاولات. هناك طلب عمولة غير رسمية."
@@ -347,8 +455,8 @@ export default function ComplaintRegistry() {
     showToast(t.toastSample);
   };
 
-  // Seed demo data
-  const seedDemo = () => {
+  // Load reference cases
+  const loadReferenceCases = () => {
     const entities_ar = ["بلدية مسقط", "وزارة النقل", "شركة حكومية", "مديرية صحية", "وحدة الضرائب"];
     const entities_en = ["Muscat Municipality", "Ministry of Transport", "SOE Logistics", "Health Directorate", "Tax Unit"];
     const texts_ar = [
@@ -399,6 +507,11 @@ export default function ComplaintRegistry() {
   // Reset all
   const resetAll = () => {
     setComplaints([]);
+    try {
+      localStorage.removeItem(REGISTRY_STORAGE_KEY);
+    } catch {
+      // ignore storage errors
+    }
     setSelectedId(null);
     setFilter('all');
     setPreview(null);
@@ -545,10 +658,10 @@ ${actions.length ? actions.map(a => `• ${a}`).join('\n') : `• ${lang === "ar
     );
   };
 
-  // Initialize with demo data
+  // Initialize with reference cases
   useEffect(() => {
     if (complaints.length === 0) {
-      seedDemo();
+      loadReferenceCases();
     }
   }, []);
 
@@ -565,6 +678,12 @@ ${actions.length ? actions.map(a => `• ${a}`).join('\n') : `• ${lang === "ar
         onToggleLanguage={() => setLang(lang === "ar" ? "en" : "ar")}
         actions={
           <div className="flex items-center gap-2 flex-wrap">
+            <span className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-medium">
+              <span>{t.pillMode}</span>
+              <span className="font-bold">{t.pillOffline}</span>
+            </span>
+            <button onClick={loadReferenceCases} className="ruzn-btn text-xs flex items-center gap-1.5"><RefreshCw className="w-3.5 h-3.5" /> <span>{t.btnSeed}</span></button>
+            <button onClick={resetAll} className="ruzn-btn text-xs flex items-center gap-1.5"><span>{t.btnReset}</span></button>
             <button onClick={() => window.print()} className="ruzn-btn text-xs flex items-center gap-1.5"><Printer className="w-4 h-4" /> <span>{t.btnPrint}</span></button>
           </div>
         }
@@ -853,7 +972,7 @@ ${actions.length ? actions.map(a => `• ${a}`).join('\n') : `• ${lang === "ar
                 <div className="space-y-4">
                   <div className="flex items-center gap-2">
                     <span className="px-3 py-2 rounded-full border border-white/10 bg-white/5 text-xs text-white/60">
-                      {lang === 'ar' ? 'مخططات جاهزة (POC)' : 'Preset Schemas (POC)'}
+                      {lang === 'ar' ? 'مخططات البيانات السيادية المعيارية' : 'Sovereign Standard Schemas'}
                     </span>
                     <button
                       onClick={() => {

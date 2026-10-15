@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { trpc } from "@/lib/trpc";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -52,7 +52,10 @@ interface VersionEntry {
 }
 
 export default function KnowledgeBase() {
-  const [language, setLanguage] = useState<"arabic" | "english">("arabic");
+  const [language, setLanguage] = useState<"arabic" | "english">(() => {
+    const saved = typeof window !== "undefined" ? localStorage.getItem("ruzn_lang") : null;
+    return saved === "en" || saved === "english" ? "english" : "arabic";
+  });
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const [expandedIds, setExpandedIds] = useState<Set<number>>(new Set());
@@ -67,6 +70,12 @@ export default function KnowledgeBase() {
   
   const { user } = useAuth();
   const isAdmin = user?.role === "admin";
+
+  useEffect(() => {
+    localStorage.setItem("ruzn_lang", language === "english" ? "en" : "ar");
+    document.documentElement.dir = language === "arabic" ? "rtl" : "ltr";
+    document.documentElement.lang = language === "arabic" ? "ar" : "en";
+  }, [language]);
 
   // Calculate date range based on filter
   const getDateRange = () => {

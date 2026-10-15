@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Link } from "wouter";
 import { toast } from "sonner";
 import SovereignHeader from "@/components/SovereignHeader";
@@ -67,8 +67,8 @@ const UI_TEXT = {
     qarcStatus: "Q-ARC: مفعّل",
     qencStatus: "Q-ENC: مفعّل",
     auditStatus: "أثر تدقيقي: مفعّل",
-    seedBtn: "تحديث السجل السيادي",
-    resetBtn: "مسح الفلاتر",
+    seedBtn: "تحميل حالات مرجعية",
+    resetBtn: "إعادة تعيين العرض",
     printBtn: "طباعة التقرير اليومي",
     exportBtn: "تصدير JSON",
     tabs: {
@@ -89,7 +89,7 @@ const UI_TEXT = {
       amount: "المبلغ التقديري (ر.ع.) إن وجد",
       text: "تفاصيل ونَص البلاغ",
       submit: "إرسال + فرز ذكي (Q-ARC)",
-      sample: "تعبئة مثال رسمي",
+      sample: "تعبئة حالة مرجعية",
       reset: "مسح النموذج",
       hintKeywords: "كلمات مفتاحية سريعة:",
       channels: ["التطبيق الذكي", "واتساب", "الخط الساخن", "البريد الإلكتروني", "حضور شخصي", "بريد عادي"],
@@ -98,8 +98,8 @@ const UI_TEXT = {
       keywords: ["مناقصة", "ترسية", "تضارب مصالح", "رشوة", "عمولة", "اختلاس", "تزوير", "محاباة", "إهمال إداري"]
     },
     triagePreview: {
-      title: "نتيجة الفرز والتحليل الذكي (معاينة Q-ARC)",
-      note: "إخراج منظم ذكي: دعم قرار تشريعي سيادي — كل خطوة موثقة وقابلة للتدقيق الكامل.",
+      title: "مخرجات الفرز الهيكلي لـ Q-ARC",
+      note: "مخرجات الفرز الهيكلي لـ Q-ARC: دعم قرار تشريعي سيادي — كل خطوة موثقة وقابلة للتدقيق الكامل.",
       category: "التصنيف المقترح",
       riskScore: "مؤشر الخطورة",
       referral: "جهة الإحالة المقترحة",
@@ -164,8 +164,8 @@ const UI_TEXT = {
     qarcStatus: "Q-ARC: Active",
     qencStatus: "Q-ENC: Active",
     auditStatus: "Audit Trail: Enabled",
-    seedBtn: "Sync Sovereign Registry",
-    resetBtn: "Clear Filters",
+    seedBtn: "Load Reference Cases",
+    resetBtn: "Reset View",
     printBtn: "Print Daily Brief",
     exportBtn: "Export JSON",
     tabs: {
@@ -186,7 +186,7 @@ const UI_TEXT = {
       amount: "Estimated Amount (OMR) if any",
       text: "Complaint Narrative & Evidence",
       submit: "Submit + Q-ARC Triage",
-      sample: "Load Sample Complaint",
+      sample: "Load Reference Case",
       reset: "Clear Form",
       hintKeywords: "Quick Keywords:",
       channels: ["Mobile App", "WhatsApp", "Hotline", "Email", "Walk-in", "Regular Mail"],
@@ -195,8 +195,8 @@ const UI_TEXT = {
       keywords: ["tender", "award", "conflict of interest", "bribe", "kickback", "embezzlement", "forgery", "favoritism", "negligence"]
     },
     triagePreview: {
-      title: "Triage & Neural Analysis Result (Q-ARC Preview)",
-      note: "Structured Decision Support: Non-adversarial — Human Authority — Fully Auditable.",
+      title: "Q-ARC Structured Triage Output",
+      note: "Q-ARC Structured Triage Output: Non-adversarial Decision Support — Human Authority — Fully Auditable.",
       category: "Suggested Category",
       riskScore: "Risk Index",
       referral: "Recommended Referral Dept",
@@ -427,11 +427,93 @@ const REPORT_SCHEMA = {
   }
 };
 
+const REGISTRY_STORAGE_KEY = "ruzn_sovereign_registry_cases";
+
+function normalizeComplaintForOps(raw: any, idx: number): Complaint {
+  const numericId =
+    typeof raw.id === "number"
+      ? raw.id
+      : parseInt(String(raw.id || "").replace(/\D/g, ""), 10) || 1000 + idx;
+  const riskScore =
+    typeof raw.riskScore === "number"
+      ? raw.riskScore
+      : typeof raw.triage?.risk_score_0_100 === "number"
+      ? raw.triage.risk_score_0_100
+      : 65;
+  const rawStatus = String(raw.status || raw.triage?.status || "new").toLowerCase();
+  const status: ComplaintStatus =
+    rawStatus === "investigating"
+      ? "investigating"
+      : rawStatus === "closed"
+      ? "closed"
+      : "new";
+  const classification = String(raw.category || raw.triage?.classification || "");
+  let category = raw.category || "general";
+  if (!raw.category) {
+    if (classification.includes("مناقص") || classification.includes("Procurement")) {
+      category = "tender_violation";
+    } else if (classification.includes("تضارب") || classification.includes("Conflict")) {
+      category = "conflict_of_interest";
+    } else if (
+      classification.includes("رشوة") ||
+      classification.includes("اختلاس") ||
+      classification.includes("Bribery") ||
+      classification.includes("Funds")
+    ) {
+      category = "financial_corruption";
+    } else if (classification.includes("تأخير") || classification.includes("Delay")) {
+      category = "administrative_negligence";
+    }
+  }
+  return {
+    id: numericId,
+    channel: raw.channel || "التطبيق الذكي",
+    complainantType: raw.complainantType || raw.complainant_type || "مواطن",
+    entity: raw.entity || "جهة حكومية",
+    governorate: raw.governorate || "مسقط",
+    topic: raw.topic || raw.triage?.classification || "بلاغ نزاهة تشغيلي",
+    amount:
+      raw.amount !== undefined
+        ? raw.amount
+        : raw.amount_omr !== undefined
+        ? raw.amount_omr
+        : null,
+    text: raw.text || "",
+    riskScore,
+    status,
+    createdAt: raw.createdAt || raw.created_at || new Date().toISOString(),
+    category,
+    referral: raw.referral || raw.triage?.routing || "دائرة فحص الشكاوى والبلاغات العامة",
+    legalBasis:
+      raw.legalBasis ||
+      raw.triage?.rationale ||
+      "المرسوم السلطاني 112/2011 (قانون حماية المال العام)"
+  };
+}
+
 export default function Operations() {
-  const [language, setLanguage] = useState<Language>("arabic");
+  const [language, setLanguage] = useState<Language>(() => {
+    const saved = typeof window !== "undefined" ? localStorage.getItem("ruzn_lang") : null;
+    return saved === "en" || saved === "english" ? "english" : "arabic";
+  });
   const [activeTab, setActiveTab] = useState<TabId>("intake");
   const [riskFilter, setRiskFilter] = useState<RiskLevel>("all");
-  const [complaints, setComplaints] = useState<Complaint[]>(INITIAL_COMPLAINTS);
+  const [complaints, setComplaints] = useState<Complaint[]>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem(REGISTRY_STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            return parsed.map((item, idx) => normalizeComplaintForOps(item, idx));
+          }
+        }
+      } catch {
+        // fallback to initial complaints
+      }
+    }
+    return INITIAL_COMPLAINTS;
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Form state
@@ -460,6 +542,20 @@ export default function Operations() {
 
   const isRTL = language === "arabic";
   const text = UI_TEXT[language];
+
+  useEffect(() => {
+    localStorage.setItem("ruzn_lang", language === "english" ? "en" : "ar");
+    document.documentElement.dir = isRTL ? "rtl" : "ltr";
+    document.documentElement.lang = isRTL ? "ar" : "en";
+  }, [language, isRTL]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(REGISTRY_STORAGE_KEY, JSON.stringify(complaints));
+    } catch {
+      // ignore storage quota errors
+    }
+  }, [complaints]);
 
   // Auto triage analysis algorithm
   const computeTriage = (complaintText: string, amount: number | null) => {
@@ -610,13 +706,13 @@ export default function Operations() {
     const amt = parseFloat(chosen.amount);
     const res = computeTriage(chosen.text, amt);
     setLivePreview(res);
-    toast.info(language === "arabic" ? "تم تعبئة نموذج البلاغ التجريبي بنجاح" : "Sample complaint loaded");
+    toast.info(language === "arabic" ? "تم تعبئة حالة البلاغ المرجعية بنجاح" : "Reference case loaded");
   };
 
-  // Seed 8-12 randomized demo complaints
-  const seedDemoData = () => {
-    const demoEntities = SAMPLE_ENTITIES;
-    const demoTexts = [
+  // Load reference sovereign complaints
+  const loadReferenceCases = () => {
+    const refEntities = SAMPLE_ENTITIES;
+    const refTexts = [
       "شبهة تلاعب في إرساء عقد توريد معدات حاسوبية بمبلغ مضاعف.",
       "طلب عمولة مالية غير معلنة مقابل اعتماد كشف دفعات المقاولين.",
       "تضارب مصالح صريح بين مدير الدائرة والشركة المنفذة للمشروع.",
@@ -628,8 +724,8 @@ export default function Operations() {
     const newItems: Complaint[] = [];
     const count = 6;
     for (let i = 0; i < count; i++) {
-      const ent = demoEntities[Math.floor(Math.random() * demoEntities.length)];
-      const txt = demoTexts[Math.floor(Math.random() * demoTexts.length)];
+      const ent = refEntities[Math.floor(Math.random() * refEntities.length)];
+      const txt = refTexts[Math.floor(Math.random() * refTexts.length)];
       const amt = [18000, 45000, 110000, 260000, 750000][Math.floor(Math.random() * 5)];
       const res = computeTriage(txt, amt);
       newItems.push({
@@ -651,7 +747,7 @@ export default function Operations() {
     }
 
     setComplaints(prev => [...newItems, ...prev]);
-    toast.success(language === "arabic" ? `تم توليد ${count} بلاغات ذكية للعرض` : `Generated ${count} demo cases`);
+    toast.success(language === "arabic" ? `تم تحميل ${count} حالات مرجعية في السجل السيادي` : `Loaded ${count} reference cases into Sovereign Registry`);
   };
 
   // Reset to initial complaints
@@ -751,7 +847,7 @@ export default function Operations() {
         actions={
           <div className="flex items-center gap-1.5 flex-wrap">
             <button
-              onClick={seedDemoData}
+              onClick={loadReferenceCases}
               className="ruzn-btn text-xs gap-1.5 border-[rgba(214,179,106,0.3)] hover:border-[rgba(214,179,106,0.6)] text-[rgba(214,179,106,0.95)]"
               title={text.seedBtn}
             >

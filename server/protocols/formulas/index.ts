@@ -140,6 +140,13 @@ export const EREBUS_FORMULA_METADATA = {
     effectiveness: 95.3,
     flashMLA: '147x',
   },
+  'EREBUSFORMULA653': {
+    protocolId: 'EREBUS-CSE-3A12d-004',
+    name: 'Legislative Impact & Priority Score (LITP)',
+    description: 'Resolution Impact Assessment, downstream statutory conflict detection, and whistleblowing triage correlation',
+    effectiveness: 96.9,
+    flashMLA: '156x',
+  },
   'EREBUSFORMULA654': {
     protocolId: 'EREBUS-CSE-3A12d-005',
     name: 'Litigation Outcome Prediction',
@@ -161,6 +168,13 @@ export const EREBUS_FORMULA_METADATA = {
     effectiveness: 95.6,
     flashMLA: '149x',
   },
+  'EREBUSFORMULA657': {
+    protocolId: 'EREBUS-CSE-3A12d-008',
+    name: 'Regulatory Change Priority Score (RCMP-2)',
+    description: 'Multi-factor regulatory change urgency and compliance transition scoring',
+    effectiveness: 95.9,
+    flashMLA: '150x',
+  },
   'EREBUSFORMULA658': {
     protocolId: 'EREBUS-CSE-3A12d-009',
     name: 'Privacy Risk Aggregate Score',
@@ -171,7 +185,7 @@ export const EREBUS_FORMULA_METADATA = {
   'EREBUSFORMULA659': {
     protocolId: 'EREBUS-CSE-3A12d-010',
     name: 'Regulatory Impact Assessment (RIA)',
-    description: 'AI-driven legislative impact simulation with Vision 2040 alignment',
+    description: 'AI-driven legislative drafting & future side-effect simulation with Vision 2040 alignment',
     effectiveness: 94.8,
     flashMLA: '142x',
     category: 'Legislative Engineering',
@@ -182,5 +196,12 @@ export const EREBUS_FORMULA_METADATA = {
     description: 'Third-party risk management across 5 dimensions',
     effectiveness: 96.2,
     flashMLA: '151x',
+  },
+  'EREBUSFORMULA661': {
+    protocolId: 'EREBUS-CSE-3A12d-012',
+    name: 'Legal Intelligence Fusion & Contradiction Penalty Score (LIFP)',
+    description: 'Multi-source legal intelligence fusion and statutory contradiction penalty scoring',
+    effectiveness: 97.4,
+    flashMLA: '160x',
   },
 } as const;

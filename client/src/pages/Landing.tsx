@@ -45,7 +45,7 @@ const UI_TEXT = {
     description:
       "رُزن هو نظام ذكاء اصطناعي سيادي عالي الموثوقية يدعم الجهات والمؤسسات في تحويل البلاغات والبيانات التنظيمية المعقدة إلى قرارات واضحة وقابلة للتوثيق والتدقيق الجنائي — وفق التشريعات ومراسيم سلطنة عُمان ورؤية 2040.",
     directAccessBtn: "دخول المنصة السيادية المباشرة",
-    demoKeyBtn: "تفعيل الدخول التجريبي الفوري (Master Key)",
+    demoKeyBtn: "تفعيل المفتاح السيادي الفوري (Master Key)",
     kpis: [
       { value: "6,007", label: "مادة قانونية وتشريعية", sub: "مفهرسة مع نصوص المواد الكاملة" },
       { value: "63", label: "مرسوماً سلطانياً سيادياً", sub: "تغطي العمل والجزاء والمناقصات والرقابة" },
@@ -207,9 +207,9 @@ const UI_TEXT = {
     },
     contact: {
       title: "تواصل معنا",
-      subtitle: "للاستفسارات والعروض التوضيحية لقطاعات الدولة",
+      subtitle: "للاستفسارات المؤسسية والاعتماد الرسمي لقطاعات الدولة",
       email: "info@ruzn.ai",
-      cta: "طلب عرض توضيحي"
+      cta: "طلب اعتماد مؤسسي"
     },
     footer: {
       poweredBy: "مدعوم من أكيوتيريوم تكنولوجيز (Acuterium Technologies)",
@@ -388,9 +388,9 @@ const UI_TEXT = {
     },
     contact: {
       title: "Contact Us",
-      subtitle: "For institutional inquiries and official state demonstrations",
+      subtitle: "For institutional inquiries and official state onboarding",
       email: "info@ruzn.ai",
-      cta: "Request Demo"
+      cta: "Request Institutional Access"
     },
     footer: {
       poweredBy: "Powered by Acuterium Technologies",
