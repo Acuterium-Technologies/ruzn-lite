@@ -666,7 +666,7 @@ export default function Operations() {
       amount: "",
       text: ""
     });
-    toast.info(language === "arabic" ? "تمت استعادة البيانات الأصلية" : "Reset to default demo data");
+    toast.info(language === "arabic" ? "تمت استعادة البيانات الأصلية" : "Reset to default sovereign data");
   };
 
   // Form submit
