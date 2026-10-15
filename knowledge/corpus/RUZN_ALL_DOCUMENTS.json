@@ -4,7 +4,7 @@
  "description": "RUZN.AI Legal Document Collection — Omani Criminal Law and Public Prosecution Documents",
  "jurisdiction": "Oman/GCC",
  "generated_at": "2026-08-25T00:00:00Z",
- "generated_by": "Claude (phase d: parse_consolidated + diff_versions)",
+ "generated_by": "Sovereign-Faqih-Parser (phase d: parse_consolidated + diff_versions)",
  "total_documents": 63,
  "document_types_summary": {
   "law": 26,
@@ -122,7 +122,7 @@
    "summary_en": "This legal commentary, sourced from Qanoon.om and Eastlaws, analyzes the grounds for expiry (انقضاء) of public prosecution cases under Omani criminal law, primarily Article 15 of the Criminal Procedures Law (Royal Decree 97/99). Six grounds for expiry are identified: (1) death of the accused; (2) general royal pardon; (3) statute of limitations — 20 years for felonies, 3 years for misdemeanors, and 1 year for violations; (4) withdrawal of complaint in cases requiring one; (5) final judgment (res judicata); (6) repeal of the criminal provision. The commentary further covers interruption of the limitation period by any investigative or judicial act (which also affects co-accused), the rule against suspension of the period, special rules for government employee crimes (embezzlement, bribery: limitation starts from end of service), exceptions for state security crimes, and the persistence of confiscation rights even after expiry.",
    "extraction_metadata": {
     "parsed_at": "2026-03-09T12:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "1.0.0",
     "source_file": "تنقضي الدعوى العمومية في القانون ال.txt",
     "source_url": null,
@@ -12051,7 +12051,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٥٥  ٩٠ -RD_55_90.txt",
     "source_url": null,
@@ -13083,7 +13083,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٤٧  ٩٧ -RD_47_97.txt",
     "source_url": null,
@@ -14838,7 +14838,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٩٠  ٩٩ _RD_90_1999.txt",
     "source_url": null,
@@ -15395,7 +15395,7 @@
    "id_source": "manual",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "قانون الادعاء العام (معدل)-92_99.txt",
     "source_url": null,
@@ -21049,7 +21049,7 @@
    "id_source": "manual",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "قانون الإجراءات الجزائية (معدل)-RD_97_99.txt",
     "source_url": null,
@@ -27595,7 +27595,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٢٩  ٢٠٠٢ _RD_29_2002.txt",
     "source_url": null,
@@ -29979,7 +29979,7 @@
    "id_source": "manual",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "قانون العمل (معدل)-RD_113_2011.txt",
     "source_url": null,
@@ -30553,7 +30553,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٦٤  ٢٠٠٣ -RD_64_2003.txt",
     "source_url": null,
@@ -31170,7 +31170,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٨  ٢٠٠٧ -RD_8_2007.txt",
     "source_url": null,
@@ -32062,7 +32062,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٣٠  ٢٠٠٨ -RD_30_2008.txt",
     "source_url": null,
@@ -33281,7 +33281,7 @@
    "id_source": "manual",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "-36_2008قانون المناقصات (معدل).txt",
     "source_url": null,
@@ -34997,7 +34997,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٦٨  ٢٠٠٨ -RD_68_2008.txt",
     "source_url": null,
@@ -35806,7 +35806,7 @@
    "id_source": "manual",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "قانون المعاملات الإلكترونية (معدل)-69_2008.txt",
     "source_url": null,
@@ -38027,7 +38027,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ١١٠  ٢٠١١-RD_110_2011.txt",
     "source_url": null,
@@ -38740,7 +38740,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ١٢  ٢٠١١ -RD_12_2011.txt",
     "source_url": null,
@@ -55133,7 +55133,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٢٩  ٢٠١٣ -RD_29_2013.txt",
     "source_url": null,
@@ -55693,7 +55693,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٦٧  ٢٠١٤ -RD_67_2014.txt",
     "source_url": null,
@@ -61843,7 +61843,7 @@
    "id_source": "manual",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "قانون الجزاء (معدل)-RD_11_2025.txt",
     "source_url": null,
@@ -63147,7 +63147,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٨  ٢٠١٨ -RD_8_2018.txt",
     "source_url": null,
@@ -67991,7 +67991,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ١٨  ٢٠١٩ -RD_18_2019.txt",
     "source_url": null,
@@ -71800,7 +71800,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٥٣  ٢٠١٩ -RD_53_2019.txt",
     "source_url": null,
@@ -72368,7 +72368,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ١٢٥  ٢٠٢٠ -RD_125_2020.txt",
     "source_url": null,
@@ -73623,7 +73623,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٧  ٢٠٢١ -RD_7_2021.txt",
     "source_url": null,
@@ -74218,7 +74218,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٦  ٢٠٢٢ RD_6_2022.txt",
     "source_url": null,
@@ -76085,7 +76085,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٨٧  ٢٠٢٢ -RD_87_2022.txt",
     "source_url": null,
@@ -78517,7 +78517,7 @@
    "id_source": "manual",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "قانون العمل (معدل)-53_2023.txt",
     "source_url": null,
@@ -79571,7 +79571,7 @@
    "id_source": "manual",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "المرسوم السلطاني ٦١  ٢٠٢٦ -RD_61_2026.txt",
     "source_url": null,
@@ -80634,7 +80634,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٨  ٢٠٢٦ -RD_8_2026.txt",
     "source_url": null,
@@ -81314,7 +81314,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مجلس الشؤون الإدارية للقضاء قرار -SJC_78_2017.txt",
     "source_url": null,
@@ -82525,7 +82525,7 @@
    "id_source": "manual",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مجلس الشؤون الإدارية للقضاء قرار -SJC_104_2021.txt",
     "source_url": null,
@@ -83195,7 +83195,7 @@
    "id_source": "manual",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "وزارة التجارة والصناعة وترويج الاست-MOCCIP_MD_18_2021.txt",
     "source_url": null,
@@ -86730,7 +86730,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "الهيئة العامة لسوق المال قرار رقم -FSA_27_2021.txt",
     "source_url": null,
@@ -87493,7 +87493,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "_426_2021جلس الشؤون الإدارية للقضاء قرار رقم.txt",
     "source_url": null,
@@ -88282,7 +88282,7 @@
    "id_source": "manual",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "وزارة النقل والاتصالات وتقنية المعل-MTCIT_MD_34_2024.txt",
     "source_url": null,
@@ -89128,7 +89128,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "المجلس الأعلى للقضاء قرار رقم _411_2024.txt",
     "source_url": null,
@@ -89213,7 +89213,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "المجلس الأعلى للقضاء قرار رقم -SJC_149_2025.txt",
     "source_url": null,
@@ -90514,7 +90514,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ١٠١  ٩٦ -RD_101_1996.txt",
     "source_url": null,
@@ -90603,7 +90603,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٧٣  ٢٠٠١ -RD_73_2001.txt",
     "source_url": null,
@@ -90716,7 +90716,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٤٢  ٢٠٠٣ -RD_42_2003.txt",
     "source_url": null,
@@ -90831,7 +90831,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٦٣  ٢٠٠٣ -RD_63_2003.txt",
     "source_url": null,
@@ -90901,7 +90901,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٨٩  ٢٠٠٤ -RD_89_2004.txt",
     "source_url": null,
@@ -90986,7 +90986,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٧٥  ٢٠٠٥ -RD_75_2005.txt",
     "source_url": null,
@@ -91101,7 +91101,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٥٢  ٢٠٠٧ -RD_52_2007.txt",
     "source_url": null,
@@ -91225,7 +91225,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ١٠٢  ٢٠١٠ -RD_102_2010.txt",
     "source_url": null,
@@ -91388,7 +91388,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٥٩  ٢٠١١ -RD_59_2011.txt",
     "source_url": null,
@@ -91664,7 +91664,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٩٦  ٢٠١١ -RD_96_2011.txt",
     "source_url": null,
@@ -91924,7 +91924,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ١٠  ٢٠١٢ -RD_10_2012.txt",
     "source_url": null,
@@ -92041,7 +92041,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ١٢٠  ٢٠٢٠ -RD_120_2020.txt",
     "source_url": null,
@@ -92188,7 +92188,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٨٣  ٢٠٢٠ -RD_83_2020.txt",
     "source_url": null,
@@ -92380,7 +92380,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٨٤  ٢٠٢٠ -RD_84_2020.txt",
     "source_url": null,
@@ -93969,7 +93969,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٦  ٢٠٢١ -RD_6_2021.txt",
     "source_url": null,
@@ -94425,7 +94425,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٣٥  ٢٠٢٢ -RD_35_2022.txt",
     "source_url": null,
@@ -94638,7 +94638,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٦٨  ٢٠٢٢ -RD_68_2022.txt",
     "source_url": null,
@@ -94836,7 +94836,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٦٩  ٢٠٢٢ -RD_69_2022.txt",
     "source_url": null,
@@ -95012,7 +95012,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٧٣  ٢٠٢٣ -RD_73_2023.txt",
     "source_url": null,
@@ -95297,7 +95297,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ١٣  ٢٠٢٤ -RD_13_2024.txt",
     "source_url": null,
@@ -95419,7 +95419,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ١٨  ٢٠٢٤ -RD_18_2024.txt",
     "source_url": null,
@@ -95566,7 +95566,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ١١  ٢٠٢٥ -RD_11_2025.txt",
     "source_url": null,
@@ -95810,7 +95810,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٥٧  ٢٠٢٥ -RD_57_2025.txt",
     "source_url": null,
@@ -95928,7 +95928,7 @@
    "id_source": "in_text",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "مرسوم سلطاني رقم ٧  ٢٠٢٦ -RD_7_2026.txt",
     "source_url": null,
@@ -95995,7 +95995,7 @@
    },
    "extraction_metadata": {
     "parsed_at": "2026-03-09T12:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "1.0.0",
     "source_file": "httpslaw-yuosif.com%D9%85%D9%84%D9%.txt",
     "source_url": "https://law-yuosif.com/%D9%85%D9%84%D9%81-%D8%A7%D9%84%D8%AD%D9%85%D8%A7%D9%8A%D8%A9-%D8%A7%D9%84%D8%B2%D9%85%D9%86%D9%8A%D8%A9-%D8%AF%D9%84%D9%8A%D9%84-%D8%A7%D9%84%D9%85%D8%AD%D8%A7%D9%81%D8%B8%D8%A9-%D8%B9%D9%84%D9%89/",
@@ -96207,7 +96207,7 @@
    "id_source": "manual",
    "extraction_metadata": {
     "parsed_at": "2026-08-25T00:00:00Z",
-    "parsed_by": "Claude",
+    "parsed_by": "Sovereign-Legal-Parser",
     "schema_version": "RUZN_LEGAL_SCHEMA_V1",
     "source_file": "sourcing/pdfs/rd_66_2026.pdf",
     "source_url": null,

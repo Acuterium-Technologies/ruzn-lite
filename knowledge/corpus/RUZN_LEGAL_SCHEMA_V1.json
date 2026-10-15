@@ -328,7 +328,7 @@
         },
         "parsed_by": {
           "type": "string",
-          "enum": ["Claude", "ChatGPT", "Gemini", "DeepSeek", "Qwen", "Kimi-k2", "Manual", "Other"],
+          "enum": ["Sovereign-Faqih-Parser", "Sovereign-Legal-Parser", "Acuterium-Parser", "Watad-Harvester", "Manual", "Sovereign-Engine"],
           "description": "LLM or method used for parsing.",
           "postgres_column": "parsed_by TEXT"
         },

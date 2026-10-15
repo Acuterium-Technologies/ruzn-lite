@@ -4,7 +4,7 @@
   "description": "RUZN.AI Legal Document Collection — Omani Criminal Law and Public Prosecution Documents",
   "jurisdiction": "Oman/GCC",
   "generated_at": "2026-03-09T12:00:00Z",
-  "generated_by": "Claude (Perplexity Computer)",
+  "generated_by": "Sovereign-Faqih-Parser (Acuterium Engine)",
   "total_documents": 7,
   "document_types_summary": {
     "royal_decree": 3,
@@ -3391,7 +3391,7 @@
       "summary_en": "Royal Decree 97/99, issued by Sultan Qaboos bin Said on 1 December 1999 (23 Sha'ban 1420 AH) and published in Official Gazette No. 661 dated 15 December 1999, is the foundational Criminal Procedures Law (قانون الإجراءات الجزائية) of Oman. It is the primary statute governing all stages of criminal proceedings — from evidence gathering and preliminary investigation through trial to enforcement of judgments. The law comprises 356 articles organized in a preliminary chapter and six main chapters: (1) The Action (public and civil), covering the exclusive role of the Public Prosecution, complaint requirements, limitation periods, and civil claims; (2) Investigation, covering judicial police powers, flagrante delicto, precautionary measures including arrest and pre-trial detention, and comprehensive preliminary investigation procedures; (3) Trial, covering court jurisdiction, notification and attendance, court session rules, evidence, confessions, witness examination, expert evidence, and forgery challenges; (4) Judgments and Appeals, covering judicial recusal, nullity, judgment requirements, costs, opposition, appeal, Supreme Court cassation, interest-of-law cassation, and retrial; (5) Execution, covering executable judgments, death penalty execution (including the 2020 amendment requiring Grand Mufti consultation and unanimity), liberty-restricting sentence enforcement, conditional release, and settlement of financial penalties; (6) Miscellaneous Provisions, covering lapse of penalty, rehabilitation, loss of judicial papers, and calculation of deadlines. Key provisions include: Article 31 (judicial police, amended by RD 2024/18 adding Minister of Justice delegation), Article 54 (pre-trial detention periods), Article 164 (summons procedures, amended by RD 2022/69), Article 221 (death penalty requiring unanimity and Mufti opinion, amended by RD 2020/120), and Article 309 (conditional release at two-thirds of sentence). The law has been amended three times: by Royal Decree 2020/120 (Article 221 — death penalty procedures), Royal Decree 2022/69 (Articles 4bis and 164 — victim filing rights and notification), and Royal Decree 2024/18 (Article 31 — judicial police powers).",
       "extraction_metadata": {
         "parsed_at": "2026-03-09T12:53:00Z",
-        "parsed_by": "Claude",
+        "parsed_by": "Sovereign-Legal-Parser",
         "schema_version": "1.0.0",
         "source_file": "royal-decree-1999-097.pdf",
         "source_url": "https://onedrive.live.com/?id=DCF793DD54050EF2%21sadbd23fc362d44809a16f64686ebe7d7&cid=DCF793DD54050EF2",
@@ -3740,7 +3740,7 @@
       "summary_en": "Royal Decree 99/92, issued by Sultan Qaboos bin Said on 21 November 1999 (13 Sha'ban 1420 AH), establishes the Public Prosecution (الادعاء العام) as an independent institutional body in Oman, separate from the Royal Oman Police, and issues its organizing law in 25 articles. Key provisions include: the Public Prosecution assumes responsibility for public prosecution on behalf of society (Art. 1), with the Royal Oman Police retaining competency for misdemeanor prosecution (Art. 2); the hierarchical structure from Prosecutor General down to Prosecution Assistants (Art. 5); appointments require Administrative Affairs Council approval, with senior posts by Royal Decree (Art. 7); Public Prosecution members are equated to judges in salary and employment rules (Art. 8); judicial immunity applies except to Prosecution Assistants (Art. 9); an internal Inspection Directorate is established (Arts. 12-14); disciplinary proceedings follow judicial rules (Art. 15); the Prosecutor General takes his oath before the Sultan (Art. 11); the Supreme Court and Courts of Appeal each have dedicated prosecution offices (Arts. 19-20). The law entered into force upon publication and upon the Judicial Authority Law taking effect.",
       "extraction_metadata": {
         "parsed_at": "2026-03-09T12:00:00Z",
-        "parsed_by": "Claude",
+        "parsed_by": "Sovereign-Legal-Parser",
         "schema_version": "1.0.0",
         "source_file": "قانون الادعاء العام.pdf",
         "source_url": null,
@@ -3839,7 +3839,7 @@
       "summary_en": "Royal Decree 2020/120, issued by Sultan Haitham bin Tariq on 12 October 2020 (24 Safar 1442 AH), amends Article 221 paragraph 2 of Oman's Criminal Procedures Law (Royal Decree 97/99). The amendment introduces two critical safeguards for death penalty cases: (1) the criminal court must reach a unanimous decision to impose the death penalty — if unanimity fails, the sentence is automatically reduced to life imprisonment; (2) before issuing a death sentence, the court must refer the case papers to a committee chaired by the Grand Mufti of Oman (or his deputy) plus two Sharia experts, who have 60 days to submit their religious opinion. Published in Official Gazette Issue 1362. This decree significantly strengthens procedural protections in capital punishment cases and incorporates Sharia oversight into the judiciary.",
       "extraction_metadata": {
         "parsed_at": "2026-03-09T12:00:00Z",
-        "parsed_by": "Claude",
+        "parsed_by": "Sovereign-Legal-Parser",
         "schema_version": "1.0.0",
         "source_file": "royal-decree-2020-120.pdf",
         "source_url": null,
@@ -3962,7 +3962,7 @@
       "summary_en": "Royal Decree 2022/69, issued by Sultan Haitham bin Tariq on 20 October 2022 (24 Rabi Al-Awwal 1444 AH), amends Articles 4bis and 164 of Oman's Criminal Procedures Law (Royal Decree 97/99). Article 4bis is updated to allow persons harmed by crimes under Article 230 of the Penal Code (Royal Decree 7/2018) to file civil cases directly with the competent court, bypassing the Public Prosecution — though the court secretariat must still notify the Public Prosecution. Special authorization from the Council of Ministers is required before suing heads of state administrative units. Article 164 is updated to clarify notification procedures for accused persons, including specific rules for state officials, prisoners, and military personnel, with a fine of up to 50 Omani Riyals for refusal to acknowledge service. Published in Official Gazette Issue 1464.",
       "extraction_metadata": {
         "parsed_at": "2026-03-09T12:00:00Z",
-        "parsed_by": "Claude",
+        "parsed_by": "Sovereign-Legal-Parser",
         "schema_version": "1.0.0",
         "source_file": "royal-decree-2022-069.pdf",
         "source_url": null,
@@ -4067,7 +4067,7 @@
       "summary_en": "Royal Decree 18/2024, issued by Sultan Haitham bin Tariq on 25 March 2024 (14 Ramadan 1445 AH), adds a new paragraph to Article 31 of Oman's Criminal Procedures Law (Royal Decree 97/99). The amendment empowers the Minister of Justice and Legal Affairs to grant judicial police (ضبطية قضائية) authority to selected employees within the inspection units of security and safety service institutions, provided a formal request is made by the head of the relevant regulatory body. This expansion of judicial police powers allows inspection personnel in regulated security sectors to enforce applicable laws. Published in Official Gazette Issue 1539. The decree consists of two operative articles plus the appended amendment text.",
       "extraction_metadata": {
         "parsed_at": "2026-03-09T12:00:00Z",
-        "parsed_by": "Claude",
+        "parsed_by": "Sovereign-Legal-Parser",
         "schema_version": "1.0.0",
         "source_file": "royal-decree-2024-018.pdf",
         "source_url": null,
@@ -4181,7 +4181,7 @@
       "summary_en": "This legal commentary, sourced from Qanoon.om and Eastlaws, analyzes the grounds for expiry (انقضاء) of public prosecution cases under Omani criminal law, primarily Article 15 of the Criminal Procedures Law (Royal Decree 97/99). Six grounds for expiry are identified: (1) death of the accused; (2) general royal pardon; (3) statute of limitations — 20 years for felonies, 3 years for misdemeanors, and 1 year for violations; (4) withdrawal of complaint in cases requiring one; (5) final judgment (res judicata); (6) repeal of the criminal provision. The commentary further covers interruption of the limitation period by any investigative or judicial act (which also affects co-accused), the rule against suspension of the period, special rules for government employee crimes (embezzlement, bribery: limitation starts from end of service), exceptions for state security crimes, and the persistence of confiscation rights even after expiry.",
       "extraction_metadata": {
         "parsed_at": "2026-03-09T12:00:00Z",
-        "parsed_by": "Claude",
+        "parsed_by": "Sovereign-Legal-Parser",
         "schema_version": "1.0.0",
         "source_file": "تنقضي الدعوى العمومية في القانون ال.txt",
         "source_url": null,
@@ -4255,7 +4255,7 @@
       },
       "extraction_metadata": {
         "parsed_at": "2026-03-09T12:00:00Z",
-        "parsed_by": "Claude",
+        "parsed_by": "Sovereign-Legal-Parser",
         "schema_version": "1.0.0",
         "source_file": "httpslaw-yuosif.com%D9%85%D9%84%D9%.txt",
         "source_url": "https://law-yuosif.com/%D9%85%D9%84%D9%81-%D8%A7%D9%84%D8%AD%D9%85%D8%A7%D9%8A%D8%A9-%D8%A7%D9%84%D8%B2%D9%85%D9%86%D9%8A%D8%A9-%D8%AF%D9%84%D9%8A%D9%84-%D8%A7%D9%84%D9%85%D8%AD%D8%A7%D9%81%D8%B8%D8%A9-%D8%B9%D9%84%D9%89/",
