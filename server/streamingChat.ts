@@ -123,12 +123,15 @@ export interface StreamChatRequest {
 
 export async function handleStreamingChat(req: Request, res: Response) {
   try {
-    const { message, feature, language, history, userId } = req.body as StreamChatRequest;
+    const { message, feature, language, history, userId } = req.body || {};
 
-    if (!message || !feature || !language) {
-      res.status(400).json({ error: 'Missing required fields' });
+    if (!message || typeof message !== 'string') {
+      res.status(400).json({ error: 'Missing required message field' });
       return;
     }
+
+    const featKey: 'complaints' | 'legislative' = (feature === 'legislative') ? 'legislative' : 'complaints';
+    const langKey: 'arabic' | 'english' = (language === 'english' || language === 'en') ? 'english' : 'arabic';
 
     // Set up SSE headers
     res.setHeader('Content-Type', 'text/event-stream');
@@ -141,7 +144,7 @@ export async function handleStreamingChat(req: Request, res: Response) {
     res.write(': stream-open\n\n');
 
     // Build messages array
-    const systemPrompt = SYSTEM_PROMPTS[feature][language];
+    const systemPrompt = SYSTEM_PROMPTS[featKey][langKey];
     const messages: Message[] = [
       { role: 'system', content: systemPrompt }
     ];
