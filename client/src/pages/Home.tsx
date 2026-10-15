@@ -491,6 +491,10 @@ export default function Home() {
       setIsStreaming(true);
       setStreamingContent("");
       
+      let accumulatedContent = "";
+      let streamBuffer = "";
+      let committed = false;
+      
       try {
         const response = await fetch('/api/chat/stream', {
           method: 'POST',
@@ -510,19 +514,20 @@ export default function Home() {
         if (!reader) throw new Error('No reader');
         
         const decoder = new TextDecoder();
-        let accumulatedContent = "";
         
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
           
-          const chunk = decoder.decode(value, { stream: true });
-          const lines = chunk.split('\n');
+          streamBuffer += decoder.decode(value, { stream: true });
+          const lines = streamBuffer.split('\n');
+          streamBuffer = lines.pop() || "";
           
           for (const line of lines) {
-            if (line.startsWith('data: ')) {
+            const trimmed = line.trim();
+            if (trimmed.startsWith('data: ')) {
               try {
-                const data = JSON.parse(line.slice(6));
+                const data = JSON.parse(trimmed.slice(6));
                 if (data.type === 'status' && data.status === 'searching') {
                   setIsSearchingWeb(true);
                 } else if (data.type === 'chunk' && data.content) {
@@ -530,13 +535,16 @@ export default function Home() {
                   accumulatedContent += data.content;
                   setStreamingContent(accumulatedContent);
                 } else if (data.type === 'done') {
-                  // Stream complete, add final message
+                  // Stream complete, commit final message
                   setIsSearchingWeb(false);
-                  setMessages(prev => [...prev, { role: "assistant", content: accumulatedContent }]);
+                  if (!committed && accumulatedContent.trim()) {
+                    setMessages(prev => [...prev, { role: "assistant", content: accumulatedContent }]);
+                    committed = true;
+                  }
                   setStreamingContent("");
                 } else if (data.type === 'error') {
                   setIsSearchingWeb(false);
-                  throw new Error(data.error);
+                  console.warn('Server stream error:', data.error);
                 }
               } catch (e) {
                 // Skip malformed JSON
@@ -544,39 +552,65 @@ export default function Home() {
             }
           }
         }
-      } catch (error) {
-        console.warn('Streaming interrupted, switching to fast sync fallback:', error);
-        try {
-          const syncRes = await fetch('/api/chat/sync', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              message: userMessage,
-              feature,
-              language,
-              history: messages.slice(-10),
-              userId: user?.id
-            })
-          });
-          if (syncRes.ok) {
-            const syncData = await syncRes.json();
-            if (syncData.answer || syncData.response) {
-              const textResp = syncData.answer || syncData.response;
-              setMessages(prev => [...prev, { role: "assistant", content: textResp }]);
-              return;
+
+        // Process any residual data in buffer
+        if (streamBuffer.trim().startsWith('data: ')) {
+          try {
+            const data = JSON.parse(streamBuffer.trim().slice(6));
+            if (data.type === 'chunk' && data.content) {
+              accumulatedContent += data.content;
+            } else if (data.type === 'done' && !committed && accumulatedContent.trim()) {
+              setMessages(prev => [...prev, { role: "assistant", content: accumulatedContent }]);
+              committed = true;
             }
-          }
-        } catch (syncErr) {
-          console.error('Sync fallback failed:', syncErr);
+          } catch (e) {}
         }
 
-        // Secondary fallback to tRPC mutation
-        chatMutation.mutate({
-          message: userMessage,
-          language,
-          feature,
-          history: messages
-        });
+        // Safety Invariant: Guarantee content persistence when stream ends
+        if (!committed && accumulatedContent.trim()) {
+          setMessages(prev => [...prev, { role: "assistant", content: accumulatedContent }]);
+          committed = true;
+        }
+      } catch (error) {
+        console.warn('Streaming interrupted:', error);
+        // Only run sync fallback if no content was streamed yet
+        if (!committed && !accumulatedContent.trim()) {
+          try {
+            const syncRes = await fetch('/api/chat/sync', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                message: userMessage,
+                feature,
+                language,
+                history: messages.slice(-10),
+                userId: user?.id
+              })
+            });
+            if (syncRes.ok) {
+              const syncData = await syncRes.json();
+              if (syncData.answer || syncData.response) {
+                const textResp = syncData.answer || syncData.response;
+                setMessages(prev => [...prev, { role: "assistant", content: textResp }]);
+                committed = true;
+                return;
+              }
+            }
+          } catch (syncErr) {
+            console.error('Sync fallback failed:', syncErr);
+          }
+
+          // Secondary fallback to tRPC mutation
+          chatMutation.mutate({
+            message: userMessage,
+            language,
+            feature,
+            history: messages
+          });
+        } else if (!committed && accumulatedContent.trim()) {
+          setMessages(prev => [...prev, { role: "assistant", content: accumulatedContent }]);
+          committed = true;
+        }
       } finally {
         setIsStreaming(false);
         setStreamingContent("");
