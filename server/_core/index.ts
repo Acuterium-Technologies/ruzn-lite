@@ -9,6 +9,7 @@ const require = createRequire(import.meta.url);
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
 import { handleStreamingChat, handleSyncChat } from "../streamingChat";
+import { getCorpusStats } from "../knowledge/sovereignLegalCorpus";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
@@ -97,28 +98,16 @@ async function startServer() {
 
   // Diagnostic Endpoint — Inspects container runtime, database presence, and active AI engine
   app.get("/api/debug/system", (_req, res) => {
-    let sqliteStatus = 'untested';
-    let sqliteError: string | null = null;
-    let sqliteRows = 0;
+    let corpusStatus = 'in-memory-corpus';
+    let corpusArticles = 6033;
+    let corpusDocs = 63;
     try {
-      const dbPath = path.join(process.cwd(), 'knowledge', 'corpus', 'SOVEREIGN_LEGAL_VECTOR_INDEX.sqlite');
-      const exists = fs.existsSync(dbPath);
-      sqliteStatus = exists ? `exists (${fs.statSync(dbPath).size} bytes)` : 'NOT_FOUND';
-      if (exists) {
-        try {
-          const Database = require('better-sqlite3');
-          const db = new Database(dbPath, { readonly: true });
-          const stmt = db.prepare('SELECT count(*) as c FROM legal_articles');
-          const row = stmt.get() as any;
-          sqliteRows = row?.c || 0;
-          sqliteStatus += ` - articles: ${sqliteRows}`;
-          db.close();
-        } catch (sqliteLoadErr: any) {
-          sqliteError = 'load/query error: ' + sqliteLoadErr.message;
-        }
-      }
+      const stats = getCorpusStats();
+      corpusArticles = stats.totalArticles;
+      corpusDocs = stats.totalDocuments;
+      corpusStatus = `${stats.engine} (${corpusArticles} articles, ${corpusDocs} documents)`;
     } catch (e: any) {
-      sqliteError = e.message;
+      corpusStatus = 'error: ' + e.message;
     }
 
     let llmCandidates: any[] = [];
@@ -148,9 +137,10 @@ async function startServer() {
         HAS_PERPLEXITY_KEY: !!process.env.PERPLEXITY_API_KEY,
         HAS_DB_URL: !!process.env.DATABASE_URL
       },
-      sqlite: {
-        status: sqliteStatus,
-        error: sqliteError
+      corpus: {
+        status: corpusStatus,
+        articles: corpusArticles,
+        documents: corpusDocs
       },
       llm: llmCandidates
     });
