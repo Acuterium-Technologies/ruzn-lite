@@ -247,3 +247,72 @@ export function getCorpusStats() {
     lastSync: '2026-10-15T00:00:00Z'
   };
 }
+
+let queriesCache: Array<{ 'النية': string; 'المجال': string; 'السؤال': string }> | null = null;
+let domainsCache: Array<{ domain: string; law: string; decree: string }> | null = null;
+
+/**
+ * Get the 10 statutory Omani legal domains
+ */
+export function getLegalDomains(): Array<{ domain: string; law: string; decree: string }> {
+  if (domainsCache) return domainsCache;
+  const filePath = path.join(CORPUS_DIR, 'laws_domains.txt');
+  if (fs.existsSync(filePath)) {
+    try {
+      const lines = fs.readFileSync(filePath, 'utf-8').split('\n').filter(l => l.trim().length > 0);
+      const rows = lines.slice(1).map(l => {
+        const parts = l.split(',').map(s => s.trim());
+        return { domain: parts[0] || '', law: parts[1] || '', decree: parts[2] || '' };
+      });
+      domainsCache = rows;
+      return domainsCache;
+    } catch (e) {
+      console.error('[SovereignCorpus] Error loading laws_domains:', e);
+    }
+  }
+  return [];
+}
+
+/**
+ * Retrieve suggested legal queries from the 227-query bank
+ */
+export function getSuggestedQueries(filter?: { domain?: string; intent?: string; search?: string; limit?: number }): {
+  totalAvailable: number;
+  returnedCount: number;
+  queries: Array<{ 'النية': string; 'المجال': string; 'السؤال': string }>;
+} {
+  if (!queriesCache) {
+    const queryPath = path.join(CORPUS_DIR, 'legal-queries_ar_expanded.json');
+    if (fs.existsSync(queryPath)) {
+      try {
+        queriesCache = JSON.parse(fs.readFileSync(queryPath, 'utf-8'));
+      } catch (e) {
+        console.error('[SovereignCorpus] Error loading legal queries:', e);
+        queriesCache = [];
+      }
+    } else {
+      queriesCache = [];
+    }
+  }
+
+  let results = queriesCache || [];
+  if (filter?.domain) {
+    const d = filter.domain;
+    results = results.filter(q => q['المجال'] === d || q['المجال'].includes(d));
+  }
+  if (filter?.intent) {
+    const i = filter.intent;
+    results = results.filter(q => q['النية'] === i || q['النية'].includes(i));
+  }
+  if (filter?.search) {
+    const s = filter.search.toLowerCase();
+    results = results.filter(q => q['السؤال'].toLowerCase().includes(s));
+  }
+
+  const limit = filter?.limit || 20;
+  return {
+    totalAvailable: (queriesCache || []).length,
+    returnedCount: Math.min(limit, results.length),
+    queries: results.slice(0, limit),
+  };
+}

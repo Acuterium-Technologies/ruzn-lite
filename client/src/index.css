@@ -40,9 +40,20 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --font-arabic-heading: 'IBM Plex Sans Arabic', 'IBM Plex Sans', system-ui, sans-serif;
+  --font-arabic-body: 'Tajawal', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --font-arabic-accent: 'Readex Pro', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --font-arabic-mono: 'IBM Plex Mono', 'Consolas', monospace;
 }
 
 :root {
+  /* Royal Arabic & Sovereign Typography Tokens */
+  --font-heading: 'IBM Plex Sans Arabic', 'IBM Plex Sans', system-ui, sans-serif;
+  --font-body: 'Tajawal', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --font-accent: 'Readex Pro', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Consolas', monospace;
+  --font-ui: 'IBM Plex Sans Arabic', 'Inter', system-ui, sans-serif;
+
   /* Ruzn POC Demo Theme - Deep Blacks with Rich Gold */
   /* POC Colors: --bg:#070708, --gold:#d6b36a, --gold2:#b8924d */
   --primary: oklch(0.78 0.11 85); /* Rich gold #d6b36a */
@@ -131,7 +142,22 @@
     min-height: 100vh;
   }
   html[dir="rtl"] body {
-    font-family: "IBM Plex Sans Arabic", "Cairo", "Tajawal", system-ui, sans-serif;
+    font-family: var(--font-body);
+    font-size: 1.0625rem; /* 17px base for Arabic legibility */
+    line-height: 1.7;     /* relaxed 1.7 to avoid clipping diacritics */
+    letter-spacing: 0.01em;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+  html[dir="rtl"] h1,
+  html[dir="rtl"] h2,
+  html[dir="rtl"] h3,
+  html[dir="rtl"] h4,
+  html[dir="rtl"] h5,
+  html[dir="rtl"] h6 {
+    font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
+    line-height: 1.4;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -374,6 +400,104 @@
 
   .ltr {
     direction: ltr;
+  }
+
+  /* Royal Arabic Typography Utilities */
+  .font-arabic-heading {
+    font-family: 'IBM Plex Sans Arabic', 'IBM Plex Sans', system-ui, sans-serif;
+  }
+
+  .font-arabic-body {
+    font-family: 'Tajawal', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  }
+
+  .font-arabic-accent {
+    font-family: 'Readex Pro', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  }
+
+  .font-arabic-mono {
+    font-family: 'IBM Plex Mono', 'Consolas', monospace;
+  }
+
+  .heading-display {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
+  .body-text-ar {
+    font-family: 'Tajawal', 'IBM Plex Sans Arabic', sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+  }
+
+  /* Page Wrapper Component Styles */
+  .page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+  }
+
+  .page-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(10, 10, 15, 0.65);
+    backdrop-filter: blur(12px);
+  }
+
+  .page-title {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .page-content {
+    flex: 1;
+    padding: 1.5rem;
+  }
+
+  .has-mobile-nav {
+    padding-bottom: 5.5rem;
+  }
+
+  .ruzn-grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .ruzn-grid-2 {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+
+  .ruzn-grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .ruzn-grid-4 {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .ruzn-kpi {
+    padding: 1.25rem;
+    border-radius: 1.125rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .ruzn-kpi-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #d6b36a;
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+  }
+
+  .ruzn-kpi-label {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.65);
+    margin-top: 0.25rem;
   }
 }
 

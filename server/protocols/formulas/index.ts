@@ -28,6 +28,15 @@ export {
   type DetectedRisk,
 } from './EREBUSFORMULA651';
 
+// EREBUSFORMULA652 - Contract Risk Aggregate Score (CARP)
+export {
+  calculateEREBUSFORMULA652,
+  type ContractClauseInput,
+  type ContractRiskInput,
+  type ClauseRiskItem,
+  type ContractRiskResult,
+} from './EREBUSFORMULA652';
+
 // EREBUSFORMULA653 - Legislative Impact & Priority Score (LITP) / Resolution Impact Assessment
 export {
   calculateEREBUSFORMULA653,
@@ -35,6 +44,22 @@ export {
   type LegislativeImpactResult,
   type DownstreamConflict,
 } from './EREBUSFORMULA653';
+
+// EREBUSFORMULA654 - Litigation Outcome Prediction (LSPP)
+export {
+  calculateEREBUSFORMULA654,
+  type LitigationCaseFactor,
+  type LitigationPredictionInput,
+  type LitigationPredictionResult,
+} from './EREBUSFORMULA654';
+
+// EREBUSFORMULA655 - Compliance Assurance Composite Score (CAAP)
+export {
+  calculateEREBUSFORMULA655,
+  type AuditControlTest,
+  type ComplianceAssuranceInput,
+  type ComplianceAssuranceResult,
+} from './EREBUSFORMULA655';
 
 // EREBUSFORMULA656 - Legal Entity Risk Composite Score (LEIP)
 export {
@@ -52,6 +77,14 @@ export {
   type RegulatoryChangeResult,
 } from './EREBUSFORMULA657';
 
+// EREBUSFORMULA658 - Privacy Risk Aggregate Score (DPCP / DPIA)
+export {
+  calculateEREBUSFORMULA658,
+  type DataCategoryExposure,
+  type PrivacyRiskInput,
+  type PrivacyRiskResult,
+} from './EREBUSFORMULA658';
+
 // EREBUSFORMULA659 - Regulatory Impact Assessment (RIA)
 export {
   calculateEREBUSFORMULA659,
@@ -68,6 +101,14 @@ export {
   type Vision2040Alignment,
   type ScenarioProjection,
 } from './EREBUSFORMULA659';
+
+// EREBUSFORMULA660 - Third-Party & Counterparty Risk Composite Score (TCRP)
+export {
+  calculateEREBUSFORMULA660,
+  type VendorRiskDimension,
+  type ThirdPartyRiskInput,
+  type ThirdPartyRiskResult,
+} from './EREBUSFORMULA660';
 
 // EREBUSFORMULA661 - Legal Intelligence Fusion & Contradiction Penalty Score (LIFP)
 export {

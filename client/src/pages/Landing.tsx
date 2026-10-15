@@ -416,9 +416,9 @@ export default function Landing({ onAccessGranted }: LandingProps) {
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <img
-                src="/ruzn-logo.png"
-                alt="Ruzn Logo"
-                className="h-10 w-10 object-contain"
+                src="/ruzn-logo-v-1-TRANS.png"
+                alt="Ruzn Sovereign Emblem"
+                className="h-10 w-10 object-contain drop-shadow-[0_0_10px_rgba(214,179,106,0.4)]"
               />
               <span className="text-2xl font-extrabold ruzn-gold-gradient">
                 {text.title}

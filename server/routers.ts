@@ -2,7 +2,7 @@ import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { ENV } from "./_core/env";
 import { systemRouter } from "./_core/systemRouter";
-import { protectedProcedure, router } from "./_core/trpc";
+import { protectedProcedure, unauthenticatedProcedure, router } from "./_core/trpc";
 import { TRPCError } from "@trpc/server";
 import { invokeLLM } from "./_core/llm";
 import { transcribeAudio } from "./_core/voiceTranscription";
@@ -34,8 +34,7 @@ import { notifyOwner } from "./_core/notification";
 import { getDb } from "./db";
 import { accessRequests, accessCodes } from "../drizzle/schema";
 import { eq, and, desc, gt } from "drizzle-orm";
-import { unauthenticatedProcedure } from "./_core/trpc";
-import { searchSovereignCorpus, verifyStatutoryCitation, getCorpusStats } from "./knowledge/sovereignLegalCorpus";
+import { searchSovereignCorpus, verifyStatutoryCitation, getCorpusStats, getSuggestedQueries, getLegalDomains } from "./knowledge/sovereignLegalCorpus";
 import { detectLegalIntent } from "./protocols/skills/legalSkills";
 import { performResolutionImpactAssessment } from "./protocols/services/riaService";
 import { dispatchAgentSwarm, generateMinisterDailyBrief, SOVEREIGN_AGENTS_ROSTER } from "./protocols/swarm/agentSwarm";
@@ -2508,6 +2507,22 @@ Email sent to user with access code.
       }))
       .query(async ({ input }) => {
         return detectLegalIntent(input.query);
+      }),
+
+    getSuggestedQueries: protectedProcedure
+      .input(z.object({
+        domain: z.string().optional(),
+        intent: z.string().optional(),
+        search: z.string().optional(),
+        limit: z.number().min(1).max(100).optional().default(20),
+      }).optional())
+      .query(async ({ input }) => {
+        return getSuggestedQueries(input);
+      }),
+
+    getDomains: protectedProcedure
+      .query(async () => {
+        return getLegalDomains();
       }),
 
     assessResolution: protectedProcedure

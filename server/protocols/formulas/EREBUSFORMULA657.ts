@@ -45,9 +45,11 @@ export function calculateEREBUSFORMULA657(input: RegulatoryChangeInput): Regulat
   const daysRemaining = Math.max(0, Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
 
   const U_urgency = daysRemaining <= 14 ? 1.0 : daysRemaining <= 60 ? 0.75 : daysRemaining <= 180 ? 0.50 : 0.25;
-  const S_scope = Math.min(1.0, (input.affectedDepartments.length * 0.2) + (input.mandatoryActionsCount * 0.05));
+  const deptsCount = input.affectedDepartments ? input.affectedDepartments.length : 1;
+  const actionsCount = input.mandatoryActionsCount || 1;
+  const S_scope = Math.min(1.0, (deptsCount * 0.2) + (actionsCount * 0.05));
   const P_penalty = input.maxPenaltyOMR && input.maxPenaltyOMR > 10000 ? 0.95 : 0.60;
-  const T_grace = Math.min(2.0, input.gracePeriodDays / 180);
+  const T_grace = Math.min(2.0, (input.gracePeriodDays || 30) / 180);
 
   const rawScore = ((0.4 * U_urgency) + (0.35 * S_scope) + (0.25 * P_penalty)) * phi * (100 / (1 + T_grace * 0.3));
   const RCMP_score = parseFloat(Math.min(100, Math.max(0, rawScore)).toFixed(2));

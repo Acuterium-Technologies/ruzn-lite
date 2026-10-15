@@ -198,12 +198,28 @@ function DashboardLayoutContent({
                 <PanelLeft className="h-4 w-4 text-muted-foreground" />
               </button>
               {!isCollapsed ? (
-                <div className="flex items-center gap-2 min-w-0">
-                  <span className="font-semibold tracking-tight truncate">
-                    Navigation
-                  </span>
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <img
+                    src="/ruzn-logo-v-1-TRANS.png"
+                    alt="Ruzn Sovereign Emblem"
+                    className="h-7 w-7 object-contain drop-shadow-[0_0_8px_rgba(214,179,106,0.35)] shrink-0"
+                  />
+                  <div className="flex flex-col min-w-0">
+                    <span className="font-bold text-sm text-primary tracking-wide font-arabic-heading truncate">
+                      رُزن السيادية
+                    </span>
+                    <span className="text-[10px] text-muted-foreground uppercase tracking-widest -mt-0.5 truncate">
+                      RUZN.LEGAL
+                    </span>
+                  </div>
                 </div>
-              ) : null}
+              ) : (
+                <img
+                  src="/ruzn-logo-v-1-TRANS.png"
+                  alt="Ruzn Sovereign Emblem"
+                  className="h-6 w-6 object-contain drop-shadow-[0_0_6px_rgba(214,179,106,0.35)] mx-auto"
+                />
+              )}
             </div>
           </SidebarHeader>
 

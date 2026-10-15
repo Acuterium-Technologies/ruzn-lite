@@ -50,15 +50,15 @@ export interface LegislativeImpactResult {
 }
 
 const EXISTING_STATUTE_REGISTRY = [
-  { id: 'RD 111/2011', name: 'قانون الرقابة المالية والإدارية للدولة', keywords: ['رقابة', 'audit', 'financial oversight'] },
-  { id: 'RD 112/2011', name: 'قانون حماية المال العام وتجنب تضارب المصالح', keywords: ['مال عام', 'تضارب مصالح', 'public funds', 'conflict of interest'] },
-  { id: 'RD 35/2025', name: 'قانون إنشاء محكمة الاستثمار والتجارة', keywords: ['استثمار', 'تجارة', 'محكمة', 'investment court', 'commercial litigation'] },
-  { id: 'RD 53/2023', name: 'قانون العمل العماني', keywords: ['عمل', 'عمال', 'إضراب', 'labor', 'wages', 'employment'] },
-  { id: 'RD 18/2019', name: 'قانون الشركات التجارية', keywords: ['شركات', 'commercial companies', 'llc', 'joint stock'] },
-  { id: 'RD 2/2025', name: 'القانون المصرفي العماني المحدث', keywords: ['مصارف', 'بنوك', 'banking', 'cbo', 'مركزي'] },
-  { id: 'RD 7/2018', name: 'قانون الجزاء العماني', keywords: ['جزاء', 'عقوبة', 'penal', 'criminal'] },
-  { id: 'RD 30/2016', name: 'قانون مكافحة غسل الأموال وتمويل الإرهاب', keywords: ['غسل أموال', 'aml', 'cft'] },
-  { id: 'RD 36/2008', name: 'قانون المناقصات ولائحته التنفيذية', keywords: ['مناقصات', 'tenders', 'procurement'] },
+  { id: 'RD 111/2011', name: 'قانون الرقابة المالية والإدارية للدولة', keywords: ['111/2011', 'رقابة', 'الرقابة', 'audit', 'financial oversight'] },
+  { id: 'RD 112/2011', name: 'قانون حماية المال العام وتجنب تضارب المصالح', keywords: ['112/2011', 'مال عام', 'المال العام', 'تضارب مصالح', 'تضارب المصالح', 'حماية المال العام', 'public funds', 'conflict of interest'] },
+  { id: 'RD 35/2025', name: 'قانون إنشاء محكمة الاستثمار والتجارة', keywords: ['35/2025', 'استثمار', 'الاستثمار', 'تجارة', 'محكمة الاستثمار', 'investment court', 'commercial litigation'] },
+  { id: 'RD 53/2023', name: 'قانون العمل العماني', keywords: ['53/2023', 'عمل', 'العمل', 'عمال', 'إضراب', 'labor', 'wages', 'employment'] },
+  { id: 'RD 18/2019', name: 'قانون الشركات التجارية', keywords: ['18/2019', 'شركات', 'الشركات', 'commercial companies', 'llc', 'joint stock'] },
+  { id: 'RD 2/2025', name: 'القانون المصرفي العماني المحدث', keywords: ['2/2025', 'مصارف', 'المصارف', 'بنوك', 'البنوك', 'banking', 'cbo', 'مركزي'] },
+  { id: 'RD 7/2018', name: 'قانون الجزاء العماني', keywords: ['7/2018', 'جزاء', 'الجزاء', 'عقوبة', 'العقوبات', 'penal', 'criminal'] },
+  { id: 'RD 30/2016', name: 'قانون مكافحة غسل الأموال وتمويل الإرهاب', keywords: ['30/2016', 'غسل أموال', 'غسل الأموال', 'aml', 'cft'] },
+  { id: 'RD 36/2008', name: 'قانون المناقصات ولائحته التنفيذية', keywords: ['36/2008', 'مناقصات', 'المناقصات', 'tenders', 'procurement'] },
 ];
 
 export function calculateEREBUSFORMULA653(input: LegislativeResolutionInput): LegislativeImpactResult {

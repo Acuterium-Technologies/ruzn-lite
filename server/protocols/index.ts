@@ -32,13 +32,18 @@ export function initializeEREBUSProtocols(): void {
   
   // Log available protocols
   const protocols = [
-    { id: 'EREBUS-CSE-3A12d-001', name: 'Legal Research & Case Law', formula: 'EREBUSFORMULA650' },
+    { id: 'EREBUS-CSE-3A12d-001', name: 'Legal Precedent & Case Law Relevance', formula: 'EREBUSFORMULA650' },
     { id: 'EREBUS-CSE-3A12d-002', name: 'Regulatory Compliance Monitoring', formula: 'EREBUSFORMULA651' },
+    { id: 'EREBUS-CSE-3A12d-003', name: 'Contract Risk Aggregate Score (CARP)', formula: 'EREBUSFORMULA652' },
     { id: 'EREBUS-CSE-3A12d-004', name: 'Legislative Impact & Priority (LITP)', formula: 'EREBUSFORMULA653' },
-    { id: 'EREBUS-CSE-3A12d-007', name: 'Legal Entity Risk Composite Score', formula: 'EREBUSFORMULA656' },
-    { id: 'EREBUS-CSE-3A12d-008', name: 'Regulatory Change Priority Score', formula: 'EREBUSFORMULA657' },
-    { id: 'EREBUS-CSE-3A12d-010', name: 'Regulatory Impact Assessment (RIA)', formula: 'EREBUSFORMULA659' },
-    { id: 'EREBUS-CSE-3A12d-012', name: 'Legal Intelligence Fusion & Contradiction Penalty', formula: 'EREBUSFORMULA661' },
+    { id: 'EREBUS-CSE-3A12d-005', name: 'Litigation Strategy & Outcome Prediction', formula: 'EREBUSFORMULA654' },
+    { id: 'EREBUS-CSE-3A12d-006', name: 'Compliance Automation & Assurance (CAAP)', formula: 'EREBUSFORMULA655' },
+    { id: 'EREBUS-CSE-3A12d-007', name: 'Legal Entity Risk Composite Score (LEIP)', formula: 'EREBUSFORMULA656' },
+    { id: 'EREBUS-CSE-3A12d-008', name: 'Regulatory Change Priority Score (RCMP-2)', formula: 'EREBUSFORMULA657' },
+    { id: 'EREBUS-CSE-3A12d-009', name: 'Data Privacy & Compliance (DPCP / DPIA)', formula: 'EREBUSFORMULA658' },
+    { id: 'EREBUS-CSE-3A12d-010', name: 'Regulatory Impact Assessment (RIA Vision 2040)', formula: 'EREBUSFORMULA659' },
+    { id: 'EREBUS-CSE-3A12d-011', name: 'Third-Party & Counterparty Risk (TCRP)', formula: 'EREBUSFORMULA660' },
+    { id: 'EREBUS-CSE-3A12d-012', name: 'Legal Intelligence Fusion & Contradiction Penalty (LIFP)', formula: 'EREBUSFORMULA661' },
   ];
   
   for (const p of protocols) {
@@ -52,7 +57,7 @@ export function initializeEREBUSProtocols(): void {
 export const EREBUS_VERSION = {
   version: '3.0.0-SOVEREIGN',
   releaseDate: '2026-10-15',
-  protocols: 7,
-  formulas: 7,
+  protocols: 12,
+  formulas: 12,
   totalEffectiveness: 97.4,
 };

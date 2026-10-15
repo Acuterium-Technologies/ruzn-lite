@@ -147,22 +147,34 @@ export async function dispatchAgentSwarm(request: AgentTaskRequest): Promise<Age
     };
   }
 
-  // Default: Faqih Prime (Chief Sovereign Jurist)
-  const articles = searchSovereignCorpus(request.query, 3);
+  // Default: Faqih Prime (Senior Legal Counsel & Chief Sovereign Jurist)
+  const articles = searchSovereignCorpus(request.query, 4);
   const citations = articles.map(a => `[المادة ${a.articleNumber}، مرسوم سلطاني رقم ${a.decreeNo}]`);
+  const finalCitations = citations.length > 0 ? citations : ['[المادة 8، مرسوم سلطاني رقم 111/2011]'];
+
+  const iracSummaryAr = `[التكييف القانوني]: دراسة الواقعة وتحديد الإطار النظامي الحاكم بموجب التشريعات العُمانية النافذة.
+[السند التشريعي]: استناداً إلى ${finalCitations.slice(0, 2).join(' و ')} واللوائح التنفيذية المرتبطة.
+[التحليل الموضوعي]: تقييم الالتزامات النظامية، وتحديد نطاق المسؤولية الإدارية والتعاقدية، وفحص مدى توافر شروط المشروعية.
+[تقييم المخاطر]: فحص مخاطر عدم الامتثال أو التنازع الإجرائي ودرجة التعرض للمساءلة الرقابية أو القضائية.
+[الرأي والتوجيه]: وجوب الالتزام بالأطر القانونية المعتمدة واستيفاء الموافقات والتوثيق اللازم.`;
+
+  const iracSummaryEn = `[Characterization]: Evaluated factual scenario under applicable Omani legislative doctrine.
+[Governing Rule]: Grounded in ${finalCitations.slice(0, 2).join(' and ')} and governing executive regulations.
+[Substantive Analysis]: Assessment of contractual and regulatory duties, administrative liability, and compliance bounds.
+[Risk Assessment]: Appraisal of non-compliance exposure, supervisory audit scrutiny, and procedural vulnerabilities.
+[Counsel Guidance]: Enforce statutory compliance measures and maintain institutional documentation.`;
 
   return {
     agent: agentMeta,
-    summary: lang === 'arabic'
-      ? `قدم فقيه برايم الرأي القانوني السيادي بالاستناد إلى التشريعات العُمانية ومبادئ النزاهة والعدالة القضائية.`
-      : `Faqih Prime delivered sovereign legal guidance grounded in Omani statutory doctrine and judicial precedent.`,
+    summary: lang === 'arabic' ? iracSummaryAr : iracSummaryEn,
     verdict: 'LEGAL_OPINION_DELIVERED',
-    citations: citations.length > 0 ? citations : ['[المادة 8، مرسوم سلطاني رقم 111/2011]'],
+    citations: finalCitations,
     recommendations: [
-      'الالتزام بأحكام القوانين النافذة وعدم مخالفتها',
-      'توثيق الإجراءات الرقابية وفق المعايير المعتمدة'
+      'الالتزام الصارم بأحكام القوانين النافذة والمراسيم المنظمة ذات الصلة',
+      'توثيق ومراجعة الإجراءات التعاقدية والإدارية وفق الممارسات المعتمدة بسلطنة عُمان',
+      'التحقق من استيفاء الموافقات الرسمية من الجهات المختصة قبل اتخاذ القرار النهائي'
     ],
-    metadata: { articles }
+    metadata: { articles, methodology: 'IRAC-SOVEREIGN-v2' }
   };
 }
 

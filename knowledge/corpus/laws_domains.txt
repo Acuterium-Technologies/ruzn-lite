@@ -1,0 +1,11 @@
+Domain,Relevant_Law,Decree_Number
+Civil Law, Civil Rights Law, Sultan's Decree 29/2013
+Criminal Law, Penal Code, Sultan's Decree 7/2018
+Family Law, Personal Status Law, Sultan's Decree 9/1997
+Labor Law, Labor Law, Sultan's Decree 35/2003
+Commercial Law, Commercial Companies Law, Sultan's Decree 48/1981
+Tax Law, Income Tax Law, Sultan's Decree 39/2000
+Traffic Law, Traffic Regulation Law, Sultan's Decree 11/1999
+Land Law, Real Estate Registration Law, Sultan's Decree 22/1997
+Cybercrime Law, Cybercrime Law, Sultan's Decree 12/2011
+Maritime Law, Maritime Law, Sultan's Decree 12/1978

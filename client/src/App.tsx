@@ -88,6 +88,8 @@ function AccessGate() {
 //   to keep consistent foreground/background color across components
 // - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
 
+import PWAStatus from "./components/PWAStatus";
+
 function App() {
   return (
     <ErrorBoundary>
@@ -97,6 +99,7 @@ function App() {
       >
         <TooltipProvider>
           <Toaster />
+          <PWAStatus />
           <AccessGate />
         </TooltipProvider>
       </ThemeProvider>

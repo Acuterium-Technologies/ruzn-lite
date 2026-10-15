@@ -783,9 +783,9 @@ export default function Home() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 sm:gap-3">
               <img 
-                src="/ruzn-logo.png" 
-                alt="Ruzn Logo" 
-                className="h-8 w-8 sm:h-12 sm:w-12 object-contain"
+                src="/ruzn-logo-v-1-TRANS.png" 
+                alt="Ruzn Sovereign Emblem" 
+                className="h-8 w-8 sm:h-12 sm:w-12 object-contain drop-shadow-[0_0_12px_rgba(214,179,106,0.45)]"
               />
               <div>
                 <h1 className="text-lg sm:text-2xl font-extrabold" style={{ background: 'linear-gradient(90deg, rgba(214,179,106,.95), rgba(184,146,77,.85))', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
