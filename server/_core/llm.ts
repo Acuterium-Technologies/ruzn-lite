@@ -218,7 +218,7 @@ const resolveApiUrl = () => {
 };
 
 const resolveApiKey = () => {
-  return process.env.DEEPSEEK_API_KEY || "sk-5ad3abee81d94de28790865f2c35f9f0";
+  return process.env.DEEPSEEK_API_KEY || ENV.forgeApiKey || "";
 };
 
 const assertApiKey = () => {
