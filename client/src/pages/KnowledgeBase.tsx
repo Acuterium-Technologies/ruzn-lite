@@ -11,6 +11,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import SovereignHeader from "@/components/SovereignHeader";
 
 // Document type icons and colors
 const documentTypeConfig: Record<string, { icon: React.ReactNode; color: string; label: string; labelAr: string }> = {
@@ -149,111 +150,73 @@ export default function KnowledgeBase() {
         background: 'radial-gradient(1200px 600px at 60% 18%, rgba(214,179,106,.16), transparent 55%), radial-gradient(900px 500px at 20% 80%, rgba(96,165,250,.10), transparent 60%), linear-gradient(180deg, #050506, #0a0a0c)'
       }}
     >
-      {/* Header */}
-      <header className="border-b border-white/10 bg-black/40 backdrop-blur-md sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <BookOpen className="w-8 h-8 text-[#d6b36a] drop-shadow-[0_0_10px_rgba(214,179,106,0.5)]" />
-              <div>
-                <h1 className="text-xl sm:text-2xl font-extrabold text-[#d6b36a]">
-                  {language === "arabic" ? "قاعدة المعرفة والتشريعات" : "Knowledge Base & Legislation"}
-                </h1>
-                <p className="text-sm text-white/70">
-                  {language === "arabic" ? "المراسيم السلطانية، اللوائح التنظيمية، والمراجع القضائية" : "Royal Decrees, Regulations, and Legal References"}
-                </p>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-2">
-              {/* Language Toggle */}
-              <div className="flex rounded-lg overflow-hidden border border-white/20">
-                <button
-                  onClick={() => setLanguage("english")}
-                  className={`px-3 py-1.5 text-xs font-semibold transition-colors ${language === "english" ? "bg-[#d6b36a] text-black" : "bg-transparent text-white/70 hover:text-white"}`}
-                >
-                  English
-                </button>
-                <button
-                  onClick={() => setLanguage("arabic")}
-                  className={`px-3 py-1.5 text-xs font-semibold transition-colors ${language === "arabic" ? "bg-[#d6b36a] text-black" : "bg-transparent text-white/70 hover:text-white"}`}
-                >
-                  العربية
-                </button>
-              </div>
-              
-              {/* Admin: Seed Button */}
-              {isAdmin && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => seedMutation.mutate()}
-                  disabled={seedMutation.isPending}
-                  className="border-[#d6b36a]/30 text-[#d6b36a] hover:bg-[#d6b36a]/10"
-                >
-                  {seedMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : "Seed DB"}
-                </Button>
-              )}
-              
-              {/* Admin: Manual Upload Button */}
-              {isAdmin && (
-                <Dialog open={isUploadOpen} onOpenChange={setIsUploadOpen}>
-                  <DialogTrigger asChild>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="border-[#d6b36a]/30 text-[#d6b36a] hover:bg-[#d6b36a]/10"
-                    >
-                      <Upload className="w-4 h-4 mr-2" />
-                      {language === "arabic" ? "إضافة يدوية" : "Manual Add"}
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="bg-[#101014] border-[#d6b36a]/30 text-white max-w-2xl">
-                    <DialogHeader>
-                      <DialogTitle className="text-[#d6b36a]">{language === "arabic" ? "إضافة وثيقة جديدة" : "Add New Document"}</DialogTitle>
-                      <DialogDescription className="text-white/60">
-                        {language === "arabic" ? "أدخل تفاصيل الوثيقة الجديدة" : "Enter the details of the new document"}
-                      </DialogDescription>
-                    </DialogHeader>
-                    <UploadForm language={language} onSuccess={() => { setIsUploadOpen(false); refetch(); }} />
-                  </DialogContent>
-                </Dialog>
-              )}
-
-              {/* Admin: PDF Upload Button */}
-              {isAdmin && (
-                <Dialog open={isPdfUploadOpen} onOpenChange={setIsPdfUploadOpen}>
-                  <DialogTrigger asChild>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="border-[#4ade80]/30 text-[#4ade80] hover:bg-[#4ade80]/10"
-                    >
-                      <FileUp className="w-4 h-4 mr-2" />
-                      {language === "arabic" ? "رفع PDF" : "Upload PDF"}
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="bg-[#101014] border-[#4ade80]/30 text-white max-w-2xl">
-                    <DialogHeader>
-                      <DialogTitle className="flex items-center gap-2 text-[#4ade80]">
-                        <FileUp className="w-5 h-5 text-[#4ade80]" />
-                        {language === "arabic" ? "رفع ملف PDF" : "Upload PDF Document"}
-                      </DialogTitle>
-                      <DialogDescription className="text-white/60">
-                        {language === "arabic" 
-                          ? "سيتم استخراج النص والكلمات المفتاحية تلقائياً" 
-                          : "Text and keywords will be automatically extracted"
-                        }
-                      </DialogDescription>
-                    </DialogHeader>
-                    <PDFUploadForm language={language} onSuccess={() => { setIsPdfUploadOpen(false); refetch(); }} />
-                  </DialogContent>
-                </Dialog>
-              )}
-            </div>
+      {/* Sovereign Header */}
+      <SovereignHeader
+        title={language === "arabic" ? "المكتبة التشريعية وقاعدة المعرفة" : "Statutory Corpus & Knowledge Base"}
+        subtitle={language === "arabic" ? "المراسيم السلطانية، اللوائح التنظيمية، والمراجع القضائية (6,007 مادة تشريعية)" : "Royal Decrees, Regulations, and Legal References (6,007 Articles)"}
+        language={language}
+        onToggleLanguage={() => setLanguage(language === "arabic" ? "english" : "arabic")}
+        activeSuite="knowledge"
+        actions={
+          <div className="flex items-center gap-2">
+            {isAdmin && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => seedMutation.mutate()}
+                disabled={seedMutation.isPending}
+                className="ruzn-btn-gold text-xs"
+              >
+                {seedMutation.isPending ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : "Seed DB"}
+              </Button>
+            )}
+            {isAdmin && (
+              <Dialog open={isUploadOpen} onOpenChange={setIsUploadOpen}>
+                <DialogTrigger asChild>
+                  <Button variant="outline" size="sm" className="ruzn-btn text-xs">
+                    <Upload className="w-3.5 h-3.5 mr-1" />
+                    {language === "arabic" ? "إضافة يدوية" : "Manual Add"}
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="bg-[#101014] border-[rgba(214,179,106,0.3)] text-white max-w-2xl">
+                  <DialogHeader>
+                    <DialogTitle className="text-[#d6b36a]">{language === "arabic" ? "إضافة وثيقة جديدة" : "Add New Document"}</DialogTitle>
+                    <DialogDescription className="text-white/60">
+                      {language === "arabic" ? "أدخل تفاصيل الوثيقة الجديدة" : "Enter the details of the new document"}
+                    </DialogDescription>
+                  </DialogHeader>
+                  <UploadForm language={language} onSuccess={() => { setIsUploadOpen(false); refetch(); }} />
+                </DialogContent>
+              </Dialog>
+            )}
+            {isAdmin && (
+              <Dialog open={isPdfUploadOpen} onOpenChange={setIsPdfUploadOpen}>
+                <DialogTrigger asChild>
+                  <Button variant="outline" size="sm" className="ruzn-btn text-xs border-[#4ade80]/40 text-[#4ade80]">
+                    <FileUp className="w-3.5 h-3.5 mr-1" />
+                    {language === "arabic" ? "رفع PDF" : "Upload PDF"}
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="bg-[#101014] border-[#4ade80]/30 text-white max-w-2xl">
+                  <DialogHeader>
+                    <DialogTitle className="flex items-center gap-2 text-[#4ade80]">
+                      <FileUp className="w-5 h-5 text-[#4ade80]" />
+                      {language === "arabic" ? "رفع ملف PDF" : "Upload PDF Document"}
+                    </DialogTitle>
+                    <DialogDescription className="text-white/60">
+                      {language === "arabic" 
+                        ? "سيتم استخراج النص والكلمات المفتاحية تلقائياً" 
+                        : "Text and keywords will be automatically extracted"
+                      }
+                    </DialogDescription>
+                  </DialogHeader>
+                  <PDFUploadForm language={language} onSuccess={() => { setIsPdfUploadOpen(false); refetch(); }} />
+                </DialogContent>
+              </Dialog>
+            )}
           </div>
-        </div>
-      </header>
+        }
+      />
 
       <main className="container mx-auto px-4 py-6">
         {/* Search and Filters */}

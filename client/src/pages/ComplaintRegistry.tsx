@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'wouter';
+import SovereignHeader from '@/components/SovereignHeader';
 import { ArrowRight, ArrowLeft, Printer, RefreshCw, FileJson, FileSpreadsheet, Copy, ChevronDown, ChevronUp, UserPlus, Users, Bell } from 'lucide-react';
 import { trpc } from '../lib/trpc';
 import { useAuth } from '@/_core/hooks/useAuth';
@@ -555,61 +556,23 @@ ${actions.length ? actions.map(a => `• ${a}`).join('\n') : `• ${lang === "ar
     <div className="min-h-screen" style={{
       background: 'radial-gradient(1200px 600px at 60% 18%, rgba(214,179,106,.16), transparent 55%), radial-gradient(900px 500px at 20% 80%, rgba(96,165,250,.10), transparent 60%), linear-gradient(180deg, #050506, #0a0a0c)'
     }}>
-      <div className="max-w-[1200px] mx-auto px-4 py-6 pb-20">
-        {/* Header */}
-        <header className="flex items-center justify-between gap-4 mb-6 flex-wrap">
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-[14px] flex items-center justify-center border border-[rgba(214,179,106,.25)]"
-              style={{
-                background: 'radial-gradient(circle at 30% 30%, rgba(214,179,106,.35), rgba(214,179,106,.10) 45%, rgba(255,255,255,.05) 70%, transparent 75%), linear-gradient(135deg, rgba(214,179,106,.22), rgba(255,255,255,.04))'
-              }}>
-              <span className="text-[rgba(214,179,106,.92)] font-bold text-sm">رُزن</span>
-            </div>
-            <div>
-              <h1 className="text-lg font-semibold text-white/90">{t.appTitle}</h1>
-              <p className="text-xs text-white/60">{t.appSub}</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3 flex-wrap">
-            {/* Language toggle */}
-            <div className="flex items-center gap-2 px-3 py-2 rounded-full border border-white/10 bg-white/5">
-              <button
-                onClick={() => setLang('ar')}
-                className={`px-3 py-1 rounded-full text-xs transition ${lang === 'ar' ? 'border border-[rgba(214,179,106,.35)] bg-[rgba(214,179,106,.12)] text-[rgba(214,179,106,.95)] font-bold' : 'text-white/60'}`}
-              >
-                العربية
-              </button>
-              <button
-                onClick={() => setLang('en')}
-                className={`px-3 py-1 rounded-full text-xs transition ${lang === 'en' ? 'border border-[rgba(214,179,106,.35)] bg-[rgba(214,179,106,.12)] text-[rgba(214,179,106,.95)] font-bold' : 'text-white/60'}`}
-              >
-                English
-              </button>
-            </div>
-
-            {/* Pills */}
-            <div className="flex items-center gap-2 px-3 py-2 rounded-full border border-white/10 bg-white/5 text-xs text-white/60">
-              <span>{t.pillMode}</span>
-              <span className="text-[rgba(214,179,106,.95)] font-bold">{t.pillOffline}</span>
-            </div>
-            <div className="flex items-center gap-2 px-3 py-2 rounded-full border border-white/10 bg-white/5 text-xs text-white/60">
-              <span>{t.pillData}</span>
-              <span className="text-[rgba(214,179,106,.95)] font-bold">{complaints.length}</span>
-            </div>
-
-            {/* Action buttons */}
+      {/* Universal Sovereign Header */}
+      <SovereignHeader
+        title={t.appTitle}
+        subtitle={t.appSub}
+        language={lang === "ar" ? "arabic" : "english"}
+        activeSuite="registry"
+        onToggleLanguage={() => setLang(lang === "ar" ? "en" : "ar")}
+        actions={
+          <div className="flex items-center gap-2 flex-wrap">
             <button onClick={seedDemo} className="ruzn-btn text-xs">{t.btnSeed}</button>
             <button onClick={resetAll} className="ruzn-btn text-xs border-red-500/35 bg-gradient-to-b from-red-500/20 to-white/5">{t.btnReset}</button>
             <button onClick={() => window.print()} className="ruzn-btn text-xs"><Printer className="w-4 h-4" /></button>
           </div>
-        </header>
+        }
+      />
 
-        {/* Back to Home */}
-        <Link href="/" className="inline-flex items-center gap-2 text-sm text-[rgba(214,179,106,.95)] hover:underline mb-4">
-          {lang === 'ar' ? <ArrowRight className="w-4 h-4" /> : <ArrowLeft className="w-4 h-4" />}
-          {t.backHome}
-        </Link>
+      <div className="max-w-[1200px] mx-auto px-4 py-6 pb-20">
 
         {/* Main Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_.85fr] gap-4">

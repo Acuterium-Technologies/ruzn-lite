@@ -47,6 +47,7 @@ import {
   ShieldCheck
 } from "lucide-react";
 import { Link } from "wouter";
+import SovereignHeader from "@/components/SovereignHeader";
 
 type Language = "arabic" | "english";
 type Feature = "complaints" | "legislative";
@@ -802,222 +803,92 @@ export default function Home() {
         threshold={80}
         language={language}
       />
-      {/* Header */}
-      <header className="border-b border-white/10 bg-black/35 backdrop-blur-md sticky top-0 z-50">
-        <div className="container max-w-5xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 sm:gap-3">
-              <img 
-                src="/ruzn-logo-v-1-TRANS.png" 
-                alt="Ruzn Sovereign Emblem" 
-                className="h-8 w-8 sm:h-12 sm:w-12 object-contain drop-shadow-[0_0_12px_rgba(214,179,106,0.45)]"
-              />
-              <div>
-                <h1 className="text-lg sm:text-2xl font-extrabold" style={{ background: 'linear-gradient(90deg, rgba(214,179,106,.95), rgba(184,146,77,.85))', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
-                  {text.title}
-                </h1>
-                <p className="text-xs sm:text-sm hidden sm:block" style={{ color: 'rgba(255,255,255,.70)' }}>
-                  {text.subtitle}
-                </p>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-2 flex-wrap">
-              {/* User Auth Display */}
-              {isAuthenticated ? (
-                <div className="flex items-center gap-2">
-                  <span className="text-xs sm:text-sm flex items-center gap-1" style={{ color: 'rgba(214,179,106,.95)' }}>
-                    <User className="w-4 h-4" />
-                    <span className="hidden sm:inline">{user?.name || 'Staff'}</span>
-                  </span>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={handleLogout}
-                    className="ruzn-btn text-xs p-2"
-                  >
-                    <LogOut className="w-4 h-4" />
-                  </Button>
-                </div>
-              ) : (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => window.location.href = getLoginUrl()}
-                  className="gap-1 sm:gap-2 ruzn-btn-gold text-xs sm:text-sm px-2 sm:px-3"
-                >
-                  <LogIn className="w-4 h-4" />
-                  <span className="hidden sm:inline">{text.login}</span>
-                </Button>
-              )}
-              
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={toggleLanguage}
-                className="gap-1 sm:gap-2 ruzn-btn text-xs sm:text-sm px-2 sm:px-3"
-              >
-                <Globe className="w-4 h-4" />
-                <span className="hidden sm:inline">{language === "arabic" ? "English" : "العربية"}</span>
-              </Button>
-              
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={resetWalkthrough}
-                className="ruzn-btn p-2"
-                title={language === 'arabic' ? 'جولة تعريفية' : 'Tour'}
-              >
-                <Sparkles className="w-4 h-4" />
-              </Button>
-            </div>
-          </div>
-          
-          {/* Feature Toggle */}
-          <div className="flex gap-2 mt-4">
-            <button
-              onClick={() => setFeature("complaints")}
-              className={`ruzn-tab flex-1 flex items-center justify-center gap-2 py-3 ${feature === "complaints" ? "active" : ""}`}
-            >
-              <FileSearch className="w-4 h-4" />
-              {text.complaints}
-            </button>
-            <button
-              onClick={() => setFeature("legislative")}
-              className={`ruzn-tab flex-1 flex items-center justify-center gap-2 py-3 ${feature === "legislative" ? "active" : ""}`}
-            >
-              <Scale className="w-4 h-4" />
-              {text.legislative}
-            </button>
-          </div>
-          
-          {/* Action Buttons - Primary Actions */}
-          <div className="flex flex-wrap gap-2 mt-3">
+      {/* ─── Universal Sovereign Header ─── */}
+      <SovereignHeader
+        title={language === "arabic" ? "المستشار التشريعي ورقابة البلاغات" : "Sovereign Legal Intelligence & Complaints"}
+        subtitle={text.subtitle}
+        language={language}
+        activeSuite="chat"
+        onToggleLanguage={toggleLanguage}
+        actions={
+          <div className="flex items-center gap-1.5 flex-wrap">
             <button
               onClick={() => setShowSamples(!showSamples)}
-              className="ruzn-btn text-xs flex items-center gap-1"
+              className="ruzn-btn text-xs flex items-center gap-1 border-[rgba(214,179,106,0.3)] hover:border-[rgba(214,179,106,0.6)] text-[rgba(214,179,106,0.95)]"
             >
-              <Database className="w-3 h-3" />
+              <Database className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">{text.loadSamples}</span>
             </button>
             <button
               onClick={handleExportPdf}
               disabled={messages.length === 0 || exportPdfMutation.isPending}
-              className="ruzn-btn text-xs flex items-center gap-1 disabled:opacity-50"
+              className="ruzn-btn text-xs flex items-center gap-1 disabled:opacity-50 text-white/80"
             >
               {exportPdfMutation.isPending ? (
-                <Loader2 className="w-3 h-3 animate-spin" />
+                <Loader2 className="w-3.5 h-3.5 animate-spin" />
               ) : (
-                <Download className="w-3 h-3" />
+                <Download className="w-3.5 h-3.5 text-[rgba(214,179,106,0.9)]" />
               )}
               <span className="hidden sm:inline">{text.exportPdf}</span>
             </button>
             <button
               onClick={handleClearChat}
               disabled={messages.length === 0}
-              className="ruzn-btn text-xs flex items-center gap-1 disabled:opacity-50"
+              className="ruzn-btn text-xs flex items-center gap-1 disabled:opacity-50 text-white/60 hover:text-white"
             >
-              <Trash2 className="w-3 h-3" />
+              <Trash2 className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">{text.clearChat}</span>
             </button>
           </div>
-          
-          {/* Navigation Links - Horizontally scrollable on mobile */}
-          <div className="mt-3 -mx-4 px-4 overflow-x-auto scrollbar-hide">
-            <div className="flex gap-2 pb-2 min-w-max">
-              <Link href="/ria-dashboard">
-                <button className="ruzn-btn-gold text-xs flex items-center gap-1 px-3 py-2 rounded-xl whitespace-nowrap font-bold">
-                  <Scale className="w-3 h-3 text-[#d6b36a]" />
-                  {language === "arabic" ? "تقييم الأثر (RIA)" : "RIA Dashboard"}
-                </button>
-              </Link>
-              <Link href="/landing">
-                <button className="ruzn-btn text-xs flex items-center gap-1 px-3 py-2 rounded-xl whitespace-nowrap border-[#d6b36a]/40 text-[#d6b36a]">
-                  <Globe className="w-3 h-3" />
-                  {language === "arabic" ? "الموقع التعريفي" : "Landing Page"}
-                </button>
-              </Link>
-              <Link href="/operations">
-                <button className="ruzn-btn-gold text-xs flex items-center gap-1 px-3 py-2 rounded-xl whitespace-nowrap">
-                  <ClipboardList className="w-3 h-3" />
-                  {text.operations}
-                </button>
-              </Link>
-              <Link href="/entity-map">
-                <button className="ruzn-btn text-xs flex items-center gap-1 px-3 py-2 rounded-xl whitespace-nowrap">
-                  <Map className="w-3 h-3" />
-                  {text.entityMap}
-                </button>
-              </Link>
-              <Link href="/comparative-analysis">
-                <button className="ruzn-btn text-xs flex items-center gap-1 px-3 py-2 rounded-xl whitespace-nowrap">
-                  <TrendingUp className="w-3 h-3" />
-                  {text.comparativeAnalysis}
-                </button>
-              </Link>
-              <Link href="/case-law">
-                <button className="ruzn-btn text-xs flex items-center gap-1 px-3 py-2 rounded-xl whitespace-nowrap">
-                  <Scale className="w-3 h-3" />
-                  {text.caseLaw}
-                </button>
-              </Link>
-              <Link href="/complaint-registry">
-                <button className="ruzn-btn text-xs flex items-center gap-1 px-3 py-2 rounded-xl whitespace-nowrap">
-                  <FileText className="w-3 h-3" />
-                  {text.complaintRegistry}
-                </button>
-              </Link>
-              <Link href="/knowledge-base">
-                <button className="ruzn-btn text-xs flex items-center gap-1 px-3 py-2 rounded-xl whitespace-nowrap">
-                  <Database className="w-3 h-3" />
-                  {text.knowledgeBase}
-                </button>
-              </Link>
-              <Link href="/analytics">
-                <button className="ruzn-btn text-xs flex items-center gap-1 px-3 py-2 rounded-xl whitespace-nowrap">
-                  <BarChart3 className="w-3 h-3" />
-                  {text.analytics}
-                </button>
-              </Link>
-              {user?.role === 'admin' && (
-                <Link href="/admin">
-                  <button className="ruzn-btn text-xs flex items-center gap-1 px-3 py-2 rounded-xl whitespace-nowrap">
-                    <Settings className="w-3 h-3" />
-                    {text.admin}
-                  </button>
-                </Link>
-              )}
+        }
+      />
+
+      {/* Mode Sub-deck */}
+      <div className="container max-w-5xl mx-auto px-4 pt-4">
+        <div className="flex gap-2.5">
+          <button
+            onClick={() => setFeature("complaints")}
+            className={`ruzn-tab flex-1 flex items-center justify-center gap-2 py-3 ${feature === "complaints" ? "active" : ""}`}
+          >
+            <FileSearch className="w-4 h-4" />
+            <span className="font-bold">{text.complaints}</span>
+          </button>
+          <button
+            onClick={() => setFeature("legislative")}
+            className={`ruzn-tab flex-1 flex items-center justify-center gap-2 py-3 ${feature === "legislative" ? "active" : ""}`}
+          >
+            <Scale className="w-4 h-4" />
+            <span className="font-bold">{text.legislative}</span>
+          </button>
+        </div>
+
+        {/* Sample Complaints Panel */}
+        {showSamples && samples && samples.length > 0 && (
+          <div className="mt-3 p-3.5 ruzn-card border-[rgba(214,179,106,0.3)]">
+            <h3 className="text-sm font-semibold mb-2.5 text-[rgba(214,179,106,0.98)] font-heading">{text.sampleComplaints}</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-48 overflow-y-auto">
+              {samples.map((sample) => (
+                <Button
+                  key={sample.id}
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => handleLoadSample(sample.text)}
+                  className="justify-start text-start h-auto py-2.5 px-3 text-xs hover:bg-[rgba(214,179,106,0.1)] border border-white/5 hover:border-[rgba(214,179,106,0.3)] text-white/85"
+                >
+                  <span className="truncate flex-1">{sample.text}</span>
+                  <span className={`ml-2 px-1.5 py-0.5 rounded text-[10px] font-mono ${
+                    sample.expectedRiskScore >= 70 ? 'bg-red-500/20 text-red-400 border border-red-500/30' :
+                    sample.expectedRiskScore >= 40 ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30' :
+                    'bg-green-500/20 text-green-400 border border-green-500/30'
+                  }`}>
+                    {sample.expectedRiskScore}%
+                  </span>
+                </Button>
+              ))}
             </div>
           </div>
-          
-          {/* Sample Complaints Panel */}
-          {showSamples && samples && samples.length > 0 && (
-            <div className="mt-3 p-3 bg-card/80 rounded-lg border border-primary/20">
-              <h3 className="text-sm font-semibold mb-2 text-primary">{text.sampleComplaints}</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-48 overflow-y-auto">
-                {samples.map((sample) => (
-                  <Button
-                    key={sample.id}
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => handleLoadSample(sample.text)}
-                    className="justify-start text-start h-auto py-2 px-3 text-xs hover:bg-primary/10 border border-transparent hover:border-primary/30"
-                  >
-                    <span className="truncate">{sample.text}</span>
-                    <span className={`ml-2 px-1.5 py-0.5 rounded text-[10px] ${
-                      sample.expectedRiskScore >= 70 ? 'bg-red-500/20 text-red-400' :
-                      sample.expectedRiskScore >= 40 ? 'bg-yellow-500/20 text-yellow-400' :
-                      'bg-green-500/20 text-green-400'
-                    }`}>
-                      {sample.expectedRiskScore}
-                    </span>
-                  </Button>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      </header>
+        )}
+      </div>
       
       {/* Dashboard Widgets */}
       {dashboardStats && (

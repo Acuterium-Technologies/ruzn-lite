@@ -6,9 +6,10 @@ import { Input } from "@/components/ui/input";
 import { 
   ArrowLeft, Search, Filter, Scale, Building2, Calendar,
   DollarSign, Clock, FileText, ChevronDown, ChevronUp, Gavel,
-  AlertTriangle, TrendingUp, Users, Loader2
+  AlertTriangle, TrendingUp, Users, Loader2, Sparkles
 } from "lucide-react";
 import { toast } from "sonner";
+import SovereignHeader from "@/components/SovereignHeader";
 
 type Language = "arabic" | "english";
 
@@ -158,63 +159,27 @@ export default function CaseLaw() {
           "linear-gradient(180deg, #050506, #0a0a0c)"
       }}
     >
-      {/* Header */}
-      <header className="border-b border-[rgba(214,179,106,0.18)] bg-black/45 backdrop-blur-xl sticky top-0 z-50 py-3.5 shadow-deep">
-        <div className="container max-w-7xl mx-auto px-4 flex items-center justify-between flex-wrap gap-4">
-          <div className="flex items-center gap-4">
-            <Link href="/">
-              <button className="ruzn-btn text-xs font-semibold gap-2 border-[rgba(214,179,106,0.25)] hover:border-[rgba(214,179,106,0.5)]">
-                <ArrowLeft className={`w-4 h-4 ${isRTL ? "rotate-180" : ""}`} />
-                {text.back}
-              </button>
-            </Link>
-            <div>
-              <h1 className="text-xl sm:text-2xl font-extrabold ruzn-gold-gradient font-heading flex items-center gap-2">
-                <Scale className="w-5 h-5 text-[rgba(214,179,106,0.98)]" />
-                {text.title}
-              </h1>
-              <p className="text-xs text-white/60">{text.subtitle}</p>
-            </div>
-          </div>
-          
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => seedMutation.mutate()}
-              disabled={seedMutation.isPending}
-              className="ruzn-btn text-xs"
-            >
-              {seedMutation.isPending ? (
-                <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> {text.seeding}</>
-              ) : (
-                text.seedDatabase
-              )}
-            </button>
-            
-            <div className="ruzn-glass-soft rounded-full p-1 flex items-center gap-1 border-[rgba(214,179,106,0.18)]">
-              <button
-                onClick={() => setLanguage("arabic")}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition ${
-                  language === "arabic" 
-                    ? "bg-[rgba(214,179,106,.20)] border border-[rgba(214,179,106,.45)] text-[rgba(214,179,106,1)]" 
-                    : "text-white/70 hover:text-white"
-                }`}
-              >
-                العربية
-              </button>
-              <button
-                onClick={() => setLanguage("english")}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition ${
-                  language === "english" 
-                    ? "bg-[rgba(214,179,106,.20)] border border-[rgba(214,179,106,.45)] text-[rgba(214,179,106,1)]" 
-                    : "text-white/70 hover:text-white"
-                }`}
-              >
-                English
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* ─── Universal Sovereign Header ─── */}
+      <SovereignHeader
+        title={text.title}
+        subtitle={text.subtitle}
+        language={language}
+        activeSuite="caseLaw"
+        onToggleLanguage={() => setLanguage(language === "arabic" ? "english" : "arabic")}
+        actions={
+          <button
+            onClick={() => seedMutation.mutate()}
+            disabled={seedMutation.isPending}
+            className="ruzn-btn text-xs gap-1.5 border-[rgba(214,179,106,0.3)] hover:border-[rgba(214,179,106,0.6)] text-[rgba(214,179,106,0.95)]"
+          >
+            {seedMutation.isPending ? (
+              <><Loader2 className="w-3.5 h-3.5 animate-spin" /> {text.seeding}</>
+            ) : (
+              <><Sparkles className="w-3.5 h-3.5" /> {text.seedDatabase}</>
+            )}
+          </button>
+        }
+      />
       
       <main className="flex-1 container max-w-7xl mx-auto px-4 py-6">
         {/* Stats Cards */}

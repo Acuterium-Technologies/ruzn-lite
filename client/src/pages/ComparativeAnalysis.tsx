@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'wouter';
+import SovereignHeader from '@/components/SovereignHeader';
 import { trpc } from '@/lib/trpc';
 import { Button } from '@/components/ui/button';
 import { 
@@ -476,35 +477,22 @@ export default function ComparativeAnalysis() {
         background: 'radial-gradient(1200px 600px at 60% 18%, rgba(214,179,106,.16), transparent 55%), radial-gradient(900px 500px at 20% 80%, rgba(96,165,250,.10), transparent 60%), linear-gradient(180deg, #050506, #0a0a0c)'
       }}
     >
-      {/* Header */}
-      <header className="border-b border-white/10 bg-black/40 backdrop-blur-md sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Link href="/">
-                <button className="ruzn-btn text-xs sm:text-sm flex items-center gap-2">
-                  <ArrowLeft className="h-4 w-4 ml-1 rotate-180" />
-                  {UI_TEXT.backToHome}
-                </button>
-              </Link>
-              <div className="h-6 w-px bg-white/10" />
-              <div>
-                <h1 className="text-xl font-extrabold text-[#d6b36a]">{UI_TEXT.title}</h1>
-                <p className="text-xs sm:text-sm text-white/70">{UI_TEXT.subtitle}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <button 
-                className="ruzn-btn-gold text-xs sm:text-sm flex items-center gap-2"
-                onClick={() => window.print()}
-              >
-                <Download className="h-4 w-4 ml-1" />
-                {UI_TEXT.exportPdf}
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* Universal Sovereign Header */}
+      <SovereignHeader
+        title={UI_TEXT.title}
+        subtitle={UI_TEXT.subtitle}
+        language="arabic"
+        activeSuite="analytics"
+        actions={
+          <button 
+            className="ruzn-btn-gold text-xs sm:text-sm flex items-center gap-2"
+            onClick={() => window.print()}
+          >
+            <Download className="h-4 w-4 ml-1" />
+            {UI_TEXT.exportPdf}
+          </button>
+        }
+      />
 
       <main className="container mx-auto px-4 py-6">
         {/* Filters */}

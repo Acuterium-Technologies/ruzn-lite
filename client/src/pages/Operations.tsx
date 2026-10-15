@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { toast } from "sonner";
+import SovereignHeader from "@/components/SovereignHeader";
 import {
   ArrowLeft,
   FileText,
@@ -740,98 +741,50 @@ export default function Operations() {
           "linear-gradient(180deg, #050506, #0a0a0c)"
       }}
     >
-      {/* ─── Sovereign Top Navigation Bar ─── */}
-      <header className="border-b border-[rgba(214,179,106,0.18)] bg-black/45 backdrop-blur-xl sticky top-0 z-50 shadow-deep print:hidden">
-        <div className="container max-w-7xl mx-auto px-4 py-3.5">
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            {/* Left Brand & Title */}
-            <div className="flex items-center gap-3.5">
-              <Link href="/">
-                <button className="ruzn-btn text-xs font-semibold gap-2 border-[rgba(214,179,106,0.25)] hover:border-[rgba(214,179,106,0.5)]">
-                  <ArrowLeft className={`w-4 h-4 ${isRTL ? "rotate-180" : ""}`} />
-                  {text.backToChat}
-                </button>
-              </Link>
-              <div className="flex items-center gap-2.5">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[rgba(214,179,106,0.3)] to-[rgba(255,255,255,0.03)] border border-[rgba(214,179,106,0.3)] flex items-center justify-center shadow-lg">
-                  <span className="font-heading font-extrabold text-[rgba(214,179,106,0.98)] text-base">رُزن</span>
-                </div>
-                <div>
-                  <h1 className="text-lg md:text-xl font-heading font-extrabold text-gold-gradient">
-                    {text.title}
-                  </h1>
-                  <p className="text-xs text-white/60 hidden sm:block">
-                    {text.subtitle}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Action Tools */}
-            <div className="flex items-center gap-2 flex-wrap">
-              {/* Sovereign Status Pills */}
-              <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/70">
-                <span className="flex items-center gap-1.5 text-[rgba(214,179,106,0.95)] font-semibold">
-                  <Shield className="w-3.5 h-3.5" />
-                  {text.statusBadge}
-                </span>
-                <span className="text-white/30">•</span>
-                <span>{text.qarcStatus}</span>
-                <span className="text-white/30">•</span>
-                <span>{text.qencStatus}</span>
-              </div>
-
-              {/* Seed Demo Button */}
-              <button
-                onClick={seedDemoData}
-                className="ruzn-btn text-xs gap-1.5 border-[rgba(214,179,106,0.3)] hover:border-[rgba(214,179,106,0.6)] text-[rgba(214,179,106,0.95)]"
-                title={text.seedBtn}
-              >
-                <Sparkles className="w-3.5 h-3.5" />
-                <span className="hidden md:inline">{text.seedBtn}</span>
-              </button>
-
-              {/* Reset Button */}
-              <button
-                onClick={handleResetAll}
-                className="ruzn-btn text-xs gap-1.5 text-white/70 hover:text-white"
-                title={text.resetBtn}
-              >
-                <RefreshCw className="w-3.5 h-3.5" />
-                <span className="hidden md:inline">{text.resetBtn}</span>
-              </button>
-
-              {/* Print Ministerial Report */}
-              <button
-                onClick={handlePrint}
-                className="ruzn-btn text-xs gap-1.5 text-white/80 border-white/15 hover:border-[rgba(214,179,106,0.4)]"
-                title={text.printBtn}
-              >
-                <Printer className="w-3.5 h-3.5 text-[rgba(214,179,106,0.9)]" />
-                <span className="hidden sm:inline">{text.printBtn}</span>
-              </button>
-
-              {/* JSON Export */}
-              <button
-                onClick={handleExportJSON}
-                className="ruzn-btn-gold text-xs gap-1.5"
-                title={text.exportBtn}
-              >
-                <Download className="w-3.5 h-3.5" />
-                <span>JSON</span>
-              </button>
-
-              {/* Language Switch */}
-              <button
-                onClick={() => setLanguage(language === "arabic" ? "english" : "arabic")}
-                className="ruzn-btn text-xs font-heading font-bold px-3"
-              >
-                {language === "arabic" ? "EN" : "عربي"}
-              </button>
-            </div>
+      {/* ─── Universal Sovereign Header ─── */}
+      <SovereignHeader
+        title={text.title}
+        subtitle={text.subtitle}
+        language={language}
+        activeSuite="operations"
+        onToggleLanguage={() => setLanguage(language === "arabic" ? "english" : "arabic")}
+        actions={
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <button
+              onClick={seedDemoData}
+              className="ruzn-btn text-xs gap-1.5 border-[rgba(214,179,106,0.3)] hover:border-[rgba(214,179,106,0.6)] text-[rgba(214,179,106,0.95)]"
+              title={text.seedBtn}
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span className="hidden md:inline">{text.seedBtn}</span>
+            </button>
+            <button
+              onClick={handleResetAll}
+              className="ruzn-btn text-xs gap-1.5 text-white/70 hover:text-white"
+              title={text.resetBtn}
+            >
+              <RefreshCw className="w-3.5 h-3.5" />
+              <span className="hidden md:inline">{text.resetBtn}</span>
+            </button>
+            <button
+              onClick={handlePrint}
+              className="ruzn-btn text-xs gap-1.5 text-white/80 border-white/15 hover:border-[rgba(214,179,106,0.4)]"
+              title={text.printBtn}
+            >
+              <Printer className="w-3.5 h-3.5 text-[rgba(214,179,106,0.9)]" />
+              <span className="hidden sm:inline">{text.printBtn}</span>
+            </button>
+            <button
+              onClick={handleExportJSON}
+              className="ruzn-btn-gold text-xs gap-1.5 font-bold"
+              title={text.exportBtn}
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>JSON</span>
+            </button>
           </div>
-        </div>
-      </header>
+        }
+      />
 
       {/* ─── Main Content Canvas ─── */}
       <main className="flex-1 container max-w-7xl mx-auto px-4 py-6">

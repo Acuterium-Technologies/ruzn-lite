@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DashboardLayout from "@/components/DashboardLayout";
+import SovereignHeader from "@/components/SovereignHeader";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
@@ -194,25 +194,19 @@ export default function RIADashboard() {
   const isLoading = riaLoading || vision2040Loading || alertsLoading;
 
   return (
-    <DashboardLayout defaultCollapsed={true}>
-      <div className="space-y-6 p-3 sm:p-5 md:p-6 font-body" dir="rtl">
-        {/* ─── Top Header ─── */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-[rgba(214,179,106,0.16)]">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full ruzn-glass-soft border-[rgba(214,179,106,0.3)] mb-2">
-              <Sparkles className="w-3.5 h-3.5 text-[rgba(214,179,106,0.98)]" />
-              <span className="text-xs font-semibold text-[rgba(214,179,106,0.98)]">
-                EREBUSFORMULA659 • SOVEREIGN RIA SUITE
-              </span>
-            </div>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold ruzn-gold-gradient font-heading">
-              لوحة تقييم الأثر التنظيمي (RIA)
-            </h1>
-            <p className="text-xs sm:text-sm text-white/70 mt-1">
-              قياس مواءمة التشريعات واللوائح والقرارات الوزارية مع محاور رؤية عُمان 2040
-            </p>
-          </div>
-
+    <div 
+      className="min-h-screen text-foreground flex flex-col font-body"
+      dir="rtl"
+      style={{
+        background: 'radial-gradient(1200px 600px at 60% 18%, rgba(214,179,106,.16), transparent 55%), radial-gradient(900px 500px at 20% 80%, rgba(96,165,250,.10), transparent 60%), linear-gradient(180deg, #050506, #0a0a0c)'
+      }}
+    >
+      <SovereignHeader
+        title="لوحة تقييم الأثر التنظيمي (RIA)"
+        subtitle="قياس مواءمة التشريعات واللوائح والقرارات الوزارية مع محاور رؤية عُمان 2040"
+        language="arabic"
+        activeSuite="ria"
+        actions={
           <div className="flex items-center gap-2.5 flex-wrap">
             <button
               onClick={handleRefresh}
@@ -389,7 +383,10 @@ export default function RIADashboard() {
               </DialogContent>
             </Dialog>
           </div>
-        </div>
+        }
+      />
+
+      <div className="container max-w-7xl mx-auto space-y-6 p-3 sm:p-5 md:p-6 font-body">
 
         {/* ─── Vision 2040 Key Pillars (Sovereign KPI Deck) ─── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -723,6 +720,6 @@ export default function RIADashboard() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </div>
   );
 }

@@ -211,19 +211,19 @@ const normalizeToolChoice = (
 };
 
 const resolveApiUrl = () => {
-  const apiUrl = ENV.forgeApiUrl;
-  if (!apiUrl || apiUrl.trim().length === 0) {
-    throw new Error(
-      "BUILT_IN_FORGE_API_URL environment variable is required. " +
-      "Set to https://api.openai.com/v1 for OpenAI."
-    );
+  if (ENV.forgeApiUrl && ENV.forgeApiUrl.trim().length > 0) {
+    return `${ENV.forgeApiUrl.replace(/\/$/, "")}/v1/chat/completions`;
   }
-  return `${apiUrl.replace(/\/$/, "")}/v1/chat/completions`;
+  return "https://api.deepseek.com/v1/chat/completions";
+};
+
+const resolveApiKey = () => {
+  return process.env.DEEPSEEK_API_KEY || ENV.forgeApiKey || "";
 };
 
 const assertApiKey = () => {
-  if (!ENV.forgeApiKey) {
-    throw new Error("OPENAI_API_KEY is not configured");
+  if (!resolveApiKey()) {
+    throw new Error("API key is not configured");
   }
 };
 
@@ -299,7 +299,7 @@ export async function* invokeLLMStream(params: InvokeParams): AsyncGenerator<Str
   } = params;
 
   const payload: Record<string, unknown> = {
-    model: "gpt-4o-mini",
+    model: "deepseek-chat",
     messages: messages.map(normalizeMessage),
     stream: true,
   };
@@ -316,7 +316,7 @@ export async function* invokeLLMStream(params: InvokeParams): AsyncGenerator<Str
     payload.tool_choice = normalizedToolChoice;
   }
 
-  payload.max_tokens = 32768;
+  payload.max_tokens = 4096;
 
   const normalizedResponseFormat = normalizeResponseFormat({
     responseFormat,
@@ -333,7 +333,7 @@ export async function* invokeLLMStream(params: InvokeParams): AsyncGenerator<Str
     method: "POST",
     headers: {
       "content-type": "application/json",
-      authorization: `Bearer ${ENV.forgeApiKey}`,
+      authorization: `Bearer ${resolveApiKey()}`,
     },
     body: JSON.stringify(payload),
   });
@@ -391,7 +391,7 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
   } = params;
 
   const payload: Record<string, unknown> = {
-    model: "gpt-4o-mini",
+    model: "deepseek-chat",
     messages: messages.map(normalizeMessage),
   };
 
@@ -407,10 +407,7 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
     payload.tool_choice = normalizedToolChoice;
   }
 
-  payload.max_tokens = 32768
-  payload.thinking = {
-    "budget_tokens": 128
-  }
+  payload.max_tokens = 4096;
 
   const normalizedResponseFormat = normalizeResponseFormat({
     responseFormat,
@@ -427,7 +424,7 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
     method: "POST",
     headers: {
       "content-type": "application/json",
-      authorization: `Bearer ${ENV.forgeApiKey}`,
+      authorization: `Bearer ${resolveApiKey()}`,
     },
     body: JSON.stringify(payload),
   });

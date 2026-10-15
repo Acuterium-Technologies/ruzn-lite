@@ -2,6 +2,7 @@ import { useState } from "react";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Link } from "wouter";
+import SovereignHeader from "@/components/SovereignHeader";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -160,38 +161,20 @@ export default function Analytics() {
         background: 'radial-gradient(1200px 600px at 60% 18%, rgba(214,179,106,.16), transparent 55%), radial-gradient(900px 500px at 20% 80%, rgba(96,165,250,.10), transparent 60%), linear-gradient(180deg, #050506, #0a0a0c)'
       }}
     >
-      {/* Header */}
-      <header className="border-b border-white/10 bg-black/35 backdrop-blur-md sticky top-0 z-50">
-        <div className="container max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Link href="/">
-                <button className="ruzn-btn text-sm flex items-center gap-2">
-                  <ArrowLeft className={`w-4 h-4 ${isRTL ? "rotate-180" : ""}`} />
-                  {text.backToChat}
-                </button>
-              </Link>
-              <div>
-                <h1 className="text-xl font-extrabold" style={{ color: 'rgba(214,179,106,.95)' }}>{text.title}</h1>
-                <p className="text-sm" style={{ color: 'rgba(255,255,255,.70)' }}>{text.subtitle}</p>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setLanguage(language === "arabic" ? "english" : "arabic")}
-                className="ruzn-btn text-sm"
-              >
-                {language === "arabic" ? "EN" : "عربي"}
-              </button>
-              <button className="ruzn-btn-gold text-sm flex items-center gap-2">
-                <Download className="w-4 h-4" />
-                {text.exportReport}
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* Universal Sovereign Header */}
+      <SovereignHeader
+        title={text.title}
+        subtitle={text.subtitle}
+        language={language}
+        activeSuite="analytics"
+        onToggleLanguage={() => setLanguage(language === "arabic" ? "english" : "arabic")}
+        actions={
+          <button className="ruzn-btn-gold text-xs sm:text-sm flex items-center gap-2">
+            <Download className="w-4 h-4" />
+            {text.exportReport}
+          </button>
+        }
+      />
       
       <main className="flex-1 container max-w-7xl mx-auto px-4 py-6">
         {isLoading ? (

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DashboardLayout from "@/components/DashboardLayout";
+import SovereignHeader from "@/components/SovereignHeader";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -145,30 +145,28 @@ export default function AssessmentDetail() {
   }
   
   return (
-    <DashboardLayout>
-      <div className="space-y-6" dir="rtl">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Button 
-              variant="ghost" 
-              size="icon"
-              onClick={() => setLocation("/ria-dashboard")}
-            >
-              <ArrowRight className="h-5 w-5" />
-            </Button>
-            <div>
-              <h1 className="text-2xl font-extrabold text-[#d6b36a]">{assessment.title}</h1>
-              <p className="text-sm text-white/60">{assessment.titleEn}</p>
-            </div>
-          </div>
+    <div 
+      className="min-h-screen text-foreground flex flex-col font-body"
+      dir="rtl"
+      style={{
+        background: 'radial-gradient(1200px 600px at 60% 18%, rgba(214,179,106,.16), transparent 55%), radial-gradient(900px 500px at 20% 80%, rgba(96,165,250,.10), transparent 60%), linear-gradient(180deg, #050506, #0a0a0c)'
+      }}
+    >
+      <SovereignHeader
+        title={assessment.title}
+        subtitle={assessment.titleEn || "تفاصيل تقييم الأثر التنظيمي"}
+        language="arabic"
+        activeSuite="ria"
+        actions={
           <div className="flex items-center gap-2">
             {getStatusBadge(assessment.status)}
             <Badge className={getRiskBadgeColor(assessment.riskLevel)}>
               {getRiskLabel(assessment.riskLevel)}
             </Badge>
           </div>
-        </div>
+        }
+      />
+      <div className="container max-w-7xl mx-auto space-y-6 p-4 sm:p-6" dir="rtl">
         
         {/* Vision 2040 Score Card */}
         <div className="ruzn-card p-6">
@@ -405,6 +403,6 @@ export default function AssessmentDetail() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </div>
   );
 }
