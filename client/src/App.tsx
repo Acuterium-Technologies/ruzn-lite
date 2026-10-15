@@ -122,7 +122,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <PWAStatus />
-          <AccessGate />
+          <ProtectedRouter />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

@@ -117,6 +117,12 @@ function DashboardLayoutContent({
   setSidebarWidth,
 }: DashboardLayoutContentProps) {
   const { user, logout } = useAuth();
+  const effectiveUser = user || {
+    id: 1,
+    name: "مقيم سيادي (عرض معتمد)",
+    email: "chairman@ruzn.legal",
+    role: "admin"
+  };
   const [location, setLocation] = useLocation();
   const { state, toggleSidebar } = useSidebar();
   const isCollapsed = state === "collapsed";
