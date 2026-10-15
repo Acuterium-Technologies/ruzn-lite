@@ -87,10 +87,11 @@ const CITATION_REGEX = /\[(?:Article|المادة)\s*(\d+|[٠-٩]+)[\s,\u060C]+(
  * Perform high-speed FTS5 full-text search across 6,007 legal articles with decree-level precision
  */
 export function searchSovereignCorpus(query: string, limit = 10): LegalArticleResult[] {
-  const db = getCorpusDb();
-  if (!db) {
-    return [];
-  }
+  try {
+    const db = getCorpusDb();
+    if (!db) {
+      return [];
+    }
 
   const rawTrimmed = query.trim();
   if (!rawTrimmed) return [];
@@ -218,6 +219,10 @@ export function searchSovereignCorpus(query: string, limit = 10): LegalArticleRe
     }));
   } catch (err) {
     console.error('[SovereignCorpus] All retrieval attempts failed:', err);
+    return [];
+  }
+  } catch (outerErr) {
+    console.error('[SovereignCorpus] Unexpected search failure:', outerErr);
     return [];
   }
 }

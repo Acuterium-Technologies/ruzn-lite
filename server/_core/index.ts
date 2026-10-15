@@ -2,12 +2,23 @@ import "dotenv/config";
 import express from "express";
 import { createServer } from "http";
 import net from "net";
+import fs from "fs";
+import path from "path";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
 import { handleStreamingChat } from "../streamingChat";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
+import { getProviderCandidates, invokeLLM } from "./llm";
+
+// Global process error barriers to prevent container crashes on async rejections
+process.on("unhandledRejection", (reason) => {
+  console.error("[Process Barrier] Unhandled Rejection:", reason);
+});
+process.on("uncaughtException", (err) => {
+  console.error("[Process Barrier] Uncaught Exception:", err);
+});
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -80,6 +91,80 @@ async function startServer() {
       service: "ruzn-backend",
       version: "1.0.0",
     });
+  });
+
+  // Diagnostic Endpoint — Inspects container runtime, database presence, and active AI engine
+  app.get("/api/debug/system", (_req, res) => {
+    let sqliteStatus = 'untested';
+    let sqliteError: string | null = null;
+    let sqliteRows = 0;
+    try {
+      const dbPath = path.join(process.cwd(), 'knowledge', 'corpus', 'SOVEREIGN_LEGAL_VECTOR_INDEX.sqlite');
+      const exists = fs.existsSync(dbPath);
+      sqliteStatus = exists ? `exists (${fs.statSync(dbPath).size} bytes)` : 'NOT_FOUND';
+      if (exists) {
+        try {
+          const Database = require('better-sqlite3');
+          const db = new Database(dbPath, { readonly: true });
+          const stmt = db.prepare('SELECT count(*) as c FROM legal_articles');
+          const row = stmt.get() as any;
+          sqliteRows = row?.c || 0;
+          sqliteStatus += ` - articles: ${sqliteRows}`;
+          db.close();
+        } catch (sqliteLoadErr: any) {
+          sqliteError = 'load/query error: ' + sqliteLoadErr.message;
+        }
+      }
+    } catch (e: any) {
+      sqliteError = e.message;
+    }
+
+    let llmCandidates: any[] = [];
+    try {
+      llmCandidates = getProviderCandidates().map(c => ({
+        name: c.name,
+        model: c.model,
+        url: c.url,
+        keyPrefix: c.apiKey ? (c.apiKey.substring(0, 6) + '...') : 'NONE'
+      }));
+    } catch (e: any) {
+      // ignore
+    }
+
+    res.json({
+      status: "ok",
+      time: new Date().toISOString(),
+      node: process.version,
+      platform: process.platform,
+      arch: process.arch,
+      cwd: process.cwd(),
+      env: {
+        NODE_ENV: process.env.NODE_ENV,
+        PORT: process.env.PORT,
+        HAS_GEMINI_KEY: !!process.env.GEMINI_API_KEY,
+        HAS_DEEPSEEK_KEY: !!process.env.DEEPSEEK_API_KEY,
+        HAS_PERPLEXITY_KEY: !!process.env.PERPLEXITY_API_KEY,
+        HAS_DB_URL: !!process.env.DATABASE_URL
+      },
+      sqlite: {
+        status: sqliteStatus,
+        error: sqliteError
+      },
+      llm: llmCandidates
+    });
+  });
+
+  // Direct sync test AI endpoint
+  app.post("/api/debug/test-ai", async (req, res) => {
+    try {
+      const { message = 'مرحبا' } = req.body || {};
+      const resp = await invokeLLM({
+        messages: [{ role: 'user', content: message }]
+      });
+      res.json({ ok: true, answer: resp.choices[0]?.message?.content });
+    } catch (err: any) {
+      res.status(500).json({ ok: false, error: err.message, stack: err.stack });
+    }
   });
 
   // OAuth callback under /api/oauth/callback
