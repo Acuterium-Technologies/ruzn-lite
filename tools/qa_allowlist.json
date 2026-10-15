@@ -5,13 +5,34 @@
     "api.openai.com",
     "fonts.googleapis.com",
     "fonts.gstatic.com",
+    "ruzn.legal",
+    "www.ruzn.legal",
     "ruzn.ai",
     "www.ruzn.ai",
     "ruzn.io",
-    "www.ruzn.io"
+    "www.ruzn.io",
+    "acuterium.ai",
+    "www.acuterium.ai",
+    "acuterium.com",
+    "www.acuterium.com",
+    "master-project.acuterium.ai",
+    "baseera.acuterium.ai",
+    "urana.ai",
+    "www.urana.ai",
+    "orion-crew.io",
+    "www.orion-crew.io",
+    "api.deepseek.com",
+    "generativelanguage.googleapis.com",
+    "api.anthropic.com",
+    "api.perplexity.ai",
+    "aisstream.io",
+    "cartocdn.com",
+    "basemaps.cartocdn.com",
+    "openstreetmap.org"
   ],
   "allowed_host_suffixes": [
     ".vercel.app",
-    ".railway.app"
+    ".railway.app",
+    ".acuterium.ai"
   ]
 }

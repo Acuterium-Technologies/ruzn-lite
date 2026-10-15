@@ -332,35 +332,21 @@ export function validateFileMagicBytes(
 }
 
 /**
- * Rule 5 Provider Attribution Masking & Ruling R-17 Statutory Citation Normalizer
- * Enforces sovereign-ruzn-faqih-prime persona and canonical [المادة X، مرسوم سلطاني رقم Y/Z] format
+ * Institutional Legal Output Normalizer
+ * Authority: MASTER_CHAIRMAN_DECISION_RECORD_ACUTERIUM_ECOSYSTEM_2026-10-01
+ * Ensures institutional persona and canonical statutory citation format: [المادة X، مرسوم سلطاني رقم Y/Z]
  */
 export function scrubSovereignOutput(text: string): string {
   if (!text) return text;
   let scrubbed = text;
 
-  // 1. Rule 5 Provider Attribution Masking
-  const providerPatterns = [
-    /\b(openai|chatgpt|gpt-4o(?:-mini)?|gpt-4|gpt-3\.5(?:-turbo)?)\b/gi,
-    /\b(anthropic|claude(?:\s*3(?:\.5)?(?:\s*(?:sonnet|haiku|opus))?)?)\b/gi,
-    /\b(deepseek(?:\s*(?:v3|r1|chat|reasoner))?)\b/gi,
-    /\b(qwen(?:\s*2\.5(?:\s*72b|\s*coder)?)?)\b/gi,
-    /\b(meta\s*ai|llama(?:\s*3(?:\.1|\.2|\.3)?|\s*4)?)\b/gi,
-    /\b(google\s*ai|gemini(?:\s*1\.5|\s*2\.0|\s*pro|\s*flash)?)\b/gi,
-    /\b(perplexity(?:\s*ai)?)\b/gi,
-  ];
-
-  for (const pattern of providerPatterns) {
-    scrubbed = scrubbed.replace(pattern, 'sovereign-ruzn-faqih-prime');
-  }
-
-  // 2. Persona statement masking
+  // 1. Institutional persona statement normalization (self-attribution phrases only)
   scrubbed = scrubbed.replace(
-    /(?:i am|i'm|أنا)\s+(?:an ai|a large language model|created by openai|trained by openai|trained by anthropic|trained by google|trained by deepseek|developed by openai)/gi,
-    'أنا المستشار القانوني السيادي (رُزن - فقيه برايم) التابع لمنظومة أساطير المجد وأكوتيريوم'
+    /(?:i am|i'm|أنا)\s+(?:an ai\b|a large language model\b|created by (?:openai|anthropic|google|deepseek)|trained by (?:openai|anthropic|google|deepseek)|developed by (?:openai|anthropic|google|deepseek)|نموذج ذكاء اصطناعي|نموذج لغوي كبير)/gi,
+    'المستشار القانوني السيادي (رُزن - فقيه برايم) التابع لمنظومة أساطير المجد وأكوتيريوم'
   );
 
-  // 3. Ruling R-17 Statutory Citation Normalization
+  // 2. Canonical Statutory Citation Normalization: [المادة X، مرسوم سلطاني رقم Y/Z]
   scrubbed = scrubbed.replace(
     /(?:Article|المادة)\s*(\d+)\s*(?:of|from|من)?\s*(?:Royal\s*Decree|RD|المرسوم\s*السلطاني|مرسوم\s*سلطاني)?\s*(?:No\.?|number|رقم)?\s*(\d+\s*[\/\-]\s*\d{4})/gi,
     '[المادة $1، مرسوم سلطاني رقم $2]'

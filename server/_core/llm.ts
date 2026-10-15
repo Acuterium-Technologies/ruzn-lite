@@ -210,20 +210,76 @@ const normalizeToolChoice = (
   return toolChoice;
 };
 
-const resolveApiUrl = () => {
-  if (process.env.DEEPSEEK_API_URL) {
-    return process.env.DEEPSEEK_API_URL;
+export interface ProviderCandidate {
+  name: string;
+  url: string;
+  apiKey: string;
+  model: string;
+}
+
+export function getProviderCandidates(): ProviderCandidate[] {
+  const candidates: ProviderCandidate[] = [];
+
+  // 1. Google Gemini (Primary high-speed, non-exhausted sovereign engine)
+  const geminiKey = process.env.GEMINI_API_KEY || "";
+  if (geminiKey) {
+    candidates.push({
+      name: "gemini",
+      url: process.env.GEMINI_API_URL || "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+      apiKey: geminiKey,
+      model: process.env.GEMINI_MODEL || "gemini-flash-lite-latest",
+    });
   }
-  return "https://api.deepseek.com/v1/chat/completions";
+
+  // 2. DeepSeek (Secondary reasoning & Arabic legal drafting)
+  const deepseekKey = process.env.DEEPSEEK_API_KEY || "";
+  if (deepseekKey) {
+    candidates.push({
+      name: "deepseek",
+      url: process.env.DEEPSEEK_API_URL || "https://api.deepseek.com/v1/chat/completions",
+      apiKey: deepseekKey,
+      model: process.env.DEEPSEEK_MODEL || "deepseek-chat",
+    });
+  }
+
+  // 3. Perplexity (Tertiary statutory search & citation validation)
+  const pplxKey = process.env.PERPLEXITY_API_KEY || "";
+  if (pplxKey) {
+    candidates.push({
+      name: "perplexity",
+      url: process.env.PERPLEXITY_API_URL || "https://api.perplexity.ai/chat/completions",
+      apiKey: pplxKey,
+      model: process.env.PERPLEXITY_MODEL || "sonar",
+    });
+  }
+
+  // Optional: Pin primary provider via LLM_PRIMARY_PROVIDER env
+  const pinned = process.env.LLM_PRIMARY_PROVIDER?.toLowerCase();
+  if (pinned) {
+    const idx = candidates.findIndex(c => c.name.toLowerCase() === pinned);
+    if (idx > 0) {
+      const [fav] = candidates.splice(idx, 1);
+      candidates.unshift(fav);
+    }
+  }
+
+  return candidates;
+}
+
+const resolveApiUrl = () => {
+  const candidates = getProviderCandidates();
+  return candidates[0]?.url || "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
 };
 
 const resolveApiKey = () => {
-  return process.env.DEEPSEEK_API_KEY || ENV.forgeApiKey || "";
+  const candidates = getProviderCandidates();
+  return candidates[0]?.apiKey || "";
 };
 
 const assertApiKey = () => {
-  if (!resolveApiKey()) {
-    throw new Error("API key is not configured");
+  const candidates = getProviderCandidates();
+  if (!candidates.length) {
+    throw new Error("No LLM API keys are configured (checked Gemini, DeepSeek, Perplexity)");
   }
 };
 
@@ -285,7 +341,10 @@ export type StreamChunk = {
 };
 
 export async function* invokeLLMStream(params: InvokeParams): AsyncGenerator<StreamChunk> {
-  assertApiKey();
+  const candidates = getProviderCandidates();
+  if (!candidates.length) {
+    throw new Error("No LLM API keys are configured (checked Gemini, DeepSeek, Perplexity)");
+  }
 
   const {
     messages,
@@ -298,25 +357,10 @@ export async function* invokeLLMStream(params: InvokeParams): AsyncGenerator<Str
     response_format,
   } = params;
 
-  const payload: Record<string, unknown> = {
-    model: "deepseek-chat",
-    messages: messages.map(normalizeMessage),
-    stream: true,
-  };
-
-  if (tools && tools.length > 0) {
-    payload.tools = tools;
-  }
-
   const normalizedToolChoice = normalizeToolChoice(
     toolChoice || tool_choice,
     tools
   );
-  if (normalizedToolChoice) {
-    payload.tool_choice = normalizedToolChoice;
-  }
-
-  payload.max_tokens = 4096;
 
   const normalizedResponseFormat = normalizeResponseFormat({
     responseFormat,
@@ -325,59 +369,96 @@ export async function* invokeLLMStream(params: InvokeParams): AsyncGenerator<Str
     output_schema,
   });
 
-  if (normalizedResponseFormat) {
-    payload.response_format = normalizedResponseFormat;
-  }
+  let lastError: Error | null = null;
 
-  const response = await fetch(resolveApiUrl(), {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      authorization: `Bearer ${resolveApiKey()}`,
-    },
-    body: JSON.stringify(payload),
-  });
+  for (const candidate of candidates) {
+    try {
+      const payload: Record<string, unknown> = {
+        model: candidate.model,
+        messages: messages.map(normalizeMessage),
+        stream: true,
+        max_tokens: params.maxTokens || params.max_tokens || 4096,
+      };
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(
-      `LLM stream failed: ${response.status} ${response.statusText} – ${errorText}`
-    );
-  }
+      if (tools && tools.length > 0) {
+        payload.tools = tools;
+      }
+      if (normalizedToolChoice) {
+        payload.tool_choice = normalizedToolChoice;
+      }
+      if (normalizedResponseFormat) {
+        payload.response_format = normalizedResponseFormat;
+      }
 
-  const reader = response.body?.getReader();
-  if (!reader) {
-    throw new Error("No response body for streaming");
-  }
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), Number(process.env.LLM_TIMEOUT_MS) || 20000);
 
-  const decoder = new TextDecoder();
-  let buffer = "";
+      const response = await fetch(candidate.url, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${candidate.apiKey}`,
+        },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+      });
 
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
+      clearTimeout(timeoutId);
 
-    buffer += decoder.decode(value, { stream: true });
-    const lines = buffer.split("\n");
-    buffer = lines.pop() || "";
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.warn(`[LLM Stream Cascade] ${candidate.name} (${candidate.model}) returned ${response.status}: ${errorText.substring(0, 150)}`);
+        lastError = new Error(`LLM stream ${candidate.name} failed: ${response.status} – ${errorText.substring(0, 150)}`);
+        continue;
+      }
 
-    for (const line of lines) {
-      const trimmed = line.trim();
-      if (!trimmed || trimmed === "data: [DONE]") continue;
-      if (trimmed.startsWith("data: ")) {
-        try {
-          const chunk = JSON.parse(trimmed.slice(6)) as StreamChunk;
-          yield chunk;
-        } catch {
-          // Skip malformed JSON
+      const reader = response.body?.getReader();
+      if (!reader) {
+        lastError = new Error(`No response body for streaming from ${candidate.name}`);
+        continue;
+      }
+
+      const decoder = new TextDecoder();
+      let buffer = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n");
+        buffer = lines.pop() || "";
+
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (!trimmed || trimmed === "data: [DONE]") continue;
+          if (trimmed.startsWith("data: ")) {
+            try {
+              const chunk = JSON.parse(trimmed.slice(6)) as StreamChunk;
+              yield chunk;
+            } catch {
+              // Skip malformed JSON
+            }
+          }
         }
       }
+
+      // Stream successfully completed
+      return;
+    } catch (err: any) {
+      console.warn(`[LLM Stream Cascade] ${candidate.name} failed:`, err?.message || err);
+      lastError = err instanceof Error ? err : new Error(String(err));
     }
   }
+
+  throw lastError || new Error("All LLM stream candidates failed");
 }
 
 export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
-  assertApiKey();
+  const candidates = getProviderCandidates();
+  if (!candidates.length) {
+    throw new Error("No LLM API keys are configured (checked Gemini, DeepSeek, Perplexity)");
+  }
 
   const {
     messages,
@@ -390,24 +471,10 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
     response_format,
   } = params;
 
-  const payload: Record<string, unknown> = {
-    model: "deepseek-chat",
-    messages: messages.map(normalizeMessage),
-  };
-
-  if (tools && tools.length > 0) {
-    payload.tools = tools;
-  }
-
   const normalizedToolChoice = normalizeToolChoice(
     toolChoice || tool_choice,
     tools
   );
-  if (normalizedToolChoice) {
-    payload.tool_choice = normalizedToolChoice;
-  }
-
-  payload.max_tokens = 4096;
 
   const normalizedResponseFormat = normalizeResponseFormat({
     responseFormat,
@@ -416,33 +483,62 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
     output_schema,
   });
 
-  if (normalizedResponseFormat) {
-    payload.response_format = normalizedResponseFormat;
-  }
+  let lastError: Error | null = null;
 
-  const response = await fetch(resolveApiUrl(), {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      authorization: `Bearer ${resolveApiKey()}`,
-    },
-    body: JSON.stringify(payload),
-  });
+  for (const candidate of candidates) {
+    try {
+      const payload: Record<string, unknown> = {
+        model: candidate.model,
+        messages: messages.map(normalizeMessage),
+        max_tokens: params.maxTokens || params.max_tokens || 4096,
+      };
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(
-      `LLM invoke failed: ${response.status} ${response.statusText} – ${errorText}`
-    );
-  }
-
-  const result = (await response.json()) as InvokeResult;
-  if (result?.choices) {
-    for (const choice of result.choices) {
-      if (typeof choice.message?.content === "string") {
-        choice.message.content = scrubSovereignOutput(choice.message.content);
+      if (tools && tools.length > 0) {
+        payload.tools = tools;
       }
+      if (normalizedToolChoice) {
+        payload.tool_choice = normalizedToolChoice;
+      }
+      if (normalizedResponseFormat) {
+        payload.response_format = normalizedResponseFormat;
+      }
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), Number(process.env.LLM_TIMEOUT_MS) || 20000);
+
+      const response = await fetch(candidate.url, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${candidate.apiKey}`,
+        },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.warn(`[LLM Cascade] ${candidate.name} (${candidate.model}) returned ${response.status}: ${errorText.substring(0, 150)}`);
+        lastError = new Error(`LLM ${candidate.name} failed: ${response.status} – ${errorText.substring(0, 150)}`);
+        continue;
+      }
+
+      const result = (await response.json()) as InvokeResult;
+      if (result?.choices) {
+        for (const choice of result.choices) {
+          if (typeof choice.message?.content === "string") {
+            choice.message.content = scrubSovereignOutput(choice.message.content);
+          }
+        }
+      }
+      return result;
+    } catch (err: any) {
+      console.warn(`[LLM Cascade] ${candidate.name} attempt failed:`, err?.message || err);
+      lastError = err instanceof Error ? err : new Error(String(err));
     }
   }
-  return result;
+
+  throw lastError || new Error("All LLM cascade candidates failed");
 }
