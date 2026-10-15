@@ -1,42 +1,51 @@
-// Ruzn Service Worker v1.0
-const CACHE_NAME = 'ruzn-cache-v1';
+// Ruzn Sovereign Service Worker v4.0 (Instant Invalidation & Live Updates)
+const CACHE_NAME = 'ruzn-sovereign-v4.0';
 const OFFLINE_URL = '/offline.html';
 
-// Assets to cache immediately on install
+// Assets to cache immediately on install - DO NOT precache HTML root to avoid stale shells
 const PRECACHE_ASSETS = [
-  '/',
+  '/offline.html',
   '/ruzn-logo.png',
   '/ruzn-icon-192.png',
-  '/ruzn-icon-512.png',
-  '/offline.html'
+  '/ruzn-icon-512.png'
 ];
 
-// Install event - cache essential assets
+// Install event - cache essential offline fallback assets and skip waiting immediately
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        console.log('[SW] Precaching assets');
+        console.log('[SW] Sovereign Precaching offline assets');
         return cache.addAll(PRECACHE_ASSETS);
       })
-      .then(() => self.skipWaiting())
   );
 });
 
-// Activate event - clean up old caches
+// Activate event - aggressively wipe out all old and stale caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames
           .filter((name) => name !== CACHE_NAME)
-          .map((name) => caches.delete(name))
+          .map((name) => {
+            console.log('[SW] Deleting stale cache:', name);
+            return caches.delete(name);
+          })
       );
     }).then(() => self.clients.claim())
   );
 });
 
-// Fetch event - network first, fallback to cache
+// Message listener to trigger instant skipWaiting from client
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
+
+// Fetch event - network first for all documents/navigations, stale-while-revalidate for static assets
 self.addEventListener('fetch', (event) => {
   // Skip non-GET requests
   if (event.request.method !== 'GET') return;
@@ -44,37 +53,45 @@ self.addEventListener('fetch', (event) => {
   // Skip API requests - always go to network
   if (event.request.url.includes('/api/')) return;
 
+  // Navigation / HTML requests - MUST ALWAYS GO DIRECT TO NETWORK with cache-control reload
+  if (event.request.mode === 'navigate' || event.request.destination === 'document') {
+    event.respondWith(
+      fetch(event.request, { cache: 'no-cache' })
+        .catch(() => {
+          return caches.match(OFFLINE_URL);
+        })
+    );
+    return;
+  }
+
+  // Static hashed assets (.js, .css, images)
   event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        // Clone the response before caching
-        const responseClone = response.clone();
-        
-        // Cache successful responses
-        if (response.status === 200) {
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseClone);
-          });
+    caches.match(event.request).then((cachedResponse) => {
+      if (cachedResponse) {
+        // Return cached and refresh in background
+        fetch(event.request).then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, networkResponse);
+            });
+          }
+        }).catch(() => {});
+        return cachedResponse;
+      }
+
+      return fetch(event.request).then((response) => {
+        if (!response || response.status !== 200 || response.type !== 'basic') {
+          return response;
         }
-        
+
+        const responseToCache = response.clone();
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, responseToCache);
+        });
+
         return response;
-      })
-      .catch(() => {
-        // Network failed, try cache
-        return caches.match(event.request)
-          .then((cachedResponse) => {
-            if (cachedResponse) {
-              return cachedResponse;
-            }
-            
-            // If it's a navigation request, show offline page
-            if (event.request.mode === 'navigate') {
-              return caches.match(OFFLINE_URL);
-            }
-            
-            return new Response('Offline', { status: 503 });
-          });
-      })
+      });
+    })
   );
 });
 

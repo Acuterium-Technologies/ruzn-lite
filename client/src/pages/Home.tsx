@@ -786,8 +786,11 @@ export default function Home() {
       
     <div 
       ref={pullRefreshContainerRef}
-      className="min-h-screen flex flex-col bg-background pb-20 md:pb-0"
+      className="min-h-screen flex flex-col pb-20 md:pb-0"
       dir={isRTL ? "rtl" : "ltr"}
+      style={{
+        background: 'radial-gradient(1200px 600px at 60% 18%, rgba(214,179,106,.16), transparent 55%), radial-gradient(900px 500px at 20% 80%, rgba(96,165,250,.10), transparent 60%), linear-gradient(180deg, #050506, #0a0a0c)'
+      }}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -1280,7 +1283,7 @@ export default function Home() {
         </div>
         
         {/* Input Area */}
-        <div className="sticky bottom-0 pt-3 sm:pt-4 border-t border-white/10" style={{ background: 'rgba(7,7,8,.95)', backdropFilter: 'blur(10px)' }}>
+        <div className="sticky bottom-0 pt-3 sm:pt-4 border-t border-white/10" style={{ background: 'rgba(7,7,8,.82)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}>
           {/* Uploaded file preview */}
           {uploadedFile && (
             <div className="mb-3 p-3 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-between">
