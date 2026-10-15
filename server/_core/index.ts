@@ -63,7 +63,16 @@ async function startServer() {
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
-  // Health check endpoint for Railway
+  // Health check endpoints for Railway and Docker
+  app.get("/health", (_req, res) => {
+    res.json({
+      status: "healthy",
+      timestamp: new Date().toISOString(),
+      service: "ruzn-backend",
+      version: "1.0.0",
+    });
+  });
+
   app.get("/api/health", (_req, res) => {
     res.json({
       status: "healthy",
@@ -93,15 +102,10 @@ async function startServer() {
     serveStatic(app);
   }
 
-  const preferredPort = parseInt(process.env.PORT || "3000");
-  const port = await findAvailablePort(preferredPort);
+  const port = parseInt(process.env.PORT || "3000");
 
-  if (port !== preferredPort) {
-    console.log(`Port ${preferredPort} is busy, using port ${port} instead`);
-  }
-
-  server.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}/`);
+  server.listen(port, "0.0.0.0", () => {
+    console.log(`Server running on http://0.0.0.0:${port}/`);
   });
 }
 
