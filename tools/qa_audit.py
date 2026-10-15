@@ -104,8 +104,8 @@ def iter_files(repo_root: Path) -> Iterable[Path]:
         # skip build artifacts
         if "dist" in parts:
             continue
-        # skip generated audit outputs to avoid self-triggering
-        if p.name.startswith("QA_AUDIT_REPORT."):
+        # skip generated audit outputs and blocklists to avoid self-triggering
+        if p.name.startswith("QA_AUDIT_REPORT.") or p.name in {"qa_blocklist.json", "qa_allowlist.json"}:
             continue
         yield p
 
