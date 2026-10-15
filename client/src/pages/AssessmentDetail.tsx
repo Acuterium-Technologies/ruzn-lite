@@ -111,26 +111,38 @@ export default function AssessmentDetail() {
   
   if (isLoading) {
     return (
-      <DashboardLayout>
+      <div className="min-h-screen bg-[#070708] text-white">
+        <SovereignHeader
+          title="تقييم الأثر التشريعي والتنظيمي (RIA)"
+          subtitle="Regulatory Impact Assessment Suite"
+          language="arabic"
+          activeSuite="ria"
+        />
         <div className="flex items-center justify-center min-h-[60vh]">
-          <Loader2 className="h-12 w-12 animate-spin text-[#c9a227]" />
+          <Loader2 className="h-12 w-12 animate-spin text-[#d6b36a]" />
         </div>
-      </DashboardLayout>
+      </div>
     );
   }
   
   if (!assessment) {
     return (
-      <DashboardLayout>
+      <div className="min-h-screen bg-[#070708] text-white">
+        <SovereignHeader
+          title="تقييم الأثر التشريعي والتنظيمي (RIA)"
+          subtitle="Regulatory Impact Assessment Suite"
+          language="arabic"
+          activeSuite="ria"
+        />
         <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
           <AlertCircle className="h-16 w-16 text-red-500" />
           <h2 className="text-xl font-semibold">التقييم غير موجود</h2>
-          <Button onClick={() => setLocation("/ria-dashboard")} variant="outline">
+          <Button onClick={() => setLocation("/ria-dashboard")} variant="outline" className="border-[#3a2f1d] text-[#e8c77e]">
             <ChevronLeft className="h-4 w-4 ml-2" />
             العودة للوحة التقييمات
           </Button>
         </div>
-      </DashboardLayout>
+      </div>
     );
   }
   
