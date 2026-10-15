@@ -272,8 +272,24 @@ export const appRouter = router({
           messages.push({ role: h.role, content: h.content });
         }
         
+        // 1. Detect Legal Intent & Domain
+        const legalIntent = detectLegalIntent(message);
+
+        // 2. Retrieve Sovereign Articles from 6,007-article corpus
+        const retrievedArticles = searchSovereignCorpus(message, 4);
+        let userMessageWithContext = message;
+        if (retrievedArticles.length > 0) {
+          userMessageWithContext += '\n\n--- Sovereign Statutory Corpus [النصوص التشريعية والمراسيم السلطانية المعتمدة] ---\n';
+          for (const art of retrievedArticles) {
+            const decreeStr = art.decreeNo ? ` (مرسوم سلطاني رقم ${art.decreeNo})` : '';
+            userMessageWithContext += `\n[المادة ${art.articleNumber}${decreeStr}]: ${art.titleAr}\n${art.textAr?.substring(0, 1000)}\n`;
+          }
+          userMessageWithContext += '--- End of Sovereign Statutory Corpus ---\n';
+          userMessageWithContext += `\n[توجيه النية الاستشارية]: النية المصنفة هي "${legalIntent.intent}" ضمن مجال "${legalIntent.domain}". اعتمد المواد المسترجعة أعلاه بصيغة [المادة X، مرسوم سلطاني رقم Y/Z].\n`;
+        }
+
         // Add current message
-        messages.push({ role: 'user', content: message });
+        messages.push({ role: 'user', content: userMessageWithContext });
         
         try {
           const response = await invokeLLM({ messages });
@@ -393,11 +409,21 @@ export const appRouter = router({
             }
           }
           
+          const verifiedCitations = verifyStatutoryCitation(assistantMessage);
+
           return {
             response: assistantMessage,
             status: 'success' as const,
             riskScore,
             category,
+            intent: legalIntent,
+            matchedArticles: retrievedArticles.map(a => ({
+              articleNumber: a.articleNumber,
+              decreeNo: a.decreeNo,
+              titleAr: a.titleAr,
+              documentId: a.documentId
+            })),
+            verifiedCitations,
             // EREBUS enhanced response data
             advancedRisk: advancedRiskAssessment ? {
               score: advancedRiskAssessment.RC_risk,

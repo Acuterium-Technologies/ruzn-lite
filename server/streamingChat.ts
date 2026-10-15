@@ -5,8 +5,9 @@ import { searchKnowledgeBase } from './db/knowledge';
 import { notifyOwner } from './_core/notification';
 import { shouldSearchWeb, searchAndScrape, formatSearchResultsForAI } from './webSearch';
 import { scrubSovereignOutput } from './utils/sanitize';
+import { searchSovereignCorpus, verifyStatutoryCitation } from './knowledge/sovereignLegalCorpus';
+import { detectLegalIntent } from './protocols/skills/legalSkills';
 
-// Sovereign System prompts with Rule 5 persona and Ruling R-17 citation invariant
 // Sovereign System prompts with Rule 5 persona, Senior Legal Counsel Training, and Ruling R-17 citation invariant
 const SYSTEM_PROMPTS = {
   complaints: {
@@ -148,10 +149,31 @@ export async function handleStreamingChat(req: Request, res: Response) {
       }
     }
 
-    // Search knowledge base first
+    // 1. Detect Legal Intent & Statutory Domain
+    const legalIntent = detectLegalIntent(message);
+
+    // 2. Search Sovereign Legal Corpus (FTS5 across 6,007 articles & Royal Decrees)
+    let sovereignArticlesContext = '';
+    let retrievedArticles: any[] = [];
+    try {
+      retrievedArticles = searchSovereignCorpus(message, 4);
+      if (retrievedArticles.length > 0) {
+        sovereignArticlesContext = '\n\n--- Sovereign Statutory Corpus [النصوص التشريعية والمراسيم السلطانية المعتمدة] ---\n';
+        for (const art of retrievedArticles) {
+          const decreeStr = art.decreeNo ? ` (مرسوم سلطاني رقم ${art.decreeNo})` : '';
+          sovereignArticlesContext += `\n[المادة ${art.articleNumber}${decreeStr}]: ${art.titleAr}\n${art.textAr?.substring(0, 1200)}\n`;
+        }
+        sovereignArticlesContext += '--- End of Sovereign Statutory Corpus ---\n';
+        sovereignArticlesContext += `\n[توجيه النية الاستشارية]: النية المصنفة هي "${legalIntent.intent}" ضمن مجال "${legalIntent.domain}" بدرجة ثقة ${(legalIntent.confidence * 100).toFixed(0)}%. قدم الإجابة وفق منهجية IRAC واعتمد المواد المسترجعة أعلاه حصراً بالصيغة الإلزامية [المادة X، مرسوم سلطاني رقم Y/Z].\n`;
+      }
+    } catch (scErr) {
+      console.error('[SovereignCorpus] Retrieval error in streaming chat:', scErr);
+    }
+
+    // 3. Search legacy knowledge base fallback
     let knowledgeContext = '';
     try {
-      const knowledgeResults = await searchKnowledgeBase(message, { limit: 3, language: language === 'arabic' ? 'arabic' : 'english' });
+      const knowledgeResults = await searchKnowledgeBase(message, { limit: 2, language: language === 'arabic' ? 'arabic' : 'english' });
       if (knowledgeResults.length > 0) {
         knowledgeContext = '\n\n--- Knowledge Base ---\n';
         for (const result of knowledgeResults) {
@@ -160,7 +182,7 @@ export async function handleStreamingChat(req: Request, res: Response) {
           const content = language === 'arabic' ? (doc.contentArabic || doc.content) : doc.content;
           knowledgeContext += `\n### ${title}\n`;
           if (doc.referenceNumber) knowledgeContext += `Reference: ${doc.referenceNumber}\n`;
-          knowledgeContext += `${content?.substring(0, 1500) || ''}\n`;
+          knowledgeContext += `${content?.substring(0, 1000) || ''}\n`;
         }
         knowledgeContext += '\n--- End of Knowledge Base ---\n';
       }
@@ -173,9 +195,7 @@ export async function handleStreamingChat(req: Request, res: Response) {
     if (shouldSearchWeb(message)) {
       try {
         // Send searching status to client
-        res.write(`data: ${JSON.stringify({ type: 'status', status: 'searching' })}
-
-`);
+        res.write(`data: ${JSON.stringify({ type: 'status', status: 'searching' })}\n\n`);
         
         const { searchResults, scrapedContent } = await searchAndScrape(message);
         
@@ -196,8 +216,11 @@ export async function handleStreamingChat(req: Request, res: Response) {
       }
     }
 
-    // Add current message with knowledge base and web search context if available
+    // Add current message with sovereign corpus, knowledge base and web search context if available
     let userMessageWithContext = message;
+    if (sovereignArticlesContext) {
+      userMessageWithContext += sovereignArticlesContext;
+    }
     if (knowledgeContext) {
       userMessageWithContext += knowledgeContext;
     }
@@ -238,11 +261,21 @@ export async function handleStreamingChat(req: Request, res: Response) {
         riskScore = parseInt(riskMatch[1], 10);
       }
 
-      // Send completion event with metadata
+      // Verify citations against sovereign corpus (Ruling R-17)
+      const citationVerification = verifyStatutoryCitation(fullResponse);
+
+      // Send completion event with rich metadata
       res.write(`data: ${JSON.stringify({ 
         type: 'done', 
         riskScore,
-        fullResponse 
+        fullResponse,
+        intent: legalIntent,
+        citations: citationVerification,
+        matchedArticles: retrievedArticles.map(a => ({
+          decreeNo: a.decreeNo,
+          articleNumber: a.articleNumber,
+          titleAr: a.titleAr
+        }))
       })}\n\n`);
 
       // Notify owner for high-risk complaints

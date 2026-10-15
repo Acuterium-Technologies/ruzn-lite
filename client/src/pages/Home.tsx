@@ -42,7 +42,9 @@ import {
   VolumeX,
   X,
   Image,
-  FileUp
+  FileUp,
+  BookOpen,
+  ShieldCheck
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -94,6 +96,16 @@ const PRESET_QUERIES = {
     ]
   }
 };
+
+const DOMAIN_OPTIONS = [
+  { id: "all", labelAr: "كافة التشريعات", labelEn: "All Decrees", count: "63 مرسوم" },
+  { id: "عمال", labelAr: "قانون العمل", labelEn: "Labor Law", count: "د.س 53/2023" },
+  { id: "جزائ", labelAr: "قانون الجزاء", labelEn: "Penal Code", count: "د.س 7/2018" },
+  { id: "تجار", labelAr: "الشركات والتجارة", labelEn: "Commercial & Companies", count: "د.س 18/2019" },
+  { id: "مدن", labelAr: "المعاملات المدنية", labelEn: "Civil Law", count: "د.س 29/2013" },
+  { id: "إدار", labelAr: "الرقابة والنزاهة", labelEn: "Governance & Audit", count: "د.س 111/2011" },
+  { id: "ضريب", labelAr: "الضرائب والمالية", labelEn: "Tax & Finance", count: "د.س 121/2020" },
+];
 
 const UI_TEXT = {
   arabic: {
@@ -328,6 +340,7 @@ export default function Home() {
   const [isStreaming, setIsStreaming] = useState(false);
   const [streamingContent, setStreamingContent] = useState("");
   const [isSearchingWeb, setIsSearchingWeb] = useState(false);
+  const [selectedDomain, setSelectedDomain] = useState<string>("all");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   
@@ -416,6 +429,15 @@ export default function Home() {
   
   // Dashboard stats query
   const { data: dashboardStats } = trpc.dashboard.getStats.useQuery();
+
+  // Sovereign Corpus Exploration Queries
+  const suggestedQueriesQuery = trpc.legalCorpus.getSuggestedQueries.useQuery(
+    selectedDomain !== "all" ? { domain: selectedDomain, limit: 6 } : { limit: 6 },
+    { enabled: feature === "legislative" }
+  );
+  const corpusStatsQuery = trpc.legalCorpus.getCorpusStats.useQuery(undefined, {
+    enabled: feature === "legislative"
+  });
   
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -1069,22 +1091,81 @@ export default function Home() {
               <h2 className="text-xl sm:text-2xl font-bold mb-2">{text.welcome}</h2>
               <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-8 px-4">{text.welcomeDesc}</p>
               
-              {/* Preset Queries */}
-              <div className="w-full max-w-md px-2">
-                <p className="text-sm text-muted-foreground mb-3">{text.presetTitle}</p>
-                <div className="space-y-2">
-                  {presets.map((query, idx) => (
-                    <Button
-                      key={idx}
-                      variant="outline"
-                      className="w-full justify-start text-start h-auto py-2 sm:py-3 px-3 sm:px-4 text-xs sm:text-sm border-primary/20 hover:border-primary/50 hover:bg-primary/5"
-                      onClick={() => handlePreset(query)}
-                    >
-                      {query}
-                    </Button>
-                  ))}
+              {/* Sovereign Statutory Exploration Hub (Legislative Mode) */}
+              {feature === "legislative" ? (
+                <div className="w-full max-w-3xl px-2">
+                  {/* Sovereign Corpus Badge */}
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[rgba(214,179,106,0.12)] border border-[rgba(214,179,106,0.3)] mb-4 text-xs font-medium text-[rgb(214,179,106)]">
+                    <ShieldCheck className="w-4 h-4 text-[rgb(214,179,106)]" />
+                    <span>
+                      {language === 'arabic'
+                        ? `الفهرس التشريعي والرقابي السيادي: ${corpusStatsQuery.data?.totalArticles?.toLocaleString('ar-OM') || '6,007'} مادة قانونية · 63 مرسوماً سلطانياً`
+                        : `Sovereign Statutory Corpus: ${corpusStatsQuery.data?.totalArticles?.toLocaleString() || '6,007'} Articles · 63 Royal Decrees`}
+                    </span>
+                  </div>
+
+                  {/* Domain Selector Filter Pills */}
+                  <div className="flex flex-wrap items-center justify-center gap-1.5 mb-4">
+                    {DOMAIN_OPTIONS.map((domain) => (
+                      <button
+                        key={domain.id}
+                        onClick={() => setSelectedDomain(domain.id)}
+                        className={`text-xs px-2.5 py-1 rounded-lg transition-all border ${
+                          selectedDomain === domain.id
+                            ? "bg-[rgba(214,179,106,0.22)] border-[rgba(214,179,106,0.6)] text-[rgb(214,179,106)] font-semibold shadow-sm"
+                            : "bg-background/40 border-border/50 text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                        }`}
+                      >
+                        {language === 'arabic' ? domain.labelAr : domain.labelEn}
+                        <span className="text-[10px] opacity-70 ml-1 mr-1">({domain.count})</span>
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Suggested Query Cards */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-start">
+                    {(suggestedQueriesQuery.data?.queries && suggestedQueriesQuery.data.queries.length > 0
+                      ? suggestedQueriesQuery.data.queries
+                      : presets.map(p => ({ 'السؤال': p, 'النية': 'استشارة قانونية', 'المجال': 'التشريع العماني' }))
+                    ).map((item, idx) => (
+                      <div
+                        key={idx}
+                        onClick={() => handlePreset(item['السؤال'])}
+                        className="p-3 rounded-xl bg-card/60 hover:bg-card/90 border border-primary/20 hover:border-primary/50 transition-all cursor-pointer group shadow-sm flex flex-col justify-between"
+                      >
+                        <p className="text-xs sm:text-sm font-medium text-foreground group-hover:text-primary transition-colors mb-2 line-clamp-2">
+                          {item['السؤال']}
+                        </p>
+                        <div className="flex items-center justify-between text-[10px] text-muted-foreground pt-1 border-t border-border/30">
+                          <span className="px-1.5 py-0.5 rounded bg-primary/10 text-primary font-mono">
+                            {item['النية']}
+                          </span>
+                          <span className="truncate max-w-[140px] text-muted-foreground">
+                            {item['المجال']}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              ) : (
+                /* Preset Queries (Complaints Mode) */
+                <div className="w-full max-w-md px-2">
+                  <p className="text-sm text-muted-foreground mb-3">{text.presetTitle}</p>
+                  <div className="space-y-2">
+                    {presets.map((query, idx) => (
+                      <Button
+                        key={idx}
+                        variant="outline"
+                        className="w-full justify-start text-start h-auto py-2 sm:py-3 px-3 sm:px-4 text-xs sm:text-sm border-primary/20 hover:border-primary/50 hover:bg-primary/5"
+                        onClick={() => handlePreset(query)}
+                      >
+                        {query}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           ) : (
             messages.map((msg, idx) => (

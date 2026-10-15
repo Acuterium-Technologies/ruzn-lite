@@ -81,7 +81,7 @@ function toArabicDigits(str: string): string {
 const CITATION_REGEX = /\[(?:Article|المادة)\s*(\d+|[٠-٩]+)[\s,\u060C]+(?:RD|مرسوم\s*سلطاني\s*(?:رقم)?)?\s*(\d+|[٠-٩]+)\s*[\/\-]\s*(\d+|[٠-٩]+)\]/gi;
 
 /**
- * Perform high-speed FTS5 full-text search across 6,033 legal articles
+ * Perform high-speed FTS5 full-text search across 6,007 legal articles with decree-level precision
  */
 export function searchSovereignCorpus(query: string, limit = 10): LegalArticleResult[] {
   const db = getCorpusDb();
@@ -89,20 +89,123 @@ export function searchSovereignCorpus(query: string, limit = 10): LegalArticleRe
     return [];
   }
 
-  try {
-    // Sanitize query for FTS5 (escape special characters)
-    const cleanedQuery = query.replace(/['"*()^:]/g, ' ').trim();
-    if (!cleanedQuery) return [];
+  const rawTrimmed = query.trim();
+  if (!rawTrimmed) return [];
 
+  // 1. Check for Decree Number pattern e.g. 53/2023 or 53-2023 or ٥٣/٢٠٢٣
+  const decreeMatch = rawTrimmed.match(/(?:مرسوم\s*(?:سلطاني)?\s*(?:رقم)?)?\s*(\d+|[٠-٩]+)\s*[\/\-]\s*(\d+|[٠-٩]+)/);
+  const articleMatch = rawTrimmed.match(/(?:المادة|Article|مادة)\s*(\d+|[٠-٩]+|[أ-ي]+)/i);
+
+  if (decreeMatch) {
+    const dNum = normalizeArabicDigits(decreeMatch[1]);
+    const dYear = normalizeArabicDigits(decreeMatch[2]);
+    const westernDecree = `${dNum}/${dYear}`;
+    const arabicDecree = `${toArabicDigits(dNum)}/${toArabicDigits(dYear)}`;
+
+    if (articleMatch) {
+      const artNum = articleMatch[1];
+      const normArtNum = normalizeArabicDigits(artNum);
+      const arabArtNum = toArabicDigits(normArtNum);
+      try {
+        const stmt = db.prepare(`
+          SELECT document_id, decree_no, article_number, title_ar, text_ar
+          FROM legal_articles
+          WHERE (decree_no LIKE ? OR decree_no LIKE ? OR document_id LIKE ?)
+            AND (article_number = ? OR article_number = ? OR article_number LIKE ?)
+          LIMIT ?
+        `);
+        const rows = stmt.all(
+          `%${westernDecree}%`, `%${arabicDecree}%`, `%${dYear}-${dNum}%`,
+          normArtNum, arabArtNum, `%${artNum}%`, limit
+        ) as any[];
+        if (rows.length > 0) {
+          return rows.map(r => ({
+            documentId: r.document_id,
+            decreeNo: r.decree_no || westernDecree,
+            articleNumber: r.article_number,
+            titleAr: r.title_ar,
+            textAr: r.text_ar,
+          }));
+        }
+      } catch (err) {
+        // Continue to general search
+      }
+    }
+
+    // Decree match without specific article or if article didn't match
+    try {
+      const stmt = db.prepare(`
+        SELECT document_id, decree_no, article_number, title_ar, text_ar
+        FROM legal_articles
+        WHERE decree_no LIKE ? OR decree_no LIKE ? OR document_id LIKE ?
+        LIMIT ?
+      `);
+      const rows = stmt.all(`%${westernDecree}%`, `%${arabicDecree}%`, `%${dYear}-${dNum}%`, limit) as any[];
+      if (rows.length > 0) {
+        return rows.map(r => ({
+          documentId: r.document_id,
+          decreeNo: r.decree_no || westernDecree,
+          articleNumber: r.article_number,
+          titleAr: r.title_ar,
+          textAr: r.text_ar,
+        }));
+      }
+    } catch (err) {
+      // Continue to FTS
+    }
+  }
+
+  // 2. FTS5 Search with phrase or token matching
+  try {
+    const cleanedQuery = rawTrimmed.replace(/['"*()^:/\\-]/g, ' ').replace(/\s+/g, ' ').trim();
+    if (cleanedQuery) {
+      const stmt = db.prepare(`
+        SELECT document_id, decree_no, article_number, title_ar, text_ar 
+        FROM legal_articles_fts 
+        WHERE legal_articles_fts MATCH ? 
+        LIMIT ?
+      `);
+      const rows = stmt.all(`"${cleanedQuery}"`, limit) as any[];
+      if (rows.length > 0) {
+        return rows.map(r => ({
+          documentId: r.document_id,
+          decreeNo: r.decree_no,
+          articleNumber: r.article_number,
+          titleAr: r.title_ar,
+          textAr: r.text_ar,
+        }));
+      }
+
+      // If exact phrase has no match, try token OR
+      const tokens = cleanedQuery.split(' ').filter(t => t.length > 2);
+      if (tokens.length > 0) {
+        const tokenQuery = tokens.slice(0, 5).join(' OR ');
+        const tokenRows = stmt.all(tokenQuery, limit) as any[];
+        if (tokenRows.length > 0) {
+          return tokenRows.map(r => ({
+            documentId: r.document_id,
+            decreeNo: r.decree_no,
+            articleNumber: r.article_number,
+            titleAr: r.title_ar,
+            textAr: r.text_ar,
+          }));
+        }
+      }
+    }
+  } catch (ftsErr) {
+    // Fallback to LIKE
+  }
+
+  // 3. Fallback to LIKE across decree_no, title_ar, and text_ar
+  try {
+    const term = `%${rawTrimmed}%`;
     const stmt = db.prepare(`
       SELECT document_id, decree_no, article_number, title_ar, text_ar 
-      FROM legal_articles_fts 
-      WHERE legal_articles_fts MATCH ? 
+      FROM legal_articles 
+      WHERE text_ar LIKE ? OR title_ar LIKE ? OR decree_no LIKE ?
       LIMIT ?
     `);
-
-    // Match query in FTS5
-    const rows = stmt.all(cleanedQuery, limit) as any[];
+    const rows = stmt.all(term, term, term, limit) as any[];
     return rows.map(r => ({
       documentId: r.document_id,
       decreeNo: r.decree_no,
@@ -110,28 +213,9 @@ export function searchSovereignCorpus(query: string, limit = 10): LegalArticleRe
       titleAr: r.title_ar,
       textAr: r.text_ar,
     }));
-  } catch (e) {
-    // If exact FTS fails (syntax error in match), fallback to LIKE query
-    try {
-      const stmt = db.prepare(`
-        SELECT document_id, decree_no, article_number, title_ar, text_ar 
-        FROM legal_articles_fts 
-        WHERE text_ar LIKE ? OR title_ar LIKE ? 
-        LIMIT ?
-      `);
-      const term = `%${query.trim()}%`;
-      const rows = stmt.all(term, term, limit) as any[];
-      return rows.map(r => ({
-        documentId: r.document_id,
-        decreeNo: r.decree_no,
-        articleNumber: r.article_number,
-        titleAr: r.title_ar,
-        textAr: r.text_ar,
-      }));
-    } catch (innerErr) {
-      console.error('[SovereignCorpus] Query execution error:', innerErr);
-      return [];
-    }
+  } catch (err) {
+    console.error('[SovereignCorpus] All retrieval attempts failed:', err);
+    return [];
   }
 }
 
@@ -296,9 +380,12 @@ export function getSuggestedQueries(filter?: { domain?: string; intent?: string;
   }
 
   let results = queriesCache || [];
-  if (filter?.domain) {
-    const d = filter.domain;
-    results = results.filter(q => q['المجال'] === d || q['المجال'].includes(d));
+  if (filter?.domain && filter.domain !== 'all') {
+    const rawFilter = filter.domain.replace(/_/g, '').replace(/\s+/g, '');
+    results = results.filter(q => {
+      const qDomain = (q['المجال'] || '').replace(/_/g, '').replace(/\s+/g, '');
+      return qDomain.includes(rawFilter) || rawFilter.includes(qDomain);
+    });
   }
   if (filter?.intent) {
     const i = filter.intent;
