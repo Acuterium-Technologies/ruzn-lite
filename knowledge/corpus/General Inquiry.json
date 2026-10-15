@@ -1,0 +1,10 @@
+{
+  "intent": "general_inquiry",
+  "domain": "civil_law",
+  "keywords": ["property", "ownership", "land"],
+  "query": "What are the legal requirements for property ownership in Oman?",
+  "context": {
+    "location": "Muscat",
+    "user_type": "individual"
+  }
+}

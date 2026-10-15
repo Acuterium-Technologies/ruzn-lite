@@ -1,0 +1,221 @@
+# Ruzn-AI Knowledge Base & RAG/DAG Architecture Research
+
+## Phase 1: Omani Legal Regulations & Compliance Framework
+
+### Key Legal Sources Identified:
+
+1. **Decree.om** - Omani Legislation Search Engine
+   - URL: https://decree.om/
+   - Content: Comprehensive database of English-translated Omani laws
+   - Categories:
+     - Royal Decrees (e.g., RD 50/2026 on AI Special Zone)
+     - Ministerial Decisions
+     - Circulars
+     - Treaties
+   - Features: Lex AI for legal research, Risk assessment tools
+
+2. **Open Data Portal** - Oman Government
+   - URL: https://opendata.gov.om/en/community/laws
+   - Principles: Complete, Primary, Timely, Permanent, Accessible, Machine-readable
+   - Formats: CSV, XLS, JSON, XML
+   - License: Open Data licenses (Creative Commons)
+
+3. **Qanoon.om** - Arabic Legal Database
+   - Full catalogue of Omani legislation in Arabic
+   - Searchable interface
+
+4. **State Audit Institution (SAI)** - Oman
+   - Regulatory authority for financial and administrative control
+   - Standards and audit programs for governmental entities
+   - Compliance frameworks
+
+### Critical Omani Laws for Ruzn-AI Knowledge Base:
+
+1. **Anti-Money Laundering (AML) Framework**
+   - Compliance with international AML/CFT standards
+   - Regulations on financial transactions and reporting
+
+2. **Cybersecurity & Data Protection**
+   - Personal Data Protection Law (PDPL)
+   - Data collection, storage, processing, and transfer requirements
+   - Information security compliance for e-government
+
+3. **Financial Compliance**
+   - Tender Law
+   - Financial Law
+   - Conflict-of-interest regulations
+   - State contract frameworks
+
+4. **AI Regulations**
+   - Royal Decree 50/2026: Establishing AI Special Zone in Muscat
+   - Healthcare sector AI legal control
+   - Algorithmic bias and transparency requirements
+
+5. **Government Procurement & Contracts**
+   - State contract legal framework
+   - Public benefit status declarations
+
+6. **Audit & Governance Standards**
+   - SAI audit programs and guidelines
+   - Financial and administrative audit standards
+   - Performance monitoring and supervision
+
+### Data Sources for Knowledge Base Population:
+
+- **Decree.om API** - For automated retrieval of laws and regulations
+- **Oman Open Data Portal** - For structured datasets (JSON, CSV, XML)
+- **SAI Official Documents** - Audit standards and compliance guidelines
+- **Ministry Circulars** - Latest regulatory updates and guidance
+
+---
+
+## Phase 2: RAG/DAG Architecture Design
+
+### RAG (Retrieval-Augmented Generation) Component:
+
+**Purpose**: Enable the chat interface to retrieve relevant legal documents and regulations before generating responses.
+
+**Architecture**:
+```
+User Query 
+  ↓
+Vector Embedding (Manus LLM)
+  ↓
+Vector Database Search (Pinecone/Weaviate/Milvus)
+  ↓
+Document Retrieval (Top-K relevant documents)
+  ↓
+Context Assembly
+  ↓
+LLM Prompt with Context (Manus AI API)
+  ↓
+Response Generation
+```
+
+**Implementation Steps**:
+1. Parse and embed all Omani legal documents
+2. Store embeddings in vector database
+3. Implement similarity search for query matching
+4. Augment LLM prompts with retrieved documents
+5. Generate contextual responses with citations
+
+### DAG (Directed Acyclic Graph) Component:
+
+**Purpose**: Define document processing workflow for ingestion, validation, and indexing.
+
+**Workflow**:
+```
+Document Upload
+  ↓
+Format Detection (PDF/TXT/DOCX)
+  ↓
+Text Extraction
+  ↓
+Chunking & Segmentation
+  ↓
+Metadata Extraction (Title, Date, Category, Authority)
+  ↓
+Duplicate Detection
+  ↓
+Quality Validation
+  ↓
+Vector Embedding
+  ↓
+Database Indexing
+  ↓
+Search Index Update
+  ↓
+Notification to Users
+```
+
+**Key Features**:
+- Parallel processing of multiple documents
+- Error handling and retry mechanisms
+- Version tracking and document history
+- Audit trail for compliance
+
+---
+
+## Phase 3: Database Schema Requirements
+
+### Tables Needed:
+
+1. **documents**
+   - id, title, content, source_url, document_type, category
+   - authority, effective_date, expiry_date
+   - created_at, updated_at, version
+
+2. **document_chunks**
+   - id, document_id, chunk_text, chunk_index
+   - embedding_vector, metadata
+
+3. **knowledge_base_categories**
+   - id, category_name, description, parent_category
+
+4. **rag_queries**
+   - id, user_id, query_text, retrieved_documents
+   - response, confidence_score, created_at
+
+5. **document_versions**
+   - id, document_id, version_number, changes
+   - updated_by, updated_at
+
+---
+
+## Phase 4: Implementation Roadmap
+
+### Week 1: Setup & Infrastructure
+- [ ] Set up vector database (Pinecone/Weaviate)
+- [ ] Create database schema
+- [ ] Implement document upload API
+
+### Week 2: Document Processing
+- [ ] Build document parser (PDF/TXT/DOCX)
+- [ ] Implement text chunking algorithm
+- [ ] Create metadata extraction pipeline
+- [ ] Build DAG workflow orchestration
+
+### Week 3: RAG Integration
+- [ ] Implement vector embedding pipeline
+- [ ] Build similarity search functionality
+- [ ] Integrate with Manus LLM API
+- [ ] Create prompt engineering templates
+
+### Week 4: Knowledge Base Population
+- [ ] Scrape and parse Decree.om documents
+- [ ] Extract SAI audit standards
+- [ ] Process government circulars
+- [ ] Index all documents
+
+### Week 5: Testing & Optimization
+- [ ] Test RAG retrieval accuracy
+- [ ] Benchmark query performance
+- [ ] Optimize vector search
+- [ ] User acceptance testing
+
+### Week 6: Deployment
+- [ ] Deploy to production
+- [ ] Set up monitoring and logging
+- [ ] Create user documentation
+- [ ] Train users on knowledge base
+
+---
+
+## Current Status:
+
+✅ **Manus AI API**: Connected to chat interface via `invokeLLM`
+✅ **Legal Sources**: Identified and accessible
+⏳ **Vector Database**: Needs setup
+⏳ **Document Parser**: Needs implementation
+⏳ **RAG Pipeline**: Needs development
+⏳ **Knowledge Base**: Empty, needs population
+
+---
+
+## Next Steps:
+
+1. Confirm which Omani legal documents to prioritize
+2. Decide on vector database solution
+3. Set up document upload infrastructure
+4. Begin scraping and parsing legal documents
+5. Implement RAG pipeline

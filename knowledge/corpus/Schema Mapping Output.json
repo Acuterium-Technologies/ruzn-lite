@@ -1,0 +1,11 @@
+{
+  "record_id": "RecordID",
+  "article_number": "ArticleNumber",
+  "book_name": "BookName",
+  "chapter": "Chapter",
+  "door": "Door",
+  "index": "Index",
+  "text": "Text",
+  "status": "Status",
+  "database_id": "db"
+}

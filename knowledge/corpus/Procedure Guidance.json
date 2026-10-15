@@ -1,0 +1,10 @@
+{
+  "intent": "procedure_guidance",
+  "domain": "labor_law",
+  "keywords": ["resignation", "notice_period", "end_of_service"],
+  "query": "What is the notice period required when resigning from a job in Oman?",
+  "context": {
+    "contract_type": "fixed_term",
+    "duration": "2 years"
+  }
+}

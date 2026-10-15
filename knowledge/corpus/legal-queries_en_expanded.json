@@ -1,0 +1,227 @@
+[
+  {
+    "intent": "general_inquiry",
+    "domain": "civil_law",
+    "query": "What are the requirements for property transfer in Oman?"
+  },
+  {
+    "intent": "case_advice",
+    "domain": "criminal_law",
+    "query": "I was threatened online. What should I do under Omani cybercrime law?"
+  },
+  {
+    "intent": "law_reference",
+    "domain": "commercial_law",
+    "query": "Which article discusses company liquidation procedures in Omani Commercial Law?"
+  },
+  {
+    "intent": "document_request",
+    "domain": "family_law",
+    "query": "Can you provide a standard marriage contract template according to Omani law?"
+  },
+  {
+    "intent": "procedure_guidance",
+    "domain": "labor_law",
+    "query": "How is end-of-service gratuity calculated in Oman?"
+  },
+  {
+    "intent": "general_inquiry",
+    "domain": "tax_law",
+    "query": "What is the current VAT rate in Oman?"
+  },
+  {
+    "intent": "case_advice",
+    "domain": "traffic_law",
+    "query": "I received a traffic ticket. Can I appeal it and how?"
+  },
+  {
+    "intent": "law_reference",
+    "domain": "land_law",
+    "query": "Which article regulates land subdivision in Oman?"
+  },
+  {
+    "intent": "document_request",
+    "domain": "commercial_law",
+    "query": "Where can I download the LLC registration form in Oman?"
+  },
+  {
+    "intent": "procedure_guidance",
+    "domain": "family_law",
+    "query": "What documents are needed for child custody after divorce?"
+  },
+  {
+    "intent": "general_inquiry",
+    "domain": "cyber_law",
+    "query": "Is defamation on social media punishable by law in Oman?"
+  },
+  {
+    "intent": "case_advice",
+    "domain": "civil_law",
+    "query": "My tenant stopped paying rent. What can I do legally?"
+  },
+  {
+    "intent": "law_reference",
+    "domain": "labor_law",
+    "query": "Which article governs annual leave entitlement in Oman?"
+  },
+  {
+    "intent": "document_request",
+    "domain": "criminal_law",
+    "query": "Where can I file a police report for theft in Oman?"
+  },
+  {
+    "intent": "procedure_guidance",
+    "domain": "commercial_law",
+    "query": "How do I renew my trade license in Oman Free Zone?"
+  },
+  {
+    "intent": "general_inquiry",
+    "domain": "maritime_law",
+    "query": "What laws regulate ship registration in Oman?"
+  },
+  {
+    "intent": "case_advice",
+    "domain": "family_law",
+    "query": "My spouse refuses to pay child support. What can I do?"
+  },
+  {
+    "intent": "law_reference",
+    "domain": "tax_law",
+    "query": "Which decree regulates income tax in Oman?"
+  },
+  {
+    "intent": "document_request",
+    "domain": "civil_law",
+    "query": "Can you provide a template for a rental agreement in Oman?"
+  },
+  {
+    "intent": "procedure_guidance",
+    "domain": "traffic_law",
+    "query": "How do I get my driver’s license renewed in Oman?"
+  },
+  {
+    "intent": "general_inquiry",
+    "domain": "intellectual_property",
+    "query": "How can I register a trademark in Oman?"
+  },
+  {
+    "intent": "case_advice",
+    "domain": "commercial_law",
+    "query": "A client refused to pay an invoice. How can I recover the money?"
+  },
+  {
+    "intent": "law_reference",
+    "domain": "family_law",
+    "query": "Which article regulates dowry in Islamic law in Oman?"
+  },
+  {
+    "intent": "document_request",
+    "domain": "labor_law",
+    "query": "Where can I find the official labor complaint form in Oman?"
+  },
+  {
+    "intent": "procedure_guidance",
+    "domain": "civil_law",
+    "query": "How do I enforce a court judgment in Oman?"
+  },
+  {
+    "intent": "general_inquiry",
+    "domain": "maritime_law",
+    "query": "Are foreign ships allowed to dock in Omani ports without permission?"
+  },
+  {
+    "intent": "case_advice",
+    "domain": "cyber_law",
+    "query": "Someone hacked my email account. What legal action can I take?"
+  },
+  {
+    "intent": "law_reference",
+    "domain": "land_law",
+    "query": "Which law governs land disputes in Oman?"
+  },
+  {
+    "intent": "document_request",
+    "domain": "tax_law",
+    "query": "Where can I download the VAT return form in Oman?"
+  },
+  {
+    "intent": "procedure_guidance",
+    "domain": "intellectual_property",
+    "query": "How long does patent protection last in Oman?"
+  },
+  {
+    "intent": "general_inquiry",
+    "domain": "criminal_law",
+    "query": "Is gambling illegal in Oman? What is the punishment?"
+  },
+  {
+    "intent": "case_advice",
+    "domain": "civil_law",
+    "query": "I inherited property from my father. Do I need to re-register it?"
+  },
+  {
+    "intent": "law_reference",
+    "domain": "commercial_law",
+    "query": "Which article regulates shareholder rights in Omani companies?"
+  },
+  {
+    "intent": "document_request",
+    "domain": "family_law",
+    "query": "Can I get a copy of my marriage certificate from the court in Oman?"
+  },
+  {
+    "intent": "procedure_guidance",
+    "domain": "labor_law",
+    "query": "What is the process for terminating an employment contract in Oman?"
+  },
+  {
+    "intent": "general_inquiry",
+    "domain": "cyber_law",
+    "query": "Is spreading fake news online a criminal offense in Oman?"
+  },
+  {
+    "intent": "case_advice",
+    "domain": "traffic_law",
+    "query": "I got into a car accident. Who is responsible for damages in Oman?"
+  },
+  {
+    "intent": "law_reference",
+    "domain": "tax_law",
+    "query": "Which article governs customs duties in Oman?"
+  },
+  {
+    "intent": "document_request",
+    "domain": "maritime_law",
+    "query": "Where can I find the shipping license application form in Oman?"
+  },
+  {
+    "intent": "procedure_guidance",
+    "domain": "commercial_law",
+    "query": "How do I close down a business in Oman?"
+  },
+  {
+    "intent": "general_inquiry",
+    "domain": "land_law",
+    "query": "Can foreigners own property in Oman?"
+  },
+  {
+    "intent": "case_advice",
+    "domain": "criminal_law",
+    "query": "I was falsely accused of a crime. What legal remedies are available?"
+  },
+  {
+    "intent": "law_reference",
+    "domain": "intellectual_property",
+    "query": "Which law protects industrial designs in Oman?"
+  },
+  {
+    "intent": "document_request",
+    "domain": "civil_law",
+    "query": "Where can I get a certified copy of a court judgment in Oman?"
+  },
+  {
+    "intent": "procedure_guidance",
+    "domain": "family_law",
+    "query": "How do I apply for alimony in Oman?"
+  }
+]

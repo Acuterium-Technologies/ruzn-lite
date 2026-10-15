@@ -1,0 +1,51 @@
+{
+  "general_inquiry": {
+    "intent": "general_inquiry",
+    "domain": "civil_law",
+    "keywords": ["property", "ownership", "land"],
+    "query": "What are the legal requirements for property ownership in Oman?",
+    "context": {
+      "location": "Muscat",
+      "user_type": "individual"
+    }
+  },
+  "case_advice": {
+    "intent": "case_advice",
+    "domain": "criminal_law",
+    "keywords": ["theft", "punishment", "article 378"],
+    "query": "If someone stole from my shop, what is the punishment under Omani law?",
+    "context": {
+      "incident_date": "2025-02-10",
+      "evidence_available": true
+    }
+  },
+  "law_reference": {
+    "intent": "law_reference",
+    "domain": "commercial_law",
+    "keywords": ["company", "establishment", "Oman Commercial Law"],
+    "query": "Which article in the Omani Commercial Law discusses company establishment procedures?",
+    "context": {
+      "company_type": "LLC"
+    }
+  },
+  "document_request": {
+    "intent": "document_request",
+    "domain": "family_law",
+    "keywords": ["divorce", "petition", "template"],
+    "query": "Can you provide a standard divorce petition template according to Omani family law?",
+    "context": {
+      "court": "Sharia Court",
+      "language_required": "Arabic"
+    }
+  },
+  "procedure_guidance": {
+    "intent": "procedure_guidance",
+    "domain": "labor_law",
+    "keywords": ["resignation", "notice_period", "end_of_service"],
+    "query": "What is the notice period required when resigning from a job in Oman?",
+    "context": {
+      "contract_type": "fixed_term",
+      "duration": "2 years"
+    }
+  }
+}

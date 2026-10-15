@@ -1,0 +1,9 @@
+{
+  "intent": "law_reference",
+  "domain": "commercial_law",
+  "keywords": ["company", "establishment", "Oman Commercial Law"],
+  "query": "Which article in the Omani Commercial Law discusses company establishment procedures?",
+  "context": {
+    "company_type": "LLC"
+  }
+}

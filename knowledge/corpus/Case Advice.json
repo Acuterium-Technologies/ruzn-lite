@@ -1,0 +1,10 @@
+{
+  "intent": "case_advice",
+  "domain": "criminal_law",
+  "keywords": ["theft", "punishment", "article 378"],
+  "query": "If someone stole from my shop, what is the punishment under Omani law?",
+  "context": {
+    "incident_date": "2025-02-10",
+    "evidence_available": true
+  }
+}

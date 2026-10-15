@@ -1,0 +1,36 @@
+{
+  "queries": [
+    {
+      "id": 1,
+      "language": "en",
+      "intent": "general_inquiry",
+      "domain": "civil_law",
+      "query": "What are the requirements for property transfer in Oman?",
+      "context": {}
+    },
+    {
+      "id": 2,
+      "language": "ar",
+      "intent": "general_inquiry",
+      "domain": "civil_law",
+      "query": "ما هي الشروط اللازمة لنقل ملكية العقار في سلطنة عمان؟",
+      "context": {}
+    },
+    {
+      "id": 3,
+      "language": "en",
+      "intent": "case_advice",
+      "domain": "criminal_law",
+      "query": "I was threatened online. What should I do under Omani cybercrime law?",
+      "context": {}
+    },
+    {
+      "id": 4,
+      "language": "ar",
+      "intent": "case_advice",
+      "domain": "criminal_law",
+      "query": "تعرضت للتهديد عبر الإنترنت، ماذا يجب أن أفعل وفقًا لقانون الجرائم الإلكترونية العماني؟",
+      "context": {}
+    }
+  ]
+}

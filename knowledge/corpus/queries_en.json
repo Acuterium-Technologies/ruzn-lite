@@ -1,0 +1,27 @@
+[
+  {
+    "intent": "general_inquiry",
+    "domain": "civil_law",
+    "query": "How do I register land in my name in Oman?"
+  },
+  {
+    "intent": "case_advice",
+    "domain": "criminal_law",
+    "query": "My neighbor hit me. What should I do under Omani criminal law?"
+  },
+  {
+    "intent": "procedure_guidance",
+    "domain": "family_law",
+    "query": "How can I get custody of my child after divorce?"
+  },
+  {
+    "intent": "general_inquiry",
+    "domain": "labor_law",
+    "query": "Is it allowed to work remotely outside Oman while employed here?"
+  },
+  {
+    "intent": "document_request",
+    "domain": "commercial_law",
+    "query": "Where can I find the form to register a new company in Oman?"
+  }
+]

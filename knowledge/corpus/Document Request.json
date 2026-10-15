@@ -1,0 +1,10 @@
+{
+  "intent": "document_request",
+  "domain": "family_law",
+  "keywords": ["divorce", "petition", "template"],
+  "query": "Can you provide a standard divorce petition template according to Omani family law?",
+  "context": {
+    "court": "Sharia Court",
+    "language_required": "Arabic"
+  }
+}
