@@ -174,10 +174,11 @@ export async function handleStreamingChat(req: Request, res: Response) {
       console.error('[SovereignCorpus] Retrieval error in streaming chat:', scErr);
     }
 
-    // 3. Search legacy knowledge base fallback
+    // 3. Search legacy knowledge base fallback (only if sovereign corpus did not find articles)
     let knowledgeContext = '';
-    try {
-      const knowledgeResults = await searchKnowledgeBase(message, { limit: 2, language: language === 'arabic' ? 'arabic' : 'english' });
+    if (retrievedArticles.length === 0) {
+      try {
+        const knowledgeResults = await searchKnowledgeBase(message, { limit: 2, language: language === 'arabic' ? 'arabic' : 'english' });
       if (knowledgeResults.length > 0) {
         knowledgeContext = '\n\n--- Knowledge Base ---\n';
         for (const result of knowledgeResults) {
@@ -193,10 +194,11 @@ export async function handleStreamingChat(req: Request, res: Response) {
     } catch (kbError) {
       console.error('[KnowledgeBase] Error searching:', kbError);
     }
+  }
 
-    // Check if web search is needed
+    // Check if web search is needed (prioritize sovereign statutory corpus; only search web if no corpus articles matched)
     let webSearchContext = '';
-    if (shouldSearchWeb(message)) {
+    if (retrievedArticles.length === 0 && shouldSearchWeb(message)) {
       try {
         // Send searching status to client
         res.write(`data: ${JSON.stringify({ type: 'status', status: 'searching' })}\n\n`);
