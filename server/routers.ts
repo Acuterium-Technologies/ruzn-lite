@@ -246,7 +246,7 @@ export const appRouter = router({
 
   // Ruzn-Lite AI Chat Router
   chat: router({
-    send: protectedProcedure
+    send: unauthenticatedProcedure
       .input(z.object({
         message: z.string().min(1),
         language: z.enum(['arabic', 'english']),

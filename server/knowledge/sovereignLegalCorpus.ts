@@ -6,7 +6,10 @@
 
 import path from 'path';
 import fs from 'fs';
-import Database from 'better-sqlite3';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
+const Database = require('better-sqlite3');
 
 const CORPUS_DIR = path.join(process.cwd(), 'knowledge', 'corpus');
 const SQLITE_PATH = path.join(CORPUS_DIR, 'SOVEREIGN_LEGAL_VECTOR_INDEX.sqlite');

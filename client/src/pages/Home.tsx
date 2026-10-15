@@ -545,9 +545,32 @@ export default function Home() {
           }
         }
       } catch (error) {
-        console.error('Streaming error:', error);
-        toast.error(language === 'arabic' ? 'فشل الاتصال بالخادم' : 'Failed to connect to server');
-        // Fallback to non-streaming
+        console.warn('Streaming interrupted, switching to fast sync fallback:', error);
+        try {
+          const syncRes = await fetch('/api/chat/sync', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              message: userMessage,
+              feature,
+              language,
+              history: messages.slice(-10),
+              userId: user?.id
+            })
+          });
+          if (syncRes.ok) {
+            const syncData = await syncRes.json();
+            if (syncData.answer || syncData.response) {
+              const textResp = syncData.answer || syncData.response;
+              setMessages(prev => [...prev, { role: "assistant", content: textResp }]);
+              return;
+            }
+          }
+        } catch (syncErr) {
+          console.error('Sync fallback failed:', syncErr);
+        }
+
+        // Secondary fallback to tRPC mutation
         chatMutation.mutate({
           message: userMessage,
           language,

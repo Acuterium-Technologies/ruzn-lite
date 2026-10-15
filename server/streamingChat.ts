@@ -319,3 +319,67 @@ export async function handleStreamingChat(req: Request, res: Response) {
     }
   }
 }
+
+export async function handleSyncChat(req: Request, res: Response) {
+  try {
+    const { message, feature, language, history, userId } = req.body || {};
+    if (!message || typeof message !== 'string') {
+      res.status(400).json({ error: 'Missing required message field' });
+      return;
+    }
+    const featKey: 'complaints' | 'legislative' = (feature === 'legislative') ? 'legislative' : 'complaints';
+    const langKey: 'arabic' | 'english' = (language === 'english' || language === 'en') ? 'english' : 'arabic';
+
+    const systemPrompt = SYSTEM_PROMPTS[featKey][langKey];
+    const messages: Message[] = [{ role: 'system', content: systemPrompt }];
+
+    if (history && history.length > 0) {
+      for (const msg of history.slice(-10)) {
+        messages.push({ role: msg.role, content: msg.content });
+      }
+    }
+
+    const legalIntent = detectLegalIntent(message);
+    let sovereignArticlesContext = '';
+    let retrievedArticles: any[] = [];
+    try {
+      retrievedArticles = searchSovereignCorpus(message, 4);
+      if (retrievedArticles.length > 0) {
+        sovereignArticlesContext = '\n\n--- Sovereign Statutory Corpus [النصوص التشريعية والمراسيم السلطانية المعتمدة] ---\n';
+        for (const art of retrievedArticles) {
+          const decreeStr = art.decreeNo ? ` (مرسوم سلطاني رقم ${art.decreeNo})` : '';
+          sovereignArticlesContext += `\n[المادة ${art.articleNumber}${decreeStr}]: ${art.titleAr}\n${art.textAr?.substring(0, 1200)}\n`;
+        }
+        sovereignArticlesContext += '--- End of Sovereign Statutory Corpus ---\n';
+        sovereignArticlesContext += `\n[توجيه النية الاستشارية]: النية المصنفة هي "${legalIntent.intent}" ضمن مجال "${legalIntent.domain}". قدم الإجابة وفق منهجية IRAC واعتمد المواد المسترجعة أعلاه حصراً بالصيغة الإلزامية [المادة X، مرسوم سلطاني رقم Y/Z].\n`;
+      }
+    } catch (scErr) {
+      console.error('[SovereignCorpus] Retrieval error in sync chat:', scErr);
+    }
+
+    let userMessageWithContext = message;
+    if (sovereignArticlesContext) userMessageWithContext += sovereignArticlesContext;
+    messages.push({ role: 'user', content: userMessageWithContext });
+
+    const { invokeLLM } = await import('./_core/llm');
+    const resp = await invokeLLM({ messages });
+    const rawContent = resp.choices[0]?.message?.content;
+    const answer = typeof rawContent === 'string' ? scrubSovereignOutput(rawContent) : '';
+
+    res.json({
+      success: true,
+      answer,
+      response: answer,
+      intent: legalIntent,
+      matchedArticles: retrievedArticles.map(a => ({
+        decreeNo: a.decreeNo,
+        articleNumber: a.articleNumber,
+        titleAr: a.titleAr
+      }))
+    });
+  } catch (err: any) {
+    console.error('[SyncChat] Error:', err);
+    res.status(500).json({ error: err.message || 'Internal server error' });
+  }
+}
+

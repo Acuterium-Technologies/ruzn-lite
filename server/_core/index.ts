@@ -4,9 +4,11 @@ import { createServer } from "http";
 import net from "net";
 import fs from "fs";
 import path from "path";
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
-import { handleStreamingChat } from "../streamingChat";
+import { handleStreamingChat, handleSyncChat } from "../streamingChat";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
@@ -171,6 +173,8 @@ async function startServer() {
   registerOAuthRoutes(app);
   // Streaming chat endpoint (SSE)
   app.post("/api/chat/stream", handleStreamingChat);
+  // Sync chat endpoint (JSON fallback)
+  app.post("/api/chat/sync", handleSyncChat);
 
   // tRPC API
   app.use(
