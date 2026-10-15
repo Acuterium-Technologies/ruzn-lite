@@ -621,15 +621,12 @@ ${actions.length ? actions.map(a => `• ${a}`).join('\n') : `• ${lang === "ar
             </div>
 
             {/* Tabs */}
-            <div className="flex gap-2 p-4 flex-wrap">
+            <div className="flex gap-2 p-4 flex-wrap border-b border-white/10">
               {(['intake', 'triage', 'entities', 'schema'] as const).map(tab => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`px-3 py-2 rounded-xl border text-xs transition ${activeTab === tab
-                    ? 'border-[rgba(214,179,106,.35)] text-[rgba(214,179,106,.95)] bg-[rgba(214,179,106,.12)]'
-                    : 'border-white/10 text-white/60 bg-white/5 hover:border-white/20'
-                    }`}
+                  className={`ruzn-tab text-xs ${activeTab === tab ? 'active' : ''}`}
                 >
                   {tab === 'intake' && t.tabIntake}
                   {tab === 'triage' && t.tabQueue}
@@ -646,28 +643,28 @@ ${actions.length ? actions.map(a => `• ${a}`).join('\n') : `• ${lang === "ar
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs text-white/60 mb-2">{t.lblChannel}</label>
+                      <label className="block text-xs text-white/70 mb-2 font-medium">{t.lblChannel}</label>
                       <select
                         value={channel}
                         onChange={e => setChannel(e.target.value)}
-                        className="w-full rounded-xl border border-white/10 bg-black/30 text-white/90 px-3 py-2 text-sm outline-none focus:border-[rgba(214,179,106,.35)]"
+                        className="ruzn-input text-sm"
                       >
-                        <option value="app">{lang === 'ar' ? 'التطبيق' : 'Mobile App'}</option>
+                        <option value="app">{lang === 'ar' ? 'التطبيق الذكي' : 'Mobile App'}</option>
                         <option value="whatsapp">{lang === 'ar' ? 'واتساب' : 'WhatsApp'}</option>
                         <option value="hotline">{lang === 'ar' ? 'الخط الساخن' : 'Hotline'}</option>
                         <option value="email">{lang === 'ar' ? 'البريد الإلكتروني' : 'Email'}</option>
-                        <option value="walkin">{lang === 'ar' ? 'حضورياً' : 'Walk-in'}</option>
+                        <option value="walkin">{lang === 'ar' ? 'حضور شخصي' : 'Walk-in'}</option>
                       </select>
                     </div>
                     <div>
-                      <label className="block text-xs text-white/60 mb-2">{t.lblType}</label>
+                      <label className="block text-xs text-white/70 mb-2 font-medium">{t.lblType}</label>
                       <select
                         value={complainantType}
                         onChange={e => setComplainantType(e.target.value)}
-                        className="w-full rounded-xl border border-white/10 bg-black/30 text-white/90 px-3 py-2 text-sm outline-none focus:border-[rgba(214,179,106,.35)]"
+                        className="ruzn-input text-sm"
                       >
                         <option value="citizen">{lang === 'ar' ? 'مواطن' : 'Citizen'}</option>
-                        <option value="employee">{lang === 'ar' ? 'موظف' : 'Employee'}</option>
+                        <option value="employee">{lang === 'ar' ? 'موظف حكومي' : 'Employee'}</option>
                         <option value="vendor">{lang === 'ar' ? 'مورد / مقاول' : 'Vendor / Contractor'}</option>
                         <option value="anonymous">{lang === 'ar' ? 'مجهول' : 'Anonymous'}</option>
                       </select>
@@ -676,21 +673,21 @@ ${actions.length ? actions.map(a => `• ${a}`).join('\n') : `• ${lang === "ar
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs text-white/60 mb-2">{t.lblEntity}</label>
+                      <label className="block text-xs text-white/70 mb-2 font-medium">{t.lblEntity}</label>
                       <input
                         type="text"
                         value={entity}
                         onChange={e => setEntity(e.target.value)}
-                        placeholder={lang === 'ar' ? 'مثال: وزارة/هيئة/شركة' : 'e.g., Ministry / Authority'}
-                        className="w-full rounded-xl border border-white/10 bg-black/30 text-white/90 px-3 py-2 text-sm outline-none focus:border-[rgba(214,179,106,.35)]"
+                        placeholder={lang === 'ar' ? 'مثال: وزارة المالية / بلدية مسقط' : 'e.g., Ministry / Municipality'}
+                        className="ruzn-input text-sm"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs text-white/60 mb-2">{t.lblGov}</label>
+                      <label className="block text-xs text-white/70 mb-2 font-medium">{t.lblGov}</label>
                       <select
                         value={governorate}
                         onChange={e => setGovernorate(e.target.value)}
-                        className="w-full rounded-xl border border-white/10 bg-black/30 text-white/90 px-3 py-2 text-sm outline-none focus:border-[rgba(214,179,106,.35)]"
+                        className="ruzn-input text-sm"
                       >
                         <option value="muscat">{lang === 'ar' ? 'مسقط' : 'Muscat'}</option>
                         <option value="dhofar">{lang === 'ar' ? 'ظفار' : 'Dhofar'}</option>
@@ -703,11 +700,11 @@ ${actions.length ? actions.map(a => `• ${a}`).join('\n') : `• ${lang === "ar
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs text-white/60 mb-2">{t.lblTopic}</label>
+                      <label className="block text-xs text-white/70 mb-2 font-medium">{t.lblTopic}</label>
                       <select
                         value={topic}
                         onChange={e => setTopic(e.target.value)}
-                        className="w-full rounded-xl border border-white/10 bg-black/30 text-white/90 px-3 py-2 text-sm outline-none focus:border-[rgba(214,179,106,.35)]"
+                        className="ruzn-input text-sm"
                       >
                         <option value="">{lang === 'ar' ? '— تلقائي —' : '— Auto-detect —'}</option>
                         <option value={lang === 'ar' ? 'المناقصات والمشتريات' : 'Procurement / Tender'}>{lang === 'ar' ? 'المناقصات والمشتريات' : 'Procurement / Tender'}</option>
@@ -717,32 +714,33 @@ ${actions.length ? actions.map(a => `• ${a}`).join('\n') : `• ${lang === "ar
                       </select>
                     </div>
                     <div>
-                      <label className="block text-xs text-white/60 mb-2">{t.lblAmount}</label>
+                      <label className="block text-xs text-white/70 mb-2 font-medium">{t.lblAmount}</label>
                       <input
                         type="number"
                         value={amount}
                         onChange={e => setAmount(e.target.value)}
                         placeholder={lang === 'ar' ? 'مثال: 25000' : 'e.g., 25000'}
-                        className="w-full rounded-xl border border-white/10 bg-black/30 text-white/90 px-3 py-2 text-sm outline-none focus:border-[rgba(214,179,106,.35)]"
+                        className="ruzn-input text-sm"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs text-white/60 mb-2">{t.lblText}</label>
+                    <label className="block text-xs text-white/70 mb-2 font-medium">{t.lblText}</label>
                     <textarea
                       value={text}
                       onChange={e => setText(e.target.value)}
-                      placeholder={lang === 'ar' ? 'اكتب البلاغ هنا...' : 'Write complaint here...'}
-                      className="w-full rounded-xl border border-white/10 bg-black/30 text-white/90 px-3 py-2 text-sm outline-none focus:border-[rgba(214,179,106,.35)] min-h-[110px] resize-y"
+                      placeholder={lang === 'ar' ? 'اكتب تفاصيل ونَص البلاغ هنا...' : 'Write complaint narrative here...'}
+                      className="ruzn-input text-sm min-h-[120px] resize-y"
                     />
-                    <p className="text-xs text-white/50 mt-1">{t.hintText}</p>
+                    <p className="text-xs text-[rgba(214,179,106,0.8)] mt-1.5">{t.hintText}</p>
                   </div>
 
-                  <div className="flex gap-3">
-                    <button onClick={submitComplaint} className="ruzn-btn-gold text-sm">{t.btnSubmit}</button>
-                    <button onClick={fillSample} className="ruzn-btn text-sm">{t.btnSample}</button>
+                  <div className="flex gap-3 pt-2">
+                    <button onClick={submitComplaint} className="ruzn-btn-gold text-sm font-bold px-5 py-2.5 rounded-xl">{t.btnSubmit}</button>
+                    <button onClick={fillSample} className="ruzn-btn text-sm px-4 py-2.5 rounded-xl">{t.btnSample}</button>
                   </div>
+
 
                   {/* Preview */}
                   {preview && (
@@ -770,10 +768,9 @@ ${actions.length ? actions.map(a => `• ${a}`).join('\n') : `• ${lang === "ar
                       { val: `${kpis.sla}%`, lbl: t.kSlaLbl },
                       { val: `${kpis.saved}h`, lbl: t.kSavedLbl },
                     ].map((k, i) => (
-                      <div key={i} className="p-3 rounded-2xl border border-white/10 bg-white/5 relative overflow-hidden">
-                        <div className="absolute -top-10 -right-20 w-44 h-44 rounded-full opacity-50" style={{ background: 'radial-gradient(circle at 30% 30%, rgba(214,179,106,.25), transparent 60%)' }} />
-                        <div className="text-lg font-black text-[rgba(214,179,106,.95)]">{k.val}</div>
-                        <div className="text-xs text-white/60 mt-1">{k.lbl}</div>
+                      <div key={i} className="ruzn-kpi p-3.5">
+                        <div className="ruzn-kpi-value text-xl font-heading">{k.val}</div>
+                        <div className="text-xs text-white/70 mt-1">{k.lbl}</div>
                       </div>
                     ))}
                   </div>
@@ -784,10 +781,7 @@ ${actions.length ? actions.map(a => `• ${a}`).join('\n') : `• ${lang === "ar
                       <button
                         key={f}
                         onClick={() => setFilter(f)}
-                        className={`px-3 py-1.5 rounded-xl border text-xs transition ${filter === f
-                          ? 'border-[rgba(214,179,106,.35)] text-[rgba(214,179,106,.95)] bg-[rgba(214,179,106,.12)]'
-                          : 'border-white/10 text-white/60 bg-white/5'
-                          }`}
+                        className={`ruzn-tab text-xs ${filter === f ? 'active' : ''}`}
                       >
                         {f === 'all' && t.fAll}
                         {f === 'high' && t.fHigh}
@@ -801,39 +795,39 @@ ${actions.length ? actions.map(a => `• ${a}`).join('\n') : `• ${lang === "ar
                   </div>
 
                   {/* Table */}
-                  <div className="overflow-x-auto">
+                  <div className="overflow-x-auto rounded-2xl border border-white/10 bg-black/20">
                     <table className="w-full text-xs">
                       <thead>
-                        <tr className="text-white/60">
-                          <th className="p-2 text-start"></th>
-                          <th className="p-2 text-start">{t.thId}</th>
-                          <th className="p-2 text-start">{t.thDate}</th>
-                          <th className="p-2 text-start">{t.thEntity}</th>
-                          <th className="p-2 text-start">{t.thClass}</th>
-                          <th className="p-2 text-start">{t.thRisk}</th>
-                          <th className="p-2 text-start">{t.thStatus}</th>
-                          <th className="p-2 text-start">{t.thRoute}</th>
+                        <tr className="text-[rgba(214,179,106,0.9)] border-b border-white/10 bg-white/5">
+                          <th className="p-3 text-start"></th>
+                          <th className="p-3 text-start font-bold">{t.thId}</th>
+                          <th className="p-3 text-start font-bold">{t.thDate}</th>
+                          <th className="p-3 text-start font-bold">{t.thEntity}</th>
+                          <th className="p-3 text-start font-bold">{t.thClass}</th>
+                          <th className="p-3 text-start font-bold">{t.thRisk}</th>
+                          <th className="p-3 text-start font-bold">{t.thStatus}</th>
+                          <th className="p-3 text-start font-bold">{t.thRoute}</th>
                         </tr>
                       </thead>
                       <tbody>
                         {filteredComplaints.map(c => (
-                          <tr key={c.id} className="border-t border-white/10">
-                            <td className="p-2">
+                          <tr key={c.id} className="border-t border-white/10 hover:bg-white/5 transition-colors">
+                            <td className="p-3">
                               <input
                                 type="radio"
                                 name="sel"
                                 checked={selectedId === c.id}
                                 onChange={() => setSelectedId(c.id)}
-                                className="accent-[rgba(214,179,106,.95)]"
+                                className="accent-[#d6b36a]"
                               />
                             </td>
-                            <td className="p-2 font-mono text-white/80">{c.id}</td>
-                            <td className="p-2 text-white/70">{c.created_at.slice(0, 10)}</td>
-                            <td className="p-2 text-white/90">{c.entity}</td>
-                            <td className="p-2 text-white/80">{c.triage.classification}</td>
-                            <td className="p-2"><RiskTag level={c.triage.risk_level} /> <span className="font-mono text-white/60 ml-1">{c.triage.risk_score_0_100}</span></td>
-                            <td className="p-2"><StatusTag status={c.triage.status} /></td>
-                            <td className="p-2 text-white/70">{c.triage.routing}</td>
+                            <td className="p-3 font-mono text-white/80">{c.id}</td>
+                            <td className="p-3 text-white/70">{c.created_at.slice(0, 10)}</td>
+                            <td className="p-3 text-white/95 font-medium">{c.entity}</td>
+                            <td className="p-3 text-white/80">{c.triage.classification}</td>
+                            <td className="p-3"><RiskTag level={c.triage.risk_level} /> <span className="font-mono text-white/60 ml-1">{c.triage.risk_score_0_100}</span></td>
+                            <td className="p-3"><StatusTag status={c.triage.status} /></td>
+                            <td className="p-3 text-white/70">{c.triage.routing}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -842,15 +836,16 @@ ${actions.length ? actions.map(a => `• ${a}`).join('\n') : `• ${lang === "ar
 
                   {/* Case Pack */}
                   {selectedId && (
-                    <div className="mt-4 p-4 rounded-2xl border border-white/10 bg-white/5">
-                      <h3 className="text-sm font-semibold text-white/90 mb-2">{t.caseTitle}</h3>
-                      <pre className="text-xs text-white/70 overflow-x-auto whitespace-pre-wrap font-mono">
+                    <div className="mt-4 p-4 rounded-2xl ruzn-card border-[rgba(214,179,106,0.25)]">
+                      <h3 className="text-sm font-semibold text-[rgba(214,179,106,0.98)] mb-2 font-heading">{t.caseTitle}</h3>
+                      <pre className="text-xs text-white/80 overflow-x-auto whitespace-pre-wrap font-mono bg-black/40 p-3 rounded-xl border border-white/10">
                         {JSON.stringify(complaints.find(c => c.id === selectedId), null, 2)}
                       </pre>
                     </div>
                   )}
                 </div>
               )}
+
 
               {/* Entity Map Tab */}
               {activeTab === 'entities' && (
@@ -968,9 +963,9 @@ ${actions.length ? actions.map(a => `• ${a}`).join('\n') : `• ${lang === "ar
                     { val: `${kpis.avgRisk}%`, lbl: t.mAvgLbl },
                     { val: kpis.escalations, lbl: t.mEscLbl },
                   ].map((k, i) => (
-                    <div key={i} className="p-3 rounded-2xl border border-white/10 bg-white/5">
-                      <div className="text-lg font-black text-[rgba(214,179,106,.95)]">{k.val}</div>
-                      <div className="text-xs text-white/60 mt-1">{k.lbl}</div>
+                    <div key={i} className="ruzn-kpi p-3.5">
+                      <div className="ruzn-kpi-value text-lg font-heading">{k.val}</div>
+                      <div className="text-xs text-white/70 mt-1">{k.lbl}</div>
                     </div>
                   ))}
                 </div>

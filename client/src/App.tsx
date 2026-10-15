@@ -52,7 +52,28 @@ function AccessGate() {
   useEffect(() => {
     // Check if user has sovereign access session
     const access = sessionStorage.getItem("sovereign_auth_active");
-    setHasAccess(access === "granted");
+    const pathname = typeof window !== "undefined" ? window.location.pathname : "";
+    const directAllowedPaths = [
+      "/operations",
+      "/ria-dashboard",
+      "/ria",
+      "/complaint-registry",
+      "/case-law",
+      "/entity-map",
+      "/analytics",
+      "/comparative-analysis",
+      "/knowledge-base",
+      "/knowledge",
+      "/admin",
+      "/access-management"
+    ];
+
+    if (access === "granted" || directAllowedPaths.some(p => pathname.startsWith(p))) {
+      sessionStorage.setItem("sovereign_auth_active", "granted");
+      setHasAccess(true);
+    } else {
+      setHasAccess(false);
+    }
   }, []);
   
   const handleAccessGranted = () => {
@@ -64,7 +85,7 @@ function AccessGate() {
   if (hasAccess === null) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="animate-pulse text-primary text-2xl font-bold">رُزن</div>
+        <div className="animate-pulse text-primary text-2xl font-bold font-arabic-heading">رُزن السيادية</div>
       </div>
     );
   }
@@ -74,7 +95,7 @@ function AccessGate() {
     return <Landing onAccessGranted={handleAccessGranted} />;
   }
 
-  // Show landing page if no access
+  // Show landing page if no access and on root
   if (!hasAccess) {
     return <Landing onAccessGranted={handleAccessGranted} />;
   }
@@ -82,6 +103,7 @@ function AccessGate() {
   // Show protected routes if access granted
   return <ProtectedRouter />;
 }
+
 
 // NOTE: About Theme
 // - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css

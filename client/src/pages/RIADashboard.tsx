@@ -1,15 +1,8 @@
 import { useState } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { 
@@ -29,55 +22,46 @@ import {
   Plus,
   Sparkles,
   Eye,
-  Brain
+  Brain,
+  Zap,
+  ArrowRight
 } from "lucide-react";
 import { useLocation } from "wouter";
 
 function getRiskBadgeColor(risk: string | null) {
   switch (risk) {
-    case "CRITICAL": return "bg-red-600 text-white";
-    case "HIGH": return "bg-orange-500 text-white";
-    case "MEDIUM": return "bg-yellow-500 text-black";
-    case "LOW": return "bg-green-500 text-white";
-    case "NEGLIGIBLE": return "bg-blue-500 text-white";
-    default: return "bg-gray-500 text-white";
+    case "CRITICAL": return "ruzn-tag-high text-xs";
+    case "HIGH": return "ruzn-tag-high text-xs";
+    case "MEDIUM": return "ruzn-tag-med text-xs";
+    case "LOW": return "ruzn-tag-low text-xs";
+    case "NEGLIGIBLE": return "ruzn-tag-info text-xs";
+    default: return "ruzn-tag-info text-xs";
   }
 }
 
 function getStatusBadge(status: string | null) {
   switch (status) {
-    case "approved": return <Badge className="bg-green-600">معتمد</Badge>;
-    case "draft": return <Badge className="bg-gray-600">مسودة</Badge>;
-    case "pending_review": return <Badge className="bg-yellow-600 text-black">بانتظار المراجعة</Badge>;
-    case "rejected": return <Badge className="bg-red-600">مرفوض</Badge>;
-    case "archived": return <Badge className="bg-gray-500">مؤرشف</Badge>;
-    default: return <Badge className="bg-gray-600">{status}</Badge>;
+    case "approved": return <span className="ruzn-tag-low text-xs">معتمد</span>;
+    case "draft": return <span className="ruzn-tag-info text-xs">مسودة</span>;
+    case "pending_review": return <span className="ruzn-tag-med text-xs">بانتظار المراجعة</span>;
+    case "rejected": return <span className="ruzn-tag-high text-xs">مرفوض</span>;
+    case "archived": return <span className="ruzn-tag-info text-xs">مؤرشف</span>;
+    default: return <span className="ruzn-tag-info text-xs">{status}</span>;
   }
 }
 
 function getSeverityIcon(severity: string | null) {
   switch (severity) {
-    case "critical": return <AlertTriangle className="h-5 w-5 text-red-500" />;
-    case "warning": return <Clock className="h-5 w-5 text-yellow-500" />;
-    case "info": return <CheckCircle2 className="h-5 w-5 text-blue-500" />;
-    default: return <FileText className="h-5 w-5 text-gray-500" />;
-  }
-}
-
-function getRiskCategoryLabel(category: string | null) {
-  switch (category) {
-    case "PROCEED": return "يُوصى بالمضي";
-    case "PROCEED_WITH_MODIFICATIONS": return "يُوصى بتعديلات";
-    case "REQUIRES_MAJOR_REVISION": return "يتطلب مراجعة كبرى";
-    case "NOT_RECOMMENDED": return "غير موصى به";
-    default: return category;
+    case "critical": return <AlertTriangle className="h-5 w-5 text-red-400" />;
+    case "warning": return <Clock className="h-5 w-5 text-yellow-400" />;
+    case "info": return <CheckCircle2 className="h-5 w-5 text-blue-400" />;
+    default: return <FileText className="h-5 w-5 text-white/60" />;
   }
 }
 
 export default function RIADashboard() {
-  const [activeTab, setActiveTab] = useState("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "assessments" | "alerts">("overview");
   const [isNewAssessmentOpen, setIsNewAssessmentOpen] = useState(false);
-  // Using sonner toast directly
   
   // Fetch RIA data
   const { data: riaData, isLoading: riaLoading, refetch: refetchRia } = trpc.ria.list.useQuery();
@@ -93,7 +77,7 @@ export default function RIADashboard() {
     onSuccess: (data) => {
       setAnalysisResult(data.analysis);
       setIsAnalyzing(false);
-      toast.success("تم تحليل النص بنجاح - Analysis complete");
+      toast.success("تم إنجاز التحليل الذكي للأثر التشريعي بنجاح");
     },
     onError: (error) => {
       setIsAnalyzing(false);
@@ -104,11 +88,10 @@ export default function RIADashboard() {
   // Create assessment with AI analysis mutation
   const createWithAnalysis = trpc.ria.createWithAnalysis.useMutation({
     onSuccess: (data) => {
-      toast.success("تم إنشاء التقييم مع التحليل الذكي - Assessment created with AI analysis");
+      toast.success("تم إنشاء تقييم الأثر التنظيمي مع التحليل الذكي");
       setIsNewAssessmentOpen(false);
       setAnalysisResult(null);
       refetchRia();
-      // Navigate to detail view
       if (data.id) {
         setLocation(`/ria-dashboard/assessment/${data.id}`);
       }
@@ -121,7 +104,7 @@ export default function RIADashboard() {
   // Legacy create assessment mutation (without AI)
   const createAssessment = trpc.ria.create.useMutation({
     onSuccess: () => {
-      toast.success("تم إنشاء التقييم بنجاح - Assessment created successfully");
+      toast.success("تم إنشاء التقييم بنجاح");
       setIsNewAssessmentOpen(false);
       refetchRia();
     },
@@ -161,13 +144,11 @@ export default function RIADashboard() {
     }
     
     if (analysisResult) {
-      // Create with AI analysis
       createWithAnalysis.mutate({
         ...newAssessment,
         analysis: analysisResult
       });
     } else {
-      // Create without AI analysis
       createAssessment.mutate(newAssessment);
     }
   };
@@ -175,7 +156,7 @@ export default function RIADashboard() {
   const handleRefresh = () => {
     refetchRia();
     refetchAlerts();
-    toast.success("تم التحديث - Data refreshed successfully");
+    toast.success("تم تحديث بيانات التقييم والمؤشرات بنجاح");
   };
 
   // Vision 2040 pillars with live data
@@ -183,30 +164,30 @@ export default function RIADashboard() {
     { 
       id: "economy", 
       name: "اقتصاد متنوع ومستدام", 
-      nameEn: "الاقتصاد المتنوع", 
+      nameEn: "Economy & Development", 
       icon: TrendingUp, 
-      score: vision2040Data?.pillars.economy.score || 0 
+      score: vision2040Data?.pillars?.economy?.score || 0 
     },
     { 
       id: "society", 
       name: "مجتمع إنسان وقدرات", 
-      nameEn: "الإنسان والقدرات", 
+      nameEn: "Society & Human Capital", 
       icon: Building2, 
-      score: vision2040Data?.pillars.society.score || 0 
+      score: vision2040Data?.pillars?.society?.score || 0 
     },
     { 
       id: "governance", 
-      name: "حوكمة رشيدة", 
-      nameEn: "الحوكمة الرشيدة", 
+      name: "حوكمة رشيدة ونزاهة", 
+      nameEn: "Governance & Institutional", 
       icon: Landmark, 
-      score: vision2040Data?.pillars.governance.score || 0 
+      score: vision2040Data?.pillars?.governance?.score || 0 
     },
     { 
       id: "environment", 
-      name: "بيئة مستدامة", 
+      name: "بيئة مستدامة وموارد", 
       nameEn: "Sustainable Environment", 
       icon: Target, 
-      score: vision2040Data?.pillars.environment.score || 0 
+      score: vision2040Data?.pillars?.environment?.score || 0 
     },
   ];
 
@@ -214,541 +195,533 @@ export default function RIADashboard() {
 
   return (
     <DashboardLayout defaultCollapsed={true}>
-      <div className="space-y-4 md:space-y-6 p-3 sm:p-4 md:p-6" dir="rtl">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+      <div className="space-y-6 p-3 sm:p-5 md:p-6 font-body" dir="rtl">
+        {/* ─── Top Header ─── */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-[rgba(214,179,106,0.16)]">
           <div>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#c9a227]">
-              لوحة تقييم الأثر التنظيمي
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full ruzn-glass-soft border-[rgba(214,179,106,0.3)] mb-2">
+              <Sparkles className="w-3.5 h-3.5 text-[rgba(214,179,106,0.98)]" />
+              <span className="text-xs font-semibold text-[rgba(214,179,106,0.98)]">
+                EREBUSFORMULA659 • SOVEREIGN RIA SUITE
+              </span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold ruzn-gold-gradient font-heading">
+              لوحة تقييم الأثر التنظيمي (RIA)
             </h1>
-            <p className="text-sm sm:text-base text-muted-foreground mt-1">
-              EREBUSFORMULA659 - RIA Dashboard
+            <p className="text-xs sm:text-sm text-white/70 mt-1">
+              قياس مواءمة التشريعات واللوائح والقرارات الوزارية مع محاور رؤية عُمان 2040
             </p>
           </div>
-          <div className="flex items-center gap-2 sm:gap-3">
-            <Button variant="outline" size="sm" onClick={handleRefresh} disabled={isLoading} className="text-sm sm:text-base px-3 sm:px-4 py-2 h-auto">
-              <RefreshCw className={`h-4 w-4 sm:h-5 sm:w-5 ml-2 ${isLoading ? 'animate-spin' : ''}`} />
-              <span className="hidden sm:inline">تحديث</span>
-            </Button>
+
+          <div className="flex items-center gap-2.5 flex-wrap">
+            <button
+              onClick={handleRefresh}
+              disabled={isLoading}
+              className="ruzn-btn text-xs sm:text-sm flex items-center gap-1.5 px-3.5 py-2"
+            >
+              <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
+              <span>تحديث</span>
+            </button>
+
             <Dialog open={isNewAssessmentOpen} onOpenChange={setIsNewAssessmentOpen}>
               <DialogTrigger asChild>
-                <Button className="bg-[#c9a227] hover:bg-[#b8922a] text-black text-sm sm:text-base px-3 sm:px-4 py-2 h-auto">
-                  <Plus className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
-                  تقييم جديد
-                </Button>
+                <button className="ruzn-btn-gold text-xs sm:text-sm font-bold flex items-center gap-2 px-4 py-2 rounded-xl">
+                  <Plus className="h-4 w-4" />
+                  <span>تقييم جديد</span>
+                </button>
               </DialogTrigger>
-              <DialogContent className="max-w-4xl bg-[#1a1a1a] border-[#333] max-h-[90vh] overflow-y-auto" dir="rtl">
-                <DialogHeader>
-                  <DialogTitle className="text-lg sm:text-xl text-[#c9a227]">إنشاء تقييم أثر تنظيمي جديد</DialogTitle>
-                  <DialogDescription>New Regulatory Impact Assessment</DialogDescription>
+              <DialogContent className="max-w-4xl ruzn-card max-h-[90vh] overflow-y-auto p-6" dir="rtl">
+                <DialogHeader className="mb-4 pb-3 border-b border-[rgba(214,179,106,0.2)]">
+                  <DialogTitle className="text-xl font-bold ruzn-gold-gradient font-heading">
+                    إنشاء تقييم أثر تنظيمي جديد (RIA)
+                  </DialogTitle>
+                  <DialogDescription className="text-xs text-white/60">
+                    أدخل بيانات التشريع أو اللائحة التنظيمية لحساب التوافق مع رؤية 2040
+                  </DialogDescription>
                 </DialogHeader>
-                <div className="space-y-4 py-4">
+
+                <div className="space-y-4 py-2">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="title" className="text-sm sm:text-base">العنوان بالإنجليزية *</Label>
-                      <Input
-                        id="title"
-                        placeholder="Title in English"
-                        value={newAssessment.title}
-                        onChange={(e) => setNewAssessment({ ...newAssessment, title: e.target.value })}
-                        className="bg-[#0d0d0d] border-[#333] text-sm sm:text-base"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="titleArabic" className="text-sm sm:text-base">العنوان بالعربية</Label>
-                      <Input
+                    <div className="space-y-1.5">
+                      <Label htmlFor="titleArabic" className="text-xs text-white/80">العنوان بالعربية *</Label>
+                      <input
                         id="titleArabic"
-                        placeholder="العنوان بالعربية"
+                        placeholder="مثال: لائحة حوكمة العقود والمشتريات"
                         value={newAssessment.titleArabic}
                         onChange={(e) => setNewAssessment({ ...newAssessment, titleArabic: e.target.value })}
-                        className="bg-[#0d0d0d] border-[#333] text-sm sm:text-base"
+                        className="ruzn-input text-sm"
+                      />
+                    </div>
+                    <div className="space-y-1.5">
+                      <Label htmlFor="title" className="text-xs text-white/80">العنوان بالإنجليزية (English Title) *</Label>
+                      <input
+                        id="title"
+                        placeholder="e.g. Procurement Governance Bylaw"
+                        value={newAssessment.title}
+                        onChange={(e) => setNewAssessment({ ...newAssessment, title: e.target.value })}
+                        className="ruzn-input text-sm"
                       />
                     </div>
                   </div>
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="legislationType" className="text-sm sm:text-base">نوع التشريع *</Label>
-                      <Select
+                    <div className="space-y-1.5">
+                      <Label htmlFor="legislationType" className="text-xs text-white/80">نوع التشريع *</Label>
+                      <select
+                        id="legislationType"
                         value={newAssessment.legislationType}
-                        onValueChange={(value: any) => setNewAssessment({ ...newAssessment, legislationType: value })}
+                        onChange={(e: any) => setNewAssessment({ ...newAssessment, legislationType: e.target.value })}
+                        className="ruzn-input text-sm"
                       >
-                        <SelectTrigger className="bg-[#0d0d0d] border-[#333] text-sm sm:text-base">
-                          <SelectValue placeholder="اختر نوع التشريع" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="royal_decree">مرسوم سلطاني</SelectItem>
-                          <SelectItem value="ministerial_decision">قرار وزاري</SelectItem>
-                          <SelectItem value="regulation">لائحة تنظيمية</SelectItem>
-                          <SelectItem value="amendment">تعديل</SelectItem>
-                          <SelectItem value="policy">سياسة</SelectItem>
-                          <SelectItem value="circular">تعميم</SelectItem>
-                        </SelectContent>
-                      </Select>
+                        <option value="royal_decree">مرسوم سلطاني</option>
+                        <option value="ministerial_decision">قرار وزاري</option>
+                        <option value="regulation">لائحة تنظيمية</option>
+                        <option value="amendment">تعديل تشريعي</option>
+                        <option value="policy">سياسة عامة</option>
+                        <option value="circular">تعميم رسمي</option>
+                      </select>
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="issuingAuthority" className="text-sm sm:text-base">الجهة المصدرة *</Label>
-                      <Input
+
+                    <div className="space-y-1.5">
+                      <Label htmlFor="issuingAuthority" className="text-xs text-white/80">الجهة المصدرة *</Label>
+                      <input
                         id="issuingAuthority"
-                        placeholder="مثال: وزارة التجارة"
+                        placeholder="مثال: وزارة المالية / الأمانة العامة للضرائب"
                         value={newAssessment.issuingAuthority}
                         onChange={(e) => setNewAssessment({ ...newAssessment, issuingAuthority: e.target.value })}
-                        className="bg-[#0d0d0d] border-[#333] text-sm sm:text-base"
+                        className="ruzn-input text-sm"
                       />
                     </div>
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="legislativeText" className="text-sm sm:text-base">نص التشريع *</Label>
-                    <Textarea
+
+                  <div className="space-y-1.5">
+                    <Label htmlFor="legislativeText" className="text-xs text-white/80">نص التشريع أو المواد المقترحة *</Label>
+                    <textarea
                       id="legislativeText"
-                      placeholder="أدخل نص التشريع أو ملخصه..."
+                      placeholder="أدخل النص الكامل للمواد التشريعية المراد قياس أثرها ومواءمتها التنظيمية..."
                       value={newAssessment.legislativeText}
                       onChange={(e) => {
                         setNewAssessment({ ...newAssessment, legislativeText: e.target.value });
-                        setAnalysisResult(null); // Reset analysis when text changes
+                        setAnalysisResult(null);
                       }}
-                      className="bg-[#0d0d0d] border-[#333] min-h-[150px] text-sm sm:text-base"
+                      className="ruzn-input min-h-[140px] text-sm resize-y"
                     />
                   </div>
                   
                   {/* AI Analysis Button */}
-                  <div className="flex items-center gap-2">
-                    <Button
+                  <div className="flex items-center gap-3 pt-2">
+                    <button
                       type="button"
-                      variant="outline"
-                      className="border-[#6b9ac4] text-[#6b9ac4] hover:bg-[#6b9ac4]/10"
                       onClick={handleAnalyzeText}
                       disabled={isAnalyzing || !newAssessment.legislativeText}
+                      className="ruzn-btn-gold text-xs sm:text-sm font-bold flex items-center gap-2 px-4 py-2.5 rounded-xl disabled:opacity-50"
                     >
                       {isAnalyzing ? (
-                        <><Loader2 className="h-4 w-4 ml-2 animate-spin" /> جاري التحليل الذكي...</>
+                        <><Loader2 className="h-4 w-4 animate-spin" /> جاري التحليل الذكي السيادي...</>
                       ) : (
-                        <><Brain className="h-4 w-4 ml-2" /> تحليل ذكي (EREBUS-RIA)</>
+                        <><Brain className="h-4 w-4" /> تحليل الأثر الذكي (EREBUS-RIA)</>
                       )}
-                    </Button>
+                    </button>
                     {analysisResult && (
-                      <Badge className="bg-green-600"><Sparkles className="h-3 w-3 ml-1" /> تم التحليل</Badge>
+                      <span className="ruzn-tag-low text-xs flex items-center gap-1">
+                        <Sparkles className="h-3.5 w-3.5" />
+                        تم استخراج النتائج
+                      </span>
                     )}
                   </div>
                   
-                  {/* AI Analysis Results */}
+                  {/* AI Analysis Preview Card */}
                   {analysisResult && (
-                    <Card className="bg-[#0d0d0d] border-[#6b9ac4]">
-                      <CardHeader className="pb-2">
-                        <CardTitle className="text-sm text-[#6b9ac4] flex items-center gap-2">
-                          <Sparkles className="h-4 w-4" /> نتائج التحليل الذكي
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-3">
-                        <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <span className="text-xs text-muted-foreground">مستوى المخاطر</span>
-                            <Badge className={getRiskBadgeColor(analysisResult.riskLevel)}>
-                              {analysisResult.riskLevel}
-                            </Badge>
-                          </div>
-                          <div>
-                            <span className="text-xs text-muted-foreground">توافق رؤية 2040</span>
-                            <div className="text-lg font-bold text-[#c9a227]">{analysisResult.vision2040Score}%</div>
-                          </div>
+                    <div className="ruzn-card p-4 border-[rgba(214,179,106,0.35)] mt-3">
+                      <div className="flex items-center justify-between mb-3 pb-2 border-b border-white/10">
+                        <span className="text-xs font-bold text-[rgba(214,179,106,0.98)] flex items-center gap-1.5">
+                          <Sparkles className="h-4 w-4" /> نتائج تقييم الأثر الفوري
+                        </span>
+                        <span className="text-lg font-bold text-[rgba(214,179,106,0.98)]">
+                          توافق رؤية 2040: {analysisResult.vision2040Score}%
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-4 gap-2 text-center mb-3">
+                        <div className="ruzn-glass-soft p-2 rounded-xl">
+                          <div className="text-[11px] text-white/60">اقتصادي</div>
+                          <div className="text-sm font-bold text-blue-400">{analysisResult.economicImpact}%</div>
                         </div>
-                        <div className="grid grid-cols-4 gap-2 text-center">
-                          <div>
-                            <div className="text-xs text-muted-foreground">اقتصادي</div>
-                            <div className="font-semibold text-blue-400">{analysisResult.economicImpact}%</div>
-                          </div>
-                          <div>
-                            <div className="text-xs text-muted-foreground">اجتماعي</div>
-                            <div className="font-semibold text-green-400">{analysisResult.socialImpact}%</div>
-                          </div>
-                          <div>
-                            <div className="text-xs text-muted-foreground">حوكمة</div>
-                            <div className="font-semibold text-purple-400">{analysisResult.governanceImpact}%</div>
-                          </div>
-                          <div>
-                            <div className="text-xs text-muted-foreground">بيئي</div>
-                            <div className="font-semibold text-teal-400">{analysisResult.environmentImpact}%</div>
-                          </div>
+                        <div className="ruzn-glass-soft p-2 rounded-xl">
+                          <div className="text-[11px] text-white/60">اجتماعي</div>
+                          <div className="text-sm font-bold text-green-400">{analysisResult.socialImpact}%</div>
                         </div>
-                        <div>
-                          <span className="text-xs text-muted-foreground">الملخص:</span>
-                          <p className="text-sm text-white mt-1">{analysisResult.summary}</p>
+                        <div className="ruzn-glass-soft p-2 rounded-xl">
+                          <div className="text-[11px] text-white/60">حوكمة</div>
+                          <div className="text-sm font-bold text-purple-400">{analysisResult.governanceImpact}%</div>
                         </div>
-                        {analysisResult.keyFindings?.length > 0 && (
-                          <div>
-                            <span className="text-xs text-muted-foreground">النتائج الرئيسية:</span>
-                            <ul className="text-xs text-white mt-1 list-disc list-inside">
-                              {analysisResult.keyFindings.slice(0, 3).map((finding: string, i: number) => (
-                                <li key={i}>{finding}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
+                        <div className="ruzn-glass-soft p-2 rounded-xl">
+                          <div className="text-[11px] text-white/60">بيئي</div>
+                          <div className="text-sm font-bold text-teal-400">{analysisResult.environmentImpact}%</div>
+                        </div>
+                      </div>
+
+                      <p className="text-xs text-white/80 leading-relaxed bg-black/30 p-2.5 rounded-xl border border-white/10">
+                        {analysisResult.summary}
+                      </p>
+                    </div>
                   )}
                 </div>
-                <DialogFooter>
+
+                <DialogFooter className="mt-4 pt-3 border-t border-[rgba(214,179,106,0.16)] flex gap-2">
                   <DialogClose asChild>
-                    <Button variant="outline">إلغاء</Button>
+                    <button className="ruzn-btn text-xs px-4 py-2">إلغاء</button>
                   </DialogClose>
-                  <Button 
-                    className="bg-[#c9a227] hover:bg-[#b8922a] text-black"
+                  <button 
                     onClick={handleCreateAssessment}
                     disabled={createAssessment.isPending || createWithAnalysis.isPending}
+                    className="ruzn-btn-gold text-xs font-bold px-5 py-2 rounded-xl"
                   >
                     {(createAssessment.isPending || createWithAnalysis.isPending) ? (
-                      <><Loader2 className="h-4 w-4 ml-2 animate-spin" /> جاري الإنشاء...</>
+                      <><Loader2 className="h-4 w-4 animate-spin ml-1" /> جاري الحفظ...</>
                     ) : analysisResult ? (
-                      <><Sparkles className="h-4 w-4 ml-2" /> إنشاء مع التحليل الذكي</>
+                      <><Sparkles className="h-4 w-4 ml-1" /> اعتماد التقييم مع النتائج</>
                     ) : (
-                      <><Plus className="h-4 w-4 ml-2" /> إنشاء التقييم</>
+                      <><Plus className="h-4 w-4 ml-1" /> حفظ التقييم</>
                     )}
-                  </Button>
+                  </button>
                 </DialogFooter>
               </DialogContent>
             </Dialog>
           </div>
         </div>
 
-        {/* التوافق مع رؤية 2040 Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          {vision2040Pillars.map((pillar) => (
-            <Card key={pillar.id} className="bg-[#1a1a1a] border-[#333]">
-              <CardContent className="p-4 sm:p-5">
+        {/* ─── Vision 2040 Key Pillars (Sovereign KPI Deck) ─── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {vision2040Pillars.map((pillar) => {
+            const IconComp = pillar.icon;
+            return (
+              <div key={pillar.id} className="ruzn-kpi p-5">
                 <div className="flex items-center justify-between mb-3">
-                  <pillar.icon className="h-5 w-5 sm:h-6 sm:w-6 text-[#6b9ac4]" />
-                  <span className="text-xl sm:text-2xl font-bold text-[#c9a227]">
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center border border-[rgba(214,179,106,0.3)] bg-[rgba(214,179,106,0.12)]">
+                    <IconComp className="h-5 w-5 text-[rgba(214,179,106,0.98)]" />
+                  </div>
+                  <span className="text-2xl font-extrabold text-[rgba(214,179,106,0.98)] font-heading">
                     {vision2040Loading ? <Loader2 className="h-5 w-5 animate-spin" /> : `${pillar.score}%`}
                   </span>
                 </div>
-                <h3 className="font-semibold text-white text-sm sm:text-base">{pillar.name}</h3>
-                <Progress value={pillar.score} className="mt-2 h-2" />
-              </CardContent>
-            </Card>
-          ))}
+                <h3 className="font-bold text-white/95 text-sm mb-1">{pillar.name}</h3>
+                <p className="text-[11px] text-white/55 mb-2.5">{pillar.nameEn}</p>
+                <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-gradient-to-r from-[#b8924d] to-[#d6b36a] rounded-full transition-all duration-500"
+                    style={{ width: `${Math.min(pillar.score, 100)}%` }}
+                  />
+                </div>
+              </div>
+            );
+          })}
         </div>
 
-        {/* Main Content Tabs */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-3 sm:space-y-4">
-          <TabsList className="bg-[#1a1a1a] border border-[#333] h-auto">
-            <TabsTrigger value="overview" className="data-[state=active]:bg-[#c9a227] data-[state=active]:text-black text-sm sm:text-base px-3 sm:px-4 py-2 h-auto">
-              <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
-              <span className="hidden sm:inline">نظرة عامة</span>
-            </TabsTrigger>
-            <TabsTrigger value="assessments" className="data-[state=active]:bg-[#c9a227] data-[state=active]:text-black text-sm sm:text-base px-3 sm:px-4 py-2 h-auto">
-              <Scale className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
-              <span className="hidden sm:inline">التقييمات</span>
-            </TabsTrigger>
-            <TabsTrigger value="alerts" className="data-[state=active]:bg-[#c9a227] data-[state=active]:text-black text-sm sm:text-base px-3 sm:px-4 py-2 h-auto">
-              <AlertTriangle className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
-              <span className="hidden sm:inline">التنبيهات</span>
-              {alertsData?.stats.unread ? (
-                <Badge className="mr-2 bg-red-600">{alertsData.stats.unread}</Badge>
-              ) : null}
-            </TabsTrigger>
-          </TabsList>
+        {/* ─── Segmented Tabs ─── */}
+        <div className="flex gap-2 border-b border-white/10 pb-3 flex-wrap">
+          <button
+            onClick={() => setActiveTab("overview")}
+            className={`ruzn-tab text-xs sm:text-sm font-semibold flex items-center gap-2 px-4 py-2.5 rounded-xl ${
+              activeTab === "overview" ? "active" : ""
+            }`}
+          >
+            <BarChart3 className="h-4 w-4" />
+            <span>نظرة عامة ومؤشرات المواءمة</span>
+          </button>
 
-          {/* Overview Tab */}
-          <TabsContent value="overview" className="space-y-4">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-              {/* Summary Stats */}
-              <Card className="bg-[#1a1a1a] border-[#333]">
-                <CardHeader>
-                  <CardTitle className="text-[#c9a227]">إحصائيات التقييم</CardTitle>
-                  <CardDescription>Assessment Statistics</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {riaLoading ? (
-                    <div className="flex justify-center py-8">
-                      <Loader2 className="h-8 w-8 animate-spin text-[#c9a227]" />
+          <button
+            onClick={() => setActiveTab("assessments")}
+            className={`ruzn-tab text-xs sm:text-sm font-semibold flex items-center gap-2 px-4 py-2.5 rounded-xl ${
+              activeTab === "assessments" ? "active" : ""
+            }`}
+          >
+            <Scale className="h-4 w-4" />
+            <span>سجل التقييمات التشريعية</span>
+            {riaData?.assessments?.length ? (
+              <span className="ruzn-tag-info text-[10px] px-2 py-0.5 rounded-full">
+                {riaData.assessments.length}
+              </span>
+            ) : null}
+          </button>
+
+          <button
+            onClick={() => setActiveTab("alerts")}
+            className={`ruzn-tab text-xs sm:text-sm font-semibold flex items-center gap-2 px-4 py-2.5 rounded-xl ${
+              activeTab === "alerts" ? "active" : ""
+            }`}
+          >
+            <AlertTriangle className="h-4 w-4" />
+            <span>التنبيهات التشريعية</span>
+            {alertsData?.stats?.unread ? (
+              <span className="ruzn-tag-high text-[10px] px-2 py-0.5 rounded-full">
+                {alertsData.stats.unread}
+              </span>
+            ) : null}
+          </button>
+        </div>
+
+        {/* ─── Tab Content 1: Overview ─── */}
+        {activeTab === "overview" && (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+            {/* Summary Stats */}
+            <div className="ruzn-card p-6">
+              <div className="flex items-center gap-2 mb-4 pb-2 border-b border-white/10">
+                <BarChart3 className="w-5 h-5 text-[rgba(214,179,106,0.98)]" />
+                <h3 className="font-bold text-white/95 text-base font-heading">إحصائيات التقييمات</h3>
+              </div>
+
+              {riaLoading ? (
+                <div className="flex justify-center py-10">
+                  <Loader2 className="h-8 w-8 animate-spin text-[#d6b36a]" />
+                </div>
+              ) : (
+                <div className="space-y-3.5">
+                  <div className="flex items-center justify-between p-2.5 ruzn-glass-soft rounded-xl">
+                    <span className="text-xs text-white/70">إجمالي التقييمات</span>
+                    <span className="text-xl font-bold text-white font-heading">{riaData?.stats?.total || 0}</span>
+                  </div>
+                  <div className="flex items-center justify-between p-2.5 ruzn-glass-soft rounded-xl">
+                    <span className="text-xs text-white/70">مسودات قيد الإعداد</span>
+                    <span className="text-lg font-semibold text-gray-300">{riaData?.stats?.draft || 0}</span>
+                  </div>
+                  <div className="flex items-center justify-between p-2.5 ruzn-glass-soft rounded-xl">
+                    <span className="text-xs text-white/70">بانتظار المراجعة والاعتماد</span>
+                    <span className="text-lg font-semibold text-yellow-400">{riaData?.stats?.pending_review || 0}</span>
+                  </div>
+                  <div className="flex items-center justify-between p-2.5 ruzn-glass-soft rounded-xl">
+                    <span className="text-xs text-white/70">تقييمات معتمدة رسمياً</span>
+                    <span className="text-lg font-semibold text-green-400">{riaData?.stats?.approved || 0}</span>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Risk Distribution */}
+            <div className="ruzn-card p-6">
+              <div className="flex items-center gap-2 mb-4 pb-2 border-b border-white/10">
+                <AlertTriangle className="w-5 h-5 text-[rgba(214,179,106,0.98)]" />
+                <h3 className="font-bold text-white/95 text-base font-heading">توزيع مستويات المخاطر</h3>
+              </div>
+
+              {riaLoading ? (
+                <div className="flex justify-center py-10">
+                  <Loader2 className="h-8 w-8 animate-spin text-[#d6b36a]" />
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between p-2.5 ruzn-glass-soft rounded-xl border-r-4 border-r-red-500">
+                    <span className="text-xs text-white/80">مخاطر حرجة (Critical)</span>
+                    <span className="font-bold text-red-400 text-base">{riaData?.riskDistribution?.critical || 0}</span>
+                  </div>
+                  <div className="flex items-center justify-between p-2.5 ruzn-glass-soft rounded-xl border-r-4 border-r-orange-500">
+                    <span className="text-xs text-white/80">مخاطر عالية (High)</span>
+                    <span className="font-bold text-orange-400 text-base">{riaData?.riskDistribution?.high || 0}</span>
+                  </div>
+                  <div className="flex items-center justify-between p-2.5 ruzn-glass-soft rounded-xl border-r-4 border-r-yellow-500">
+                    <span className="text-xs text-white/80">مخاطر متوسطة (Medium)</span>
+                    <span className="font-bold text-yellow-400 text-base">{riaData?.riskDistribution?.medium || 0}</span>
+                  </div>
+                  <div className="flex items-center justify-between p-2.5 ruzn-glass-soft rounded-xl border-r-4 border-r-green-500">
+                    <span className="text-xs text-white/80">مخاطر منخفضة (Low)</span>
+                    <span className="font-bold text-green-400 text-base">{riaData?.riskDistribution?.low || 0}</span>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Vision 2040 Overall Alignment Dial */}
+            <div className="ruzn-card p-6 flex flex-col items-center justify-center text-center">
+              <div className="flex items-center gap-2 mb-4 pb-2 border-b border-white/10 w-full justify-center">
+                <Target className="w-5 h-5 text-[rgba(214,179,106,0.98)]" />
+                <h3 className="font-bold text-white/95 text-base font-heading">متوسط المواءمة العامة مع 2040</h3>
+              </div>
+
+              {vision2040Loading ? (
+                <Loader2 className="h-16 w-16 animate-spin text-[#d6b36a] my-8" />
+              ) : (
+                <div className="py-4">
+                  <div className="relative w-36 h-36 mx-auto mb-3">
+                    <svg className="w-full h-full transform -rotate-90">
+                      <circle
+                        cx="72"
+                        cy="72"
+                        r="60"
+                        stroke="rgba(255,255,255,0.08)"
+                        strokeWidth="12"
+                        fill="none"
+                      />
+                      <circle
+                        cx="72"
+                        cy="72"
+                        r="60"
+                        stroke="#d6b36a"
+                        strokeWidth="12"
+                        fill="none"
+                        strokeDasharray={`${(vision2040Data?.overallAlignment || 0) * 3.77} ${100 * 3.77}`}
+                        strokeLinecap="round"
+                        className="transition-all duration-1000"
+                      />
+                    </svg>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      <span className="text-3xl font-extrabold text-[rgba(214,179,106,0.98)] font-heading">
+                        {vision2040Data?.overallAlignment || 0}%
+                      </span>
+                      <span className="text-[10px] text-white/60">مؤشر RIA</span>
                     </div>
-                  ) : (
-                    <>
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">إجمالي التقييمات</span>
-                        <span className="text-2xl font-bold text-white">{riaData?.stats.total || 0}</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">مسودات</span>
-                        <span className="text-xl font-semibold text-gray-400">{riaData?.stats.draft || 0}</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">بانتظار المراجعة</span>
-                        <span className="text-xl font-semibold text-yellow-400">{riaData?.stats.pending_review || 0}</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">معتمدة</span>
-                        <span className="text-xl font-semibold text-green-400">{riaData?.stats.approved || 0}</span>
-                      </div>
-                    </>
-                  )}
-                </CardContent>
-              </Card>
+                  </div>
+                  <p className="text-xs text-white/70 max-w-xs leading-relaxed">
+                    متوسط الامتثال والمواءمة لكافة التشريعات المسجلة في النظام السيادي
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
-              {/* توزيع المخاطر */}
-              <Card className="bg-[#1a1a1a] border-[#333]">
-                <CardHeader>
-                  <CardTitle className="text-[#c9a227]">توزيع المخاطر</CardTitle>
-                  <CardDescription>توزيع المخاطر</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  {riaLoading ? (
-                    <div className="flex justify-center py-8">
-                      <Loader2 className="h-8 w-8 animate-spin text-[#c9a227]" />
-                    </div>
-                  ) : (
-                    <>
-                      <div className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                        <span className="flex-1 text-muted-foreground">حرج</span>
-                        <span className="font-semibold text-white">{riaData?.riskDistribution.critical || 0}</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-orange-500"></div>
-                        <span className="flex-1 text-muted-foreground">عالي</span>
-                        <span className="font-semibold text-white">{riaData?.riskDistribution.high || 0}</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                        <span className="flex-1 text-muted-foreground">متوسط</span>
-                        <span className="font-semibold text-white">{riaData?.riskDistribution.medium || 0}</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                        <span className="flex-1 text-muted-foreground">منخفض</span>
-                        <span className="font-semibold text-white">{riaData?.riskDistribution.low || 0}</span>
-                      </div>
-                    </>
-                  )}
-                </CardContent>
-              </Card>
+        {/* ─── Tab Content 2: Assessments ─── */}
+        {activeTab === "assessments" && (
+          <div className="ruzn-card p-6">
+            <div className="flex items-center justify-between mb-5 pb-3 border-b border-white/10">
+              <div>
+                <h3 className="text-lg font-bold text-white/95 font-heading">التقييمات الأخيرة</h3>
+                <p className="text-xs text-white/60">سجل التشريعات المقيدة مع درجات الأثر التقديري</p>
+              </div>
+              <button
+                onClick={() => setIsNewAssessmentOpen(true)}
+                className="ruzn-btn-gold text-xs font-bold px-3 py-1.5 rounded-xl"
+              >
+                + تقييم جديد
+              </button>
+            </div>
 
-              {/* Vision 2040 Overall */}
-              <Card className="bg-[#1a1a1a] border-[#333]">
-                <CardHeader>
-                  <CardTitle className="text-[#c9a227]">التوافق مع رؤية 2040</CardTitle>
-                  <CardDescription>التوافق مع رؤية 2040</CardDescription>
-                </CardHeader>
-                <CardContent className="flex flex-col items-center justify-center py-4">
-                  {vision2040Loading ? (
-                    <Loader2 className="h-16 w-16 animate-spin text-[#c9a227]" />
-                  ) : (
-                    <>
-                      <div className="relative w-32 h-32">
-                        <svg className="w-full h-full transform -rotate-90">
-                          <circle
-                            cx="64"
-                            cy="64"
-                            r="56"
-                            stroke="#333"
-                            strokeWidth="12"
-                            fill="none"
-                          />
-                          <circle
-                            cx="64"
-                            cy="64"
-                            r="56"
-                            stroke="#c9a227"
-                            strokeWidth="12"
-                            fill="none"
-                            strokeDasharray={`${(vision2040Data?.overallAlignment || 0) * 3.52} ${100 * 3.52}`}
-                            strokeLinecap="round"
-                          />
-                        </svg>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="text-3xl font-bold text-[#c9a227]">
-                            {vision2040Data?.overallAlignment || 0}%
+            {riaLoading ? (
+              <div className="flex justify-center py-16">
+                <Loader2 className="h-10 w-10 animate-spin text-[#d6b36a]" />
+              </div>
+            ) : riaData?.assessments?.length === 0 ? (
+              <div className="text-center py-16 text-white/50">
+                <Scale className="h-14 w-14 mx-auto mb-3 opacity-40 text-[#d6b36a]" />
+                <p className="font-semibold text-white/80">لا توجد تقييمات تشريعية مسجلة حالياً</p>
+                <p className="text-xs text-white/50 mt-1">اضغط على زر "تقييم جديد" للبدء</p>
+              </div>
+            ) : (
+              <div className="space-y-3.5">
+                {riaData?.assessments?.map((assessment: any) => (
+                  <div
+                    key={assessment.id}
+                    className="p-4 ruzn-card hover:border-[rgba(214,179,106,0.45)] transition-all"
+                  >
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2.5 mb-1.5">
+                          <Scale className="h-4 w-4 text-[rgba(214,179,106,0.95)]" />
+                          <h4 className="font-bold text-white/95 text-base">{assessment.titleArabic || assessment.title}</h4>
+                        </div>
+                        <p className="text-xs text-white/60 font-mono mb-2.5">{assessment.title}</p>
+                        
+                        <div className="flex items-center gap-2 flex-wrap">
+                          {getStatusBadge(assessment.status)}
+                          <span className={getRiskBadgeColor(assessment.riskLevel)}>
+                            {assessment.riskLevel || "NORMAL"}
+                          </span>
+                          <span className="ruzn-glass-soft text-xs text-[rgba(214,179,106,0.9)] px-2.5 py-0.5 rounded-full border border-[rgba(214,179,106,0.25)]">
+                            {assessment.issuingAuthority}
                           </span>
                         </div>
                       </div>
-                      <p className="text-muted-foreground mt-4 text-center">
-                        متوسط التوافق العام
-                      </p>
-                    </>
-                  )}
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
 
-          {/* Assessments Tab */}
-          <TabsContent value="assessments" className="space-y-4">
-            <Card className="bg-[#1a1a1a] border-[#333]">
-              <CardHeader>
-                <CardTitle className="text-[#c9a227]">التقييمات الأخيرة</CardTitle>
-                <CardDescription>Recent Regulatory Impact Assessments</CardDescription>
-              </CardHeader>
-              <CardContent>
-                {riaLoading ? (
-                  <div className="flex justify-center py-12">
-                    <Loader2 className="h-12 w-12 animate-spin text-[#c9a227]" />
-                  </div>
-                ) : riaData?.assessments.length === 0 ? (
-                  <div className="text-center py-12 text-muted-foreground">
-                    <Scale className="h-16 w-16 mx-auto mb-4 opacity-50" />
-                    <p>لا توجد تقييمات بعد</p>
-                    <p className="text-sm">No assessments yet</p>
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    {riaData?.assessments.map((assessment: any) => (
-                      <div
-                        key={assessment.id}
-                        className="p-4 bg-[#0d0d0d] rounded-lg border border-[#333] hover:border-[#c9a227] transition-colors"
-                      >
-                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-3 mb-2">
-                              <Scale className="h-5 w-5 text-[#6b9ac4]" />
-                              <h3 className="font-semibold text-white">{assessment.title}</h3>
-                            </div>
-                            <p className="text-sm text-muted-foreground">{assessment.title}</p>
-                            <div className="flex items-center gap-2 mt-2 flex-wrap">
-                              {getStatusBadge(assessment.status)}
-                              <Badge className={getRiskBadgeColor(assessment.riskLevel)}>
-                                {assessment.riskLevel}
-                              </Badge>
-                              <Badge variant="outline" className="text-[#6b9ac4] border-[#6b9ac4]">
-                                {assessment.issuingAuthority}
-                              </Badge>
-                            </div>
+                      <div className="flex items-center gap-6 self-end md:self-center">
+                        <div className="text-center">
+                          <div className="text-2xl font-extrabold text-[rgba(214,179,106,0.98)] font-heading">
+                            {Number(assessment.vision2040Score) || 0}%
                           </div>
-                          <div className="flex flex-col items-end gap-2">
-                            <div className="text-center">
-                              <div className="text-2xl font-bold text-[#c9a227]">
-                                {Number(assessment.vision2040Score) || 0}%
-                              </div>
-                              <div className="text-xs text-muted-foreground">RIA Score</div>
-                            </div>
-                            <div className="flex gap-4 text-sm">
-                              <div className="text-center">
-                                <div className="font-semibold text-blue-400">{Number(assessment.economicImpact) || 0}%</div>
-                                <div className="text-xs text-muted-foreground">اقتصادي</div>
-                              </div>
-                              <div className="text-center">
-                                <div className="font-semibold text-green-400">{Number(assessment.socialImpact) || 0}%</div>
-                                <div className="text-xs text-muted-foreground">اجتماعي</div>
-                              </div>
-                              <div className="text-center">
-                                <div className="font-semibold text-purple-400">{Number(assessment.governanceImpact) || 0}%</div>
-                                <div className="text-xs text-muted-foreground">حوكمة</div>
-                              </div>
-                            </div>
+                          <div className="text-[10px] text-white/55">توافق 2040</div>
+                        </div>
+
+                        <div className="grid grid-cols-3 gap-2 text-center text-xs">
+                          <div className="ruzn-glass-soft px-2 py-1 rounded-lg">
+                            <div className="text-[10px] text-white/50">اقتصادي</div>
+                            <div className="font-bold text-blue-400">{Number(assessment.economicImpact) || 0}%</div>
+                          </div>
+                          <div className="ruzn-glass-soft px-2 py-1 rounded-lg">
+                            <div className="text-[10px] text-white/50">اجتماعي</div>
+                            <div className="font-bold text-green-400">{Number(assessment.socialImpact) || 0}%</div>
+                          </div>
+                          <div className="ruzn-glass-soft px-2 py-1 rounded-lg">
+                            <div className="text-[10px] text-white/50">حوكمة</div>
+                            <div className="font-bold text-purple-400">{Number(assessment.governanceImpact) || 0}%</div>
                           </div>
                         </div>
                       </div>
-                    ))}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          {/* Alerts Tab */}
-          <TabsContent value="alerts" className="space-y-4">
-            <Card className="bg-[#1a1a1a] border-[#333]">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle className="text-[#c9a227]">التنبيهات التشريعية</CardTitle>
-                    <CardDescription>Legislative Alerts & Notifications</CardDescription>
-                  </div>
-                  {alertsData?.stats && (
-                    <div className="flex gap-2">
-                      <Badge variant="outline" className="text-red-500 border-red-500">
-                        {alertsData.stats.critical} حرج
-                      </Badge>
-                      <Badge variant="outline" className="text-yellow-500 border-yellow-500">
-                        {alertsData.stats.warning} تحذير
-                      </Badge>
-                      <Badge variant="outline" className="text-blue-500 border-blue-500">
-                        {alertsData.stats.info} معلومات
-                      </Badge>
                     </div>
-                  )}
-                </div>
-              </CardHeader>
-              <CardContent>
-                {alertsLoading ? (
-                  <div className="flex justify-center py-12">
-                    <Loader2 className="h-12 w-12 animate-spin text-[#c9a227]" />
                   </div>
-                ) : alertsData?.alerts.length === 0 ? (
-                  <div className="text-center py-12 text-muted-foreground">
-                    <CheckCircle2 className="h-16 w-16 mx-auto mb-4 opacity-50 text-green-500" />
-                    <p>لا توجد تنبيهات</p>
-                    <p className="text-sm">No alerts at this time</p>
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    {alertsData?.alerts.map((alert: any) => (
-                      <div
-                        key={alert.id}
-                        className={`p-4 rounded-lg border ${
-                          alert.severity === "critical"
-                            ? "bg-red-950/30 border-red-800"
-                            : alert.severity === "warning"
-                            ? "bg-yellow-950/30 border-yellow-800"
-                            : "bg-blue-950/30 border-blue-800"
-                        }`}
-                      >
-                        <div className="flex items-start gap-4">
-                          {getSeverityIcon(alert.severity)}
-                          <div className="flex-1">
-                            <div className="flex items-center justify-between">
-                              <h3 className="font-semibold text-white">{alert.title}</h3>
-                              <div className="flex items-center gap-2">
-                                <Badge variant="outline" className="text-xs">
-                                  {alert.alertType}
-                                </Badge>
-                                <Badge variant={!alert.isRead ? 'default' : 'secondary'} className="text-xs">
-                                  {!alert.isRead ? 'جديد' : alert.isActioned ? 'تم الحل' : 'تم الاطلاع'}
-                                </Badge>
-                              </div>
-                            </div>
-                            <p className="text-sm text-muted-foreground mt-1">{alert.title}</p>
-                            <p className="text-sm text-gray-300 mt-2">{alert.description}</p>
-                            {alert.descriptionEn && (
-                              <p className="text-xs text-[#6b9ac4] mt-2">
-                                <strong>ملاحظات:</strong> {alert.descriptionEn}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
 
-        {/* Footer Branding */}
-        <div className="flex items-center justify-center gap-8 pt-6 border-t border-[#333]">
-          <div className="flex items-center gap-2">
-            <img 
-              src="/logos/AMADLOGOTINNY.jpg" 
-              alt="AMAD" 
-              className="h-10 rounded"
-            />
-            <div className="text-xs text-muted-foreground">
-              <div className="font-semibold text-[#c9a227]">مجموعة عماد</div>
-              <div>الشريك الاستراتيجي</div>
+        {/* ─── Tab Content 3: Alerts ─── */}
+        {activeTab === "alerts" && (
+          <div className="ruzn-card p-6">
+            <div className="flex items-center justify-between mb-5 pb-3 border-b border-white/10">
+              <div>
+                <h3 className="text-lg font-bold text-white/95 font-heading">التنبيهات التشريعية والمستجدات</h3>
+                <p className="text-xs text-white/60">إشعارات التعديلات التشريعية وفروقات الالتزام</p>
+              </div>
+
+              {alertsData?.stats && (
+                <div className="flex gap-2">
+                  <span className="ruzn-tag-high text-xs">{alertsData.stats.critical} حرج</span>
+                  <span className="ruzn-tag-med text-xs">{alertsData.stats.warning} تحذير</span>
+                  <span className="ruzn-tag-info text-xs">{alertsData.stats.info} معلومات</span>
+                </div>
+              )}
             </div>
+
+            {alertsLoading ? (
+              <div className="flex justify-center py-16">
+                <Loader2 className="h-10 w-10 animate-spin text-[#d6b36a]" />
+              </div>
+            ) : alertsData?.alerts?.length === 0 ? (
+              <div className="text-center py-16 text-white/50">
+                <CheckCircle2 className="h-14 w-14 mx-auto mb-3 opacity-40 text-green-400" />
+                <p className="font-semibold text-white/80">لا توجد تنبيهات تشريعية جديدة</p>
+                <p className="text-xs text-white/50 mt-1">كافة الأنظمة والتشريعات مستقرة ومتوافقة</p>
+              </div>
+            ) : (
+              <div className="space-y-3.5">
+                {alertsData?.alerts?.map((alert: any) => (
+                  <div
+                    key={alert.id}
+                    className="p-4 ruzn-card hover:border-[rgba(214,179,106,0.4)] transition-all"
+                  >
+                    <div className="flex items-start gap-3.5">
+                      <div className="mt-0.5">{getSeverityIcon(alert.severity)}</div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between flex-wrap gap-2 mb-1">
+                          <h4 className="font-bold text-white/95 text-sm">{alert.title}</h4>
+                          <span className="ruzn-tag-info text-[10px]">
+                            {alert.alertType}
+                          </span>
+                        </div>
+                        <p className="text-xs text-white/70 leading-relaxed mb-2">
+                          {alert.description}
+                        </p>
+                        {alert.descriptionEn && (
+                          <p className="text-[11px] text-[rgba(214,179,106,0.85)] font-mono bg-black/25 p-2 rounded-lg border border-white/5">
+                            {alert.descriptionEn}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-          <div className="flex items-center gap-2">
-            <img 
-              src="/logos/AcuteriumTechnologies_logo.png" 
-              alt="Acuterium Technologies" 
-              className="h-10"
-            />
-            <div className="text-xs text-muted-foreground">
-              <div className="font-semibold text-[#6b9ac4]">أكيوتيريوم تكنولوجيز</div>
-              <div>الشريك التقني</div>
-            </div>
-          </div>
-        </div>
+        )}
       </div>
     </DashboardLayout>
   );

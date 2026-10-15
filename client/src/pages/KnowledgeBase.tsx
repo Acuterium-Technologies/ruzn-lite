@@ -142,19 +142,25 @@ export default function KnowledgeBase() {
   const getContent = (entry: KnowledgeEntry) => language === "arabic" ? (entry.contentArabic || entry.contentEnglish) : entry.contentEnglish;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0a0f] to-[#12121a]" dir={language === "arabic" ? "rtl" : "ltr"}>
+    <div 
+      className="min-h-screen text-foreground flex flex-col"
+      dir={language === "arabic" ? "rtl" : "ltr"}
+      style={{
+        background: 'radial-gradient(1200px 600px at 60% 18%, rgba(214,179,106,.16), transparent 55%), radial-gradient(900px 500px at 20% 80%, rgba(96,165,250,.10), transparent 60%), linear-gradient(180deg, #050506, #0a0a0c)'
+      }}
+    >
       {/* Header */}
-      <header className="border-b border-white/10 bg-black/40 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b border-white/10 bg-black/40 backdrop-blur-md sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="flex items-center gap-3">
-              <BookOpen className="w-8 h-8 text-amber-500" />
+              <BookOpen className="w-8 h-8 text-[#d6b36a] drop-shadow-[0_0_10px_rgba(214,179,106,0.5)]" />
               <div>
-                <h1 className="text-xl sm:text-2xl font-bold text-white">
-                  {language === "arabic" ? "قاعدة المعرفة" : "Knowledge Base"}
+                <h1 className="text-xl sm:text-2xl font-extrabold text-[#d6b36a]">
+                  {language === "arabic" ? "قاعدة المعرفة والتشريعات" : "Knowledge Base & Legislation"}
                 </h1>
-                <p className="text-sm text-white/60">
-                  {language === "arabic" ? "الوثائق والتشريعات القانونية" : "Legal Documents & Legislation"}
+                <p className="text-sm text-white/70">
+                  {language === "arabic" ? "المراسيم السلطانية، اللوائح التنظيمية، والمراجع القضائية" : "Royal Decrees, Regulations, and Legal References"}
                 </p>
               </div>
             </div>
@@ -164,13 +170,13 @@ export default function KnowledgeBase() {
               <div className="flex rounded-lg overflow-hidden border border-white/20">
                 <button
                   onClick={() => setLanguage("english")}
-                  className={`px-3 py-1.5 text-sm transition-colors ${language === "english" ? "bg-amber-500 text-black" : "bg-transparent text-white/70 hover:text-white"}`}
+                  className={`px-3 py-1.5 text-xs font-semibold transition-colors ${language === "english" ? "bg-[#d6b36a] text-black" : "bg-transparent text-white/70 hover:text-white"}`}
                 >
                   English
                 </button>
                 <button
                   onClick={() => setLanguage("arabic")}
-                  className={`px-3 py-1.5 text-sm transition-colors ${language === "arabic" ? "bg-amber-500 text-black" : "bg-transparent text-white/70 hover:text-white"}`}
+                  className={`px-3 py-1.5 text-xs font-semibold transition-colors ${language === "arabic" ? "bg-[#d6b36a] text-black" : "bg-transparent text-white/70 hover:text-white"}`}
                 >
                   العربية
                 </button>
@@ -183,7 +189,7 @@ export default function KnowledgeBase() {
                   size="sm"
                   onClick={() => seedMutation.mutate()}
                   disabled={seedMutation.isPending}
-                  className="border-amber-500/30 text-amber-400 hover:bg-amber-500/10"
+                  className="border-[#d6b36a]/30 text-[#d6b36a] hover:bg-[#d6b36a]/10"
                 >
                   {seedMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : "Seed DB"}
                 </Button>
@@ -196,15 +202,15 @@ export default function KnowledgeBase() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="border-amber-500/30 text-amber-400 hover:bg-amber-500/10"
+                      className="border-[#d6b36a]/30 text-[#d6b36a] hover:bg-[#d6b36a]/10"
                     >
                       <Upload className="w-4 h-4 mr-2" />
                       {language === "arabic" ? "إضافة يدوية" : "Manual Add"}
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="bg-[#1a1a24] border-white/10 text-white max-w-2xl">
+                  <DialogContent className="bg-[#101014] border-[#d6b36a]/30 text-white max-w-2xl">
                     <DialogHeader>
-                      <DialogTitle>{language === "arabic" ? "إضافة وثيقة جديدة" : "Add New Document"}</DialogTitle>
+                      <DialogTitle className="text-[#d6b36a]">{language === "arabic" ? "إضافة وثيقة جديدة" : "Add New Document"}</DialogTitle>
                       <DialogDescription className="text-white/60">
                         {language === "arabic" ? "أدخل تفاصيل الوثيقة الجديدة" : "Enter the details of the new document"}
                       </DialogDescription>
@@ -221,16 +227,16 @@ export default function KnowledgeBase() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="border-green-500/30 text-green-400 hover:bg-green-500/10"
+                      className="border-[#4ade80]/30 text-[#4ade80] hover:bg-[#4ade80]/10"
                     >
                       <FileUp className="w-4 h-4 mr-2" />
                       {language === "arabic" ? "رفع PDF" : "Upload PDF"}
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="bg-[#1a1a24] border-white/10 text-white max-w-2xl">
+                  <DialogContent className="bg-[#101014] border-[#4ade80]/30 text-white max-w-2xl">
                     <DialogHeader>
-                      <DialogTitle className="flex items-center gap-2">
-                        <FileUp className="w-5 h-5 text-green-400" />
+                      <DialogTitle className="flex items-center gap-2 text-[#4ade80]">
+                        <FileUp className="w-5 h-5 text-[#4ade80]" />
                         {language === "arabic" ? "رفع ملف PDF" : "Upload PDF Document"}
                       </DialogTitle>
                       <DialogDescription className="text-white/60">
@@ -251,55 +257,51 @@ export default function KnowledgeBase() {
 
       <main className="container mx-auto px-4 py-6">
         {/* Search and Filters */}
-        <div className="mb-6 space-y-4">
+        <div className="ruzn-card p-4 mb-6 space-y-4">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
-            <Input
-              placeholder={language === "arabic" ? "البحث في الوثائق..." : "Search documents..."}
+            <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#d6b36a]" />
+            <input
+              placeholder={language === "arabic" ? "البحث في المراسيم والوثائق التشريعية..." : "Search documents and decrees..."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 bg-white/5 border-white/10 text-white placeholder:text-white/40"
+              className="ruzn-input pr-10 pl-4 w-full"
             />
           </div>
           
           {/* Document Type Filters */}
           <div className="flex flex-wrap gap-2">
-            <Button
-              variant={selectedType === null ? "default" : "outline"}
-              size="sm"
+            <button
               onClick={() => setSelectedType(null)}
-              className={selectedType === null ? "bg-amber-500 text-black" : "border-white/20 text-white/70"}
+              className={`ruzn-tab text-xs px-3 py-1.5 rounded-lg ${selectedType === null ? "active" : ""}`}
             >
               {language === "arabic" ? "الكل" : "All"}
-            </Button>
+            </button>
             {Object.entries(documentTypeConfig).map(([type, config]) => (
-              <Button
+              <button
                 key={type}
-                variant={selectedType === type ? "default" : "outline"}
-                size="sm"
                 onClick={() => setSelectedType(type)}
-                className={selectedType === type ? "bg-amber-500 text-black" : `border-white/20 text-white/70 hover:${config.color}`}
+                className={`ruzn-tab text-xs px-3 py-1.5 rounded-lg flex items-center gap-1.5 ${selectedType === type ? "active" : ""}`}
               >
                 {config.icon}
-                <span className="ml-1">{language === "arabic" ? config.labelAr : config.label}</span>
-              </Button>
+                <span>{language === "arabic" ? config.labelAr : config.label}</span>
+              </button>
             ))}
           </div>
           
           {/* Sorting and Date Filter Controls */}
-          <div className="flex flex-wrap items-center gap-4 pt-2 border-t border-white/10">
+          <div className="flex flex-wrap items-center gap-4 pt-3 border-t border-white/10">
             {/* Sort By */}
             <div className="flex items-center gap-2">
-              <span className="text-white/60 text-sm">{language === "arabic" ? "ترتيب حسب:" : "Sort by:"}</span>
+              <span className="text-[#d6b36a] text-xs font-semibold">{language === "arabic" ? "ترتيب حسب:" : "Sort by:"}</span>
               <Select value={sortBy} onValueChange={(v) => setSortBy(v as 'date' | 'title')}>
-                <SelectTrigger className="w-[120px] bg-white/5 border-white/10 text-white h-8">
+                <SelectTrigger className="w-[120px] bg-white/5 border-white/10 text-white h-8 text-xs">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-[#1a1a24] border-white/10">
-                  <SelectItem value="date" className="text-white hover:bg-white/10">
+                <SelectContent className="bg-[#101014] border-[#d6b36a]/30">
+                  <SelectItem value="date" className="text-white hover:bg-white/10 text-xs">
                     {language === "arabic" ? "التاريخ" : "Date"}
                   </SelectItem>
-                  <SelectItem value="title" className="text-white hover:bg-white/10">
+                  <SelectItem value="title" className="text-white hover:bg-white/10 text-xs">
                     {language === "arabic" ? "العنوان" : "Title"}
                   </SelectItem>
                 </SelectContent>
@@ -308,7 +310,7 @@ export default function KnowledgeBase() {
                 variant="ghost"
                 size="sm"
                 onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
-                className="text-white/60 hover:text-white p-1 h-8"
+                className="text-[#d6b36a] hover:text-white p-1 h-8"
               >
                 {sortOrder === 'asc' ? '↑' : '↓'}
               </Button>
@@ -316,15 +318,15 @@ export default function KnowledgeBase() {
             
             {/* Date Filter */}
             <div className="flex items-center gap-2">
-              <span className="text-white/60 text-sm">{language === "arabic" ? "الفترة:" : "Period:"}</span>
+              <span className="text-[#d6b36a] text-xs font-semibold">{language === "arabic" ? "الفترة:" : "Period:"}</span>
               <div className="flex rounded-lg overflow-hidden border border-white/20">
                 {(['all', 'year', 'month', 'week'] as const).map((period) => (
                   <button
                     key={period}
                     onClick={() => setDateFilter(period)}
-                    className={`px-2 py-1 text-xs transition-colors ${
+                    className={`px-2.5 py-1 text-xs transition-colors ${
                       dateFilter === period 
-                        ? "bg-amber-500 text-black" 
+                        ? "bg-[#d6b36a] text-black font-semibold" 
                         : "bg-transparent text-white/70 hover:text-white hover:bg-white/10"
                     }`}
                   >
@@ -338,8 +340,8 @@ export default function KnowledgeBase() {
             </div>
             
             {/* Results count */}
-            <div className="ml-auto text-white/40 text-sm">
-              {filteredEntries.length} {language === "arabic" ? "وثيقة" : "documents"}
+            <div className="ml-auto text-white/60 text-xs font-mono">
+              {filteredEntries.length} {language === "arabic" ? "وثيقة مسجلة" : "registered documents"}
             </div>
           </div>
         </div>
@@ -347,25 +349,25 @@ export default function KnowledgeBase() {
         {/* Loading State */}
         {isLoading && (
           <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-8 h-8 animate-spin text-amber-500" />
+            <Loader2 className="w-8 h-8 animate-spin text-[#d6b36a]" />
           </div>
         )}
 
         {/* Empty State */}
         {!isLoading && filteredEntries.length === 0 && (
-          <div className="text-center py-20">
-            <BookOpen className="w-16 h-16 mx-auto text-white/20 mb-4" />
-            <h3 className="text-xl font-semibold text-white/60 mb-2">
-              {language === "arabic" ? "لا توجد وثائق" : "No Documents Found"}
+          <div className="ruzn-card text-center py-20">
+            <BookOpen className="w-16 h-16 mx-auto text-[#d6b36a]/40 mb-4" />
+            <h3 className="text-xl font-semibold text-white/80 mb-2">
+              {language === "arabic" ? "لا توجد وثائق مطابقة" : "No Documents Found"}
             </h3>
-            <p className="text-white/40">
-              {language === "arabic" ? "جرب تغيير معايير البحث" : "Try adjusting your search criteria"}
+            <p className="text-white/50 text-sm">
+              {language === "arabic" ? "جرب تغيير معايير البحث أو تصفية التصنيف" : "Try adjusting your search criteria"}
             </p>
             {isAdmin && (
               <Button
                 onClick={() => seedMutation.mutate()}
                 disabled={seedMutation.isPending}
-                className="mt-4 bg-amber-500 text-black hover:bg-amber-600"
+                className="mt-4 ruzn-btn-gold"
               >
                 {seedMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
                 {language === "arabic" ? "تحميل الوثائق الأساسية" : "Load Base Documents"}
@@ -377,10 +379,10 @@ export default function KnowledgeBase() {
         {/* Documents by Category */}
         {!isLoading && Object.entries(entriesByCategory).map(([category, entries]) => (
           <div key={category} className="mb-8">
-            <h2 className="text-lg font-semibold text-amber-400 mb-4 flex items-center gap-2">
-              <div className="w-1 h-6 bg-amber-500 rounded-full" />
+            <h2 className="text-lg font-bold text-[#d6b36a] mb-4 flex items-center gap-2">
+              <div className="w-1.5 h-6 bg-[#d6b36a] rounded-full shadow-[0_0_8px_#d6b36a]" />
               {category}
-              <Badge variant="secondary" className="ml-2 bg-white/10 text-white/60">
+              <Badge variant="secondary" className="ml-2 bg-[#d6b36a]/10 text-[#d6b36a] border border-[#d6b36a]/20">
                 {entries.length}
               </Badge>
             </h2>
@@ -391,42 +393,42 @@ export default function KnowledgeBase() {
                 const isExpanded = expandedIds.has(entry.id);
                 
                 return (
-                  <Card key={entry.id} className="bg-white/5 border-white/10 hover:border-white/20 transition-colors">
-                    <CardHeader className="pb-2">
+                  <div key={entry.id} className="ruzn-card p-4 hover:border-[#d6b36a]/40 transition-all">
+                    <div className="pb-2">
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex items-start gap-3">
-                          <div className={`p-2 rounded-lg ${config.color}`}>
+                          <div className={`p-2.5 rounded-xl ${config.color}`}>
                             {config.icon}
                           </div>
                           <div>
-                            <CardTitle className="text-white text-lg leading-tight">
+                            <h3 className="text-white text-lg font-bold leading-tight">
                               {getTitle(entry)}
-                            </CardTitle>
-                            <CardDescription className="text-white/50 mt-1">
+                            </h3>
+                            <div className="text-white/50 mt-1 flex items-center gap-2">
                               {entry.referenceNumber && (
-                                <Badge variant="outline" className="mr-2 border-white/20 text-white/60">
+                                <Badge variant="outline" className="border-[#d6b36a]/30 text-[#d6b36a]">
                                   {entry.referenceNumber}
                                 </Badge>
                               )}
                               <Badge className={config.color}>
                                 {language === "arabic" ? config.labelAr : config.label}
                               </Badge>
-                            </CardDescription>
+                            </div>
                           </div>
                         </div>
                         <Button
                           variant="ghost"
                           size="sm"
                           onClick={() => toggleExpand(entry.id)}
-                          className="text-white/60 hover:text-white"
+                          className="text-[#d6b36a] hover:text-white hover:bg-white/5"
                         >
                           {isExpanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
                         </Button>
                       </div>
-                    </CardHeader>
+                    </div>
                     
-                    <CardContent>
-                      <p className="text-white/70 text-sm mb-2">{getSummary(entry)}</p>
+                    <div className="mt-2">
+                      <p className="text-white/70 text-sm leading-relaxed">{getSummary(entry)}</p>
                       
                       {isExpanded && (
                         <div className="mt-4 pt-4 border-t border-white/10">
@@ -481,8 +483,8 @@ export default function KnowledgeBase() {
                           </div>
                         </div>
                       )}
-                    </CardContent>
-                  </Card>
+                    </div>
+                  </div>
                 );
               })}
             </div>

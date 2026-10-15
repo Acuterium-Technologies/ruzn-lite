@@ -470,33 +470,33 @@ export default function EntityMap() {
         {/* Entity Cards */}
         <div className="space-y-4">
           {sortedEntities.map(entity => (
-            <Card 
+            <div 
               key={entity.id} 
-              className={`ruzn-card overflow-hidden transition-all ${
-                expandedEntity === entity.id ? "ring-2 ring-primary/50" : ""
+              className={`ruzn-card overflow-hidden transition-all hover:border-[rgba(214,179,106,0.45)] ${
+                expandedEntity === entity.id ? "border-[rgba(214,179,106,0.55)] shadow-[0_0_25px_rgba(214,179,106,0.15)]" : ""
               }`}
             >
               {/* Entity Header */}
               <div 
-                className="p-4 cursor-pointer hover:bg-muted/20 transition-colors"
+                className="p-4 cursor-pointer hover:bg-white/5 transition-colors"
                 onClick={() => toggleExpand(entity.id)}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className={`p-3 rounded-xl ${getRiskBgClass(entity.avgRiskScore)} border`}>
+                    <div className={`p-3 rounded-2xl ${getRiskBgClass(entity.avgRiskScore)} border border-[rgba(214,179,106,0.25)]`}>
                       <Building2 className={`w-6 h-6 ${getRiskClass(entity.avgRiskScore)}`} />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-lg">
+                      <h3 className="font-bold text-lg text-white font-heading">
                         {language === "arabic" ? entity.name : entity.nameEn}
                       </h3>
-                      <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                      <div className="flex items-center gap-3 text-xs text-white/60 mt-1">
                         <span className="flex items-center gap-1">
-                          <MapPin className="w-3 h-3" />
+                          <MapPin className="w-3.5 h-3.5 text-[rgba(214,179,106,0.8)]" />
                           {entity.governorate}
                         </span>
                         <span className="flex items-center gap-1">
-                          <FileText className="w-3 h-3" />
+                          <FileText className="w-3.5 h-3.5 text-[rgba(214,179,106,0.8)]" />
                           {entity.totalComplaints} {text.complaints}
                         </span>
                       </div>
@@ -506,17 +506,17 @@ export default function EntityMap() {
                   <div className="flex items-center gap-6">
                     {/* Risk Distribution Mini */}
                     <div className="hidden md:flex items-center gap-2">
-                      <span className="ruzn-tag ruzn-tag-high">{entity.highRiskCount}</span>
-                      <span className="ruzn-tag ruzn-tag-med">{entity.mediumRiskCount}</span>
-                      <span className="ruzn-tag ruzn-tag-low">{entity.lowRiskCount}</span>
+                      <span className="ruzn-tag-high text-xs px-2.5 py-0.5">{entity.highRiskCount}</span>
+                      <span className="ruzn-tag-med text-xs px-2.5 py-0.5">{entity.mediumRiskCount}</span>
+                      <span className="ruzn-tag-low text-xs px-2.5 py-0.5">{entity.lowRiskCount}</span>
                     </div>
                     
                     {/* Average Risk Score */}
                     <div className="text-center">
-                      <div className={`text-2xl font-bold ${getRiskClass(entity.avgRiskScore)}`}>
+                      <div className={`text-2xl font-extrabold font-heading ${getRiskClass(entity.avgRiskScore)}`}>
                         {entity.avgRiskScore}
                       </div>
-                      <div className="text-xs text-muted-foreground">/100</div>
+                      <div className="text-[10px] text-white/55">/100</div>
                     </div>
                     
                     {/* Trend */}
@@ -524,9 +524,9 @@ export default function EntityMap() {
                     
                     {/* Expand Icon */}
                     {expandedEntity === entity.id ? (
-                      <ChevronUp className="w-5 h-5 text-muted-foreground" />
+                      <ChevronUp className="w-5 h-5 text-[rgba(214,179,106,0.9)]" />
                     ) : (
-                      <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                      <ChevronDown className="w-5 h-5 text-white/50" />
                     )}
                   </div>
                 </div>
@@ -534,21 +534,21 @@ export default function EntityMap() {
               
               {/* Expanded Details */}
               {expandedEntity === entity.id && (
-                <div className="border-t border-border/30 p-4 bg-muted/10">
+                <div className="border-t border-white/10 p-5 bg-black/30">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Top Categories */}
                     <div>
-                      <h4 className="font-semibold mb-3 flex items-center gap-2">
-                        <PieChart className="w-4 h-4 text-primary" />
+                      <h4 className="font-bold mb-3 flex items-center gap-2 text-sm text-[rgba(214,179,106,0.95)]">
+                        <PieChart className="w-4 h-4" />
                         {text.topCategories}
                       </h4>
                       <div className="space-y-2">
                         {entity.topCategories.map((cat, idx) => (
-                          <div key={idx} className="flex items-center justify-between">
-                            <span className="text-sm">
+                          <div key={idx} className="flex items-center justify-between p-2 ruzn-glass-soft rounded-xl">
+                            <span className="text-xs text-white/85">
                               {text.categories[cat.category as keyof typeof text.categories] || cat.category}
                             </span>
-                            <span className="ruzn-tag">{cat.count}</span>
+                            <span className="ruzn-tag-info text-xs">{cat.count}</span>
                           </div>
                         ))}
                       </div>
@@ -556,23 +556,23 @@ export default function EntityMap() {
                     
                     {/* Recent Complaints */}
                     <div>
-                      <h4 className="font-semibold mb-3 flex items-center gap-2">
-                        <FileText className="w-4 h-4 text-primary" />
+                      <h4 className="font-bold mb-3 flex items-center gap-2 text-sm text-[rgba(214,179,106,0.95)]">
+                        <FileText className="w-4 h-4" />
                         {text.recentComplaints}
                       </h4>
                       <div className="space-y-2">
                         {entity.recentComplaints.map(complaint => (
                           <div 
                             key={complaint.id} 
-                            className="flex items-center justify-between p-2 rounded-lg bg-muted/20"
+                            className="flex items-center justify-between p-2.5 rounded-xl ruzn-glass-soft border border-white/5"
                           >
                             <div className="flex-1">
-                              <span className="text-sm">{complaint.topic}</span>
-                              <span className="text-xs text-muted-foreground block">
+                              <span className="text-xs text-white/90 font-medium block">{complaint.topic}</span>
+                              <span className="text-[10px] text-white/50 block mt-0.5">
                                 {new Date(complaint.date).toLocaleDateString(language === "arabic" ? "ar-OM" : "en-US")}
                               </span>
                             </div>
-                            <span className={`ruzn-tag ${
+                            <span className={`text-xs px-2 py-0.5 rounded-full ${
                               complaint.riskScore >= 70 ? "ruzn-tag-high" :
                               complaint.riskScore >= 40 ? "ruzn-tag-med" : "ruzn-tag-low"
                             }`}>
@@ -585,36 +585,36 @@ export default function EntityMap() {
                   </div>
                   
                   {/* Risk Distribution Bar */}
-                  <div className="mt-4 pt-4 border-t border-border/30">
-                    <div className="flex items-center gap-4 text-sm">
-                      <span className="text-muted-foreground">{text.complaints}:</span>
-                      <div className="flex-1 flex h-4 rounded-full overflow-hidden">
+                  <div className="mt-5 pt-4 border-t border-white/10">
+                    <div className="flex items-center gap-4 text-xs">
+                      <span className="text-white/60">{text.complaints}:</span>
+                      <div className="flex-1 flex h-3.5 rounded-full overflow-hidden bg-white/10">
                         <div 
-                          className="bg-red-500/70" 
+                          className="bg-red-500/80" 
                           style={{ width: `${(entity.highRiskCount / entity.totalComplaints) * 100}%` }}
                           title={`${text.highRisk}: ${entity.highRiskCount}`}
                         />
                         <div 
-                          className="bg-yellow-500/70" 
+                          className="bg-yellow-500/80" 
                           style={{ width: `${(entity.mediumRiskCount / entity.totalComplaints) * 100}%` }}
                           title={`${text.mediumRisk}: ${entity.mediumRiskCount}`}
                         />
                         <div 
-                          className="bg-green-500/70" 
+                          className="bg-green-500/80" 
                           style={{ width: `${(entity.lowRiskCount / entity.totalComplaints) * 100}%` }}
                           title={`${text.lowRisk}: ${entity.lowRiskCount}`}
                         />
                       </div>
                       <div className="flex gap-3 text-xs">
-                        <span className="flex items-center gap-1">
+                        <span className="flex items-center gap-1 text-red-400">
                           <span className="w-2 h-2 rounded-full bg-red-500" />
                           {text.highRisk}
                         </span>
-                        <span className="flex items-center gap-1">
+                        <span className="flex items-center gap-1 text-yellow-400">
                           <span className="w-2 h-2 rounded-full bg-yellow-500" />
                           {text.mediumRisk}
                         </span>
-                        <span className="flex items-center gap-1">
+                        <span className="flex items-center gap-1 text-green-400">
                           <span className="w-2 h-2 rounded-full bg-green-500" />
                           {text.lowRisk}
                         </span>
@@ -623,7 +623,7 @@ export default function EntityMap() {
                   </div>
                 </div>
               )}
-            </Card>
+            </div>
           ))}
         </div>
       </main>

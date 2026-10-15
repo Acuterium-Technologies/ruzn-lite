@@ -469,34 +469,38 @@ export default function ComparativeAnalysis() {
   const insights = generateInsights();
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--bg, #070708)' }}>
+    <div 
+      className="min-h-screen text-foreground flex flex-col"
+      dir="rtl"
+      style={{
+        background: 'radial-gradient(1200px 600px at 60% 18%, rgba(214,179,106,.16), transparent 55%), radial-gradient(900px 500px at 20% 80%, rgba(96,165,250,.10), transparent 60%), linear-gradient(180deg, #050506, #0a0a0c)'
+      }}
+    >
       {/* Header */}
-      <header className="ruzn-card border-b border-[#d6b36a]/20 sticky top-0 z-50">
+      <header className="border-b border-white/10 bg-black/40 backdrop-blur-md sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <Link href="/">
-                <Button variant="ghost" size="sm" className="text-[#d6b36a] hover:bg-[#d6b36a]/10">
-                  <ArrowLeft className="h-4 w-4 ml-2" />
+                <button className="ruzn-btn text-xs sm:text-sm flex items-center gap-2">
+                  <ArrowLeft className="h-4 w-4 ml-1 rotate-180" />
                   {UI_TEXT.backToHome}
-                </Button>
+                </button>
               </Link>
-              <div className="h-6 w-px bg-[#d6b36a]/30" />
+              <div className="h-6 w-px bg-white/10" />
               <div>
-                <h1 className="text-xl font-bold text-[#d6b36a]">{UI_TEXT.title}</h1>
-                <p className="text-sm text-gray-400">{UI_TEXT.subtitle}</p>
+                <h1 className="text-xl font-extrabold text-[#d6b36a]">{UI_TEXT.title}</h1>
+                <p className="text-xs sm:text-sm text-white/70">{UI_TEXT.subtitle}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="border-[#d6b36a]/30 text-[#d6b36a] hover:bg-[#d6b36a]/10"
+              <button 
+                className="ruzn-btn-gold text-xs sm:text-sm flex items-center gap-2"
                 onClick={() => window.print()}
               >
-                <Download className="h-4 w-4 ml-2" />
+                <Download className="h-4 w-4 ml-1" />
                 {UI_TEXT.exportPdf}
-              </Button>
+              </button>
             </div>
           </div>
         </div>

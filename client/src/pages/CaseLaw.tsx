@@ -149,58 +149,67 @@ export default function CaseLaw() {
 
   return (
     <div 
-      className={`min-h-screen flex flex-col`}
+      className="min-h-screen flex flex-col font-body"
       dir={isRTL ? "rtl" : "ltr"}
       style={{ 
-        background: 'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(214,179,106,.15), transparent), radial-gradient(ellipse 60% 40% at 80% 100%, rgba(59,130,246,.08), transparent), var(--bg)'
+        background:
+          "radial-gradient(1200px 600px at 60% 18%, rgba(214,179,106,.15), transparent 55%)," +
+          "radial-gradient(900px 500px at 20% 80%, rgba(96,165,250,.09), transparent 60%)," +
+          "linear-gradient(180deg, #050506, #0a0a0c)"
       }}
     >
       {/* Header */}
-      <header className="border-b border-white/10 py-4" style={{ background: 'rgba(7,7,8,.85)', backdropFilter: 'blur(12px)' }}>
-        <div className="container max-w-7xl mx-auto px-4 flex items-center justify-between">
+      <header className="border-b border-[rgba(214,179,106,0.18)] bg-black/45 backdrop-blur-xl sticky top-0 z-50 py-3.5 shadow-deep">
+        <div className="container max-w-7xl mx-auto px-4 flex items-center justify-between flex-wrap gap-4">
           <div className="flex items-center gap-4">
             <Link href="/">
-              <Button variant="ghost" size="sm" className="gap-2">
+              <button className="ruzn-btn text-xs font-semibold gap-2 border-[rgba(214,179,106,0.25)] hover:border-[rgba(214,179,106,0.5)]">
                 <ArrowLeft className={`w-4 h-4 ${isRTL ? "rotate-180" : ""}`} />
                 {text.back}
-              </Button>
+              </button>
             </Link>
             <div>
-              <h1 className="text-xl font-bold text-primary flex items-center gap-2">
-                <Scale className="w-5 h-5" />
+              <h1 className="text-xl sm:text-2xl font-extrabold ruzn-gold-gradient font-heading flex items-center gap-2">
+                <Scale className="w-5 h-5 text-[rgba(214,179,106,0.98)]" />
                 {text.title}
               </h1>
-              <p className="text-sm text-muted-foreground">{text.subtitle}</p>
+              <p className="text-xs text-white/60">{text.subtitle}</p>
             </div>
           </div>
           
           <div className="flex items-center gap-3">
-            <Button
-              variant="outline"
-              size="sm"
+            <button
               onClick={() => seedMutation.mutate()}
               disabled={seedMutation.isPending}
-              className="ruzn-btn"
+              className="ruzn-btn text-xs"
             >
               {seedMutation.isPending ? (
                 <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> {text.seeding}</>
               ) : (
                 text.seedDatabase
               )}
-            </Button>
+            </button>
             
-            <div className="flex rounded-xl overflow-hidden border border-primary/30">
-              <button
-                onClick={() => setLanguage("english")}
-                className={`px-3 py-1.5 text-sm ${language === "english" ? "bg-primary text-primary-foreground" : "bg-transparent text-muted-foreground"}`}
-              >
-                English
-              </button>
+            <div className="ruzn-glass-soft rounded-full p-1 flex items-center gap-1 border-[rgba(214,179,106,0.18)]">
               <button
                 onClick={() => setLanguage("arabic")}
-                className={`px-3 py-1.5 text-sm ${language === "arabic" ? "bg-primary text-primary-foreground" : "bg-transparent text-muted-foreground"}`}
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition ${
+                  language === "arabic" 
+                    ? "bg-[rgba(214,179,106,.20)] border border-[rgba(214,179,106,.45)] text-[rgba(214,179,106,1)]" 
+                    : "text-white/70 hover:text-white"
+                }`}
               >
                 العربية
+              </button>
+              <button
+                onClick={() => setLanguage("english")}
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition ${
+                  language === "english" 
+                    ? "bg-[rgba(214,179,106,.20)] border border-[rgba(214,179,106,.45)] text-[rgba(214,179,106,1)]" 
+                    : "text-white/70 hover:text-white"
+                }`}
+              >
+                English
               </button>
             </div>
           </div>
@@ -210,50 +219,50 @@ export default function CaseLaw() {
       <main className="flex-1 container max-w-7xl mx-auto px-4 py-6">
         {/* Stats Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div className="ruzn-kpi">
+          <div className="ruzn-kpi p-4">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-primary/10">
-                <Gavel className="w-5 h-5 text-primary" />
+              <div className="p-2.5 rounded-xl border border-[rgba(214,179,106,0.3)] bg-[rgba(214,179,106,0.1)]">
+                <Gavel className="w-5 h-5 text-[rgba(214,179,106,0.98)]" />
               </div>
               <div>
-                <p className="text-xs text-muted-foreground">{text.totalCases}</p>
-                <p className="text-xl font-bold text-foreground">{stats?.totalCases || 0}</p>
+                <p className="text-xs text-white/60">{text.totalCases}</p>
+                <p className="text-2xl font-extrabold text-[rgba(214,179,106,0.98)] font-heading">{stats?.totalCases || 0}</p>
               </div>
             </div>
           </div>
           
-          <div className="ruzn-kpi">
+          <div className="ruzn-kpi p-4">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-red-500/10">
+              <div className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/25">
                 <DollarSign className="w-5 h-5 text-red-400" />
               </div>
               <div>
-                <p className="text-xs text-muted-foreground">{text.totalAmount}</p>
-                <p className="text-xl font-bold text-foreground">{formatCurrency(stats?.totalAmountInvolved)}</p>
+                <p className="text-xs text-white/60">{text.totalAmount}</p>
+                <p className="text-xl font-extrabold text-red-400 font-heading">{formatCurrency(stats?.totalAmountInvolved)}</p>
               </div>
             </div>
           </div>
           
-          <div className="ruzn-kpi">
+          <div className="ruzn-kpi p-4">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-green-500/10">
+              <div className="p-2.5 rounded-xl bg-green-500/10 border border-green-500/25">
                 <TrendingUp className="w-5 h-5 text-green-400" />
               </div>
               <div>
-                <p className="text-xs text-muted-foreground">{text.totalRecovered}</p>
-                <p className="text-xl font-bold text-foreground">{formatCurrency(stats?.totalAmountRecovered)}</p>
+                <p className="text-xs text-white/60">{text.totalRecovered}</p>
+                <p className="text-xl font-extrabold text-green-400 font-heading">{formatCurrency(stats?.totalAmountRecovered)}</p>
               </div>
             </div>
           </div>
           
-          <div className="ruzn-kpi">
+          <div className="ruzn-kpi p-4">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-orange-500/10">
+              <div className="p-2.5 rounded-xl bg-orange-500/10 border border-orange-500/25">
                 <Clock className="w-5 h-5 text-orange-400" />
               </div>
               <div>
-                <p className="text-xs text-muted-foreground">{text.avgSentence}</p>
-                <p className="text-xl font-bold text-foreground">{stats?.avgSentenceYears?.toFixed(1) || 0} {text.years}</p>
+                <p className="text-xs text-white/60">{text.avgSentence}</p>
+                <p className="text-xl font-extrabold text-orange-400 font-heading">{stats?.avgSentenceYears?.toFixed(1) || 0} {text.years}</p>
               </div>
             </div>
           </div>

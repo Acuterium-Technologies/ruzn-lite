@@ -158,8 +158,8 @@ export default function AssessmentDetail() {
               <ArrowRight className="h-5 w-5" />
             </Button>
             <div>
-              <h1 className="text-2xl font-bold text-[#c9a227]">{assessment.title}</h1>
-              <p className="text-sm text-muted-foreground">{assessment.titleEn}</p>
+              <h1 className="text-2xl font-extrabold text-[#d6b36a]">{assessment.title}</h1>
+              <p className="text-sm text-white/60">{assessment.titleEn}</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -171,16 +171,16 @@ export default function AssessmentDetail() {
         </div>
         
         {/* Vision 2040 Score Card */}
-        <Card className="bg-gradient-to-r from-[#1a1a1a] to-[#2a2a2a] border-[#c9a227]">
-          <CardContent className="pt-6">
+        <div className="ruzn-card p-6">
+          <div>
             <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
               {/* Overall Score */}
               <div className="text-center">
-                <div className="text-5xl font-bold text-[#c9a227]">
+                <div className="text-5xl font-extrabold text-[#d6b36a] drop-shadow-[0_0_12px_rgba(214,179,106,0.5)]">
                   {assessment.vision2040Score || 0}%
                 </div>
-                <div className="text-sm text-muted-foreground mt-1">توافق رؤية 2040</div>
-                <Progress value={assessment.vision2040Score || 0} className="mt-2 h-3" />
+                <div className="text-xs text-white/70 mt-1 font-semibold">توافق رؤية 2040</div>
+                <Progress value={assessment.vision2040Score || 0} className="mt-2 h-2.5 bg-white/10" />
               </div>
               
               {/* Pillar Scores */}
@@ -189,8 +189,8 @@ export default function AssessmentDetail() {
                 <div className="text-2xl font-bold text-blue-400 mt-2">
                   {assessment.economicImpact || 0}%
                 </div>
-                <div className="text-xs text-muted-foreground">اقتصاد متنوع</div>
-                <Progress value={assessment.economicImpact || 0} className="mt-2 h-2 bg-blue-900" />
+                <div className="text-xs text-white/60">اقتصاد متنوع</div>
+                <Progress value={assessment.economicImpact || 0} className="mt-2 h-2 bg-blue-950" />
               </div>
               
               <div className="text-center">
@@ -198,8 +198,8 @@ export default function AssessmentDetail() {
                 <div className="text-2xl font-bold text-green-400 mt-2">
                   {assessment.socialImpact || 0}%
                 </div>
-                <div className="text-xs text-muted-foreground">مجتمع إنسان</div>
-                <Progress value={assessment.socialImpact || 0} className="mt-2 h-2 bg-green-900" />
+                <div className="text-xs text-white/60">مجتمع إنسان</div>
+                <Progress value={assessment.socialImpact || 0} className="mt-2 h-2 bg-green-950" />
               </div>
               
               <div className="text-center">
@@ -207,8 +207,8 @@ export default function AssessmentDetail() {
                 <div className="text-2xl font-bold text-purple-400 mt-2">
                   {assessment.governanceImpact || 0}%
                 </div>
-                <div className="text-xs text-muted-foreground">حوكمة رشيدة</div>
-                <Progress value={assessment.governanceImpact || 0} className="mt-2 h-2 bg-purple-900" />
+                <div className="text-xs text-white/60">حوكمة رشيدة</div>
+                <Progress value={assessment.governanceImpact || 0} className="mt-2 h-2 bg-purple-950" />
               </div>
               
               <div className="text-center">
@@ -216,41 +216,41 @@ export default function AssessmentDetail() {
                 <div className="text-2xl font-bold text-teal-400 mt-2">
                   {assessment.environmentImpact || 0}%
                 </div>
-                <div className="text-xs text-muted-foreground">بيئة مستدامة</div>
-                <Progress value={assessment.environmentImpact || 0} className="mt-2 h-2 bg-teal-900" />
+                <div className="text-xs text-white/60">بيئة مستدامة</div>
+                <Progress value={assessment.environmentImpact || 0} className="mt-2 h-2 bg-teal-950" />
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
         
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left Column - Details */}
           <div className="lg:col-span-2 space-y-6">
             {/* Basic Information */}
-            <Card className="bg-[#1a1a1a] border-[#333]">
-              <CardHeader>
-                <CardTitle className="text-[#c9a227] flex items-center gap-2">
+            <div className="ruzn-card p-6">
+              <div className="mb-4">
+                <h3 className="text-[#d6b36a] text-lg font-bold flex items-center gap-2">
                   <FileText className="h-5 w-5" />
                   معلومات التقييم
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
+                </h3>
+              </div>
+              <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <span className="text-xs text-muted-foreground">نوع التشريع</span>
+                    <span className="text-xs text-white/60">نوع التشريع</span>
                     <p className="text-white font-medium">{getRegulationTypeLabel(assessment.regulationType)}</p>
                   </div>
                   <div>
-                    <span className="text-xs text-muted-foreground">الجهة المصدرة</span>
+                    <span className="text-xs text-white/60">الجهة المصدرة</span>
                     <p className="text-white font-medium">{assessment.issuingAuthority || "غير محدد"}</p>
                   </div>
                   <div>
-                    <span className="text-xs text-muted-foreground">رقم التشريع</span>
+                    <span className="text-xs text-white/60">رقم التشريع</span>
                     <p className="text-white font-medium">{assessment.regulationNumber || "غير محدد"}</p>
                   </div>
                   <div>
-                    <span className="text-xs text-muted-foreground">تاريخ النفاذ</span>
+                    <span className="text-xs text-white/60">تاريخ النفاذ</span>
                     <p className="text-white font-medium">
                       {assessment.effectiveDate 
                         ? new Date(assessment.effectiveDate).toLocaleDateString('ar-OM')
@@ -260,70 +260,70 @@ export default function AssessmentDetail() {
                 </div>
                 
                 {assessment.description && (
-                  <div className="pt-4 border-t border-[#333]">
-                    <span className="text-xs text-muted-foreground">الوصف</span>
-                    <p className="text-white mt-1">{assessment.description}</p>
+                  <div className="pt-4 border-t border-white/10">
+                    <span className="text-xs text-white/60">الوصف</span>
+                    <p className="text-white/90 mt-1 leading-relaxed text-sm">{assessment.description}</p>
                   </div>
                 )}
                 
                 {assessment.descriptionEn && (
                   <div>
-                    <span className="text-xs text-muted-foreground">Description (English)</span>
-                    <p className="text-gray-300 mt-1">{assessment.descriptionEn}</p>
+                    <span className="text-xs text-white/60">Description (English)</span>
+                    <p className="text-gray-300 mt-1 text-sm">{assessment.descriptionEn}</p>
                   </div>
                 )}
-              </CardContent>
-            </Card>
+              </div>
+            </div>
             
             {/* Affected Sectors */}
             {pillarsAffected.length > 0 && (
-              <Card className="bg-[#1a1a1a] border-[#333]">
-                <CardHeader>
-                  <CardTitle className="text-[#c9a227] flex items-center gap-2">
+              <div className="ruzn-card p-6">
+                <div className="mb-4">
+                  <h3 className="text-[#d6b36a] text-lg font-bold flex items-center gap-2">
                     <Building className="h-5 w-5" />
                     القطاعات المتأثرة
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
+                  </h3>
+                </div>
+                <div>
                   <div className="flex flex-wrap gap-2">
                     {pillarsAffected.map((sector, index) => (
-                      <Badge key={index} variant="outline" className="text-[#6b9ac4] border-[#6b9ac4]">
+                      <Badge key={index} variant="outline" className="text-[#d6b36a] border-[#d6b36a]/30 bg-[#d6b36a]/10">
                         {sector}
                       </Badge>
                     ))}
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             )}
           </div>
           
           {/* Right Column - Actions & Status */}
           <div className="space-y-6">
             {/* Status Management */}
-            <Card className="bg-[#1a1a1a] border-[#333]">
-              <CardHeader>
-                <CardTitle className="text-[#c9a227] flex items-center gap-2">
+            <div className="ruzn-card p-6">
+              <div className="mb-4">
+                <h3 className="text-[#d6b36a] text-lg font-bold flex items-center gap-2">
                   <FileCheck className="h-5 w-5" />
                   إدارة الحالة
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
+                </h3>
+              </div>
+              <div className="space-y-4">
                 <div>
-                  <span className="text-xs text-muted-foreground">الحالة الحالية</span>
+                  <span className="text-xs text-white/60">الحالة الحالية</span>
                   <div className="mt-1">{getStatusBadge(assessment.status)}</div>
                 </div>
                 
                 <div>
-                  <span className="text-xs text-muted-foreground">تغيير الحالة</span>
+                  <span className="text-xs text-white/60">تغيير الحالة</span>
                   <Select
                     value={assessment.status || "draft"}
                     onValueChange={handleStatusChange}
                     disabled={updateStatus.isPending}
                   >
-                    <SelectTrigger className="mt-1 bg-[#0d0d0d] border-[#333]">
+                    <SelectTrigger className="mt-1 bg-white/5 border-white/10 text-white">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-[#101014] border-[#d6b36a]/30">
                       <SelectItem value="draft">مسودة</SelectItem>
                       <SelectItem value="in_progress">قيد التنفيذ</SelectItem>
                       <SelectItem value="pending_review">بانتظار المراجعة</SelectItem>
@@ -333,50 +333,50 @@ export default function AssessmentDetail() {
                   </Select>
                 </div>
                 
-                <div className="pt-4 border-t border-[#333]">
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <Calendar className="h-4 w-4" />
+                <div className="pt-4 border-t border-white/10">
+                  <div className="flex items-center gap-2 text-xs text-white/60">
+                    <Calendar className="h-4 w-4 text-[#d6b36a]" />
                     <span>تاريخ الإنشاء: {new Date(assessment.createdAt).toLocaleDateString('ar-OM')}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground mt-2">
-                    <Clock className="h-4 w-4" />
+                  <div className="flex items-center gap-2 text-xs text-white/60 mt-2">
+                    <Clock className="h-4 w-4 text-[#d6b36a]" />
                     <span>آخر تحديث: {new Date(assessment.updatedAt).toLocaleDateString('ar-OM')}</span>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
             
             {/* Risk Assessment */}
-            <Card className="bg-[#1a1a1a] border-[#333]">
-              <CardHeader>
-                <CardTitle className="text-[#c9a227] flex items-center gap-2">
+            <div className="ruzn-card p-6">
+              <div className="mb-4">
+                <h3 className="text-[#d6b36a] text-lg font-bold flex items-center gap-2">
                   <AlertTriangle className="h-5 w-5" />
                   تقييم المخاطر
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
+                </h3>
+              </div>
+              <div className="space-y-4">
                 <div className="text-center">
                   <Badge className={`${getRiskBadgeColor(assessment.riskLevel)} text-lg px-4 py-2`}>
                     {getRiskLabel(assessment.riskLevel)}
                   </Badge>
                 </div>
                 
-                <div className="text-sm text-muted-foreground text-center">
+                <div className="text-sm text-white/70 text-center leading-relaxed">
                   {assessment.riskLevel === "CRITICAL" && "يتطلب إجراء فوري - مخاطر حرجة"}
                   {assessment.riskLevel === "HIGH" && "يتطلب مراجعة كبرى - مخاطر عالية"}
                   {assessment.riskLevel === "MEDIUM" && "يُوصى بتعديلات - مخاطر متوسطة"}
                   {assessment.riskLevel === "LOW" && "يُوصى بالمتابعة - مخاطر منخفضة"}
                   {assessment.riskLevel === "NEGLIGIBLE" && "يُوصى بالمضي - مخاطر ضئيلة"}
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
             
             {/* Quick Actions */}
-            <Card className="bg-[#1a1a1a] border-[#333]">
-              <CardHeader>
-                <CardTitle className="text-[#c9a227]">إجراءات سريعة</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
+            <div className="ruzn-card p-6">
+              <div className="mb-4">
+                <h3 className="text-[#d6b36a] text-lg font-bold">إجراءات سريعة</h3>
+              </div>
+              <div className="space-y-2">
                 <Button 
                   className="w-full bg-[#6b9ac4] hover:bg-[#5a89b3]"
                   onClick={() => toast.info("سيتم إضافة هذه الميزة قريباً")}
@@ -400,8 +400,8 @@ export default function AssessmentDetail() {
                   <FileText className="h-4 w-4 ml-2" />
                   طباعة التقرير
                 </Button>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
         </div>
       </div>
