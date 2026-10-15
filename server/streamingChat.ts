@@ -135,6 +135,10 @@ export async function handleStreamingChat(req: Request, res: Response) {
     res.setHeader('Cache-Control', 'no-cache');
     res.setHeader('Connection', 'keep-alive');
     res.setHeader('X-Accel-Buffering', 'no');
+    if (typeof res.flushHeaders === 'function') {
+      res.flushHeaders();
+    }
+    res.write(': stream-open\n\n');
 
     // Build messages array
     const systemPrompt = SYSTEM_PROMPTS[feature][language];
@@ -280,13 +284,17 @@ export async function handleStreamingChat(req: Request, res: Response) {
 
       // Notify owner for high-risk complaints
       if (riskScore >= 80 && feature === 'complaints') {
-        await notifyOwner({
-          title: language === 'arabic' ? 'تنبيه: شكوى عالية الخطورة' : 'Alert: High-Risk Complaint',
-          content: language === 'arabic' 
-            ? `تم استلام شكوى بدرجة خطورة ${riskScore}/100\n\nملخص: ${message.substring(0, 200)}...`
-            : `Received complaint with risk score ${riskScore}/100\n\nSummary: ${message.substring(0, 200)}...`
-        });
-        console.log(`[Notification] High-risk streaming complaint alert sent (Risk: ${riskScore})`);
+        try {
+          await notifyOwner({
+            title: language === 'arabic' ? 'تنبيه: شكوى عالية الخطورة' : 'Alert: High-Risk Complaint',
+            content: language === 'arabic' 
+              ? `تم استلام شكوى بدرجة خطورة ${riskScore}/100\n\nملخص: ${message.substring(0, 200)}...`
+              : `Received complaint with risk score ${riskScore}/100\n\nSummary: ${message.substring(0, 200)}...`
+          });
+          console.log(`[Notification] High-risk streaming complaint alert sent (Risk: ${riskScore})`);
+        } catch (notifErr) {
+          console.warn('[Notification] Non-fatal notification error:', notifErr);
+        }
       }
 
     } catch (streamError) {
