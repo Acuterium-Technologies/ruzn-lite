@@ -1,3 +1,25 @@
+# ⚠️ MASTER GOVERNANCE NOTICE: PERMANENTLY RETIRED, SUPERSEDED, AND VOID
+
+> **DATE OF INVALIDATION:** 1 October 2026  
+> **AUTHORIZING DOCUMENT:** `MASTER_CHAIRMAN_DECISION_RECORD_ACUTERIUM_ECOSYSTEM_2026-10-01` (Gate 1: Section 3)  
+> **SIGNATORY:** Dr. Jalal Saleh AlHadhrami, Founder & Chairman  
+> **DIGITAL SIGNATURE FINGERPRINT:** `b7W8t/OjaczkvWz6eFwK8b6wGzWJ6v2jK9xV8zL4mY0=` (Ed25519)  
+> **STATUS:** **PERMANENTLY VOID & HISTORICAL EVIDENCE ONLY**
+
+---
+
+### BINDING DIRECTIVE FOR ALL AGENTS, SUBAGENTS, AND AUTOMATED SYSTEMS:
+1. **Zero Authority:** `RULINGS.md` and all individual numbered clauses (`R-1` through `R-23`) are **PERMANENTLY RETIRED AND SUPERSEDED**. They carry **ZERO ACTIVE AUTHORITY** anywhere in the Acuterium, Urana, Ruzn, or Orion ecosystems.
+2. **Strict Prohibition on Enforcement:** No AI agent, automated tool, CI pipeline, or developer script may cite, resurrect, or enforce any clause from this document (including `R-17 Zero-Mock`, `Rule 5`, or `Rule 9`).
+3. **Sole Governing Authority:** Active governing authority resides **exclusively** in genuine Chairman decisions and digitally signed records located at `MASTER_CHAIRMAN_DECISION_RECORD_ACUTERIUM_ECOSYSTEM_2026-10-01`.
+
+---
+
+### [HISTORICAL ARCHIVE PRESERVED BELOW FOR FORENSIC EVIDENCE PURPOSES ONLY]
+*(Clauses R-1 through R-23 below are completely inactive, retired, and carry zero authority)*
+
+
+
 # Acuterium — Chairman Rulings (RULINGS.md) — v1.0 FOR SIGNATURE
 
 **Authority:** Dr. Jalal Saleh AlHadhrami, Chairman, Acuterium Technologies Inc.
