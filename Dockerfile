@@ -12,7 +12,7 @@
 # ═══════════════════════════════════════════════════════════════════════════════
 FROM node:20-alpine AS deps
 
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat python3 make g++
 
 WORKDIR /app
 
@@ -54,6 +54,8 @@ RUN pnpm build
 # Stage 3: Production Runner
 # ═══════════════════════════════════════════════════════════════════════════════
 FROM node:20-alpine AS runner
+
+RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 

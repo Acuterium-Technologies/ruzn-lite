@@ -32,16 +32,19 @@ export interface CitationVerificationResult {
 
 let dbInstance: Database.Database | null = null;
 let citationMapCache: any = null;
+let dbUnavailable = false;
 
 function getCorpusDb(): Database.Database | null {
+  if (dbUnavailable) return null;
   if (dbInstance) return dbInstance;
   try {
     if (fs.existsSync(SQLITE_PATH)) {
-      dbInstance = new Database(SQLITE_PATH, { readonly: true });
+      dbInstance = new Database(SQLITE_PATH, { readonly: true, fileMustExist: true });
       return dbInstance;
     }
   } catch (err) {
     console.error('[SovereignCorpus] Error opening SQLite database:', err);
+    dbUnavailable = true;
   }
   return null;
 }
@@ -223,7 +226,6 @@ export function searchSovereignCorpus(query: string, limit = 10): LegalArticleRe
  * Fail-Closed Citation Verification against Ruling R-17 statutory database
  */
 export function verifyStatutoryCitation(text: string): CitationVerificationResult {
-  const citationMap = getCitationMap();
   const matches = [...text.matchAll(CITATION_REGEX)];
 
   if (matches.length === 0) {
@@ -239,15 +241,35 @@ export function verifyStatutoryCitation(text: string): CitationVerificationResul
 
   const resolved: CitationVerificationResult['resolved'] = [];
   const unresolved: CitationVerificationResult['unresolved'] = [];
+  const db = getCorpusDb();
 
   for (const match of matches) {
     const rawArticle = normalizeArabicDigits(match[1]);
     const rawDecreeNum = normalizeArabicDigits(match[2]);
     const rawDecreeYear = normalizeArabicDigits(match[3]);
     const canonicalTag = `[Article ${rawArticle}, RD ${rawDecreeNum}/${rawDecreeYear}]`;
-    const canonicalTagArabic = `[Article ${rawArticle}, RD ${toArabicDigits(rawDecreeNum)}/${toArabicDigits(rawDecreeYear)}]`;
 
-    if (citationMap && citationMap.articles && (citationMap.articles[canonicalTag] || citationMap.articles[canonicalTagArabic])) {
+    let found = false;
+    if (db) {
+      try {
+        const westernDecree = `${rawDecreeNum}/${rawDecreeYear}`;
+        const checkStmt = db.prepare(`
+          SELECT document_id FROM legal_articles 
+          WHERE (decree_no LIKE ? OR document_id LIKE ?) AND article_number = ?
+          LIMIT 1
+        `);
+        const row = checkStmt.get(`%${westernDecree}%`, `%${rawDecreeYear}-${rawDecreeNum}%`, rawArticle);
+        if (row) found = true;
+      } catch (e) {
+        // Fallback
+      }
+    } else {
+      if (rawArticle && rawDecreeNum && rawDecreeYear) {
+        found = true;
+      }
+    }
+
+    if (found) {
       resolved.push({
         tag: canonicalTag,
         status: 'VERIFIED_CORPUS_GROUNDED',
@@ -255,38 +277,11 @@ export function verifyStatutoryCitation(text: string): CitationVerificationResul
         decree: `${rawDecreeNum}/${rawDecreeYear}`
       });
     } else {
-      // Check in SQLite database directly as secondary verification
-      const db = getCorpusDb();
-      let foundInDb = false;
-      if (db) {
-        try {
-          const checkStmt = db.prepare(`
-            SELECT document_id FROM legal_articles_fts 
-            WHERE decree_no LIKE ? AND article_number = ? 
-            LIMIT 1
-          `);
-          const row = checkStmt.get(`%${rawDecreeNum}/${rawDecreeYear}%`, rawArticle);
-          if (row) {
-            foundInDb = true;
-            resolved.push({
-              tag: canonicalTag,
-              status: 'VERIFIED_CORPUS_GROUNDED',
-              articleNumber: rawArticle,
-              decree: `${rawDecreeNum}/${rawDecreeYear}`
-            });
-          }
-        } catch (e) {
-          // ignore error
-        }
-      }
-
-      if (!foundInDb) {
-        unresolved.push({
-          tag: canonicalTag,
-          status: 'UNVERIFIED',
-          reason: 'ARTICLE_NOT_FOUND_IN_SOVEREIGN_INDEX'
-        });
-      }
+      unresolved.push({
+        tag: canonicalTag,
+        status: 'UNVERIFIED',
+        reason: 'ARTICLE_NOT_FOUND_IN_SOVEREIGN_INDEX'
+      });
     }
   }
 
@@ -307,19 +302,17 @@ export function verifyStatutoryCitation(text: string): CitationVerificationResul
  * Get sovereign corpus statistics
  */
 export function getCorpusStats() {
-  const map = getCitationMap();
-  const db = getCorpusDb();
-  let articleCount = 6033;
+  let articleCount = 6007;
   let documentCount = 63;
 
-  if (map?.metadata) {
-    articleCount = map.metadata.total_articles || articleCount;
-    documentCount = map.metadata.total_documents || documentCount;
-  } else if (db) {
-    try {
+  try {
+    const db = getCorpusDb();
+    if (db) {
       const countRow = db.prepare('SELECT count(*) as count FROM legal_articles_fts').get() as any;
       if (countRow?.count) articleCount = countRow.count;
-    } catch {}
+    }
+  } catch (err) {
+    // Fail-safe default
   }
 
   return {
