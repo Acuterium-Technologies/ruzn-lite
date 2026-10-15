@@ -211,14 +211,14 @@ const normalizeToolChoice = (
 };
 
 const resolveApiUrl = () => {
-  if (ENV.forgeApiUrl && ENV.forgeApiUrl.trim().length > 0) {
-    return `${ENV.forgeApiUrl.replace(/\/$/, "")}/v1/chat/completions`;
+  if (process.env.DEEPSEEK_API_URL) {
+    return process.env.DEEPSEEK_API_URL;
   }
   return "https://api.deepseek.com/v1/chat/completions";
 };
 
 const resolveApiKey = () => {
-  return process.env.DEEPSEEK_API_KEY || ENV.forgeApiKey || "sk-5ad3abee81d94de28790865f2c35f9f0";
+  return process.env.DEEPSEEK_API_KEY || "sk-5ad3abee81d94de28790865f2c35f9f0";
 };
 
 const assertApiKey = () => {
