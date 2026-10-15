@@ -1,7 +1,48 @@
+/* ═══════════════════════════════════════════════════════════════════════════════
+   RUZN-LITE SOVEREIGN AUI-V2 STYLESHEET
+   ═══════════════════════════════════════════════════════════════════════════════
+   Version: 3.0.0 Sovereign Edition
+   Typography: IBM Plex Sans Arabic, Tajawal, Readex Pro, IBM Plex Mono
+   Theme: Desert Obsidian & Imperial Gold (AUI-V2 65% Frosted Glassmorphism)
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* ═══════════════════════════════════════════════════════════════════════════════
+   GOOGLE FONTS - Professional Sovereign Arabic & English Typography
+   ═══════════════════════════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700;800&family=Readex+Pro:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap');
+
 @custom-variant dark (&:is(.dark *));
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   TYPOGRAPHY CSS VARIABLES
+   ═══════════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* Font Families */
+  --font-heading: 'IBM Plex Sans Arabic', 'IBM Plex Sans', system-ui, sans-serif;
+  --font-body: 'Tajawal', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --font-accent: 'Readex Pro', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --font-ui: 'IBM Plex Sans Arabic', 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'JetBrains Mono', 'Consolas', monospace;
+  
+  /* Arabic-optimized font sizes */
+  --text-xs-ar: 0.8125rem;    /* 13px */
+  --text-sm-ar: 0.9375rem;    /* 15px */
+  --text-base-ar: 1.0625rem;  /* 17px */
+  --text-lg-ar: 1.1875rem;    /* 19px */
+  --text-xl-ar: 1.375rem;     /* 22px */
+  --text-2xl-ar: 1.625rem;    /* 26px */
+  --text-3xl-ar: 2rem;        /* 32px */
+  --text-4xl-ar: 2.5rem;      /* 40px */
+  --text-5xl-ar: 3.25rem;     /* 52px */
+  
+  /* Arabic-optimized line heights */
+  --leading-ar-tight: 1.4;
+  --leading-ar-normal: 1.7;
+  --leading-ar-relaxed: 1.9;
+}
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -40,22 +81,17 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --font-arabic-heading: 'IBM Plex Sans Arabic', 'IBM Plex Sans', system-ui, sans-serif;
-  --font-arabic-body: 'Tajawal', 'IBM Plex Sans Arabic', system-ui, sans-serif;
-  --font-arabic-accent: 'Readex Pro', 'IBM Plex Sans Arabic', system-ui, sans-serif;
-  --font-arabic-mono: 'IBM Plex Mono', 'Consolas', monospace;
+  
+  /* Custom font family tokens for Tailwind */
+  --font-family-heading: var(--font-heading);
+  --font-family-body: var(--font-body);
+  --font-family-accent: var(--font-accent);
+  --font-family-ui: var(--font-ui);
+  --font-family-mono: var(--font-mono);
 }
 
 :root {
-  /* Royal Arabic & Sovereign Typography Tokens */
-  --font-heading: 'IBM Plex Sans Arabic', 'IBM Plex Sans', system-ui, sans-serif;
-  --font-body: 'Tajawal', 'IBM Plex Sans Arabic', system-ui, sans-serif;
-  --font-accent: 'Readex Pro', 'IBM Plex Sans Arabic', system-ui, sans-serif;
-  --font-mono: 'IBM Plex Mono', 'Consolas', monospace;
-  --font-ui: 'IBM Plex Sans Arabic', 'Inter', system-ui, sans-serif;
-
-  /* Ruzn POC Demo Theme - Deep Blacks with Rich Gold */
-  /* POC Colors: --bg:#070708, --gold:#d6b36a, --gold2:#b8924d */
+  /* Ruzn POC Demo Theme - Deep Obsidian with Rich Imperial Gold */
   --primary: oklch(0.78 0.11 85); /* Rich gold #d6b36a */
   --primary-foreground: oklch(0.08 0.005 285); /* Near black */
   --sidebar-primary: oklch(0.78 0.11 85);
@@ -65,25 +101,25 @@
   --chart-3: oklch(0.75 0.18 145); /* Green/good #4ade80 */
   --chart-4: oklch(0.80 0.15 85); /* Warn #fbbf24 */
   --chart-5: oklch(0.70 0.12 250); /* Info #60a5fa */
-  --radius: 1.375rem; /* 22px like POC demo */
+  --radius: 1.375rem; /* 22px sovereign curved */
   --background: oklch(0.08 0.005 285); /* Deep black #070708 */
   --foreground: oklch(0.95 0.01 90); /* Near white rgba(255,255,255,.92) */
-  --card: oklch(0.12 0.005 285); /* Panel rgba(255,255,255,.06) */
+  --card: rgba(14, 16, 22, 0.65); /* Translucent Glass */
   --card-foreground: oklch(0.95 0.01 90);
   --popover: oklch(0.12 0.005 285);
   --popover-foreground: oklch(0.95 0.01 90);
-  --secondary: oklch(0.15 0.005 285); /* Panel2 rgba(255,255,255,.09) */
+  --secondary: oklch(0.15 0.005 285);
   --secondary-foreground: oklch(0.95 0.01 90);
   --muted: oklch(0.12 0.005 285);
-  --muted-foreground: oklch(0.75 0.02 90); /* Muted rgba(255,255,255,.70) */
+  --muted-foreground: oklch(0.75 0.02 90);
   --accent: oklch(0.78 0.11 85); /* Gold */
   --accent-foreground: oklch(0.08 0.005 285);
-  --destructive: oklch(0.65 0.22 25); /* Bad #ff6b6b */
+  --destructive: oklch(0.65 0.22 25);
   --destructive-foreground: oklch(0.95 0.01 90);
-  --border: oklch(0.20 0.01 90); /* Stroke rgba(255,255,255,.10) */
-  --input: oklch(0.10 0.005 285); /* Dark input bg */
+  --border: rgba(214, 179, 106, 0.18); /* Delicate Gold border */
+  --input: rgba(10, 11, 16, 0.7);
   --ring: oklch(0.78 0.11 85); /* Gold ring */
-  --sidebar: oklch(0.06 0.005 285); /* Deeper sidebar */
+  --sidebar: oklch(0.06 0.005 285);
   --sidebar-foreground: oklch(0.95 0.01 90);
   --sidebar-accent: oklch(0.15 0.005 285);
   --sidebar-accent-foreground: oklch(0.95 0.01 90);
@@ -92,14 +128,13 @@
 }
 
 .dark {
-  /* Ruzn POC Demo Theme - Dark Mode (same as root) */
   --primary: oklch(0.78 0.11 85);
   --primary-foreground: oklch(0.08 0.005 285);
   --sidebar-primary: oklch(0.78 0.11 85);
   --sidebar-primary-foreground: oklch(0.08 0.005 285);
   --background: oklch(0.08 0.005 285);
   --foreground: oklch(0.95 0.01 90);
-  --card: oklch(0.12 0.005 285);
+  --card: rgba(14, 16, 22, 0.65);
   --card-foreground: oklch(0.95 0.01 90);
   --popover: oklch(0.12 0.005 285);
   --popover-foreground: oklch(0.95 0.01 90);
@@ -111,8 +146,8 @@
   --accent-foreground: oklch(0.08 0.005 285);
   --destructive: oklch(0.65 0.22 25);
   --destructive-foreground: oklch(0.95 0.01 90);
-  --border: oklch(0.20 0.01 90);
-  --input: oklch(0.10 0.005 285);
+  --border: rgba(214, 179, 106, 0.18);
+  --input: rgba(10, 11, 16, 0.7);
   --ring: oklch(0.78 0.11 85);
   --chart-1: oklch(0.78 0.11 85);
   --chart-2: oklch(0.65 0.18 25);
@@ -127,38 +162,65 @@
   --sidebar-ring: oklch(0.78 0.11 85);
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════════════════════════════════════════════ */
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+  
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  
   body {
     @apply bg-background text-foreground;
-    font-family: "Inter", "Cinzel", "IBM Plex Sans Arabic", "Cairo", system-ui, sans-serif;
-    /* Sovereign Theme: Desert Obsidian & Imperial Gold with Bronze Glow */
-    background: 
-      radial-gradient(1200px 600px at 50% 10%, rgba(212, 175, 55, 0.15), transparent 60%),
-      radial-gradient(900px 500px at 15% 75%, rgba(184, 146, 77, 0.10), transparent 65%),
-      linear-gradient(180deg, #0A0A0F, #050508);
-    min-height: 100vh;
-  }
-  html[dir="rtl"] body {
     font-family: var(--font-body);
-    font-size: 1.0625rem; /* 17px base for Arabic legibility */
-    line-height: 1.7;     /* relaxed 1.7 to avoid clipping diacritics */
-    letter-spacing: 0.01em;
+    font-size: var(--text-base-ar);
+    line-height: var(--leading-ar-normal);
+    background: 
+      radial-gradient(1200px 600px at 60% 18%, rgba(214,179,106,.15), transparent 55%),
+      radial-gradient(900px 500px at 20% 80%, rgba(96,165,250,.09), transparent 60%),
+      linear-gradient(180deg, #050506, #0a0a0c);
+    min-height: 100vh;
+    min-height: 100dvh;
+    color: rgba(255, 255, 255, 0.92);
   }
+  
+  html[dir="rtl"] body,
+  body.rtl {
+    font-family: var(--font-body);
+    direction: rtl;
+    text-align: right;
+  }
+  
+  html[dir="ltr"] body,
+  body.ltr {
+    font-family: var(--font-body);
+    direction: ltr;
+    text-align: left;
+  }
+  
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: var(--leading-ar-tight);
+    letter-spacing: -0.01em;
   }
-  html[dir="rtl"] h1,
-  html[dir="rtl"] h2,
-  html[dir="rtl"] h3,
-  html[dir="rtl"] h4,
-  html[dir="rtl"] h5,
-  html[dir="rtl"] h6 {
-    font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
-    line-height: 1.4;
-  }
+  
+  h1 { font-size: var(--text-4xl-ar); }
+  h2 { font-size: var(--text-3xl-ar); }
+  h3 { font-size: var(--text-2xl-ar); }
+  h4 { font-size: var(--text-xl-ar); }
+  h5 { font-size: var(--text-lg-ar); }
+  h6 { font-size: var(--text-base-ar); font-weight: 600; }
+  
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
   [type="button"]:not(:disabled),
@@ -170,348 +232,400 @@
   input[type="radio"]:not(:disabled) {
     @apply cursor-pointer;
   }
-}
-
-@layer components {
-  /**
-   * Custom container utility that centers content and adds responsive padding.
-   */
-  .container {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+  
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
   }
-
-  .flex {
-    min-height: 0;
-    min-width: 0;
-  }
-
-  @media (min-width: 640px) {
-    .container {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .container {
-      padding-left: 2rem;
-      padding-right: 2rem;
-      max-width: 1280px;
-    }
-  }
-
-  /* POC Demo Card Styles */
-  .ruzn-card {
-    background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-    border: 1px solid rgba(255,255,255,.10);
-    border-radius: 1.375rem;
-    box-shadow: 0 18px 60px rgba(0,0,0,.55);
-    backdrop-filter: blur(10px);
-    overflow: hidden;
-  }
-
-  .ruzn-card-header {
-    padding: 0.875rem 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.625rem;
-    border-bottom: 1px solid rgba(255,255,255,.06);
-    background: linear-gradient(90deg, rgba(214,179,106,.10), transparent 35%);
-  }
-
-  /* POC Demo Button Styles */
-  .ruzn-btn {
-    border: 1px solid rgba(255,255,255,.10);
-    background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.04));
-    color: rgba(255,255,255,.92);
-    border-radius: 0.875rem;
-    padding: 0.625rem 0.75rem;
-    cursor: pointer;
-    box-shadow: 0 10px 35px rgba(0,0,0,.35);
-    transition: 0.15s transform, 0.15s background, 0.15s border;
-    font-size: 0.8125rem;
-  }
-
-  .ruzn-btn:hover {
-    transform: translateY(-1px);
-    border-color: rgba(214,179,106,.30);
-  }
-
-  .ruzn-btn-gold {
-    border-color: rgba(214,179,106,.38);
-    background: linear-gradient(180deg, rgba(214,179,106,.22), rgba(214,179,106,.08));
-  }
-
-  /* POC Demo Tab Styles */
-  .ruzn-tab {
-    padding: 0.5rem 0.625rem;
-    border-radius: 0.75rem;
-    border: 1px solid rgba(255,255,255,.08);
-    background: rgba(255,255,255,.04);
-    color: rgba(255,255,255,.70);
-    cursor: pointer;
-    font-size: 0.75rem;
-    transition: all 0.15s;
-  }
-
-  .ruzn-tab.active,
-  .ruzn-tab:hover {
-    border-color: rgba(214,179,106,.35);
-    color: rgba(214,179,106,.95);
-    background: rgba(214,179,106,.12);
-  }
-
-  /* POC Demo Tag Styles */
-  .ruzn-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.375rem;
-    padding: 0.3125rem 0.5rem;
-    border-radius: 999px;
-    border: 1px solid rgba(255,255,255,.10);
-    background: rgba(0,0,0,.20);
-    color: rgba(255,255,255,.70);
-    font-size: 0.6875rem;
-    white-space: nowrap;
-  }
-
-  .ruzn-tag-high {
-    border-color: rgba(255,107,107,.35);
-    color: rgba(255,107,107,.95);
-    background: rgba(255,107,107,.10);
-  }
-
-  .ruzn-tag-med {
-    border-color: rgba(251,191,36,.35);
-    color: rgba(251,191,36,.95);
-    background: rgba(251,191,36,.10);
-  }
-
-  .ruzn-tag-low {
-    border-color: rgba(74,222,128,.30);
-    color: rgba(74,222,128,.95);
-    background: rgba(74,222,128,.10);
-  }
-
-  .ruzn-tag-info {
-    border-color: rgba(96,165,250,.30);
-    color: rgba(96,165,250,.95);
-    background: rgba(96,165,250,.10);
-  }
-
-  /* POC Demo KPI Box */
-  .ruzn-kpi {
-    padding: 0.75rem;
-    border-radius: 1.125rem;
-    border: 1px solid rgba(255,255,255,.08);
-    background: rgba(255,255,255,.04);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .ruzn-kpi::before {
-    content: "";
-    position: absolute;
-    inset: -40px -80px auto auto;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, rgba(214,179,106,.25), transparent 60%);
-    transform: rotate(12deg);
-    pointer-events: none;
-  }
-
-  .ruzn-kpi-value {
-    font-size: 1.125rem;
-    font-weight: 900;
-    color: rgba(214,179,106,.95);
-  }
-
-  .ruzn-kpi-label {
-    font-size: 0.75rem;
-    color: rgba(255,255,255,.70);
-    margin-top: 0.125rem;
-  }
-
-  /* POC Demo Input Styles */
-  .ruzn-input {
-    width: 100%;
-    border-radius: 0.875rem;
-    border: 1px solid rgba(255,255,255,.10);
-    background: rgba(0,0,0,.28);
-    color: rgba(255,255,255,.92);
-    padding: 0.625rem 0.75rem;
-    outline: none;
-    font-size: 0.8125rem;
-  }
-
-  .ruzn-input:focus {
-    border-color: rgba(214,179,106,.35);
+  
+  ::selection {
+    background: rgba(214, 179, 106, 0.35);
+    color: #ffffff;
   }
 }
 
-/* Ruzn Custom Utilities */
-@layer utilities {
-  /* Hide scrollbar for horizontal scroll areas */
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-  
-  /* Safe area padding for iOS devices with notch/home indicator */
-  .safe-area-bottom {
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-  }
-  
-  .text-gold-gradient {
-    background: linear-gradient(135deg, #d6b36a 0%, #f4d03f 50%, #d6b36a 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+/* ═══════════════════════════════════════════════════════════════════════════════
+   SOVEREIGN AUI-V2 CORE GLASSMORPHISM & COMPONENT CLASSES (GLOBAL SPECIFICITY)
+   ═══════════════════════════════════════════════════════════════════════════════ */
 
-  .glow-gold {
-    box-shadow: 0 0 20px rgba(214, 179, 106, 0.3);
-  }
+/* ─── 1. Sovereign Cards ─── */
+.ruzn-card,
+[data-slot="card"].ruzn-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025)) !important;
+  border: 1px solid rgba(214, 179, 106, 0.22) !important;
+  border-radius: 1.375rem !important;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  overflow: hidden;
+  position: relative;
+}
 
-  .border-gold {
-    border-color: rgba(214, 179, 106, 0.3);
+@media (max-width: 767px) {
+  .ruzn-card,
+  [data-slot="card"].ruzn-card {
+    border-radius: 1rem !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
   }
+}
 
-  .bg-gold-gradient {
-    background: linear-gradient(180deg, rgba(214,179,106,.22), rgba(214,179,106,.08));
-  }
+.ruzn-card-header {
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-bottom: 1px solid rgba(214, 179, 106, 0.16);
+  background: linear-gradient(90deg, rgba(214, 179, 106, 0.14), transparent 45%);
+}
 
-  .shadow-deep {
-    box-shadow: 0 18px 60px rgba(0,0,0,.55);
-  }
+.ruzn-card-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-base-ar);
+  font-weight: 700;
+  color: rgba(214, 179, 106, 0.98);
+}
 
-  .rtl {
-    direction: rtl;
-  }
+.ruzn-card-body {
+  padding: 1.25rem;
+}
 
-  .ltr {
-    direction: ltr;
-  }
-
-  /* Royal Arabic Typography Utilities */
-  .font-arabic-heading {
-    font-family: 'IBM Plex Sans Arabic', 'IBM Plex Sans', system-ui, sans-serif;
-  }
-
-  .font-arabic-body {
-    font-family: 'Tajawal', 'IBM Plex Sans Arabic', system-ui, sans-serif;
-  }
-
-  .font-arabic-accent {
-    font-family: 'Readex Pro', 'IBM Plex Sans Arabic', system-ui, sans-serif;
-  }
-
-  .font-arabic-mono {
-    font-family: 'IBM Plex Mono', 'Consolas', monospace;
-  }
-
-  .heading-display {
-    font-family: 'IBM Plex Sans Arabic', sans-serif;
-    font-weight: 700;
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-  }
-
-  .body-text-ar {
-    font-family: 'Tajawal', 'IBM Plex Sans Arabic', sans-serif;
-    font-size: 1.0625rem;
-    line-height: 1.7;
-  }
-
-  /* Page Wrapper Component Styles */
-  .page-wrapper {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background: transparent;
-  }
-
-  .page-header {
-    padding: 1.25rem 1.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(10, 10, 15, 0.65);
-    backdrop-filter: blur(12px);
-  }
-
-  .page-title {
-    font-family: 'IBM Plex Sans Arabic', sans-serif;
-    font-size: 1.375rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.95);
-  }
-
-  .page-content {
-    flex: 1;
+@media (min-width: 768px) {
+  .ruzn-card-body {
     padding: 1.5rem;
   }
+}
 
-  .has-mobile-nav {
-    padding-bottom: 5.5rem;
-  }
+/* ─── 2. Sovereign Glassmorphism Surfaces ─── */
+.ruzn-glass {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025)) !important;
+  border: 1px solid rgba(214, 179, 106, 0.22) !important;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
 
-  .ruzn-grid {
-    display: grid;
-    gap: 1.25rem;
-  }
+.ruzn-glass-soft {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(214, 179, 106, 0.14) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
 
-  .ruzn-grid-2 {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  }
+/* ─── 3. Sovereign Form Inputs & Dropdowns ─── */
+.ruzn-input,
+input.ruzn-input,
+textarea.ruzn-input {
+  font-family: var(--font-body);
+  width: 100%;
+  border-radius: 0.875rem !important;
+  border: 1px solid rgba(214, 179, 106, 0.22) !important;
+  background: rgba(10, 11, 16, 0.72) !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+  padding: 0.75rem 1rem !important;
+  outline: none !important;
+  font-size: var(--text-base-ar);
+  line-height: var(--leading-ar-normal);
+  min-height: 48px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.45);
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
 
-  .ruzn-grid-3 {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  }
+.ruzn-input:focus,
+input.ruzn-input:focus,
+textarea.ruzn-input:focus {
+  border-color: rgba(214, 179, 106, 0.75) !important;
+  box-shadow: 0 0 0 3px rgba(214, 179, 106, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.45) !important;
+  background: rgba(15, 17, 24, 0.88) !important;
+}
 
-  .ruzn-grid-4 {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  }
+.ruzn-input::placeholder {
+  color: rgba(255, 255, 255, 0.45) !important;
+}
 
-  .ruzn-kpi {
-    padding: 1.25rem;
-    border-radius: 1.125rem;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
+/* Custom Styled Select Dropdown (Cross-Platform Luxury) */
+select.ruzn-input {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23d6b36a' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: left 1rem center !important;
+  background-size: 1.1rem !important;
+  padding-left: 2.75rem !important;
+  cursor: pointer !important;
+}
 
+[dir="ltr"] select.ruzn-input {
+  background-position: right 1rem center !important;
+  padding-right: 2.75rem !important;
+  padding-left: 1rem !important;
+}
+
+select.ruzn-input option {
+  background-color: #0b0c10 !important;
+  color: #f1f5f9 !important;
+  padding: 10px 14px !important;
+}
+
+/* ─── 4. Sovereign Buttons ─── */
+.ruzn-btn {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.04)) !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+  border-radius: 0.875rem !important;
+  padding: 0.625rem 1rem !important;
+  cursor: pointer;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: var(--text-sm-ar);
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.ruzn-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(214, 179, 106, 0.4) !important;
+  color: #ffffff !important;
+  background: linear-gradient(180deg, rgba(214, 179, 106, 0.18), rgba(255, 255, 255, 0.06)) !important;
+  box-shadow: 0 12px 35px rgba(214, 179, 106, 0.15);
+}
+
+.ruzn-btn:active {
+  transform: translateY(0);
+}
+
+.ruzn-btn-gold {
+  border: 1px solid rgba(214, 179, 106, 0.45) !important;
+  background: linear-gradient(180deg, rgba(214, 179, 106, 0.28), rgba(214, 179, 106, 0.1)) !important;
+  color: rgba(214, 179, 106, 0.98) !important;
+  box-shadow: 0 4px 20px rgba(214, 179, 106, 0.2) !important;
+}
+
+.ruzn-btn-gold:hover {
+  background: linear-gradient(180deg, rgba(214, 179, 106, 0.42), rgba(214, 179, 106, 0.16)) !important;
+  border-color: rgba(214, 179, 106, 0.75) !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 30px rgba(214, 179, 106, 0.35) !important;
+}
+
+.ruzn-btn-lg {
+  padding: 0.875rem 1.5rem !important;
+  font-size: var(--text-base-ar) !important;
+  min-height: 52px !important;
+}
+
+.ruzn-btn-sm {
+  padding: 0.5rem 0.75rem !important;
+  font-size: var(--text-xs-ar) !important;
+  min-height: 36px !important;
+  border-radius: 0.625rem !important;
+}
+
+/* ─── 5. Sovereign Segmented Tabs ─── */
+.ruzn-tab {
+  font-family: var(--font-ui);
+  padding: 0.5rem 0.875rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  font-size: var(--text-xs-ar);
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  backdrop-filter: blur(8px);
+}
+
+.ruzn-tab.active,
+.ruzn-tab:hover {
+  border-color: rgba(214, 179, 106, 0.45);
+  color: rgba(214, 179, 106, 0.98);
+  background: rgba(214, 179, 106, 0.14);
+  box-shadow: 0 0 16px rgba(214, 179, 106, 0.18);
+}
+
+/* ─── 6. Sovereign Status Tags / Badges ─── */
+.ruzn-tag {
+  font-family: var(--font-ui);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.28);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: var(--text-xs-ar);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.ruzn-tag-high {
+  border-color: rgba(255, 107, 107, 0.45) !important;
+  color: #ff6b6b !important;
+  background: rgba(255, 107, 107, 0.14) !important;
+  box-shadow: 0 0 12px rgba(255, 107, 107, 0.18);
+}
+
+.ruzn-tag-med {
+  border-color: rgba(251, 191, 36, 0.45) !important;
+  color: #fbbf24 !important;
+  background: rgba(251, 191, 36, 0.14) !important;
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.18);
+}
+
+.ruzn-tag-low {
+  border-color: rgba(74, 222, 128, 0.4) !important;
+  color: #4ade80 !important;
+  background: rgba(74, 222, 128, 0.14) !important;
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.18);
+}
+
+.ruzn-tag-info {
+  border-color: rgba(96, 165, 250, 0.4) !important;
+  color: #60a5fa !important;
+  background: rgba(96, 165, 250, 0.14) !important;
+  box-shadow: 0 0 12px rgba(96, 165, 250, 0.18);
+}
+
+/* ─── 7. Sovereign KPI Cards with Glowing Corner Radial ─── */
+.ruzn-kpi {
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(214, 179, 106, 0.22);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+}
+
+.ruzn-kpi::before {
+  content: "";
+  position: absolute;
+  inset: -40px -80px auto auto;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(214, 179, 106, 0.28), transparent 65%);
+  transform: rotate(12deg);
+  pointer-events: none;
+}
+
+.ruzn-kpi-value {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl-ar);
+  font-weight: 800;
+  color: rgba(214, 179, 106, 0.98);
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
   .ruzn-kpi-value {
-    font-size: 1.75rem;
-    font-weight: 800;
-    color: #d6b36a;
-    font-family: 'IBM Plex Sans Arabic', sans-serif;
-  }
-
-  .ruzn-kpi-label {
-    font-size: 0.8125rem;
-    color: rgba(255, 255, 255, 0.65);
-    margin-top: 0.25rem;
+    font-size: var(--text-3xl-ar);
   }
 }
 
+.ruzn-kpi-label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs-ar);
+  color: rgba(255, 255, 255, 0.72);
+  margin-top: 0.35rem;
+}
 
-/* Print-friendly styles for Minister's Daily Report */
+/* ─── 8. Executive Ministerial Brief Box ─── */
+.report,
+.ruzn-report {
+  padding: 1.25rem !important;
+  border-radius: 1.25rem !important;
+  border: 1px solid rgba(214, 179, 106, 0.32) !important;
+  background: linear-gradient(180deg, rgba(214, 179, 106, 0.14), rgba(255, 255, 255, 0.03)) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45) !important;
+}
+
+.report h3,
+.ruzn-report h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: rgba(214, 179, 106, 0.98);
+}
+
+.report p,
+.ruzn-report p {
+  margin: 0.5rem 0;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+/* ─── 9. Sovereign Grid & Utilities ─── */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #d6b36a 0%, #f4d03f 50%, #d6b36a 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+.glow-gold {
+  box-shadow: 0 0 25px rgba(214, 179, 106, 0.35) !important;
+}
+
+.border-gold {
+  border-color: rgba(214, 179, 106, 0.35) !important;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(180deg, rgba(214, 179, 106, 0.22), rgba(214, 179, 106, 0.08)) !important;
+}
+
+.shadow-deep {
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.6) !important;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.safe-area-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   PRINT-FRIENDLY STYLES FOR MINISTERIAL DAILY REPORT
+   ═══════════════════════════════════════════════════════════════════════════════ */
 @media print {
-  /* Hide non-essential elements */
   body {
-    background: white !important;
-    color: black !important;
-    font-size: 12pt !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+    font-size: 11pt !important;
   }
 
-  /* Hide navigation, buttons, and interactive elements */
   header, nav, footer,
   button:not(.print-include),
   .no-print,
@@ -519,38 +633,32 @@
   .ruzn-btn,
   .ruzn-tab,
   input, textarea, select,
-  .toast,
   .back-link {
     display: none !important;
   }
 
-  /* Reset dark theme colors for print */
   .ruzn-card,
   .ruzn-kpi,
+  .report,
   [class*="bg-"] {
-    background: white !important;
-    border: 1px solid #ccc !important;
+    background: #ffffff !important;
+    border: 1px solid #cccccc !important;
     box-shadow: none !important;
-    color: black !important;
+    color: #111111 !important;
   }
 
-  /* Ensure text is readable */
   * {
-    color: black !important;
+    color: #111111 !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
-  /* Gold accents become dark gold for print */
-  .text-gold-gradient,
-  [class*="text-amber"],
-  [class*="text-yellow"] {
+  .text-gold-gradient {
     background: none !important;
     -webkit-text-fill-color: #8B7355 !important;
     color: #8B7355 !important;
   }
 
-  /* Risk level colors for print */
   .ruzn-tag-high {
     background: #ffcccc !important;
     color: #cc0000 !important;
@@ -569,22 +677,13 @@
     border: 1px solid #155724 !important;
   }
 
-  /* KPI boxes for print */
-  .minister-kpi {
-    border: 2px solid #8B7355 !important;
-    padding: 1rem !important;
-    margin: 0.5rem !important;
-    page-break-inside: avoid !important;
-  }
-
-  /* Tables for print */
   table {
     border-collapse: collapse !important;
     width: 100% !important;
   }
 
   th, td {
-    border: 1px solid #ccc !important;
+    border: 1px solid #cccccc !important;
     padding: 8px !important;
     text-align: right !important;
   }
@@ -594,93 +693,13 @@
     font-weight: bold !important;
   }
 
-  /* Page breaks */
-  .page-break-before {
-    page-break-before: always !important;
-  }
-
-  .page-break-after {
-    page-break-after: always !important;
-  }
-
-  .avoid-break {
-    page-break-inside: avoid !important;
-  }
-
-  /* Minister report header */
-  .minister-report-header {
-    text-align: center !important;
-    border-bottom: 2px solid #8B7355 !important;
-    padding-bottom: 1rem !important;
-    margin-bottom: 1rem !important;
-  }
-
-  .minister-report-header h1 {
-    font-size: 18pt !important;
-    margin-bottom: 0.5rem !important;
-  }
-
-  .minister-report-header .date {
-    font-size: 12pt !important;
-    color: #666 !important;
-  }
-
-  /* Daily report specific styles */
-  .daily-report {
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-
-  .daily-report h2 {
-    font-size: 14pt !important;
-    border-bottom: 1px solid #ccc !important;
-    padding-bottom: 0.5rem !important;
-    margin-top: 1rem !important;
-  }
-
-  /* Charts - hide or show placeholder */
-  canvas {
-    display: none !important;
-  }
-
-  .chart-placeholder {
-    display: block !important;
-    border: 1px dashed #ccc !important;
-    padding: 2rem !important;
-    text-align: center !important;
-    color: #666 !important;
-  }
-
-  /* Ensure proper page margins */
   @page {
-    margin: 2cm;
+    margin: 1.5cm;
     size: A4;
   }
 
-  /* Arabic text direction */
   .rtl {
     direction: rtl !important;
     text-align: right !important;
   }
-
-  /* Print footer with page numbers */
-  .print-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    font-size: 10pt;
-    color: #666;
-    border-top: 1px solid #ccc;
-    padding-top: 0.5rem;
-  }
-}
-
-/* Print button styling */
-.print-report-btn {
-  cursor: pointer;
-}
-
-.print-report-btn:hover {
-  opacity: 0.8;
 }

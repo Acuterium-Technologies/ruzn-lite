@@ -376,33 +376,35 @@ export default function Landing({ onAccessGranted }: LandingProps) {
       dir={isRTL ? "rtl" : "ltr"}
       style={bgStyle}
     >
-      {/* Global font + subtle glass tokens (matches ruzn-lite_poc_osai_demo_bilingual.html vibe) */}
+      {/* Global font + subtle glass tokens */}
       <style>
         {`
           :root{
             --ruzn-bg:#070708;
             --ruzn-text: rgba(255,255,255,.92);
             --ruzn-muted: rgba(255,255,255,.70);
-            --ruzn-stroke: rgba(255,255,255,.10);
+            --ruzn-stroke: rgba(214,179,106,.20);
             --ruzn-gold: #d6b36a;
             --ruzn-gold2: #b8924d;
             --ruzn-shadow: 0 18px 60px rgba(0,0,0,.55);
           }
-          .ruzn-font { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
-          [dir="rtl"] .ruzn-font { font-family: "Noto Naskh Arabic","Noto Kufi Arabic","Geeza Pro","Tahoma","Arial",sans-serif; }
+          .ruzn-font { font-family: var(--font-heading); }
+          [dir="rtl"] .ruzn-font { font-family: var(--font-heading); }
           .ruzn-glass {
-            background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-            border: 1px solid rgba(255,255,255,.10);
+            background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.025));
+            border: 1px solid rgba(214,179,106,.22);
             box-shadow: var(--ruzn-shadow);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
           }
           .ruzn-glass-soft {
             background: rgba(255,255,255,.04);
-            border: 1px solid rgba(255,255,255,.08);
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(214,179,106,.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
           }
           .ruzn-gold-gradient {
-            background: linear-gradient(90deg, rgba(214,179,106,.95), rgba(184,146,77,.85));
+            background: linear-gradient(90deg, rgba(214,179,106,.98), rgba(184,146,77,.88));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
