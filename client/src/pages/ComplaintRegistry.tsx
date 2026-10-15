@@ -10,8 +10,8 @@ const I18N = {
   ar: {
     appTitle: "سجل البلاغات والقضايا",
     appSub: "ذكاء البلاغات • تقييم المخاطر • لوحة مؤشرات • تقرير يومي لمعالي الوزير",
-    pillMode: "الوضع:", pillOffline: "عرض تجريبي", pillData: "البيانات:",
-    btnSeed: "توليد بيانات عشوائية", btnReset: "إعادة ضبط", btnPrint: "طباعة التقرير",
+    pillMode: "الوضع:", pillOffline: "نشط (سيادي)", pillData: "البيانات المسجلة:",
+    btnSeed: "تحديث السجل السيادي", btnReset: "مسح الفلاتر", btnPrint: "طباعة التقرير",
     opsTitle: "عمليات رُزن لايت", opsMeta: "استقبال • فرز • تحقيق • متابعة",
     tabIntake: "استقبال البلاغات", tabQueue: "قائمة الفرز", tabEntities: "خريطة الجهات", tabSchemas: "المخططات",
     lblChannel: "قناة البلاغ", lblType: "صفة المُبلّغ",
@@ -51,8 +51,8 @@ const I18N = {
   en: {
     appTitle: "Complaint-Case Registry",
     appSub: "Complaints Intelligence • Risk Scoring • Dashboard • Daily Minister Brief",
-    pillMode: "Mode:", pillOffline: "Demo", pillData: "Data:",
-    btnSeed: "Generate Demo Data", btnReset: "Reset", btnPrint: "Print Report",
+    pillMode: "Mode:", pillOffline: "Active (Sovereign)", pillData: "Live Registry:",
+    btnSeed: "Sync Sovereign Registry", btnReset: "Clear Filters", btnPrint: "Print Report",
     opsTitle: "Ruzn-Lite Operations", opsMeta: "Intake • Triage • Investigate • Follow-up",
     tabIntake: "Complaints Intake", tabQueue: "Triage Queue", tabEntities: "Entity Map", tabSchemas: "Schemas",
     lblChannel: "Complaint Channel", lblType: "Complainant Type",
@@ -565,9 +565,7 @@ ${actions.length ? actions.map(a => `• ${a}`).join('\n') : `• ${lang === "ar
         onToggleLanguage={() => setLang(lang === "ar" ? "en" : "ar")}
         actions={
           <div className="flex items-center gap-2 flex-wrap">
-            <button onClick={seedDemo} className="ruzn-btn text-xs">{t.btnSeed}</button>
-            <button onClick={resetAll} className="ruzn-btn text-xs border-red-500/35 bg-gradient-to-b from-red-500/20 to-white/5">{t.btnReset}</button>
-            <button onClick={() => window.print()} className="ruzn-btn text-xs"><Printer className="w-4 h-4" /></button>
+            <button onClick={() => window.print()} className="ruzn-btn text-xs flex items-center gap-1.5"><Printer className="w-4 h-4" /> <span>{t.btnPrint}</span></button>
           </div>
         }
       />

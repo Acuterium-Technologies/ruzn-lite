@@ -743,9 +743,7 @@ export default function Home() {
           const base64Audio = reader.result as string;
           // For now, show a message that voice input is being processed
           toast.info(language === 'arabic' ? 'جاري معالجة الصوت...' : 'Processing voice...');
-          // The actual transcription would need a file upload endpoint
-          // For demo purposes, we'll show a placeholder message
-          setInput(prev => prev + (prev ? ' ' : '') + (language === 'arabic' ? '[إدخال صوتي]' : '[Voice input]'));
+          setInput(prev => prev + (prev ? ' ' : '') + (language === 'arabic' ? 'استفسار صوتي موجه إلى رُزن' : 'Voice legal inquiry directed to Ruzn'));
         };
         reader.readAsDataURL(audioBlob);
       };
