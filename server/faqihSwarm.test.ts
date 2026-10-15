@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { describe, it, expect } from 'vitest';
 import { dispatchAgentSwarm, generateMinisterDailyBrief, SOVEREIGN_AGENTS_ROSTER } from './protocols/swarm/agentSwarm';
 
